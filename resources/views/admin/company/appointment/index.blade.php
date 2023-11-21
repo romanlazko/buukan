@@ -89,7 +89,7 @@
     </div>
 
     @push('scripts')
-        <script type="module">
+        <script>
             $(document).ready(function() {
                 $('.term').click(function(){
                     var event = $(this).attr('event');
