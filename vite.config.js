@@ -11,7 +11,4 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    build: {
-        assetsDir: 'build/assets',
-    },
 });
