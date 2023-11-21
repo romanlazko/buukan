@@ -13,7 +13,6 @@
         <script src="https://kit.fontawesome.com/f4c6764ec6.js" crossorigin="anonymous"></script>
         <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
         <script src="https://kit.fontawesome.com/f4c6764ec6.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
         
 
         <!-- Scripts -->
