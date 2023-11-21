@@ -23,11 +23,6 @@
                     </p>
                     <hr>
                     <div>
-                        <x-form.label for="url" :value="__('Url:')" />
-                        <x-form.input id="url" name="url" type="text" class="mt-1 block w-full" :value="old('url')" required autocomplete="url" />
-                        <x-form.error class="mt-2" :messages="$errors->get('url')" />
-                    </div>
-                    <div>
                         <x-form.label for="token" :value="__('Token:')" />
                         <x-form.input id="token" name="token" type="password" class="mt-1 block w-full" :value="old('token')" required autocomplete="token" />
                         <x-form.error class="mt-2" :messages="$errors->get('token')" />
