@@ -17,7 +17,10 @@
         
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="preload" as="style" href="https://test.buukan.com/public/build/assets/app-cd7552b9.css" />
+        <link rel="modulepreload" href="https://test.buukan.com/public/build/assets/app-b5da1802.js" />
+        <link rel="stylesheet" href="https://test.buukan.com/public/build/assets/app-cd7552b9.css" data-navigate-track="reload" />
+        <script type="module" src="https://test.buukan.com/public/build/assets/app-b5da1802.js" data-navigate-track="reload"></script>
     </head>
     
     <body>
