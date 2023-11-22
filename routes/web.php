@@ -108,6 +108,7 @@ Route::middleware(['web', 'auth', 'role:super-duper-admin'])->name('super-duper-
 });
 
 
+Route::middleware(['web'])->get('api/v1/get-employee-unoccupied-schedule', GetEmployeeUnoccupiedSchedule::class)->name('get-employee-unoccupied-schedule');
 Route::middleware(['web'])->post('api/v1/get-employee-unoccupied-schedule', GetEmployeeUnoccupiedSchedule::class)->name('get-employee-unoccupied-schedule');
 Route::middleware(['web'])->post('api/v1/get-employee-service', GetEmployeeService::class)->name('get-employee-service');
 Route::middleware(['web'])->post('api/v1/get-client-data', GetClientData::class)->name('get-client-data');

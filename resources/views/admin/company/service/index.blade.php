@@ -36,7 +36,7 @@
                             <x-table.td>
                                 <div class="flex items-center py-2">
                                     <a href="{{ route('admin.company.service.edit', [$company, $service]) }}" class="flex-col items-center my-auto">
-                                        <img src="{{ $service->img ?? null }}" class="mr-4 w-12 h-12 min-w-[48px] rounded-full bg-[{{ $service->color }}]">
+                                        <img src="{{ $service->img ?? null }}" class="mr-4 w-12 h-12 min-w-[48px] rounded-full" style="background-color: {{ $service->color }}">
                                     </a>
                                     <div class="flex-col justify-center">
                                         <div>
@@ -44,7 +44,7 @@
                                                 {{ $service->name ?? null }}
                                             </a>
                                         </div>
-                                        <x-badge customColor="{{ $service->color }}">
+                                        <x-badge color="{{ $service->color }}">
                                             {{ $service->name ?? null }}
                                         </x-badge>
                                     </div>

@@ -71,7 +71,7 @@
             <div class="py-2 px-6 bg-blue-700 sm:flex items-center sm:space-x-3 justify-between">
                 <h1 class="w-full font-bold text-white">Appointment:</h1>
                 <div class="w-full flex space-x-2 py-2 sm:py-0">
-                    <x-form.select id="employee" name="employee" class="w-full appointmentModalFormEmployee">
+                    <x-form.select id="employee" name="employee" class="w-full appointmentModalFormEmployee" required>
                         <option value="">Choose employee</option>
                         @forelse ($company->employees as $company_employee)
                             <option  value="{{ $company_employee->id }}">{{ $company_employee->user->first_name }} {{ $company_employee->user->last_name }}</option>
@@ -85,13 +85,13 @@
             <div class="w-full space-y-6 p-6">
                 <div class="w-full" >
                     <x-input-label for="service" value="{{ __('Service:') }}"/>
-                    <x-form.select id="service" name="service" class="w-full appointmentModalFormService appointmentSelector">
+                    <x-form.select id="service" name="service" class="w-full appointmentModalFormService appointmentSelector" required>
                     </x-form.select>
                 </div>
 
                 <div class="w-full">
                     <x-input-label for="term" value="{{ __('Term:') }}"/>
-                    <x-form.input dropdown="termDropdown" id="term" name="term" type="time" class="w-full appointmentModalFormTerm" value="{{ old('term', now()->format('H:i')) }}"/>
+                    <x-form.input dropdown="termDropdown" id="term" name="term" type="time" class="w-full appointmentModalFormTerm" value="{{ old('term', now()->format('H:i')) }}" required/>
                     <x-input-error :messages="$errors->get('term')" class="mt-2" />
                 </div>
 
@@ -118,19 +118,17 @@
                     <x-input-error :messages="$errors->get('comment')" class="mt-2" />
                 </div>
             </div>
+            <hr>
+            <div class="flex justify-end w-full p-6">
+                <x-secondary-button x-on:click="$dispatch('close')">
+                    {{ __('Close') }}
+                </x-secondary-button>
+    
+                <x-primary-button class="ml-3" type="submit" >
+                    {{ __('Save') }}
+                </x-primary-button>
+            </div>
         </form>
-
-        <hr>
-
-        <div class="flex justify-end w-full p-6">
-            <x-secondary-button x-on:click="$dispatch('close')">
-                {{ __('Close') }}
-            </x-secondary-button>
-
-            <x-primary-button class="ml-3" type="submit" onclick="$('#appointmentModalForm').submit()">
-                {{ __('Save') }}
-            </x-primary-button>
-        </div>
     </div>
 </x-modal>
 
@@ -222,7 +220,7 @@
             getEmployeeServices(
                 employee_id,
                 function(data) {
-                    var options = '<option value="">Choose service</option>';
+                    var options = '<option disabled>Choose service</option>';
 
                     data.forEach(function(element) {
                         options += "<option value='" + element.id + "'>" + element.name + "(" + element.price + ")" + "</option>";

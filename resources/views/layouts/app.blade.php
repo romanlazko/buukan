@@ -11,15 +11,17 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/f4c6764ec6.js" crossorigin="anonymous"></script>
-        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        {{-- <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> --}}
+        {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
         <script src="https://kit.fontawesome.com/f4c6764ec6.js" crossorigin="anonymous"></script>
         
 
         <!-- Scripts -->
-        <link rel="preload" as="style" href="https://test.buukan.com/public/build/assets/app-cd7552b9.css" />
+        {{-- <link rel="preload" as="style" href="https://test.buukan.com/public/build/assets/app-cd7552b9.css" />
         <link rel="modulepreload" href="https://test.buukan.com/public/build/assets/app-b5da1802.js" />
         <link rel="stylesheet" href="https://test.buukan.com/public/build/assets/app-cd7552b9.css" data-navigate-track="reload" />
-        <script type="module" src="https://test.buukan.com/public/build/assets/app-b5da1802.js" data-navigate-track="reload"></script>
+        <script type="module" src="https://test.buukan.com/public/build/assets/app-b5da1802.js" data-navigate-track="reload"></script> --}}
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     
     <body>

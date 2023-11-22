@@ -58,7 +58,7 @@
                             <x-table.td>
                                 <div class="w-full pb-2 whitespace-normal">
                                     @forelse ($employee->services as $service)
-                                        <x-badge customColor="{{ $service->color }}" >
+                                        <x-badge color="{{ $service->color }}" >
                                             <a href="{{ route('admin.company.service.edit', [$company, $service]) }}" class="whitespace-nowrap" title="{{ $service->description }}">{{ $service->name }}</a>
                                         </x-badge>
                                     @empty

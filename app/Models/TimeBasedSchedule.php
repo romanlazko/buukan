@@ -53,8 +53,8 @@ class TimeBasedSchedule extends Model
                 'id' => $this->employee->id,
             ],
             'service' => [
-                'id' => $this->service->id,
-                'name' => $this->service->name,
+                'id' => $this->service?->id,
+                'name' => $this->service?->name,
             ],
         ]);
     }

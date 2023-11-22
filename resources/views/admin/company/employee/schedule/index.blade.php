@@ -10,7 +10,7 @@
             </x-buttons.secondary>
         </div>
         <x-header.menu>
-            <x-header.link href="{{ route('admin.company.employee.create', $company) }}" class="float-right">
+            <x-header.link class="float-right" onclick="showAppointmentModal()">
                 {{ __("✚ Add appointment") }}
             </x-header.link>
         </x-header.menu>
@@ -107,6 +107,7 @@
                     <div class="w-full">
                         <x-input-label for="editEventService" value="{{ __('Service') }}"/>
                         <x-form.select id="editEventService" name="service" class="w-full">
+                            <option value="">Any service</option>
                             @forelse ($employee->services as $service)
                                 <option value="{{ $service->id }}">{{ $service->name }} ({{ $service->price }})</option>
                             @empty
@@ -249,7 +250,7 @@
 
                 function toggleEditScheduleMod() {
                     editMode = !editMode;
-                    $('#editScheduleButton').toggleClass("bg-blue-500 text-white hover:bg-blue-600 animate-bounce");
+                    $('#editScheduleButton').toggleClass("bg-blue-400 text-white hover:bg-blue-300 animate-bounce");
                     $('.schedule').toggleClass('hover:border-yellow-500 border-none animate-pulse sm:hover:border-4 hover:border my-6 hover:animate-none editable-event');
                 }
 
@@ -293,7 +294,7 @@
                     eventDidMount: function (info) {
                         $(info.el).find('.fc-event-time').addClass('items-center flex').append(
                             $("<span>", {
-                                "class": "text-[10px] text-gray-200 ml-1 border rounded-md border-gray-200 px-1",
+                                "class": "p-0 ml-1 border rounded-md border-gray-200 px-1",
                                 "html": info.event.extendedProps.service.name
                             })
                         );

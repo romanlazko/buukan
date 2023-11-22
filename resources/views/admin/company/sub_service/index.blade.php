@@ -40,7 +40,7 @@
                                                 {{ $service->name ?? null }}
                                             </a>
                                         </div>
-                                        <x-badge customColor="{{ $service->color }}">
+                                        <x-badge color="{{ $service->color }}">
                                             {{ $service->name ?? null }}
                                         </x-badge>
                                     </div>

@@ -18,6 +18,10 @@ class WebAppController extends Controller
     {
         $web_apps = $company->web_apps;
 
+        if ($web_apps->isEmpty()) {
+            return redirect()->route('admin.company.web_app.create', compact('company'));
+        } 
+
         return view('admin.company.web_app.index', compact(
             'company',
             'web_apps'
