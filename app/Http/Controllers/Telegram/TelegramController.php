@@ -45,7 +45,7 @@ class TelegramController extends Controller
             $bot = new Bot($request->token);
 
             $response = $bot::setWebHook([
-                'url' => url('api/telegram/'.$telegram->getBotId()),
+                'url' => url('api/telegram/'.$bot->getBotId()),
             ]);
 
             if ($response->getOk()) {
