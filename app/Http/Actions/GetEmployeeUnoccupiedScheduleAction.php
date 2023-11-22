@@ -7,16 +7,14 @@ use Illuminate\Http\Request;
 
 class GetEmployeeUnoccupiedScheduleAction
 {
-    public static function handle(Request $request)
+    public static function handle(Employee|null $employee = null, $date = null, $service = null)
     {
-        $employee = Employee::find($request->employee);
-
         if ($employee) {
-            return $employee->unoccupiedSchedules($request->date ?? null)
+            return $employee->unoccupiedSchedules($date)
                 ->orderBy('term')
                 ->get()
-                ->when($request->service, function($collection) use($request){
-                    return $collection->whereIn('service_id', [$request->service, null]);
+                ->when($service, function($collection) use($service){
+                    return $collection->whereIn('service_id', [$service, null]);
                 });
         }
     }

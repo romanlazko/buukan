@@ -9,6 +9,7 @@ use App\Models\WebApp as ModelsWebApp;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use App\Http\Actions\GetEmployeeUnoccupiedScheduleAction;
 
 #[Layout('layouts.web-app')]
 class WebApp extends Component
@@ -37,14 +38,7 @@ class WebApp extends Component
     public $unnocupiedDates;
     public $schedules;
     public $appointments;
-
-    // public function mount()
-    // {
-    //     
-
-    // }
     
-
     public function nextStep()
     {
         $this->currentStep++;
@@ -116,25 +110,20 @@ class WebApp extends Component
         $this->reset('serviceId', 'employeeId', 'date', 'term', 'currentStep');
     }
 
+    public function resetTerm()
+    {
+        $this->reset('term');
+    }
+
     public function render()
     {
         $this->appointments = $this->client->appointments->where('status', 'new');
         $this->services = $this->web_app->company->services;
         $this->employees = Service::find($this->serviceId)?->employees;
 
-        $this->unnocupiedDates = Employee::find($this->employeeId)?->unoccupiedSchedules()
-            ->orderBy('date')
-            ->get()
-            ->when($this->serviceId, function($collection) {
-                return $collection->where('service_id', $this->serviceId);
-            });
+        $this->unnocupiedDates = GetEmployeeUnoccupiedScheduleAction::handle(Employee::find($this->employeeId), null, $this->serviceId)?->sortBy('date');
         
-        $this->schedules = Employee::find($this->employeeId)?->unoccupiedSchedules($this->date)
-            ->orderBy('term')
-            ->get()
-            ->when($this->serviceId, function($collection) {
-                return $collection->where('service_id', $this->serviceId);
-            });
+        $this->schedules = GetEmployeeUnoccupiedScheduleAction::handle(Employee::find($this->employeeId), $this->date, $this->serviceId)?->sortBy('term');
 
         return view("livewire.web-app.{$this->steps[$this->currentStep]}");
     }

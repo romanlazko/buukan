@@ -27,7 +27,7 @@
                                     <p class="text-xs font-light mb-3">
                                         {{ $day->format('D') }}
                                     </p>
-                                    <input wire:model.live="date" id="{{ $day->timestamp }}" type="radio" name="date" class="hidden peer/{{ $day->timestamp }}" @if($unnocupiedDates->where('date', $day)->isEmpty()) disabled @endif value="{{ $day->format('Y-m-d') }}">
+                                    <input wire:model.live="date" wire:click="resetTerm" id="{{ $day->timestamp }}" type="radio" name="date" class="hidden peer/{{ $day->timestamp }}" @if($unnocupiedDates->where('date', $day)->isEmpty()) disabled @endif value="{{ $day->format('Y-m-d') }}">
                                     <label class="font-medium p-2 rounded-full border peer-checked/{{ $day->timestamp }}:bg-gray-800 peer-checked/{{ $day->timestamp }}:text-white  @if($unnocupiedDates->where('date', $day)->isEmpty()) text-gray-300 @endif" for="{{ $day->timestamp }}">
                                         {{ $day->format('d') }}
                                     </label>
