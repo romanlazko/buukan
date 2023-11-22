@@ -54,9 +54,10 @@
             </div>
         </div>
         @if (session('ok') === true)
-            <x-notifications.small class="bg-green-500 z-50" :title="session('description')"/>
+            <h1 class="text-6xl">ok</h1>
+            <x-notifications.small class="bg-green-400 z-50" :title="session('description')"/>
         @elseif (session('ok') === false)
-            <x-notifications.small class="bg-red-500 z-50" :title="session('description')"/>
+            <x-notifications.small class="bg-red-400 z-50" :title="session('description')"/>
         @endif
         
     </body>

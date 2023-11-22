@@ -39,7 +39,7 @@ class TelegramController extends Controller
         ]));
     }
 
-    public function store(BotStoreRequest $request, Company $company)
+    public function store(Request $request, Company $company)
     {
         try {
             $telegram = new Telegram($request->token);
@@ -60,7 +60,7 @@ class TelegramController extends Controller
                 ]);
             }
             
-            return redirect()->route('admin.company.telegram_bot.show', [$company, $telegram_bot])->with([
+            return back()->with([
                 'ok' => $response->getOk(), 
                 'description' => $response->getDescription()
             ]);
