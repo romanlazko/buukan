@@ -21,7 +21,31 @@
         <link rel="modulepreload" href="https://test.buukan.com/public/build/assets/app-b5da1802.js" />
         <link rel="stylesheet" href="https://test.buukan.com/public/build/assets/app-cd7552b9.css" data-navigate-track="reload" />
         <script type="module" src="https://test.buukan.com/public/build/assets/app-b5da1802.js" data-navigate-track="reload"></script> --}}
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @php
+            use Illuminate\Support\Facades\File;
+            $directory = public_path('build/assets'); // Путь к вашей директории
+            $files = File::files($directory);
+            $found_files = [];
+
+            foreach ($files as $file) {
+                $found_files[] = $file->getFilename();
+                if (count($found_files) == 2) {
+                    break;
+                }
+            }
+
+            $file1 = $found_files[0];
+            $file2 = $found_files[1];
+        @endphp
+        
+        <link rel="preload" as="style" href="{{ asset("build/assets/$file1") }}" />
+        <link rel="modulepreload" href="{{ asset("build/assets/$file2") }}" />
+        <link rel="stylesheet" href="{{ asset("build/assets/$file1") }}" data-navigate-track="reload" />
+        <script type="module" src="{{ asset("build/assets/$file2") }}" data-navigate-track="reload"></script>
+
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+
+
     </head>
     
     <body>
