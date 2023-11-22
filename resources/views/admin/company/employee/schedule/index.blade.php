@@ -331,29 +331,11 @@
                     selectable: true,
                     dateClick: function (info) {
                         resetEditScheduleMod();
-                        var startDate = moment(info.start);
-                        var endDate = moment(info.end).add(-1, 'days');
-                        var currentDate = startDate;
 
                         $('#createEventModalButton').click();
 
-
-                        var start_date = $('#start_date');
-                        var end_date = $('#end_date');
-
-                        start_date.attr('value', info.startStr);
-
-                        var inputDate = new Date(info.endStr);
-
-                        inputDate.setDate(inputDate.getDate() - 1);
-
-                        var year = inputDate.getFullYear();
-                        var month = String(inputDate.getMonth() + 1).padStart(2, '0');
-                        var day = String(inputDate.getDate()).padStart(2, '0');
-
-                        var formattedDate = year + '-' + month + '-' + day;
-
-                        end_date.attr('value', formattedDate);
+                        var start_date = $('#start_date').attr('value', info.dateStr);
+                        var end_date = $('#end_date').attr('value', '');
                     },
                     select: function (info) {
                         resetEditScheduleMod();
