@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Romanlazko\Telegram\App\Config;
-use Romanlazko\Telegram\App\Telegram;
+use Romanlazko\Telegram\App\Bot;
 use Romanlazko\Telegram\Exceptions\TelegramException;
 use Romanlazko\Telegram\Http\Requests\BotStoreRequest;
 use Romanlazko\Telegram\Models\TelegramBot;
@@ -21,8 +21,8 @@ class TelegramController extends Controller
         }
 
         $telegram_bots->map(function ($telegram_bot) {
-            $telegram = new Telegram($telegram_bot->token);
-            $telegram_bot->photo = $telegram->getBotChat()->getPhotoLink();
+            $bot = new Bot($telegram_bot->token);
+            $telegram_bot->photo = $bot->getBotChat()->getPhotoLink();
             return $telegram_bot;
         });
 
@@ -42,19 +42,19 @@ class TelegramController extends Controller
     public function store(Request $request, Company $company)
     {
         try {
-            $telegram = new Telegram($request->token);
+            $bot = new Bot($request->token);
 
-            $response = $telegram::setWebHook([
+            $response = $bot::setWebHook([
                 'url' => url('api/telegram/'.$telegram->getBotId()),
             ]);
 
             if ($response->getOk()) {
                 $telegram_bot = $company->telegram_bots()->create([
-                    'id'            => $telegram->getBotChat()->getId(),
-                    'first_name'    => $telegram->getBotChat()->getFirstName(),
-                    'last_name'     => $telegram->getBotChat()->getLastName(),
-                    'username'      => $telegram->getBotChat()->getUsername(),
-                    'photo'         => $telegram->getBotChat()->getPhoto()?->getBigFileId(),
+                    'id'            => $bot->getBotChat()->getId(),
+                    'first_name'    => $bot->getBotChat()->getFirstName(),
+                    'last_name'     => $bot->getBotChat()->getLastName(),
+                    'username'      => $bot->getBotChat()->getUsername(),
+                    'photo'         => $bot->getBotChat()->getPhoto()?->getBigFileId(),
                     'token'         => $request->token,
                     'namespace'     => 'buukan_bot',
                 ]);
@@ -78,11 +78,11 @@ class TelegramController extends Controller
      */
     public function show(Company $company, TelegramBot $telegram_bot)
     {
-        $telegram = new Telegram($telegram_bot->token);
+        $bot = new Bot($telegram_bot->token);
 
-        $telegram_bot->photo                  = $telegram->getBotChat()->getPhotoLink();
-        $telegram_bot->webhook                = $telegram::getWebhookInfo()->getResult();
-        $telegram_bot->all_commands_list      = $telegram->getAllCommandsList();
+        $telegram_bot->photo                  = $bot->getBotChat()->getPhotoLink();
+        $telegram_bot->webhook                = $bot::getWebhookInfo()->getResult();
+        $telegram_bot->all_commands_list      = $bot->getAllCommandsList();
         $telegram_bot->config                 = Config::$config;
         $telegram_bot->logs                   = $telegram_bot->logs();
 
@@ -94,11 +94,11 @@ class TelegramController extends Controller
 
     public function edit(Company $company, TelegramBot $telegram_bot)
     {
-        $telegram = new Telegram($telegram_bot->token);
+        $bot = new Telegram($telegram_bot->token);
 
-        $telegram_bot->photo                  = $telegram->getBotChat()->getPhotoLink();
-        $telegram_bot->webhook                = $telegram::getWebhookInfo()->getResult();
-        $telegram_bot->all_commands_list      = $telegram->getAllCommandsList();
+        $telegram_bot->photo                  = $bot->getBotChat()->getPhotoLink();
+        $telegram_bot->webhook                = $bot::getWebhookInfo()->getResult();
+        $telegram_bot->all_commands_list      = $bot->getAllCommandsList();
         $telegram_bot->config                 = Config::$config;
         $telegram_bot->logs                   = $telegram_bot->logs();
 
