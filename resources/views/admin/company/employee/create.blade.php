@@ -21,23 +21,19 @@
             <div class="space-y-6">
                 <x-white-block>
                     <div class="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
-                        <div class="">
-                            <x-form.file id="img" name="img" type="file" class="hidden"/>
-                            <x-form.label for="img" class="flex w-[9rem] aspect-square items-center overflow-hidden border">
-                                <img id="photoPreview" src="" class="w-full">
-                            </x-form.label>
-                        </div>
+                        <x-form.photo name="avatar" :src="asset('/storage/img/public/preview.jpg')" class="w-36"/>
                         <div class="space-y-4 w-full">
-                            <div>
-                                <x-form.label for="last_name" :value="__('Surname:')" />
-                                <x-form.input id="last_name" name="last_name" type="text" class="mt-1 block w-full" :value="old('last_name')" required autocomplete="last_name"/>
-                                <x-form.error class="mt-2" :messages="$errors->get('last_name')" />
-                            </div>
-    
-                            <div>
-                                <x-form.label for="first_name" :value="__('Name:')" />
-                                <x-form.input id="first_name" name="first_name" type="text" class="mt-1 block w-full" :value="old('first_name')" required autocomplete="first_name" />
-                                <x-form.error class="mt-2" :messages="$errors->get('first_name')" />
+                            <div class="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                                <div class="w-full">
+                                    <x-form.label for="first_name" :value="__('Name:')" />
+                                    <x-form.input id="first_name" name="first_name" type="text" class="block w-full" :value="old('first_name')" required autocomplete="first_name" />
+                                    <x-form.error class="mt-2" :messages="$errors->get('first_name')" />
+                                </div>
+                                <div class="w-full">
+                                    <x-form.label for="last_name" :value="__('Surname:')" />
+                                    <x-form.input id="last_name" name="last_name" type="text" class="block w-full" :value="old('last_name')" required autocomplete="last_name"/>
+                                    <x-form.error class="mt-2" :messages="$errors->get('last_name')" />
+                                </div>
                             </div>
                             <div>
                                 <x-form.label for="email" :value="__('Email')" />
@@ -128,22 +124,4 @@
             </div>
         </form>
     </div>
-    @push('scripts')
-        <script type="module">
-
-            $(document).ready(function() {
-                $('#img').change(function() {
-                    if (this.files && this.files[0]) {
-                        var reader = new FileReader();
-
-                        reader.onload = function (e) {
-                            $('#photoPreview').attr('src', e.target.result);
-                        };
-
-                        reader.readAsDataURL(this.files[0]);
-                    }
-                });
-            });
-        </script>
-    @endpush
 </x-app-layout>

@@ -6,7 +6,10 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@tailwindcss/forms": "^0.5.2",
+        "@tailwindcss/aspect-ratio": "^0.4.2",
+        "@tailwindcss/forms": "^0.5.7",
+        "@tailwindcss/line-clamp": "^0.4.4",
+        "@tailwindcss/typography": "^0.5.10",
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.4.16",
         "axios": "^1.1.2",
@@ -17,6 +20,8 @@
     },
     "dependencies": {
         "cssnano": "^6.0.1",
-        "jquery": "^3.7.1"
+        "jquery": "^3.7.1",
+        "lodash": "^4.17.21",
+        "tailwind": "^4.0.0"
     }
 }

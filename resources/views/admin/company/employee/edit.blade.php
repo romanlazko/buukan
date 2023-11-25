@@ -23,12 +23,7 @@
             <div class="space-y-6">
                 <x-white-block>
                     <div class="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
-                        <div class="">
-                            <x-form.file id="avatar" name="avatar" type="file" class="hidden"/>
-                            <x-form.label for="avatar" class="flex w-[9rem] aspect-square items-center overflow-hidden border">
-                                <img id="photoPreview" src="{{ $employee->avatar }}" class="w-full">
-                            </x-form.label>
-                        </div>
+                        <x-form.photo name="avatar" :src="asset($employee->avatar ?? '/storage/img/public/preview.jpg')" class="w-36"/>
                         <div class="space-y-4 w-full">
                             <div>
                                 <x-form.label for="last_name" :value="__('Surname:')" />
@@ -130,23 +125,4 @@
             </div>
         </form>
     </div>
-    @push('scripts')
-        <script type="module">
-
-            $(document).ready(function() {
-                $('#avatar').change(function() {
-                    if (this.files && this.files[0]) {
-                        var reader = new FileReader();
-
-                        reader.onload = function (e) {
-                            $('#photoPreview').attr('src', e.target.result);
-                        };
-
-                        reader.readAsDataURL(this.files[0]);
-                    }
-                });
-            });
-        </script>
-    @endpush
-
 </x-app-layout>

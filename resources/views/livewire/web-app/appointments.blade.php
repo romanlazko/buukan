@@ -1,9 +1,10 @@
 <x-web-app>
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center">
-                {{ $web_app->company->name ?? __('WebApp') }}
-            </h2>
+        <div class="flex justify-between items-center">
+            <img id="photoPreview" src="{{ asset($web_app->company->logo) }}" class="w-36">
+        </div>
+        <div>
+            CZ
         </div>
     </x-slot>
 
@@ -16,11 +17,11 @@
             @forelse ($appointments as $appointment)
                 <div wire:key="appointment-{{$appointment->id}}" class="space-y-1">
                     <div class="flex space-x-1">
-                        <x-badge customColor="{{$appointment->service->color}}">
+                        <x-badge color="{{$appointment->service->color}}">
                             {{$appointment->service->name}}
                         </x-badge>
                         @foreach ($appointment->subServices as $service)
-                            <x-badge customColor="{{$service->color}}">
+                            <x-badge color="{{$service->color}}">
                                 {{$service->name}}
                             </x-badge>
                         @endforeach
@@ -28,7 +29,7 @@
                     <x-white-block class="p-0" >
                         <div class="flex justify-between">
                             @if ($appointment->service->img)
-                                <div class="bg-cover bg-no-repeat bg-center w-36 bg-[url('{{ asset($appointment->service->img) }}')]">
+                                <div class="bg-cover bg-no-repeat bg-center w-36" style="background-image: url('{{ asset($appointment->service->img) }}')">
                                 </div>
                             @endif
                             

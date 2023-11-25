@@ -14,7 +14,7 @@ class GetEmployeeUnoccupiedSchedule extends Controller
         $employee = Employee::find($request->employee);
 
         if ($employee) {
-            $schedules = GetEmployeeUnoccupiedScheduleAction::handle($request)
+            $schedules = GetEmployeeUnoccupiedScheduleAction::handle($employee, $request->date, $request->service)
                 ->pluck('term')
                 ->map(function($term){
                     return $term->format('H:s');

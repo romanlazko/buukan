@@ -58,10 +58,11 @@
                                             <p class="font-semibold">
                                                 {{ $appointment->term->format('H:i') }}
                                             </p>
-                                            
-                                            <x-badge color="{{ $statusClass }}">
-                                                {{ $appointment->service->name }}
-                                            </x-badge>
+                                            @if ($appointment->service)
+                                                <x-badge color="{{ $statusClass }}">
+                                                    {{ $appointment->service->name }}
+                                                </x-badge>
+                                            @endif
                                         </div>
                                     </div>
                                     @if ($appointment->client)

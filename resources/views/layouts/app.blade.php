@@ -11,7 +11,6 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/f4c6764ec6.js" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/f4c6764ec6.js" crossorigin="anonymous"></script>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -54,7 +53,6 @@
             </div>
         </div>
         @if (session('ok') === true)
-            <h1 class="text-6xl">ok</h1>
             <x-notifications.small class="bg-green-400 z-50" :title="session('description')"/>
         @elseif (session('ok') === false)
             <x-notifications.small class="bg-red-400 z-50" :title="session('description')"/>

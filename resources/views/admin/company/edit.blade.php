@@ -12,16 +12,11 @@
             @method('PATCH')
 
             <x-white-block>
-                <div class="flex space-x-4 items-center">
-                    <div class="flex max-w-[9rem] aspect-square max-h-[9rem] items-center overflow-hidden">
-                        <x-form.file id="logo" name="logo" type="file" class="hidden"/>
-                        <x-form.label for="logo" class="">
-                            <img id="photoPreview" src="{{ asset($company->logo) }}" class="w-full">
-                        </x-form.label>
-                    </div>
+                <div class="flex space-x-4">
+                    <x-form.photo name="logo" :src="asset($company->logo ?? '/storage/img/public/preview.jpg')" class="w-36"/>
                     <div class="space-y-4 w-full">
                         <div>
-                            <x-form.label for="name" :value="__('Name:')" />
+                            <x-form.label for="name" :value="__('Name of company:')" />
                             <x-form.input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $company->name)" required autocomplete="name" />
                             <x-form.error class="mt-2" :messages="$errors->get('name')" />
                         </div>
@@ -32,7 +27,7 @@
             <x-white-block>
                 <div class="space-y-4">
                     <div>
-                        <x-form.label for="description" :value="__('Description:')" />
+                        <x-form.label for="description" :value="__('Description of company::')" />
                         <x-form.textarea id="description" name="description" class="mt-1 block w-full" :value="old('description', $company->description)" />
                         <x-form.error class="mt-2" :messages="$errors->get('name')" />
                     </div>
@@ -66,22 +61,4 @@
             </div>
         </form>
     </div>
-    @section('script')
-        <script type="module">
-
-            $(document).ready(function() {
-                $('#logo').change(function() {
-                    if (this.files && this.files[0]) {
-                        var reader = new FileReader();
-
-                        reader.onload = function (e) {
-                            $('#photoPreview').attr('src', e.target.result);
-                        };
-
-                        reader.readAsDataURL(this.files[0]);
-                    }
-                });
-            });
-        </script>
-    @endsection
 </x-app-layout>

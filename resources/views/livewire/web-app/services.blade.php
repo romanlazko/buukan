@@ -1,9 +1,10 @@
 <x-web-app>
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center">
-                {{ $web_app->company->name ?? __('WebApp') }}
-            </h2>
+        <div class="flex justify-between items-center">
+            <img id="photoPreview" src="{{ asset($web_app->company->logo) }}" class="w-36">
+        </div>
+        <div>
+            CZ
         </div>
     </x-slot>
 
@@ -15,14 +16,14 @@
         <div class="w-full space-y-6">
             @foreach ($services as $service)
                 <div wire:key="service-{{ $service->id }}" class="flex items-center space-x-2">
-                    <input wire:model.live="serviceId" type="radio" id="{{ $service->slug }}" class="peer/{{ $service->slug }} peer/service" name="service" slug="{{ $service->slug }}" value="{{ $service->id }}">
-                    <x-form.label for="{{ $service->slug }}" class="w-full bg-white rounded-lg border-2 peer-checked/{{ $service->slug }}:border-blue-500 overflow-hidden" >
+                    <input wire:model.live="serviceId" type="radio" id="{{ $service->slug }}" class="peer/{{ $service->slug }}" name="service" slug="{{ $service->slug }}" value="{{ $service->id }}">
+                    <x-form.label for="{{ $service->slug }}" class="w-full bg-white rounded-lg border-2 peer-checked/{{ $service->slug }}:border-blue-400 overflow-hidden" >
                         <div class="flex justify-between items-center" >
-                            <div class="flex">
-                                <div class="bg-cover bg-no-repeat bg-center w-36 bg-[url('{{ asset($service->img) }}')]">
+                            <div class="flex w-full">
+                                <div class="bg-cover bg-no-repeat bg-center w-36" style="background-image: url('{{ asset($service->img) }}')">
                                 </div>
                                 <div class="flex w-full p-4 items-center space-x-4">
-                                    <div>
+                                    <div class="w-full">
                                         <p class="w-full text-xl font-medium text-gray-900" >
                                             {{ $service->name ?? null }}
                                         </p>
@@ -48,7 +49,7 @@
         <div>
             <x-a-buttons.primary wire:click="prevStep">
                 <div class="w-full text-center p-3">
-                    <
+                    ←
                 </div>
             </x-a-buttons.primary>
         </div>
