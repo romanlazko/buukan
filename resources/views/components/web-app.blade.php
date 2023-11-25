@@ -8,7 +8,7 @@
             </div>
         @endif
         
-        <main class="my-[10vh] flex-1 overflow-x-hidden w-full overflow-y-auto bg-gray-200 fixed overflow-auto h-[80vh]">
+        <main class="my-[10vh] flex-1 overflow-x-hidden w-full overflow-y-auto bg-gray-200 fixed overflow-auto">
             <div class="mx-auto max-w-2xl px-2">
                 {{$slot}}
             </div>
@@ -21,3 +21,16 @@
         @endif
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+    // Устанавливаем высоту блока равной высоте видимой области страницы
+        var windowHeight = $(window).height();
+        $('main').height(windowHeight);
+    });
+
+    // Обновляем высоту блока при изменении размеров окна
+    $(window).resize(function() {
+        var windowHeight = $(window).height();
+        $('main').height(windowHeight);
+    });
+</script>
