@@ -10,7 +10,7 @@
         @endif
         
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-            <div class="mx-auto max-w-2xl">
+            <div class="p-2 mx-auto max-w-2xl">
                 {{$slot}}
             </div>
         </main>
@@ -50,14 +50,13 @@
 </div> --}}
 <script type="module">
     $(document).ready(function(){
-    // Устанавливаем высоту блока равной высоте видимой области
-        var windowHeight = window.innerHeight;
-        $('#main').css('height', windowHeight + 'px');
-        
-        // Обновляем высоту блока при изменении размеров окна браузера
-        $(window).resize(function(){
-            var windowHeight = window.innerHeight;
-            $('#main').css('height', windowHeight + 'px');
+        var targetElement = document.querySelector('main');
+        var resizeObserver = new ResizeObserver(function(entries) {
+            entries.forEach(function(entry) {
+                var windowHeight = window.innerHeight;
+                $('#main').css('height', windowHeight + 'px');
+            });
         });
+        resizeObserver.observe(targetElement);
     });
 </script>
