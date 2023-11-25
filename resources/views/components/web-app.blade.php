@@ -1,4 +1,4 @@
-<div class="flex h-screen bg-gray-200 font-roboto ">
+<div class="flex h-screen bg-gray-200 font-roboto overflow-hidden">
     <div class="relative flex-1 flex flex-col overflow-hidden">
         @if (isset($header))
             <div class="bg-white w-full">
