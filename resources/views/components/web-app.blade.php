@@ -1,5 +1,5 @@
 <div class="flex h-screen bg-gray-200 font-roboto ">
-    <div class="relative flex-1 flex flex-col overflow-hidden ">
+    <div class="relative flex-1 flex flex-col overflow-hidden">
         @if (isset($header))
             <div class="bg-white  w-full">
                 <div class=" bg-white flex w-full m-auto h-[80px] fixed px-4 sm:px-6 lg:px-8 items-center justify-between max-w-2xl">
