@@ -10,7 +10,7 @@
     </x-slot>
 
     <div class="space-y-6">
-        <h1 class="p-4 text-white bg-gray-800 rounded-lg sticky top-1 text-2xl font-bold shadow">
+        <h1 class="p-4 text-white bg-gray-800 rounded-lg text-2xl font-bold shadow">
             Appointments:
         </h1>
         
