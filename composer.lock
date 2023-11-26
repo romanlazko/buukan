@@ -3296,16 +3296,16 @@
         },
         {
             "name": "romanlazko/telegram",
-            "version": "1.0.29",
+            "version": "1.0.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/romanlazko/telegram.git",
-                "reference": "4641ce75addb62d5555a99e85be611b5fe316d68"
+                "reference": "3e405cc58f75493b3faa868d4367055cf01b10b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/romanlazko/telegram/zipball/4641ce75addb62d5555a99e85be611b5fe316d68",
-                "reference": "4641ce75addb62d5555a99e85be611b5fe316d68",
+                "url": "https://api.github.com/repos/romanlazko/telegram/zipball/3e405cc58f75493b3faa868d4367055cf01b10b3",
+                "reference": "3e405cc58f75493b3faa868d4367055cf01b10b3",
                 "shasum": ""
             },
             "require": {
@@ -3339,9 +3339,9 @@
             "description": "Telegram for Laravel",
             "support": {
                 "issues": "https://github.com/romanlazko/telegram/issues",
-                "source": "https://github.com/romanlazko/telegram/tree/1.0.29"
+                "source": "https://github.com/romanlazko/telegram/tree/1.0.30"
             },
-            "time": "2023-11-26T15:12:32+00:00"
+            "time": "2023-11-26T15:25:25+00:00"
         },
         {
             "name": "spatie/laravel-permission",
