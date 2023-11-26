@@ -374,6 +374,8 @@
                     const blockWidth = $(".fc-view-harness").width(); 
                     let scale = blockWidth; // начальный масштаб
                     const scaleStep = 10; // шаг масштабирования
+                    let isDragging = false;
+                    let startScale;
 
                     // Обработчик события колесика мыши
                     $(".fc-view-harness").on("wheel", function (e) {
@@ -396,6 +398,58 @@
                         $(".fc-dayGridMonth-view").css("width", scale+"px");
                         calendar.updateSize();
                     });
+    
+
+    // Обработчик события начала касания или колеса мыши
+    $(".fc-view-harness").on("touchstart wheel", function (e) {
+        isDragging = true;
+        startScale = scale;
+
+        if (e.type === "wheel") {
+            // Если событие - это колесо мыши, используйте deltaY для определения направления
+            const delta = e.originalEvent.deltaY;
+            if (delta > 0) {
+                // Прокрутка вниз - уменьшение масштаба
+                scale -= scaleStep;
+            } else {
+                // Прокрутка вверх - увеличение масштаба
+                scale += scaleStep;
+            }
+        }
+    });
+
+    // Обработчик события перемещения при касании или колесе мыши
+    $(".fc-view-harness").on("touchmove", function (e) {
+        if (isDragging) {
+            e.preventDefault();
+
+            // Если событие - это касание, используйте координаты касания для определения направления
+            if (e.originalEvent.touches && e.originalEvent.touches.length > 0) {
+                const touch = e.originalEvent.touches[0];
+                const delta = touch.clientX - touch.pageX;
+
+                if (delta > 0) {
+                    // Движение вправо - увеличение масштаба
+                    scale += scaleStep;
+                } else {
+                    // Движение влево - уменьшение масштаба
+                    scale -= scaleStep;
+                }
+            }
+
+            // Ограничение масштаба
+            scale = Math.max(blockWidth, Math.min(scale, 850));
+
+            // Применение масштаба к элементу
+            $(".fc-dayGridMonth-view").css("width", scale + "px");
+            calendar.updateSize();
+        }
+    });
+
+    // Обработчик события завершения касания или колеса мыши
+    $(".fc-view-harness").on("touchend", function () {
+        isDragging = false;
+    });
                     
                 });
             });
