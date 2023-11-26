@@ -23,10 +23,9 @@
             <div class="space-y-6">
                 <x-white-block>
                     <div class="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
-                        <x-form.photo name="img" :src="asset($service->img ?? '/storage/img/public/preview.jpg')" class="w-36"/>
                         <div class="space-y-4 w-full">
                             <div>
-                                <x-form.label for="name" :value="__('Name:')" />
+                                <x-form.label for="name" :value="__('Name of service:')" />
                                 <x-form.input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $service->name)" required autocomplete="name" />
                                 <x-form.error class="mt-2" :messages="$errors->get('name')" />
                             </div>

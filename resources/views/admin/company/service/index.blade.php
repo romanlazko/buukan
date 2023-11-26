@@ -35,9 +35,6 @@
                         <tr class="@if($index % 2 === 0) bg-gray-100 @endif">
                             <x-table.td>
                                 <div class="flex items-center py-2">
-                                    <a href="{{ route('admin.company.service.edit', [$company, $service]) }}" class="flex-col items-center my-auto">
-                                        <img src="{{ $service->img ?? null }}" class="mr-4 w-12 h-12 min-w-[48px] rounded-full" style="background-color: {{ $service->color }}">
-                                    </a>
                                     <div class="flex-col justify-center">
                                         <div>
                                             <a href="{{ route('admin.company.service.edit', [$company, $service]) }}" class="w-full text-base mb-1 hover:underline">

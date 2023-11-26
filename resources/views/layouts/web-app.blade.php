@@ -7,6 +7,7 @@
 
         <title>{{ __('WebApp') }}</title>
         <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://kit.fontawesome.com/f4c6764ec6.js" crossorigin="anonymous"></script>
         
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>

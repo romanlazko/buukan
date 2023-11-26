@@ -58,19 +58,21 @@
     </div>
 
     <x-slot name="footer">
-        <div>
-            <x-a-buttons.primary wire:click="prevStep">
-                <div class="w-full text-center p-3">
-                    ←
-                </div>
-            </x-a-buttons.primary>
-        </div>
-        <div class="w-full">
-            <x-buttons.primary wire:click="create" class="w-full" :disabled="$date == null OR $term == null">
-                <div class="w-full text-center p-3">
-                    Confirm
-                </div>
-            </x-buttons.primary>
+        <div class="space-x-4 flex w-full">
+            <div>
+                <x-a-buttons.primary wire:click="prevStep">
+                    <div class="w-full text-center p-3">
+                        ←
+                    </div>
+                </x-a-buttons.primary>
+            </div>
+            <div class="w-full">
+                <x-buttons.primary wire:click="create" class="w-full" :disabled="$date == null OR $term == null">
+                    <div class="w-full text-center p-3">
+                        Confirm
+                    </div>
+                </x-buttons.primary>
+            </div>
         </div>
     </x-slot>
 </x-web-app>

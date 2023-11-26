@@ -57,15 +57,6 @@ class ServiceController extends Controller
             'color' => $request->color,
         ]);
 
-        if ($request->hasFile('img')) {
-            $filePath = $this->fileService->uppload(
-                $request->file('img'), 
-                "public/img/{$company->slug}/services/{$service->slug}"
-            );
-
-            $service->update(['img' => $filePath]);
-        }
-
         return redirect()->route('admin.company.service.index', $company);
     }
 
@@ -110,15 +101,6 @@ class ServiceController extends Controller
             'price' => $request->price,
             'color' => $request->color
         ]);
-
-        if ($request->hasFile('img')) {
-            $filePath = $this->fileService->uppload(
-                $request->file('img'), 
-                "public/img/{$company->slug}/services/{$service->slug}"
-            );
-
-            $service->update(['img' => $filePath]);
-        }
 
         return redirect()->route('admin.company.service.index', $company);
     }

@@ -61,4 +61,11 @@ class Appointment extends Model
             ],
         ]);
     }
+
+    public function cancel()
+    {
+        return $this->update([
+            'status' => 'canceled'
+        ]);
+    }
 }

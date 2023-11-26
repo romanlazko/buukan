@@ -18,7 +18,7 @@ class WebApp extends Component
 
     public Client $client;
 
-    public $services;
+    public $sub_services = [];
 
     public $employees;
 
@@ -44,7 +44,7 @@ class WebApp extends Component
         $this->currentStep++;
 
         if ($this->steps[$this->currentStep] == 'services') {
-            $this->reset('serviceId', 'employeeId', 'date', 'term');
+            $this->reset('serviceId', 'employeeId', 'date', 'term', 'sub_services');
         }
 
         if ($this->steps[$this->currentStep] == 'employees') {
@@ -63,7 +63,7 @@ class WebApp extends Component
         }
 
         if ($this->steps[$this->currentStep] == 'services') {
-            $this->reset('serviceId', 'employeeId', 'date', 'term');
+            $this->reset('employeeId', 'date', 'term');
         }
 
         if ($this->steps[$this->currentStep] == 'employees') {
@@ -104,10 +104,19 @@ class WebApp extends Component
                 'date' => $this->date,
                 'term' => $this->term,
                 'status' => 'new',
-            ]);
+            ])->subServices()->sync($this->sub_services);
         }
 
-        $this->reset('serviceId', 'employeeId', 'date', 'term', 'currentStep');
+        $this->reset('serviceId', 'employeeId', 'date', 'term', 'currentStep', 'sub_services');
+    }
+
+    public function cancel($appointmentId) 
+    {
+        $client = $this->web_app->company->clients->find($this->client->id);
+
+        if ($client) {
+            $client->appointments()->find($appointmentId)->cancel();
+        }
     }
 
     public function resetTerm()
@@ -117,14 +126,19 @@ class WebApp extends Component
 
     public function render()
     {
-        $this->appointments = $this->client->appointments->where('status', 'new');
-        $this->services = $this->web_app->company->services;
-        $this->employees = Service::find($this->serviceId)?->employees;
+        if ($this->steps[$this->currentStep] == 'appointments') {
+            $this->appointments = $this->client->appointments->where('status', 'new');
+        }
 
-        $this->unnocupiedDates = GetEmployeeUnoccupiedScheduleAction::handle(Employee::find($this->employeeId), null, $this->serviceId)?->sortBy('date');
+        if ($this->steps[$this->currentStep] == 'employees') {
+            $this->employees = Service::find($this->serviceId)?->employees;
+        }
+
+        if ($this->steps[$this->currentStep] == 'dateterm') {
+            $this->unnocupiedDates  = GetEmployeeUnoccupiedScheduleAction::handle(Employee::find($this->employeeId), null, $this->serviceId)?->sortBy('date');
+            $this->schedules        = GetEmployeeUnoccupiedScheduleAction::handle(Employee::find($this->employeeId), $this->date, $this->serviceId)?->sortBy('term');
+        }
         
-        $this->schedules = GetEmployeeUnoccupiedScheduleAction::handle(Employee::find($this->employeeId), $this->date, $this->serviceId)?->sortBy('term');
-
         return view("livewire.web-app.{$this->steps[$this->currentStep]}");
     }
 }

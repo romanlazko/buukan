@@ -10,6 +10,7 @@
     </x-slot>
 
     <div class="space-y-6">
+        @dump($sub_services)
         <h1 class="p-4 text-white bg-gray-800 rounded-lg sticky top-1 text-2xl font-bold shadow">
             Choose employee:
         </h1>
@@ -45,19 +46,21 @@
     </div>
 
     <x-slot name="footer">
-        <div>
-            <x-a-buttons.primary wire:click="prevStep">
-                <div class="w-full text-center p-3">
-                    ←
-                </div>
-            </x-a-buttons.primary>
-        </div>
-        <div class="w-full">
-            <x-buttons.primary wire:key="employee-continue-button" wire:click="nextStep" class="w-full" :disabled="$employeeId == null">
-                <div class="w-full text-center p-3">
-                    Continue
-                </div>
-            </x-buttons.primary>
+        <div class="space-x-4 flex w-full">
+            <div>
+                <x-a-buttons.primary wire:click="prevStep">
+                    <div class="w-full text-center p-3">
+                        ←
+                    </div>
+                </x-a-buttons.primary>
+            </div>
+            <div class="w-full">
+                <x-buttons.primary wire:key="employee-continue-button" wire:click="nextStep" class="w-full" :disabled="$employeeId == null">
+                    <div class="w-full text-center p-3">
+                        Continue
+                    </div>
+                </x-buttons.primary>
+            </div>
         </div>
     </x-slot>
 </x-web-app>
