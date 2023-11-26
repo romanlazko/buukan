@@ -366,9 +366,41 @@
                 });
                 calendar.render();
                 $('.fc-view-harness').addClass('overflow-auto');
-                $('.fc-dayGridMonth-view').addClass('min-w-[850px] sm:min-w-[1240px] 2xl:min-w-full');
+                // $('.fc-dayGridMonth-view').addClass('min-w-[850px] sm:min-w-[1240px] 2xl:min-w-full');
+                
                 calendar.updateSize();
+
+                $(document).ready(function () {
+                    const blockWidth = $(".fc-view-harness").width(); 
+                    let scale = blockWidth; // начальный масштаб
+                    const scaleStep = 10; // шаг масштабирования
+
+                    // Обработчик события колесика мыши
+                    $(".fc-view-harness").on("wheel", function (e) {
+                    e.preventDefault();
+
+                    // Определение направления прокрутки
+                    const delta = e.originalEvent.deltaY;
+                    if (delta > 0) {
+                            // Прокрутка вниз - уменьшение масштаба
+                            scale -= scaleStep;
+                        } else {
+                            // Прокрутка вверх - увеличение масштаба
+                            scale += scaleStep;
+                        }
+
+                        // Ограничение масштаба
+                        scale = Math.max(blockWidth, Math.min(scale, 850));
+
+                        // Применение масштаба к элементу
+                        $(".fc-dayGridMonth-view").css("width", scale+"px");
+                        calendar.updateSize();
+                    });
+                });
             });
+        </script>
+        <script>
+            
         </script>
     @endpush
 </x-app-layout>
