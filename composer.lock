@@ -3296,16 +3296,16 @@
         },
         {
             "name": "romanlazko/telegram",
-            "version": "1.0.28",
+            "version": "1.0.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/romanlazko/telegram.git",
-                "reference": "5d5724e37cffb320386170a14ea8b9844719a607"
+                "reference": "4641ce75addb62d5555a99e85be611b5fe316d68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/romanlazko/telegram/zipball/5d5724e37cffb320386170a14ea8b9844719a607",
-                "reference": "5d5724e37cffb320386170a14ea8b9844719a607",
+                "url": "https://api.github.com/repos/romanlazko/telegram/zipball/4641ce75addb62d5555a99e85be611b5fe316d68",
+                "reference": "4641ce75addb62d5555a99e85be611b5fe316d68",
                 "shasum": ""
             },
             "require": {
@@ -3339,9 +3339,9 @@
             "description": "Telegram for Laravel",
             "support": {
                 "issues": "https://github.com/romanlazko/telegram/issues",
-                "source": "https://github.com/romanlazko/telegram/tree/1.0.28"
+                "source": "https://github.com/romanlazko/telegram/tree/1.0.29"
             },
-            "time": "2023-11-21T15:49:05+00:00"
+            "time": "2023-11-26T15:12:32+00:00"
         },
         {
             "name": "spatie/laravel-permission",
@@ -6680,16 +6680,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "10.1.8",
+            "version": "10.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "84838eed9ded511f61dc3e8b5944a52d9017b297"
+                "reference": "a56a9ab2f680246adcf3db43f38ddf1765774735"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/84838eed9ded511f61dc3e8b5944a52d9017b297",
-                "reference": "84838eed9ded511f61dc3e8b5944a52d9017b297",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/a56a9ab2f680246adcf3db43f38ddf1765774735",
+                "reference": "a56a9ab2f680246adcf3db43f38ddf1765774735",
                 "shasum": ""
             },
             "require": {
@@ -6746,7 +6746,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.8"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.9"
             },
             "funding": [
                 {
@@ -6754,7 +6754,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-15T13:31:15+00:00"
+            "time": "2023-11-23T12:23:20+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",

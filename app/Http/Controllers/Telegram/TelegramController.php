@@ -94,7 +94,7 @@ class TelegramController extends Controller
 
     public function edit(Company $company, TelegramBot $telegram_bot)
     {
-        $bot = new Telegram($telegram_bot->token);
+        $bot = new Bot($telegram_bot->token);
 
         $telegram_bot->photo                  = $bot->getBotChat()->getPhotoLink();
         $telegram_bot->webhook                = $bot::getWebhookInfo()->getResult();
