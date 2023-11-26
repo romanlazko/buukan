@@ -18,7 +18,7 @@
 
 @if(auth()->user()->employee?->hasRole('administrator', 'company') OR auth()->user()->hasRole('admin'))
     <x-responsive-nav-link :href="route('admin.company.employee.index', $company)" :active="request()->routeIs('admin.company.employee.*')">
-        {{ __('Employee') }}
+        {{ __('Employees') }}
     </x-responsive-nav-link>
 @endif
 

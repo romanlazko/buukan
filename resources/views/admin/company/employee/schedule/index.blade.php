@@ -11,7 +11,8 @@
         </div>
         <x-header.menu>
             <x-header.link class="float-right" onclick="showAppointmentModal()">
-                {{ __("✚ Add appointment") }}
+                <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
+                {{ __("Add appointment") }}
             </x-header.link>
         </x-header.menu>
     </x-slot>
@@ -231,10 +232,8 @@
     <button id="editEventModalButton" class="hidden" x-data="" x-on:click.prevent="$dispatch('open-modal', 'editEventModal')"></button>
     <button id="createEventModalButton" class="hidden" x-data="" x-on:click.prevent="$dispatch('open-modal', 'createEventModal')"></button>
 
-    <div class="w-full py-6 ">
-        <x-white-block>
-            <div id='calendar' class="text-[10px] sm:text-base"></div>
-        </x-white-block>
+    <div class="w-full py-6 bg-white">
+        <div id='calendar' class="text-[10px] sm:text-base"></div>
     </div>
 
     {{-- @yield('appointment-script') --}}
@@ -282,9 +281,9 @@
                     initialView: 'dayGridMonth',
                     headerToolbar: {
                         left: 'title',
-                        right: 'prev,next'
+                        right: 'dayGridMonth,dayGridDay,prev,next'
                     },
-                    titleFormat: { year: 'numeric', month: 'short' }, 
+                    titleFormat: { year: 'numeric', month: 'short', day: 'numeric' }, 
                     dayHeaderFormat: { weekday: 'short', omitCommas: true }, 
                     eventTimeFormat: {
                         hour: '2-digit',
@@ -365,14 +364,12 @@
                     },
                 });
                 calendar.render();
+                $('.fc-header-toolbar').addClass('px-4 sticky top-1 bg-white z-10');
                 $('.fc-view-harness').addClass('overflow-auto');
-                $('.fc-dayGridMonth-view').addClass('min-w-[850px] sm:min-w-[1240px] 2xl:min-w-full');
+                $('.fc-dayGridMonth-view').addClass('min-w-[850px] md:min-w-full');
                 
                 calendar.updateSize();
             });
-        </script>
-        <script>
-            
         </script>
     @endpush
 </x-app-layout>

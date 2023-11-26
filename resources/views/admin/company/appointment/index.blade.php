@@ -10,14 +10,15 @@
         </div>
         <x-header.menu>
             <x-header.link class="float-right" onclick="showAppointmentModal()">
-                {{ __("✚ Add appointment") }}
+                <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
+                {{ __("Add appointment") }}
             </x-header.link>
         </x-header.menu>
     </x-slot>
     
     <x-modal.appointment-modal :company="$company"/>
 
-    <div class="flex overflow-auto min-h-full py-4">
+    <div class="flex overflow-auto min-h-full py-4 sm:p-4">
         @forelse ($employees as $employee)
             <div class="min-w-full sm:min-w-0 sm:w-1/2 lg:w-1/4 px-2">
                 <div class="p-3 space-y-3 rounded-md bg-gray-100">

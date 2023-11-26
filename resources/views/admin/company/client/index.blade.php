@@ -12,7 +12,7 @@
             </x-header.link>
         </x-header.menu>
     </x-slot>
-    <div class="">
+    <div class="py-4 sm:p-4">
         <x-white-block class="p-0">
             <x-table.table class="whitespace-nowrap">
                 <x-table.thead>

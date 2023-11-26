@@ -5,7 +5,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Edit sub service:') }}
             </h2>
-            <x-badge customColor="{{ $sub_service->color }}">
+            <x-badge color="{{ $sub_service->color }}">
                 {{ $sub_service->name ?? null }}
             </x-badge>
         </div>
@@ -16,7 +16,7 @@
         </x-header.menu>
     </x-slot>
 
-    <div class="w-full space-y-6 m-auto max-w-2xl">
+    <div class="w-full space-y-6 m-auto max-w-2xl py-4">
         <form method="POST" action="{{ route('admin.company.sub_service.update', [$company, $sub_service]) }}" enctype='multipart/form-data'>
             @csrf
             @method('PATCH')

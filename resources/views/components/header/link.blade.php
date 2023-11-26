@@ -7,7 +7,7 @@
 @endphp
 
 <a {{ $attributes->merge(['class' => 'block w-full border-l-4 sm:border-l-0 sm:border-b-2 px-2 sm:px-0 py-2 text-left text-base font-base transition duration-150 ease-in-out' . $activeClasses]) }}>
-    <div class="flex whitespace-nowrap">
+    <div class="flex whitespace-nowrap items-center">
         {{ $slot }}
     </div>
 </a>

@@ -40,10 +40,7 @@
         </x-header.menu>
     </x-slot>
 
-    <div class="space-y-6">
-        {{-- <x-white-block class="p-0">
-            <x-search :action="route('admin.company.telegram_bot.chat.index', [$company, $telegram_bot] )"/>
-        </x-white-block> --}}
+    <div class="space-y-6 py-4 sm:p-4">
         <x-white-block class="p-0">
             <x-table.table class="whitespace-nowrap">
                 <x-table.thead class="text-left py-2 ">

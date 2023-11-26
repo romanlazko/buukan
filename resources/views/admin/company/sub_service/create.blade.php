@@ -12,7 +12,7 @@
         </x-header.menu>
     </x-slot>
 
-    <div class="w-full space-y-6 m-auto max-w-2xl">
+    <div class="w-full space-y-6 m-auto max-w-2xl py-4">
         <form method="POST" action="{{ route('admin.company.sub_service.store', $company) }}" enctype='multipart/form-data'>
             @csrf
             <div class="space-y-6">

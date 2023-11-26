@@ -48,11 +48,11 @@ class Appointment extends Model
             'comment' => $this->comment,
             'status' => $this->status,
             'employee' => [
-                'id' => $this->employee->id,
+                'id' => $this->employee?->id,
             ],
             'service' => [
-                'id' => $this->service->id,
-                'name' => $this->service->name,
+                'id' => $this->service?->id,
+                'name' => $this->service?->name,
             ],
             'client' => [
                 'id' => $this->client?->id,

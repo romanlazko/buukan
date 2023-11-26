@@ -10,41 +10,43 @@
         </div>
     </x-slot>
 
-    @forelse ($telegram_bots as $telegram_bot)
-        <x-white-block class="p-4">
-            <div class="w-full flex justify-between">
-                <div class="flex items-center">
-                    <div class="flex-col items-center my-auto">
-                        <img src="{{ $telegram_bot->photo ?? null }}" alt="Avatar" class="mr-4 w-12 h-12 min-w-[48px] rounded-full">
+    <div class="space-y-6 py-4 sm:p-4">
+        @forelse ($telegram_bots as $telegram_bot)
+            <x-white-block class="p-4">
+                <div class="w-full flex justify-between">
+                    <div class="flex items-center">
+                        <div class="flex-col items-center my-auto">
+                            <img src="{{ $telegram_bot->photo ?? null }}" alt="Avatar" class="mr-4 w-12 h-12 min-w-[48px] rounded-full">
+                        </div>
+                        <div class="flex-col justify-center">
+                            <div>
+                                <a href="{{ route('admin.company.telegram_bot.show', [$company, $telegram_bot]) }}" class="w-full text-sm font-light text-gray-500 mb-1 hover:underline">
+                                    {{ $telegram_bot->id ?? null }}
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{{ route('admin.company.telegram_bot.show', [$company, $telegram_bot]) }}" class="w-full text-md font-medium text-gray-900">
+                                    {{ $telegram_bot->first_name ?? null }} {{ $telegram_bot->last_name ?? null }}
+                                </a>
+                            </div>
+                            
+                            <div>
+                                <a class="w-full text-sm font-light text-blue-500 hover:underline" href="https://t.me/{{$telegram_bot->username}}">
+                                    {{ "@".($telegram_bot->username ?? null) }}
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex-col justify-center">
-                        <div>
-                            <a href="{{ route('admin.company.telegram_bot.show', [$company, $telegram_bot]) }}" class="w-full text-sm font-light text-gray-500 mb-1 hover:underline">
-                                {{ $telegram_bot->id ?? null }}
-                            </a>
-                        </div>
-                        <div>
-                            <a href="{{ route('admin.company.telegram_bot.show', [$company, $telegram_bot]) }}" class="w-full text-md font-medium text-gray-900">
-                                {{ $telegram_bot->first_name ?? null }} {{ $telegram_bot->last_name ?? null }}
-                            </a>
-                        </div>
-                        
-                        <div>
-                            <a class="w-full text-sm font-light text-blue-500 hover:underline" href="https://t.me/{{$telegram_bot->username}}">
-                                {{ "@".($telegram_bot->username ?? null) }}
-                            </a>
-                        </div>
+                    <div class="flex items-center space-x-2">
+                        <x-buttons.delete action="{{ route('admin.company.telegram_bot.destroy', [$company, $telegram_bot]) }}">
+                            {{ __('Delete') }}
+                        </x-buttons.delete>
                     </div>
                 </div>
-                <div class="flex items-center space-x-2">
-                    <x-buttons.delete action="{{ route('admin.company.telegram_bot.destroy', [$company, $telegram_bot]) }}">
-                        {{ __('Delete') }}
-                    </x-buttons.delete>
-                </div>
-            </div>
-        </x-white-block>
-    @empty
-        
-    @endforelse
+            </x-white-block>
+        @empty
+            
+        @endforelse
+    </div>
     
 </x-app-layout>
