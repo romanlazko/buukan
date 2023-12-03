@@ -43,8 +43,8 @@ class CancelAppointmentCommand extends Command
             ]);
 
             $text = implode("\n", [
-                "❗️*До твоей записи осталось менее чем 24 часа*❗️"."\n",
-                "Для изменения записи, пожалуйста, свяжись с [администратором](https://t.me/valeri_kim95)."
+                "❗️*До записи осталось менее чем 24 часа*❗️"."\n",
+                "Для изменения записи, пожалуйста, обратитесь в поддержку."
             ]);
 
             return BotApi::returnInline([
@@ -62,7 +62,7 @@ class CancelAppointmentCommand extends Command
             [array(MenuCommand::getTitle('ru'), MenuCommand::$command, '')]
         ]);
 
-        $text = "Ты уверена что хочешь отменить запись?";
+        $text = "Точно отменить запись?";
 
         return BotApi::returnInline([
             'text'          =>  $text,

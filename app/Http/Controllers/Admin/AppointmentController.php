@@ -79,7 +79,7 @@ class AppointmentController extends Controller
             'price' => $request->price,
             'comment' => $request->comment,
             'status' => $request->status,
-        ]);
+        ])->subServices()->sync($request->sub_services);
 
         return redirect()->back()->with([
             'ok' => true,
@@ -121,6 +121,7 @@ class AppointmentController extends Controller
             'comment' => $request->comment,
             'status' => $request->status,
         ]);
+        $appointment->subServices()->sync($request->sub_services);
 
         return redirect()->back()->with([
             'ok' => true,

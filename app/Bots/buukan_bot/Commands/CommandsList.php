@@ -21,19 +21,33 @@ class CommandsList extends DefaultCommandsList
             // Appointment
             UserCommands\Appointment\AppointmentCommand::class,
             UserCommands\Appointment\CreateProfile::class,
+
             UserCommands\Appointment\FirstName::class,
-            UserCommands\Appointment\LastName::class,
-            UserCommands\Appointment\Phone::class,
             UserCommands\Appointment\AwaitFirstName::class,
+
+            UserCommands\Appointment\LastName::class,
             UserCommands\Appointment\AwaitLastName::class,
+
+            UserCommands\Appointment\Phone::class,
             UserCommands\Appointment\AwaitPhone::class,
+
+            UserCommands\Appointment\Email::class,
+            UserCommands\Appointment\AwaitEmail::class,
+
             UserCommands\Appointment\SaveProfile::class,
+
             UserCommands\Appointment\ChooseEmployee::class,
             UserCommands\Appointment\SaveEmployee::class,
+
             UserCommands\Appointment\ChooseService::class,
             UserCommands\Appointment\SaveService::class,
+
+            UserCommands\Appointment\ChooseSubService::class,
+            UserCommands\Appointment\SaveSubService::class,
+
             UserCommands\Appointment\ChooseDateByWeek::class,
             UserCommands\Appointment\ChooseTerm::class,
+            
             UserCommands\Appointment\ConfirmAppointCommand::class,
             UserCommands\Appointment\Appoint::class,
 

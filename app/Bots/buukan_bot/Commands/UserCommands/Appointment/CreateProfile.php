@@ -33,6 +33,7 @@ class CreateProfile extends Command
                 array("👤 Фамилия: {$notes('last_name')}", LastName::$command, '')
             ],
             [array("☎️ Номер телефона: {$notes('phone')}", Phone::$command, '')],
+            [array("📧 Email: {$notes('email')}", Email::$command, '')],
             [
                 array("👈 Назад", MenuCommand::$command, ''),
                 array("Продолжить 👉", SaveProfile::$command, $notes('id')),

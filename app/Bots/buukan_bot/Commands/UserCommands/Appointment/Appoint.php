@@ -9,6 +9,7 @@ use Romanlazko\Telegram\App\Commands\Command;
 use Romanlazko\Telegram\App\DB;
 use Romanlazko\Telegram\App\Entities\Response;
 use Romanlazko\Telegram\App\Entities\Update;
+use App\Models\Company;
 
 class Appoint extends Command
 {
@@ -25,10 +26,11 @@ class Appoint extends Command
 
     public function execute(Update $updates): Response
     {
+        $company = Company::find(DB::getBot()->owner_id);
 
-        $client = DB::getBot()->company->clients()->find($updates->getInlineData()->getClientId());
+        $client = $company->clients()->find($updates->getInlineData()->getClientId());
         
-        $schedule = DB::getBot()->company->employees()
+        $schedule = $company->employees()
             ->find($updates->getInlineData()->getEmployeeId())
             ->schedule()
             ->find($updates->getInlineData()->getScheduleId());
@@ -73,7 +75,7 @@ class Appoint extends Command
             'date' => $schedule->date->format('Y-m-d'),
             'term' => $schedule->term->format('H:i'),
             'status' => 'new',
-        ]);
+        ])->subServices()->sync(array_filter(explode(':', $updates->getInlineData()->getSubServices())));
 
         // if ($appointment) {
         //     event(new NewAppointment($appointment));

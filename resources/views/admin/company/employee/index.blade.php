@@ -34,13 +34,13 @@
                             <tr class="@if($index % 2 === 0) bg-gray-100 @endif">
                                 <x-table.td>
                                     <div class="flex items-center py-2">
-                                        <a href="{{ route('admin.company.employee.schedule.index', [$company, $employee]) }}" class="flex-col items-center my-auto">
+                                        <a href="{{ route('admin.company.employee.show', [$company, $employee]) }}" class="flex-col items-center my-auto">
                                             <img src="{{ $employee->avatar ?? null }}" class="mr-4 w-12 h-12 min-w-[48px] rounded-full bg-slate-300">
                                         </a>
                                         <div class="flex-col justify-center">
                                             <div>
-                                                <a href="{{ route('admin.company.employee.schedule.index', [$company, $employee]) }}" class="w-full text-base mb-1 hover:underline">
-                                                    {{ $employee->user->first_name }} {{ $employee->user->last_name }}
+                                                <a href="{{ route('admin.company.employee.show', [$company, $employee]) }}" class="w-full text-base mb-1 hover:underline">
+                                                    {{ $employee->first_name }} {{ $employee->last_name }}
                                                 </a>
                                             </div>
                                             <div>

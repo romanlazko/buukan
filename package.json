@@ -19,6 +19,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@dhx/trial-eventcalendar": "^2.1.5",
         "cssnano": "^6.0.1",
         "jquery": "^3.7.1",
         "lodash": "^4.17.21",

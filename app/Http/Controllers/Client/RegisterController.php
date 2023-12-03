@@ -48,8 +48,8 @@ class RegisterController extends Controller
 
     public function update(Request $request, WebApp $web_app, Client $client) 
     {
-        $client = $web_app->company->clients->find($client->id)->update([
-            'email'         => $request->first_name,
+        $web_app->company->clients->find($client->id)->update([
+            'email'         => $request->email,
             'first_name'    => $request->first_name,
             'last_name'     => $request->last_name,
             'password'      => Hash::make($request->password),

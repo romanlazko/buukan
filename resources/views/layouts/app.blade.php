@@ -39,7 +39,7 @@
                 @endif
                 
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-                    <div class="mx-auto">
+                    <div class="mx-auto p-1">
                         {{$slot}}
                     </div>
                 </main>

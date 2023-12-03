@@ -8,6 +8,7 @@ use Romanlazko\Telegram\App\Commands\Command;
 use Romanlazko\Telegram\App\DB;
 use Romanlazko\Telegram\App\Entities\Response;
 use Romanlazko\Telegram\App\Entities\Update;
+use App\Models\Company;
 
 class SaveProfile extends Command
 {
@@ -21,7 +22,7 @@ class SaveProfile extends Command
     {
         $notes = $this->getConversation()->notes;
 
-        $fields = ['first_name', 'last_name', 'phone'];
+        $fields = ['first_name', 'last_name', 'phone', 'email'];
 
         $array = [];
 
@@ -38,8 +39,9 @@ class SaveProfile extends Command
             }
         }
 
+        $company = Company::find(DB::getBot()->owner_id);
 
-        $client = DB::getBot()->company->clients()->updateOrCreate([
+        $client = $company->clients()->updateOrCreate([
                 'telegram_chat_id' => DB::getChat($updates->getChat()->getId())->id,
             ],
             $array
@@ -47,6 +49,6 @@ class SaveProfile extends Command
 
         $updates->getInlineData()->getClientId($client->id);
 
-        return $this->bot->executeCommand(ChooseEmployee::$command);
+        return $this->bot->executeCommand(ChooseService::$command);
     }
 }

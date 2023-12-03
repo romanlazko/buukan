@@ -15,7 +15,7 @@
         </h1>
 
         <div class="w-full space-y-6">
-            @foreach ($web_app->company->services as $service)
+            @foreach ($services as $service)
                 <div wire:key="service-{{ $service->id }}" class="flex items-center space-x-2">
                     <input wire:model.live="serviceId" type="radio" id="{{ $service->slug }}" class="peer/{{ $service->slug }}" name="service" slug="{{ $service->slug }}" value="{{ $service->id }}">
                     <x-form.label for="{{ $service->slug }}" class="w-full bg-white rounded-lg border-2 peer-checked/{{ $service->slug }}:border-blue-400 overflow-hidden" >

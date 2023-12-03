@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Casts\Money;
 
 class SubService extends Model
 {
@@ -17,7 +18,12 @@ class SubService extends Model
         'name',
         'description',
         'price',
-        'color'
+        'color',
+        'currency'
+    ];
+
+    protected $casts = [
+        'price' => Money::class,
     ];
 
     /**

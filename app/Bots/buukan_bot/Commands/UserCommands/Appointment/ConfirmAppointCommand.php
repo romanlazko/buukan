@@ -7,6 +7,7 @@ use Romanlazko\Telegram\App\Commands\Command;
 use Romanlazko\Telegram\App\DB;
 use Romanlazko\Telegram\App\Entities\Response;
 use Romanlazko\Telegram\App\Entities\Update;
+use App\Models\Company;
 
 class ConfirmAppointCommand extends Command
 {
@@ -23,7 +24,9 @@ class ConfirmAppointCommand extends Command
 
     public function execute(Update $updates): Response
     {
-        $schedule = DB::getBot()->company->employees()
+        $company = Company::find(DB::getBot()->owner_id);
+
+        $schedule = $company->employees()
             ->find($updates->getInlineData()->getEmployeeId())
             ->schedule()
             ->find($updates->getInlineData()->getScheduleId());
@@ -37,20 +40,6 @@ class ConfirmAppointCommand extends Command
 
             return $this->bot->executeCommand(AppointmentCommand::$command);
         }
-
-        // if ($schedule?->appointments) {
-        //     foreach ($schedule->appointments as $appointment) {
-        //         if ($appointment->status == 'new') {
-        //             BotApi::answerCallbackQuery([
-        //                 'callback_query_id' => $updates->getCallbackQuery()->getId(),
-        //                 'text'              => "Это место уже занято, начни с начала",
-        //                 'show_alert'        => true
-        //             ]);
-
-        //             return $this->bot->executeCommand(AppointmentCommand::$command);
-        //         }
-        //     }
-        // }
     
         $buttons = BotApi::inlineKeyboard([
             [array("👌 Подтвердить", Appoint::$command, '')],

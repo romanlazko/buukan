@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Interfaces\ScheduleInterface;
 
-class TimeBasedSchedule extends Model
+class TimeBasedSchedule extends Model implements ScheduleInterface
 {
     use HasFactory; use SoftDeletes;
 
@@ -49,6 +50,7 @@ class TimeBasedSchedule extends Model
             'type' => 'schedule',
             'date' => $this->date->format('Y-m-d'),
             'term' => $this->term->format('H:i'),
+            'active' => $this->active,
             'employee' => [
                 'id' => $this->employee->id,
             ],

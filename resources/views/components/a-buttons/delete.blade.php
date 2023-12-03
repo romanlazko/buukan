@@ -1,3 +1,5 @@
+@props(['confirm' => 'Are you shure?'])
+
 <a 
     {{ 
         $attributes->merge([
@@ -5,7 +7,7 @@
         ]) 
     }} 
     
-    onclick="return confirm('{{ __('Are you shure?')}}')"
+    onclick="return confirm('{{ __($confirm)}}')"
 >
     <i class="fa-solid fa-trash sm:mr-1"></i>
     <p class="hidden sm:block">

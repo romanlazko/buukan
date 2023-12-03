@@ -89,6 +89,22 @@
                     </x-form.select>
                 </div>
 
+                <div class="w-full" >
+                    @foreach ($company->sub_services as $service)
+                        <div class="flex space-x-2 items-center py-3">
+                            <x-form.label for="{{ $service->slug }}" class="w-full ">
+                                <div class="flex justify-between w-full items-center">
+                                    <span>
+                                        {{ $service->name }} ({{$service->price}})
+                                    </span>
+                                    <x-form.checkbox id="{{ $service->slug }}" name="sub_services[]" :value="$service->id" type="checkbox" class="appointmentModalFormSubService"/>
+                                </div>
+                            </x-form.label>
+                        </div>
+                        @if(!$loop->last) <hr> @endif
+                    @endforeach
+                </div>
+
                 <div class="w-full">
                     <x-input-label for="term" value="{{ __('Term:') }}"/>
                     <x-form.input dropdown="termDropdown" id="term" name="term" type="time" class="w-full appointmentModalFormTerm" value="{{ old('term', now()->format('H:i')) }}" required/>
@@ -178,23 +194,29 @@
         form.find('.appointmentModalFormComment').val('');
         form.find('.appointmentModalFormPrice').val('');
         form.find('.appointmentModalFormStatus').val('new');
+        form.find('.appointmentModalFormSubService').attr('checked', false);
     }
 
     function setAppointmentData(data) {
         var form = $('#appointmentModalForm');
 
-        form.find('.appointmentModalFormEmployee').val(data.employee.id);
-        form.find('.appointmentModalFormDate').val(data.date);
-        form.find('.appointmentModalFormTerm').val(data.term);
-        form.find('.appointmentModalFormComment').val(data.comment);
-        form.find('.appointmentModalFormPrice').val(data.price);
-        form.find('.appointmentModalFormStatus').val(data.status ? data.status : 'new');
+        form.find('.appointmentModalFormSubService').attr('checked', false);
+        form.find('.appointmentModalFormEmployee').val(data.employee?.id);
+        data.date ? form.find('.appointmentModalFormDate').val(data.date) : null;
+        form.find('.appointmentModalFormTerm').val(data.term || null);
+        form.find('.appointmentModalFormComment').val(data.comment || null);
+        form.find('.appointmentModalFormPrice').val(data.price || data.total_price || null);
+        form.find('.appointmentModalFormStatus').val(data.status || 'new');
 
-        setEmployeeServices(data.employee.id)
+        data.sub_services?.forEach(function(sub_service) {
+            form.find('#'+sub_service.slug).attr('checked', true);
+        });
+
+        setEmployeeServices(data.employee?.id || null)
             .then(function(){
-                form.find('.appointmentModalFormService').val(data.service.id);
+                form.find('.appointmentModalFormService').val(data.service?.id);
 
-                setEmployeeUnoccupiedSchedule(data.employee.id, data.service.id, data.date);
+                setEmployeeUnoccupiedSchedule(data.employee?.id, data.service?.id, data.date || null);
             });
     }
 
@@ -223,7 +245,7 @@
                     var options = '<option disabled>Choose service</option>';
 
                     data.forEach(function(element) {
-                        options += "<option value='" + element.id + "'>" + element.name + "(" + element.price + ")" + "</option>";
+                        options += "<option value='" + element.id + "'>" + element.name + " (" + element.total_price + ")" + "</option>";
                     });
 
                     form.find('.appointmentModalFormService').html(options);

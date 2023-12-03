@@ -8,6 +8,8 @@ use Romanlazko\Telegram\App\Commands\Command;
 use Romanlazko\Telegram\App\DB;
 use Romanlazko\Telegram\App\Entities\Response;
 use Romanlazko\Telegram\App\Entities\Update;
+use App\Models\Company;
+use App\Http\Actions\GetEmployeeUnoccupiedScheduleAction;
 
 class ChooseDateByWeek extends Command
 {
@@ -26,14 +28,17 @@ class ChooseDateByWeek extends Command
         $startOfWeek    = $carbonDate->clone()->startOfWeek();
         $endOfWeek      = $carbonDate->clone()->endOfWeek();
 
-        $schedules = DB::getBot()->company->employees()->find($updates->getInlineData()->getEmployeeId())->schedule()
-            ->unoccupied()
-            ->get()
-            ->where('service_id', $updates->getInlineData()->getServiceId())
+        $company = Company::find(DB::getBot()->owner_id);
+
+        $schedules  = GetEmployeeUnoccupiedScheduleAction::handle(
+                $company->employees()->find($updates->getInlineData()->getEmployeeId()),
+                null, 
+                $updates->getInlineData()->getServiceId()
+            )
             ->where('date', '>=', $startOfWeek)
             ->where('date', '<=', $endOfWeek)
             ->where('date', '>', now())
-            ->sortBy('date')
+            ?->sortBy('date')
             ->groupBy(function ($schedule) {
                 return $schedule->date;
             })
@@ -50,11 +55,11 @@ class ChooseDateByWeek extends Command
 				array('>', 'choose_date_by_week', $startOfWeek->clone()->modify('+1 week')->format('Y-m-d'))
 			],
             ...$schedules,
-            [array("👈 Назад", ChooseService::$command, '')]
+            [array("👈 Назад", ChooseSubService::$command, '')]
         ], 'date');
 
         return BotApi::returnInline([
-            'text'          =>  "*Выбери день:*",
+            'text'          =>  "*Выбери день:*".json_encode($updates->getInlineData()->getSubServices()),
             'chat_id'       =>  $updates->getChat()->getId(),
             'reply_markup'  =>  $buttons,
             'parse_mode'    =>  'Markdown',

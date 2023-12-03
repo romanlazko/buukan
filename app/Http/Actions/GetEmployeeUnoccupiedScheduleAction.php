@@ -13,6 +13,7 @@ class GetEmployeeUnoccupiedScheduleAction
             return $employee->unoccupiedSchedules($date)
                 ->orderBy('term')
                 ->get()
+                ->where('active', 1)
                 ->when($service, function($collection) use($service){
                     return $collection->whereIn('service_id', [$service, null]);
                 });

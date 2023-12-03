@@ -22,6 +22,7 @@ return new class extends Migration
 
             $table->date('date')->nullable();
             $table->time('term')->nullable();
+            $table->boolean('active')->default(true);
 
             $table->timestamps();
             $table->softDeletes();

@@ -19,8 +19,8 @@
             @forelse ($employees as $employee)
             <div wire:key="employee-{{$employee->id}}" class="flex items-center space-x-2">
         
-                <input wire:model.live="employeeId" type="radio" name="employee" id="{{ $employee->user->first_name }}" class="peer/{{ $employee->user->first_name }}" value="{{ $employee->id }}">
-                <x-form.label for="{{ $employee->user->first_name }}" class="w-full bg-white rounded-lg border-2 peer-checked/{{ $employee->user->first_name }}:border-blue-400 overflow-hidden" >
+                <input wire:model.live="employeeId" type="radio" name="employee" id="{{ $employee->slug }}" class="peer/{{ $employee->slug }}" value="{{ $employee->id }}">
+                <x-form.label for="{{ $employee->slug }}" class="w-full bg-white rounded-lg border-2 peer-checked/{{ $employee->slug }}:border-blue-400 overflow-hidden" >
                     <div class="flex justify-between items-center" >
                         <div class="flex w-full">
                             <div class="bg-cover bg-no-repeat bg-center w-36" style="background-image: url('{{ asset($employee->avatar) }}')">
@@ -28,7 +28,7 @@
                             <div class="flex w-full p-4 items-center space-x-4">
                                 <div class="w-full">
                                     <p class="w-full text-xl font-medium text-gray-900" >
-                                        {{ $employee->user->first_name ?? null }} {{ $employee->user->last_name ?? null }}
+                                        {{ $employee->first_name ?? null }} {{ $employee->last_name ?? null }}
                                     </p>
                                     <p class="w-full text-sm font-light">
                                         {{ $employee->description ?? null }}

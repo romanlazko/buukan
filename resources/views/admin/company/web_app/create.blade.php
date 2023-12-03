@@ -44,19 +44,20 @@
                     </p>
                     <div class="border rounded-md p-3">
                         @foreach ($company->employees as $employee)
-                            <div class="flex space-x-2 items-center py-3 @if(!$loop->last) border-b @endif">
-                                <x-form.label for="{{ $employee->user->first_name }}_{{ $employee->user->last_name }}" class="w-full">
+                            <div class="flex space-x-2 items-center py-3">
+                                <x-form.label for="{{ $employee->slug }}" class="w-full">
                                     <div class="flex justify-between w-full items-center">
                                         <span>
-                                            {{ $employee->user->first_name }} {{ $employee->user->last_name }}
+                                            {{ $employee->first_name }} {{ $employee->last_name }}
                                         </span>
                                         <x-form.checkbox 
-                                            id="{{ $employee->user->first_name }}_{{ $employee->user->last_name }}" 
-                                            name="settings[employees][{{ $employee->id }}]" 
-                                            type="checkbox"/>
+                                            id="{{ $employee->slug }}" 
+                                            name="settings[employees][]"
+                                            value="{{ $employee->id }}"/>
                                     </div>
                                 </x-form.label>
                             </div>
+                            @if(!$loop->last) <hr> @endif
                         @endforeach
                     </div>
                 </div>
@@ -73,16 +74,20 @@
                     </p>
                     <div class="border rounded-md p-3">
                         @foreach ($company->services as $service)
-                            <div class="flex space-x-2 items-center py-3 @if(!$loop->last) border-b @endif">
+                            <div class="flex space-x-2 items-center py-3">
                                 <x-form.label for="{{ $service->slug }}" class="w-full ">
                                     <div class="flex justify-between w-full items-center">
                                         <span>
                                             {{ $service->name }}
                                         </span>
-                                        <x-form.checkbox id="{{ $service->slug }}" name="settings[services][{{$service->id}}]" type="checkbox"/>
+                                        <x-form.checkbox 
+                                            id="{{ $service->slug }}" 
+                                            name="settings[services][]"
+                                            value="{{$service->id}}"/>
                                     </div>
                                 </x-form.label>
                             </div>
+                            @if(!$loop->last) <hr> @endif
                         @endforeach
                     </div>
                 </div>

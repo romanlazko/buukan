@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-slot name="header">
-
         <div class="sm:flex items-center sm:space-x-3 w-max">
             <div class="flex items-center">
                 <div class="flex-col items-center my-auto">
@@ -70,7 +69,7 @@
             <div class="">
                 {{$messages->links()}}
             </div>
-            <x-message.send :action="route('message.store', $chat)"/>
+            {{-- <x-message.send :action="route('message.store', $chat)"/> --}}
         </div>
     </x-slot>
 </x-app-layout>

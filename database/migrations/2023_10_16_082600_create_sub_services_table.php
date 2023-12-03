@@ -21,8 +21,9 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             
-            $table->text('description');
-            $table->decimal('price', 8, 2);
+            $table->text('description')->nullable();
+            $table->decimal('price', 8, 2)->nullable();
+            $table->string('currency')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

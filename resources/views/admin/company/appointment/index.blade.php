@@ -20,7 +20,7 @@
 
     <div class="flex overflow-auto min-h-full py-4 sm:p-4">
         @forelse ($employees as $employee)
-            <div class="min-w-full sm:min-w-0 sm:w-1/2 lg:w-1/4 px-2">
+            <div class="min-w-full sm:min-w-0 sm:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
                 <div class="p-3 space-y-3 rounded-md bg-gray-100">
                     <div class="flex">
                         <div>
@@ -36,51 +36,7 @@
 
                     <div class="space-y-6">
                         @forelse ($employee->appointments as $appointment)
-                            @php
-                                $statusClasses = [
-                                    'new' => 'blue',
-                                    'canceled' => 'red',
-                                    'done' => 'green',
-                                    'no_done' => 'red',
-                                ];
-                            
-                                $status = $appointment->status;
-                                $statusClass = isset($statusClasses[$status]) ? $statusClasses[$status] : 'gray';
-
-                                $defaultClass = " border-l-{$statusClass}-600 hover:bg-{$statusClass}-100 border border-l-4 bg-white px-3 rounded-md w-full shadow-xl hover:scale-105 transform transition-all duration-200";
-                                $statusColorClass = $statusClass === 'gray' 
-                                    ? "{$defaultClass} ml-6 text-gray-500"
-                                    : "$defaultClass";
-                            @endphp
-                            <button class="w-full rounded-md space-y-2 term flex items-center space-x-3" event="{{ $appointment->resource()->toJson() }}">
-                                <div class=" {{ $statusColorClass }}">
-                                    <div class="flex items-center space-x-2 py-2 justify-between">
-                                        <div class="flex space-x-2">
-                                            <p class="font-semibold">
-                                                {{ $appointment->term->format('H:i') }}
-                                            </p>
-                                            @if ($appointment->service)
-                                                <x-badge color="{{ $statusClass }}">
-                                                    {{ $appointment->service->name }}
-                                                </x-badge>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    @if ($appointment->client)
-                                        <div class="flex py-2">
-                                            <div class="text-start">
-                                                <a href="" class="font-semibold text-lg hover:underline">
-                                                    {{ $appointment->client?->first_name }} {{ $appointment->client?->last_name }}
-                                                </a>
-                                    
-                                                <p class="">
-                                                    {{ $appointment->client?->email }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    @endif
-                                </div>
-                            </button>
+                            <x-appointment.block :appointment="$appointment"/>
                         @empty
                         @endforelse
                     </div>

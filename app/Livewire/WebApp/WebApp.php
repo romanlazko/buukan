@@ -20,6 +20,8 @@ class WebApp extends Component
 
     public $sub_services = [];
 
+    public $services;
+
     public $employees;
 
     public $currentStep = 0;
@@ -130,8 +132,14 @@ class WebApp extends Component
             $this->appointments = $this->client->appointments->where('status', 'new');
         }
 
+        if ($this->steps[$this->currentStep] == 'services') {
+            $this->services = Service::whereIn('id', $this->web_app->settings->services ?? [])?->get();
+        }
+
         if ($this->steps[$this->currentStep] == 'employees') {
-            $this->employees = Service::find($this->serviceId)?->employees;
+            $this->employees = Employee::whereIn('id', $this->web_app->settings->employees ?? [])?->whereHas('services', function($query){
+                return $query->where('service_id', $this->serviceId);
+            })->get();
         }
 
         if ($this->steps[$this->currentStep] == 'dateterm') {

@@ -8,7 +8,8 @@
         </div>
         <x-header.menu>
             <x-header.link href="{{ route('admin.company.client.create', $company) }}" class="float-right">
-                {{ __("✚ Create client") }}
+                <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
+                {{ __("Create client") }}
             </x-header.link>
         </x-header.menu>
     </x-slot>
@@ -21,6 +22,7 @@
                         <x-table.th>Client</x-table.th>
                         <x-table.th>Phone</x-table.th>
                         <x-table.th>Social media</x-table.th>
+                        <x-table.th>Created Updated</x-table.th>
                         <x-table.th>Action</x-table.th>
                     </tr>
                 </x-table.thead>
@@ -40,7 +42,12 @@
                             </x-table.td>
                             <x-table.td>{{ $client->phone }}</x-table.td>
                             <x-table.td></x-table.td>
-
+                            <x-table.td>
+                                <div class="text-xs text-gray-500">
+                                    <p>{{ $client->created_at->diffForHumans() }}</p>
+                                    <p>{{ $client->updated_at->diffForHumans() }}</p>
+                                </div>
+                            </x-table.td>
                             <x-table.buttons>
                                 <x-a-buttons.edit href="{{ route('admin.company.client.edit', [$company, $client]) }}">
                                     {{ __('Edit') }}

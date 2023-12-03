@@ -7,6 +7,7 @@ use Romanlazko\Telegram\App\BotApi;
 use Romanlazko\Telegram\App\Commands\Command;
 use Romanlazko\Telegram\App\Entities\Response;
 use Romanlazko\Telegram\App\Entities\Update;
+use Romanlazko\Telegram\App\DB;
 
 class ShowMyAppointment extends Command
 {
@@ -31,15 +32,19 @@ class ShowMyAppointment extends Command
         }
 
         $buttons = BotApi::inlineKeyboard([
-            [array(CancelAppointmentCommand::getTitle(), CancelAppointmentCommand::$command, '')],
+            isset(DB::getBot()->settings->can_client_cancel_appointment) ? [array(CancelAppointmentCommand::getTitle(), CancelAppointmentCommand::$command, '')] : [],
             [array(MenuCommand::getTitle(), MenuCommand::$command, '')]
         ]);
 
         $text = implode("\n", [
+            "*{$appointment->service->name}*"."\n",
+            ($appointment->subServices->isNotEmpty() ? "Доп услуги: *{$appointment->subServices->pluck('name')->implode(', ')}*\n" : "").
             "Мастер: *{$appointment->employee->user->first_name}*",
             "Дата и время: *{$appointment->date->format('d.m(D)')}: {$appointment->term->format('H:s')}*"."\n",
 
             "📍 [Masarykova 427/31, 602 00 Brno-střed-Brno-město](https://goo.gl/maps/u7L3p7xahrkJaa428)"."\n",
+
+            "Итоговая стоимость: *{$appointment->total_price}*"."\n",
 
             "Будем тебя ждать!",
         ]);

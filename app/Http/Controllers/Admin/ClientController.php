@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Company;
+use Romanlazko\Telegram\App\Bot;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -52,7 +53,49 @@ class ClientController extends Controller
      */
     public function show(Company $company, Client $client)
     {
-        
+        if ($telegram_bot = $client->telegram_chat?->bot) {
+            $bot = new Bot($telegram_bot->token);
+
+            $client->telegram_chat->photo = $bot::getPhoto(['file_id' => $client->telegram_chat->photo]);
+        }
+        return view('admin.company.client.show', compact(
+            'company',
+            'client'
+        ));
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function telegram_chat(Company $company, Client $client)
+    {
+        if ($telegram_bot = $client->telegram_chat?->bot) {
+            $bot = new Bot($telegram_bot->token);
+
+            $client->telegram_chat->photo = $bot::getPhoto(['file_id' => $client->telegram_chat->photo]);
+    
+            $messages = $client->telegram_chat->messages()
+                ->orderBy('id', 'DESC')
+                ->with(['user', 'callback_query', 'callback_query.user'])
+                ->paginate(20);
+    
+            $messages->map(function ($message) use ($bot){
+                if ($message->photo) {
+                    $message->photo = $bot::getPhoto(['file_id' => $message->photo]);
+                }
+            });
+    
+            return view('admin.company.client.telegram.chat', compact(
+                'company',
+                'client',
+                'messages'
+            ));
+        }
+
+        return redirect()->route('admin.company.client.show', [
+            'company' => $company,
+            'client' => $client
+        ]);
     }
 
     /**
@@ -113,6 +156,19 @@ class ClientController extends Controller
      */
     public function destroy(Company $company, Client $client)
     {
+        $client = $company->clients()->find($client->id);
+
+        if (!$client) {
+            return back()->with([
+                'ok' => false,
+                'description' => 'Client not found'
+            ]);
+        }
+
+        $client->appointments->each(function ($appointment) {
+            $appointment->delete();
+        });
+
         $client->delete();
 
         return redirect()->back();

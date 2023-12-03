@@ -45,7 +45,7 @@ class TelegramController extends Controller
             $bot = new Bot($request->token);
 
             $response = $bot::setWebHook([
-                'url' => url('api/telegram/'.$bot->getBotId()),
+                'url' => env('APP_URL').'/api/telegram/'.$bot->getBotId(),
             ]);
 
             if ($response->getOk()) {
@@ -56,6 +56,7 @@ class TelegramController extends Controller
                     'username'      => $bot->getBotChat()->getUsername(),
                     'photo'         => $bot->getBotChat()->getPhoto()?->getBigFileId(),
                     'token'         => $request->token,
+                    'settings'      => $request->settings,
                     'namespace'     => 'buukan_bot',
                 ]);
             }

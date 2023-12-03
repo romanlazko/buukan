@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Casts\Money;
 
 class Service extends Model
 {
@@ -18,7 +19,12 @@ class Service extends Model
         'description',
         'price',
         'img',
-        'color'
+        'color',
+        'currency'
+    ];
+
+    protected $casts = [
+        'price' => Money::class,
     ];
 
     /**

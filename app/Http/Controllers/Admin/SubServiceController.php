@@ -45,6 +45,7 @@ class SubServiceController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'color' => $request->color,
+            'currency' => 'CZK',
         ]);
         
         return redirect()->route('admin.company.sub_service.index', compact([

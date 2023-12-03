@@ -1,16 +1,27 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max text-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center">
-                {{ $employee->user->first_name}} {{ $employee->user->last_name}}:
+        <div class="sm:flex items-center sm:space-x-3 w-max">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center flex whitespace-nowrap items-center">
+                <a class="text-gray-600 hidden lg:grid hover:bg-gray-200 aspect-square mr-5 w-8 rounded-full content-center" href="{{ route('admin.company.employee.show', [$company, $employee]) }}">
+                    {{ __('←') }}
+                </a>
+                <p>
+                    {{ $employee->first_name }} {{ $employee->last_name }}
+                </p>
             </h2>
             <x-buttons.secondary id="editScheduleButton" class="whitespace-nowrap">
                 {{ __("Edit schedule") }}
             </x-buttons.secondary>
         </div>
         <x-header.menu>
-            <x-header.link class="float-right" onclick="showAppointmentModal()">
+            <x-header.link :href="route('admin.company.employee.show', [$company, $employee])" :active="request()->routeIs('admin.company.employee.show')">
+                {{ __('Card') }}
+            </x-header.link>
+            <x-header.link href="{{ route('admin.company.employee.schedule.index', [$company, $employee]) }}" :active="request()->routeIs('admin.company.employee.schedule.index')">
+                {{ __("Callendar") }}
+            </x-header.link>
+            <x-header.link class="float-right" x-data="" x-on:click.prevent="$dispatch('open-modal', 'appointmentModal')">
                 <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
                 {{ __("Add appointment") }}
             </x-header.link>
@@ -45,6 +56,7 @@
                     <div class="w-full">
                         <x-input-label for="editEventService" value="{{ __('Service') }}"/>
                         <x-form.select id="editEventService" name="service" class="w-full">
+                            <option value="">Any service</option>
                             @forelse ($employee->services as $service)
                                 <option value="{{ $service->id }}">{{ $service->name }} ({{ $service->price }})</option>
                             @empty
@@ -54,10 +66,10 @@
                     </div>
 
                     <div class="w-full">
-                        <x-input-label for="editEventStatus" value="{{ __('Status') }}"/>
-                        <x-form.select id="editEventStatus" name="status" class="w-full">
-                            <option value="active">Active</option>
-                            <option value="disable">Disable</option>
+                        <x-input-label for="editEventActive" value="{{ __('Status') }}"/>
+                        <x-form.select id="editEventActive" name="active" class="w-full">
+                            <option value="1">Active</option>
+                            <option value="0">Disable</option>
                         </x-form.select>
                     </div>
                 </div>
@@ -249,14 +261,14 @@
 
                 function toggleEditScheduleMod() {
                     editMode = !editMode;
-                    $('#editScheduleButton').toggleClass("bg-blue-400 text-white hover:bg-blue-300 animate-bounce");
+                    $('#editScheduleButton').toggleClass("bg-indigo-700 text-white hover:bg-indigo-600 animate-bounce");
                     $('.schedule').toggleClass('hover:border-yellow-500 border-none animate-pulse sm:hover:border-4 hover:border my-6 hover:animate-none editable-event');
                 }
 
                 function resetEditScheduleMod() {
                     if (editMode) {
                         editMode = false;
-                        $('#editScheduleButton').removeClass("bg-blue-500 text-white hover:bg-blue-600 animate-bounce");
+                        $('#editScheduleButton').removeClass("bg-indigo-700 text-white hover:bg-indigo-600 animate-bounce");
                         $('.schedule').addClass('border-none').removeClass('hover:border-yellow-500 animate-pulse sm:hover:border-4 hover:border my-6 hover:animate-none editable-event');
                     }
                 }
@@ -273,6 +285,8 @@
                     $("#editEventDate").attr('value', date);
 
                     $('#deleteEventModalForm').attr('action', "{{ route('admin.company.employee.schedule.destroy', [$company, $employee, '']) }}/"+event.id);
+                    $("#editEventActive").val(event.extendedProps.active);
+                    $("#editEventService").val(event.extendedProps.service.id);
                 }
                 var events = @json($events);
                 var calendarEl = document.getElementById('calendar');
@@ -281,7 +295,7 @@
                     initialView: 'dayGridMonth',
                     headerToolbar: {
                         left: 'title',
-                        right: 'dayGridMonth,dayGridDay,prev,next'
+                        right: 'prev,next'
                     },
                     titleFormat: { year: 'numeric', month: 'short', day: 'numeric' }, 
                     dayHeaderFormat: { weekday: 'short', omitCommas: true }, 
@@ -364,7 +378,6 @@
                     },
                 });
                 calendar.render();
-                $('.fc-header-toolbar').addClass('px-4 sticky top-1 bg-white z-10');
                 $('.fc-view-harness').addClass('overflow-auto');
                 $('.fc-dayGridMonth-view').addClass('min-w-[850px] md:min-w-full');
                 

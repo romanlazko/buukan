@@ -118,7 +118,7 @@
                     </div>
                 </x-white-block>
                 
-                <div class="flex justify-end">
+                <div class="flex justify-end px-4 sm:px-0">
                     <x-buttons.primary>{{ __('Create') }}</x-buttons.primary>
                 </div>
             </div>

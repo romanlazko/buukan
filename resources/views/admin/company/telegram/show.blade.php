@@ -39,7 +39,7 @@
             </x-header.link>
         </x-header.menu>
     </x-slot>
-    <div class="space-y-6">
+    <div class="space-y-6 py-4 sm:p-4">
         <h1 class="text-xl font-bold">Webhook info:</h1>
         <x-white-block>
             <div class="w-full relative z-0">

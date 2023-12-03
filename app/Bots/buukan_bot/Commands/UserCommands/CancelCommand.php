@@ -31,9 +31,7 @@ class CancelCommand extends Command
             return $this->bot->executeCommand(MenuCommand::$command);
         }
 
-        $appointment->update([
-            'status' => 'canceled'
-        ]);
+        $appointment->cancel();
 
         // if ($appointment) {
             // event(new CancelAppointmentEvent($appointment));

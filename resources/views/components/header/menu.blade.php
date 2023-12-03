@@ -1,7 +1,7 @@
-<div class="space-x-4 sm:-my-px sm:ml-10 sm:flex hidden ">
+<div class="space-x-4 lg:-my-px lg:ml-10 lg:flex hidden ">
     {{ $slot }}
 </div>
-<div x-data="{ headerMenu: false }"  class="sm:hidden">
+<div x-data="{ headerMenu: false }"  class="lg:hidden">
     <button @click="headerMenu = ! headerMenu" class="w-6">
         <i class="fa-solid fa-ellipsis-vertical"></i>
     </button>

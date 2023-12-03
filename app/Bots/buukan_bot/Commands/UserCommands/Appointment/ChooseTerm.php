@@ -8,6 +8,8 @@ use Romanlazko\Telegram\App\Commands\Command;
 use Romanlazko\Telegram\App\DB;
 use Romanlazko\Telegram\App\Entities\Response;
 use Romanlazko\Telegram\App\Entities\Update;
+use App\Models\Company;
+use App\Http\Actions\GetEmployeeUnoccupiedScheduleAction;
 
 class ChooseTerm extends Command
 {
@@ -23,10 +25,14 @@ class ChooseTerm extends Command
         
         $carbonDate = Carbon::parse($date);
 
-        $schedules = DB::getBot()->company->employees()->find($updates->getInlineData()->getEmployeeId())->schedule()
-            ->unoccupied($carbonDate->format('Y-m-d'))
-            ->get()
-            ->sortBy('term')
+        $company = Company::find(DB::getBot()->owner_id);
+
+        $schedules = GetEmployeeUnoccupiedScheduleAction::handle(
+                $company->employees()->find($updates->getInlineData()->getEmployeeId()),
+                $carbonDate->format('Y-m-d'),
+                $updates->getInlineData()->getServiceId()
+            )
+            ?->sortBy('term')
             ->map(function ($schedule) {
                 return [array($schedule->term->format('H:i'), ConfirmAppointCommand::$command, $schedule->id)];
             })

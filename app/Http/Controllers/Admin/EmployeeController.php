@@ -101,7 +101,24 @@ class EmployeeController extends Controller
      */
     public function show(Company $company, Employee $employee)
     {
-        //
+        $schedules = $employee->unoccupiedSchedules(request('date', now()->format('Y-m-d')))
+            ->orderBy('term')
+            ->get()
+            ->map(function($schedule){
+                return $schedule;
+            });
+
+        $appointments = $employee->appointments()
+            ->where('date', request('date', now()->format('Y-m-d')))
+            ->orderBy('term')
+            ->get();
+
+        $employee->appointments = $schedules->concat($appointments)->sortBy('term');
+
+        return view('admin.company.employee.show', compact([
+            'company',
+            'employee'
+        ]));
     }
 
     /**

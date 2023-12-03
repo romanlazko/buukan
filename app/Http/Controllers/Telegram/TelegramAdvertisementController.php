@@ -17,7 +17,7 @@ class TelegramAdvertisementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Telegram $telegram)
+    public function index(Bot $bot)
     {
         $advertisements = Advertisement::where('bot_id', $telegram->getBotId())->get();
 

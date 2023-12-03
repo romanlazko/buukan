@@ -81,6 +81,7 @@ Route::middleware('auth')->group(function () {
         });
     
         // Route::middleware(['checkEmployeeRole:admin|administrator'])->group(function () {
+            Route::get('company/{company}/client/{client}/telegram_chat', [ClientController::class, 'telegram_chat'])->name('company.client.telegram.chat');
             Route::resource('company.client', ClientController::class);
             Route::resource('company.employee', EmployeeController::class);
             Route::resource('company.service', ServiceController::class);
@@ -97,6 +98,7 @@ Route::middleware('auth')->group(function () {
         
         // Route::middleware(['checkEmployeeRole:admin|administrator|employee'])->group(function () {
             Route::resource('company.employee.schedule', ScheduleController::class);
+            Route::get('company/{company}/employee/{employee}/example', [ScheduleController::class, 'exampleSchedule'])->name('company.employee.schedule.example');
         // });
     });
 });

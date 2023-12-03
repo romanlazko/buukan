@@ -1,19 +1,17 @@
-
 <x-app-layout>
     <x-slot name="header">
         <div class="sm:flex items-center sm:space-x-3 w-max text-center">
+            <a class="font-semibold text-xl text-gray-600 hidden lg:grid hover:bg-gray-200 aspect-square w-8 rounded-full content-center text-center" href="{{ route('admin.company.service.index', $company) }}">
+                {{ __('←') }}
+            </a>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Edit service:') }}
             </h2>
-            <x-badge color="{{ $service->color }}">
+            <x-badge color="{{ $service->color }}" class="hidden sm:block">
                 {{ $service->name ?? null }}
             </x-badge>
         </div>
-        <x-header.menu>
-            <x-header.link :href="route('admin.company.service.index', $company)" :active="request()->routeIs('admin.company.service.index')">
-                {{ __('← Back') }}
-            </x-header.link>
-        </x-header.menu>
+        <div></div>
     </x-slot>
 
     <div class="w-full space-y-6 m-auto max-w-2xl py-4">
@@ -47,14 +45,25 @@
                 </x-white-block>
 
                 <x-white-block>
-                    <div>
-                        <x-form.label for="price" :value="__('Price:')" />
-                            <x-form.input id="price" name="price" type="number" class="mt-1 block w-full" :value="old('price', $service->price)"/>
+                    <div class="space-y-4">
+                        <div>
+                            <x-form.label for="price" :value="__('Price:')" />
+                            <x-form.input id="price" name="price" type="number" class="mt-1 block w-full" :value="old('price', $service->price->getAmount()->toInt())"/>
                             <x-form.error class="mt-2" :messages="$errors->get('price')" />
+                        </div>
+                        <div>
+                            <x-form.label for="currency" :value="__('Currency:')" />
+                            <x-form.select id="currency" name="currency" class="mt-1 block w-full">
+                                <option @selected($service->currency == 'CZK') value="CZK">CZK</option>
+                                <option @selected($service->currency == 'EUR') value="EUR">EUR</option>
+                                <option @selected($service->currency == 'USD') value="USD">USD</option>
+                            </x-form.select>
+                            <x-form.error class="mt-2" :messages="$errors->get('currency')" />
+                        </div>
                     </div>
                 </x-white-block>
                 
-                <div class="flex justify-end">
+                <div class="flex justify-end px-4 sm:px-0">
                     <x-buttons.primary>{{ __('Save') }}</x-buttons.primary>
                 </div>
             </div>

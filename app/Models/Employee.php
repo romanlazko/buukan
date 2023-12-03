@@ -48,4 +48,28 @@ class Employee extends Model
     {
         return $this->schedule()->unoccupied($date);
     }
+
+    public function getFirstNameAttribute()
+    {
+        return $this->user->first_name;
+    }
+
+    public function getLastNameAttribute()
+    {
+        return $this->user->last_name;
+    }
+
+    public function getSlugAttribute()
+    {
+        return $this->user->slug;
+    }
+
+    public function getResourceAttribute()
+    {
+        return collect([
+            'employee' => [
+                'id' => $this->id,
+            ],
+        ]);
+    }
 }

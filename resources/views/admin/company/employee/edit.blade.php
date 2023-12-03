@@ -2,18 +2,16 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="sm:flex items-center sm:space-x-3 w-max">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center">
-                {{ __('Edit employee:') }}
+            <a class="font-semibold text-xl text-gray-600 hidden lg:grid hover:bg-gray-200 aspect-square w-8 rounded-full content-center text-center" href="{{ route('admin.company.employee.show', [$company, $employee]) }}">
+                {{ __('←') }}
+            </a>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center flex whitespace-nowrap items-center">
+                <p>
+                    {{ $employee->first_name }} {{ $employee->last_name }}
+                </p>
             </h2>
         </div>
-        <x-header.menu>
-            <x-header.link :href="route('admin.company.employee.index', $company)" :active="request()->routeIs('admin.company.employee.index')">
-                {{ __('Employees') }}
-            </x-header.link>
-            <x-header.link href="{{ route('admin.company.employee.create', $company) }}" :active="request()->routeIs('admin.company.employee.create')">
-                {{ __("✚ Create employee") }}
-            </x-header.link>
-        </x-header.menu>
+        <div></div>
     </x-slot>
 
     <div class="w-full space-y-6 m-auto max-w-2xl py-4">
@@ -119,7 +117,7 @@
                     </div>
                 </x-white-block>
                 
-                <div class="flex justify-end">
+                <div class="flex justify-end px-4 sm:px-0">
                     <x-buttons.primary>{{ __('Update') }}</x-buttons.primary>
                 </div>
             </div>

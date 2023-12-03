@@ -55,6 +55,7 @@ class ServiceController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'color' => $request->color,
+            'currency' => 'CZK',
         ]);
 
         return redirect()->route('admin.company.service.index', $company);
@@ -118,6 +119,10 @@ class ServiceController extends Controller
                 'description' => 'Service not found'
             ]);
         }
+
+        $service->employee()->schedules->where($service->id)->get()->each(function ($schedule) {
+            $schedule->delete();
+        });
 
         $service->delete();
 

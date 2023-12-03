@@ -39,12 +39,23 @@ class Appointment extends Model
 
     public function resource()
     {
+        $subServices = [];
+
+        foreach ($this->subServices as $key => $service) {
+            $subServices[] = [
+                'id' => $service?->id,
+                'name' => $service?->name,
+                'price' => $service?->price?->getAmount()->toInt(),
+                'slug' => $service?->slug,
+            ];
+        }
         return collect([
             'id' => $this->id,
             'type' => 'appointment',
             'date' => $this->date->format('Y-m-d'),
             'term' => $this->term->format('H:i'),
             'price' => $this->price,
+            'total_price' => $this->total_price->getAmount()->toInt(),
             'comment' => $this->comment,
             'status' => $this->status,
             'employee' => [
@@ -53,7 +64,10 @@ class Appointment extends Model
             'service' => [
                 'id' => $this->service?->id,
                 'name' => $this->service?->name,
+                'price' => $this->service?->price->getAmount()->toInt(),
+                
             ],
+            'sub_services' => $subServices,
             'client' => [
                 'id' => $this->client?->id,
                 'first_name' => $this->client?->first_name,
@@ -67,5 +81,14 @@ class Appointment extends Model
         return $this->update([
             'status' => 'canceled'
         ]);
+    }
+
+    public function getTotalPriceAttribute()
+    {
+        return $this->service->price->plus(
+            $this->subServices->pluck('price')->map(function($price){
+                return $price->getAmount()->toInt();
+            })->sum()
+        );
     }
 }

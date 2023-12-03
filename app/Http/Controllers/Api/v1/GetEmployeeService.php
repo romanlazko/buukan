@@ -13,7 +13,10 @@ class GetEmployeeService extends Controller
         $employee = Employee::find($request->employee);
 
         if ($employee) {
-            $services = $employee->services;
+            $services = $employee->services->map(function($service){
+                $service->total_price = $service->price->getAmount()->toInt();
+                return $service;
+            });
 
             return $services->toJson();
         }

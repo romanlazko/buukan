@@ -39,7 +39,7 @@
                                             {{ $appointment->employee->user->first_name }} {{ $appointment->employee->user->last_name }} 
                                         </p>
                                         <p class="font-bold text-md">
-                                            Total price: {{ $appointment->service->price + $appointment->subServices->sum('price') }}
+                                            Total price: {{ $appointment->total_price }}
                                         </p>
                                     </div>
                                     <div>

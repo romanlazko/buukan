@@ -9,6 +9,7 @@ use Romanlazko\Telegram\App\Commands\Command;
 use Romanlazko\Telegram\App\DB;
 use Romanlazko\Telegram\App\Entities\Response;
 use Romanlazko\Telegram\App\Entities\Update;
+use App\Models\Company;
 
 class MyAppointments extends Command
 {
@@ -25,7 +26,8 @@ class MyAppointments extends Command
 
     public function execute(Update $updates): Response
     {
-        $client = DB::getBot()->company->clients()
+        $company = Company::find(DB::getBot()->owner_id);
+        $client = $company->clients()
             ->where(
                 'telegram_chat_id',
                 DB::getChat($updates->getChat()->getId())->id)
