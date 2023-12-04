@@ -24,8 +24,8 @@
             </div>
             <div class="w-full">
                 <x-input-label for="service" value="{{ __('Service') }}"/>
-                <x-form.select id="service" wire:model="service_id" class="w-full">
-                    <option value="">Any service</option>
+                <x-form.select id="service" wire:model.live="service_id" class="w-full">
+                    <option @selected($service_id == null) value="null">Any service</option>
                     @forelse ($employee->services as $service)
                         <option 
                             wire:key="{{$service->slug}}-{{ $service_id }}" 

@@ -17,19 +17,19 @@
                     <div class="w-full flex space-x-2">
                         <div class="w-full">
                             <x-input-label for="start_date" value="{{ __('From:') }}"/>
-                            <x-text-input id="start_date" type="date" class="w-full" wire:model="start_date" value="{{ $start_date }}"/>
+                            <x-text-input wire:key="start_date-{{ rand(10000, 10999) }}" id="start_date" type="date" class="w-full" wire:model.live="start_date"/>
                         </div>
                         <div class="w-full">
                             <x-input-label for="end_date" value="{{ __('To:') }}"/>
-                            <x-text-input id="end_date" type="date" class="w-full" wire:model="end_date" value="{{ $end_date }}"/>
+                            <x-text-input wire:key="end_date-{{ rand(10000, 10999) }}" id="end_date" type="date" class="w-full" wire:model.live="end_date"/>
                         </div>
                     </div>
                     <div class="w-full">
-                        <x-input-label for="editEventService" value="{{ __('Service') }}"/>
-                        <x-form.select id="editEventService" wire:model="service" class="w-full">
+                        <x-input-label for="service" value="{{ __('Service') }}"/>
+                        <x-form.select wire:key="service-{{ rand(11000, 11999) }}" id="service" wire:model.live="service_id" class="w-full">
                             <option value="">Any service</option>
-                            @forelse ($employee->services as $service)
-                                <option value="{{ $service->id }}">{{ $service->name }} ({{ $service->price }})</option>
+                            @forelse ($employee->services as $service_item)
+                                <option value="{{ $service_item->id }}">{{ $service_item->name }} ({{ $service_item->price }})</option>
                             @empty
                                 
                             @endforelse
@@ -39,7 +39,7 @@
                         <x-input-label for="term" value="{{ __('Term:') }}"/>
                         <div class="flex space-x-2">
                             <x-form.area>
-                                <select id="hours" wire:model="hours" class="border-none rounded-l-md shadow-sm">
+                                <select wire:key="hours-{{ rand(12000, 12999) }}" id="hours" wire:model.live="hours" class="border-none rounded-l-md shadow-sm">
                                     <option selected value="00">00</option>
                                     <option value="01">01</option>
                                     <option value="02">02</option>
@@ -65,7 +65,7 @@
                                     <option value="22">22</option>
                                     <option value="23">23</option>
                                 </select>
-                                <select id="minutes" wire:model="minutes" class="border-none rounded-r-md shadow-sm">
+                                <select wire:key="minutes-{{ rand(13000, 13999) }}" id="minutes" wire:model.live="minutes" class="border-none rounded-r-md shadow-sm">
                                     <option selected value="00">00</option>
                                     <option value="01">01</option>
                                     <option value="02">02</option>

@@ -10,11 +10,16 @@ use Livewire\Attributes\On;
 class Calendar extends Component
 {
     public $employee;
+
+    public $company;
     
     public $events = [];
 
+    public $activeModal;
+
     public function mount()
     {
+        $this->company  = $this->employee->company;
         $appointments   = $this->employee->appointments;
         $schedules      = $this->employee->schedule()->unoccupied()->get();
 
@@ -51,7 +56,7 @@ class Calendar extends Component
     }
 
     #[On('reset-events')]
-    public function resetEvents()
+    public function setEvents()
     {
         $this->reset('events');
         $appointments   = $this->employee->appointments;
@@ -91,9 +96,12 @@ class Calendar extends Component
         $this->dispatch('resetEvents', $events);
     }
 
+    
     public function openModal($modal, $params = [])
     {
+        
         $this->dispatch('set-data', $params)->to($modal);
+        $this->dispatch('open')->to($modal);
         $this->dispatch('open-modal', $modal);
     }
 

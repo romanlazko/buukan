@@ -1,10 +1,13 @@
 <div x-data={}>
+    {{-- <livewire:appointment-component :employee="$employee"> --}}
+    {{-- @livewire('schedule-modal', ['employee' => $employee]) --}}
     <div wire:ignore id='calendar' class="text-[10px] sm:text-base"></div>
 
     <livewire:create-event-modal :employee="$employee"/>
     <livewire:date-events-modal :employee="$employee"/>
     <livewire:edit-event-modal :employee="$employee"/>
-    <livewire:appointment-modal :employee="$employee"/>
+    <livewire:appointment-modal :employee="$employee" :company="$company"/>
+    
 
     <script>
         document.addEventListener('livewire:navigated', function() {

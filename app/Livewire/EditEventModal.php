@@ -23,6 +23,8 @@ class EditEventModal extends Component
     #[On('set-data')]
     public function setData($schedule_id)
     {
+        $this->reset('service_id', 'schedule', 'date', 'term', 'active');
+
         $this->schedule     = $this->employee->schedule()->find($schedule_id);
         $this->date         = $this->schedule->date->format('Y-m-d');
         $this->term         = $this->schedule->term->format('H:s');

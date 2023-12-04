@@ -18,7 +18,7 @@ class CreateEventModal extends Component
 
     public $minutes = '00';
 
-    public $service;
+    public $service_id = null;
 
     #[On('set-data')]
     public function setData($info = null)
@@ -46,7 +46,7 @@ class CreateEventModal extends Component
             $schedule = $this->employee->schedule()->updateOrCreate([
                 'date' => $currentDate->format('Y-m-d'),
                 'term' => "$this->hours:$this->minutes",
-                'service_id' => $this->service,
+                'service_id' => !empty($this->service_id) ? $this->service_id : null,
             ]);
 
             $currentDate->addDay();
@@ -56,7 +56,7 @@ class CreateEventModal extends Component
         
         $this->dispatch('close-modal', 'CreateEventModal');
 
-        $this->reset('start_date', 'end_date', 'hours', 'minutes', 'service');
+        $this->reset('start_date', 'end_date', 'hours', 'minutes', 'service_id');
     }
 
     public function render()

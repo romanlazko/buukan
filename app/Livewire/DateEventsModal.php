@@ -14,9 +14,9 @@ class DateEventsModal extends Component
     public $date;
 
     #[On('set-data')]
-    public function setData($info = null)
+    public function setData($data = [])
     {
-        $this->date = Carbon::parse($info['dateStr'] ?? $info['startStr'] ?? null);
+        $this->date = Carbon::parse($data['dateStr'] ?? $data['startStr'] ?? null);
     }
 
     public function createSchedule($params = null)
@@ -31,6 +31,13 @@ class DateEventsModal extends Component
         $this->dispatch('close-modal', 'DateEventsModal');
         $this->dispatch('set-data', $params)->to(EditEventModal::class);
         $this->dispatch('open-modal', 'EditEventModal');
+    }
+
+    public function appointmentModal($params = null)
+    {
+        $this->dispatch('close-modal', 'DateEventsModal');
+        $this->dispatch('set-data', $params)->to(AppointmentModal::class);
+        $this->dispatch('open-modal', 'AppointmentModal');
     }
 
     public function render()
