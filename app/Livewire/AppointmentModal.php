@@ -19,6 +19,7 @@ class AppointmentModal extends Component
 
     public Employee $employee;
     public Company $company;
+    public $isClientFormOpen = false;
 
     public $employeeId;
     
@@ -31,6 +32,7 @@ class AppointmentModal extends Component
     public $price;
     public $comment;
     public $status = 'new';
+    public $total_price = null;
 
     public $client;
     public $clientId = null;
@@ -55,16 +57,41 @@ class AppointmentModal extends Component
 
         if ($this->clientId) {
             $this->client = ClientModel::find($this->clientId);
+            $this->first_name = $this->client->first_name;
+            $this->last_name = $this->client->last_name;
+            $this->email = $this->client->email;
+            $this->phone = $this->client->phone;
             if ($telegram_bot = $this->client->telegram_chat?->bot) {
                 $bot = new Bot($telegram_bot->token);
     
                 $this->client->telegram_chat->photo = $bot::getPhoto(['file_id' => $this->client->telegram_chat->photo]);
             }
         }
+        else {
+            $this->reset('client', 'clientId', 'first_name', 'last_name', 'email', 'phone');
+        }
 
         if ($this->employee AND $this->serviceId AND $this->date) {
             $this->schedules = GetEmployeeUnoccupiedScheduleAction::handle($this->employee, $this->date, $this->serviceId);
         }
+
+            $service_price = $this->employee->services()->find($this->serviceId);
+
+            $total_price = $service_price?->price?->plus(
+                $this->company->sub_services()->whereIn('id', $this->sub_services)->get()->map(function($sub_service){
+                    return $sub_service->price->getAmount()->toInt();
+                })->sum()
+            );
+
+            $this->total_price = $total_price?->getAmount()->toInt()." ".$total_price?->getCurrency()->getCurrencyCode();
+
+            // $service_price = $this->employee->services()->find($this->serviceId)->price->getAmount()->toInt();
+
+            // $sub_services_price = $this->company->sub_services()->whereIn('id', array_values($this->sub_services))->get()->map(function($sub_service){
+            //     return $sub_service->price->getAmount()->toInt();
+            // })->sum();
+
+            // $this->total_price = $service_price+$sub_services_price;
 
         return view('livewire.appointment-modal');
     }
@@ -77,11 +104,14 @@ class AppointmentModal extends Component
     #[On('set-data')]
     public function setData($data = [])
     {
-        $this->reset('employeeId', 'appointment', 'clientId', 'client', 'schedules', 'serviceId', 'date', 'term');
+        $this->reset('employeeId', 'appointment', 'schedules', 'serviceId', 'date', 'term', 'client', 'clientId', 'first_name', 'last_name', 'email', 'phone', 'status', 'price', 'comment', 'sub_services', 'isClientFormOpen');
 
-        $this->appointment = $this->employee->appointments()->findOr($data['id'] ?? null, function() use ($data){
-            return $this->employee->schedule()->find($data['id'] ?? null);
-        });
+        if ($data['type'] == 'schedule') {
+            $this->appointment = $this->employee->schedule()->find($data['id'] ?? null);
+        }
+        if ($data['type'] == 'appointment') {
+            $this->appointment = $this->employee->appointments()->find($data['id'] ?? null);
+        }
 
         $this->clientId = $this->appointment?->client?->id ?? null;
         $this->serviceId = $this->appointment?->service?->id ?? null; 
@@ -89,6 +119,8 @@ class AppointmentModal extends Component
         $this->term = $this->appointment?->term?->format('H:s') ?? null;
         $this->status = $this->appointment?->status ?? 'new';
         $this->price = $this->appointment?->price ?? null;
+        $this->comment = $this->appointment?->comment ?? null;
+        $this->sub_services = $this->appointment?->subServices?->pluck('id')->toArray() ?? [];
     }
 
     public function save()
@@ -102,16 +134,14 @@ class AppointmentModal extends Component
             ])->withInput();
         }
 
-        $client = $this->company->clients()->find($this->clientId);
-
-        if (!$client) {
-            $client = $this->company->clients()->create([
-                'first_name' => $this->first_name,
-                'last_name' => $this->last_name,
-                'phone' => $this->phone,
-                'email' => $this->email,
-            ]);
-        }
+        $client = $this->company->clients()->updateOrCreate([
+            'id' => $this->clientId
+        ],[
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'phone' => $this->phone,
+            'email' => $this->email,
+        ]);
 
         $client->appointments()->updateOrCreate([
             'id' => $this->appointment?->id
@@ -129,7 +159,7 @@ class AppointmentModal extends Component
         
         $this->dispatch('close-modal', 'AppointmentModal');
 
-        $this->reset('employeeId', 'appointment', 'clientId', 'client', 'schedules', 'serviceId', 'date', 'term');
+        $this->reset('employeeId', 'appointment', 'clientId', 'client', 'schedules', 'serviceId', 'date', 'term', 'isClientFormOpen');
     }
 
     public function toDateEventsModal($date)

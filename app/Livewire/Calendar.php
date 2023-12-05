@@ -96,7 +96,7 @@ class Calendar extends Component
         $this->dispatch('resetEvents', $events);
     }
 
-    
+    #[On('openModal')]
     public function openModal($modal, $params = [])
     {
         

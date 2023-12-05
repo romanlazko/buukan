@@ -14,7 +14,7 @@
         <div class="relative">
             <div class="w-full space-y-6 p-3">
                 @foreach ($events as $item)
-                    <x-appointment.block wire:key="appointment-{{ rand(15000, 15999) }}" :appointment="$item" wire:click="appointmentModal({{ json_encode(['id' => $item?->id]) }})"/>
+                    <x-appointment.block wire:key="appointment-{{ rand(15000, 15999) }}" :appointment="$item" wire:click="appointmentModal({{ json_encode(['id' => $item?->id, 'type' => $item?->type ]) }})"/>
                 @endforeach
             </div>
         </div>

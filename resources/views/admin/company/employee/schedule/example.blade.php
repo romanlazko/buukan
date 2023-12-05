@@ -24,7 +24,7 @@
             <x-header.link href="{{ route('admin.company.employee.schedule.example', [$company, $employee]) }}" :active="request()->routeIs('admin.company.employee.schedule.example')">
                 {{ __("Example Callendar") }}
             </x-header.link>
-            <x-header.link class="float-right" x-data="" x-on:click.prevent="$dispatch('open-modal', 'AppointmentModal')">
+            <x-header.link class="float-right" x-data="" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: { type: 'schedule'}})">
                 <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
                 {{ __("Add appointment") }}
             </x-header.link>
