@@ -15,14 +15,14 @@
             <x-header.link :href="route('admin.company.client.telegram.chat', [$company, $client])" :active="request()->routeIs('admin.company.client.telegram.chat')">
                 {{ __('Telegram') }}
             </x-header.link>
-            <x-header.link class="float-right" onclick="showAppointmentModal({{ $client->resource->toJson() }})">
+            <x-header.link class="float-right" x-data="" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{json_encode(['client_id' => $client->id])}}})">
                 <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
                 {{ __("Add appointment") }}
             </x-header.link>
         </x-header.menu>
     </x-slot>
 
-    <x-modal.appointment-modal :company="$company"/>
+    <livewire:appointment-modal :company="$company"/>
 
     <div class="py-4 sm:p-4 space-y-6 max-w-6xl m-auto">
         <div class="sm:flex w-full sm:space-x-6 space-y-3 sm:space-y-0">
@@ -53,7 +53,7 @@
                     <div class="p-3 space-y-3 rounded-md">
                         <div class="space-y-6">
                             @forelse ($client->appointments as $appointment)
-                                <x-appointment.block :appointment="$appointment"/>
+                                <x-appointment.block :appointment="$appointment" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{ $appointment->resource->toJson()}}})"/>
                             @empty
                             @endforelse
                         </div>

@@ -1,7 +1,7 @@
 <div>
     <x-modal name="AppointmentModal">
         <x-slot name="header">
-            <a wire:click="toDateEventsModal({{ json_encode(['dateStr' => $date ?? now()->format('Y-m-d')]) }})" class="font-semibold text-base text-white grid hover:bg-gray-200 hover:text-gray-600 aspect-square w-8 rounded-full content-center text-center h-min">
+            <a wire:click="toDateEventsModal" class="font-semibold text-base text-white grid hover:bg-gray-200 hover:text-gray-600 aspect-square w-8 rounded-full content-center text-center h-min">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
             <h1 class="font-bold  text-white w-full text-center">

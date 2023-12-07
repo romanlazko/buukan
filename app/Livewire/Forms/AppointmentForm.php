@@ -26,10 +26,10 @@ class AppointmentForm extends Form
             return TimeBasedSchedule::find($data['schedule_id'] ?? null);
         });
 
-        $this->client_id        = $this->model?->client_id;
-        $this->employee_id      = $this->model?->employee_id;
-        $this->service_id       = $this->model?->service_id;
-        $this->date             = $this->model?->date->format('Y-m-d');
+        $this->client_id        = $this->model?->client_id ?? $data['client_id'] ?? null;
+        $this->employee_id      = $this->model?->employee_id ?? $data['employee_id'] ?? null;
+        $this->service_id       = $this->model?->service_id ?? $data['service_id'] ?? null;
+        $this->date             = $this->model?->date->format('Y-m-d') ?? $data['date'] ?? null;;
         $this->term             = $this->model?->term->format('H:s');
         $this->comment          = $this->model?->comment;
         $this->price            = $this->model?->price;

@@ -9,14 +9,14 @@
             </form>
         </div>
         <x-header.menu>
-            <x-header.link class="float-right" onclick="showAppointmentModal()">
+            <x-header.link class="float-right" x-data="" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{json_encode(['date' => request('date', now()->format('Y-m-d'))])}}})">
                 <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
                 {{ __("Add appointment") }}
             </x-header.link>
         </x-header.menu>
     </x-slot>
     
-    <x-modal.appointment-modal :company="$company"/>
+    <livewire:appointment-modal :company="$company"/>
 
     <div class="flex overflow-auto min-h-full py-4 sm:p-4">
         @forelse ($employees as $employee)
@@ -36,7 +36,7 @@
 
                     <div class="space-y-6">
                         @forelse ($employee->appointments as $appointment)
-                            <x-appointment.block :appointment="$appointment"/>
+                            <x-appointment.block :appointment="$appointment" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{ $appointment->resource->toJson()}}})"/>
                         @empty
                         @endforelse
                     </div>

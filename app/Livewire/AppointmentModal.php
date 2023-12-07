@@ -96,11 +96,19 @@ class AppointmentModal extends Component
         $this->reset('schedules');
     }
 
-    public function toDateEventsModal($data)
+    #[On('openModal')]
+    public function openModal($modal, $params = [])
     {
-        dd('work');
+        
+        $this->dispatch('set-data', $params)->to($modal);
+        $this->dispatch('open')->to($modal);
+        $this->dispatch('open-modal', $modal);
+    }
+
+    public function toDateEventsModal()
+    {
         $this->dispatch('close-modal', 'AppointmentModal');
-        $this->dispatch('set-data', $data)->to(DateEventsModal::class);
+        $this->dispatch('set-data', ['dateStr' => $this->appointmentForm->date ?? now()->format('Y-m-d')])->to(DateEventsModal::class);
         $this->dispatch('open-modal', "DateEventsModal");
     }
 }
