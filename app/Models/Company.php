@@ -68,6 +68,16 @@ class Company extends Model
         return $this->hasMany(WebApp::class);
     }
 
+    public function appointments()
+    {
+        return $this->hasManyThrough(Appointment::class, Employee::class);
+    }
+
+    public function schedules()
+    {
+        return $this->hasManyThrough(Schedules::class, Employee::class);
+    }
+
     public function getRolesAttribute()
     {
         return Role::whereGuardName('company')->get();

@@ -6,7 +6,8 @@
     <livewire:create-event-modal :employee="$employee"/>
     <livewire:date-events-modal :employee="$employee"/>
     <livewire:edit-event-modal :employee="$employee"/>
-    <livewire:appointment-modal :employee="$employee" :company="$company"/>
+    <livewire:appointment-modal :company="$company"/>
+    
     
 
     <script>
@@ -63,7 +64,9 @@
                     @this.openModal('CreateEventModal', info);
                 },
                 eventClick: function (eventClickInfo) {
-                    @this.openModal('AppointmentModal', eventClickInfo.event.extendedProps);
+                    // if (eventClickInfo.event.extendedProps.type == "schedule") {
+                        @this.openModal('AppointmentModal', eventClickInfo.event.extendedProps);
+                    // }
                 },
             });
             calendar.render();

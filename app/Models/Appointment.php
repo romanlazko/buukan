@@ -51,6 +51,7 @@ class Appointment extends Model
         }
         return collect([
             'id' => $this->id,
+            'appointment_id' => $this->id,
             'type' => 'appointment',
             'date' => $this->date->format('Y-m-d'),
             'term' => $this->term->format('H:i'),

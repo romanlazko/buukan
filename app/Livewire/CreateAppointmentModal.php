@@ -3,16 +3,17 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Client as ClientModel;
 use Livewire\Attributes\On;
 use Carbon\Carbon;
+use App\Models\Employee;
 use App\Models\Company;
+use App\Models\Client as ClientModel;
+use Romanlazko\Telegram\App\Bot;
 use App\Http\Actions\GetEmployeeUnoccupiedScheduleAction;
 use App\Livewire\Forms\AppointmentForm;
+use Livewire\Attributes\Modelable;
 
-use Romanlazko\Telegram\App\Bot;
-
-class AppointmentModal extends Component
+class CreateAppointmentModal extends Component
 {
     public Company $company;
 
@@ -23,8 +24,6 @@ class AppointmentModal extends Component
 
     public $schedules = [];
     public $total_price = null;
-
-    public $formDisabled = true;
 
     public function mount(Company $company)
     {
@@ -41,8 +40,6 @@ class AppointmentModal extends Component
             $this->schedules = GetEmployeeUnoccupiedScheduleAction::handle($this->employee, $this->appointmentForm->date, $this->appointmentForm->service_id);
         }
 
-        $this->toggleFormDisabled();
-
         $total_price = $this->company->services()
             ->find($this->appointmentForm->service_id)
             ?->price
@@ -56,25 +53,13 @@ class AppointmentModal extends Component
 
         $this->total_price = $total_price?->getAmount()->toInt()." ".$total_price?->getCurrency()->getCurrencyCode();
 
-        return view('livewire.appointment-modal');
+        return view('livewire.create-appointment-modal');
     }
 
     #[On('setClient')]
     public function setClient($client_id)
     {
         $this->appointmentForm->client_id = $client_id;
-    }
-
-    
-    public function toggleFormDisabled()
-    {
-        $this->formDisabled = (!$this->appointmentForm->client_id || $this->isClientFormOpen);
-    }
-
-    #[On('toggleIsClientFormOpen')]
-    public function toggleIsClientFormOpen($isClientFormOpen)
-    {
-        $this->isClientFormOpen = $isClientFormOpen;
     }
 
     #[On('set-data')]
@@ -96,14 +81,14 @@ class AppointmentModal extends Component
 
         $this->dispatch('reset-events')->to(Calendar::class);
         
-        $this->dispatch('close-modal', 'AppointmentModal');
+        $this->dispatch('close-modal', 'CreateAppointmentModal');
 
         $this->reset('schedules');
     }
 
     public function toDateEventsModal($date)
     {
-        $this->dispatch('close-modal', 'AppointmentModal');
+        $this->dispatch('close-modal', 'CreateAppointmentModal');
         $this->dispatch('set-data', $date)->to(DateEventsModal::class);
         $this->dispatch('open-modal', "DateEventsModal");
     }

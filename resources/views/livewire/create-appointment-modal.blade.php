@@ -1,5 +1,5 @@
-<div>
-    <x-modal name="AppointmentModal">
+<div x-data="{}">
+    <x-modal name="CreateAppointmentModal">
         <x-slot name="header">
             <a wire:click="toDateEventsModal({{ json_encode(['dateStr' => $date ?? now()->format('Y-m-d')]) }})" class="font-semibold text-base text-white grid hover:bg-gray-200 hover:text-gray-600 aspect-square w-8 rounded-full content-center text-center h-min">
                 <i class="fa-solid fa-arrow-left"></i>
@@ -11,14 +11,15 @@
                 <i class="fa-solid fa-xmark"></i>
             </a>
         </x-slot>
-        <form class="sm:flex w-full space-y-3 sm:space-y-0" >
+        @dump($appointmentForm)
+        <form class="sm:flex w-full space-y-3 sm:space-y-0">
             {{-- CLIENT --}}
                 <div class="sm:w-1/3 w-full p-2 space-y-3">
                     <h1 class="font-bold text-black">Client:</h1>
                     <div class="rounded-lg border shadow-md p-2 space-y-4 h-min">
                         <div class="sm:flex items-center sm:space-x-3 justify-between">
                             <div class="w-full flex space-x-2 py-2 sm:py-0 items-center">
-                                <x-form.select wire:key="appointment-client-{{$appointmentForm->client_id}}" id="client" wire:model.live="appointmentForm.client_id" class="w-full" >
+                                <x-form.select wire:key="create-appointment-client-{{$appointmentForm->client_id}}" id="client" wire:model.live="appointmentForm.client_id" class="w-full">
                                     <option value="">New client</option>
                                     @forelse ($company->clients as $client_item)
                                         <option value="{{ $client_item->id }}">{{ $client_item->first_name }} {{ $client_item->last_name }}</option>
@@ -34,31 +35,31 @@
             {{-- CLIENT --}}
 
             {{-- APPOINTMENT --}}
-                <div class="sm:w-2/3 w-full p-2 space-y-3 {{$formDisabled ? 'opacity-25' : ''}}">
+                <div class="sm:w-2/3 w-full p-2 space-y-3">
                     <h1 class="font-bold text-black">Information about appointment:</h1>
                     <div class="rounded-lg border shadow-md p-2 space-y-4">
                         <div class="w-full overflow-auto">
                             <div class="flex space-x-2 items-center">
                                 <div class="w-full" wire:key="appointment-status-{{$appointmentForm->status}}">
-                                    <x-form.radio id="new" wire:model.live="appointmentForm.status" name="status" class="hidden peer/new" value="new" :disabled="$formDisabled"/>
+                                    <x-form.radio id="new" wire:model.live="appointmentForm.status" name="status" class="hidden peer/new" value="new"/>
                                     <x-form.label for="new" class="w-full border border-blue-500 rounded-lg p-3 peer-checked/new:bg-blue-500 peer-checked/new:text-white hover:bg-blue-100 text-center whitespace-nowrap cursor-pointer">
                                         {{ __('New')}}
                                     </x-form.label>
                                 </div>
                                 <div class="w-full" wire:key="appointment-status-{{$appointmentForm->status}}">
-                                    <x-form.radio id="done" wire:model.live="appointmentForm.status" name="status" class="hidden peer/done" value="done" :disabled="$formDisabled"/>
+                                    <x-form.radio id="done" wire:model.live="appointmentForm.status" name="status" class="hidden peer/done" value="done"/>
                                     <x-form.label for="done" class="w-full border border-green-500 rounded-lg p-3 peer-checked/done:bg-green-500 peer-checked/done:text-white hover:bg-green-100 text-center whitespace-nowrap cursor-pointer">
                                         {{ __('Done')}}
                                     </x-form.label>
                                 </div>
                                 <div class="w-full" wire:key="appointment-status-{{$appointmentForm->status}}">
-                                    <x-form.radio id="canceled" wire:model.live="appointmentForm.status" name="status" class="hidden peer/canceled" value="canceled" :disabled="$formDisabled"/>
+                                    <x-form.radio id="canceled" wire:model.live="appointmentForm.status" name="status" class="hidden peer/canceled" value="canceled"/>
                                     <x-form.label for="canceled" class="w-full border border-red-500 rounded-lg p-3 peer-checked/canceled:bg-red-500 peer-checked/canceled:text-white hover:bg-red-100 text-center whitespace-nowrap cursor-pointer">
                                         {{ __('Canceled')}}
                                     </x-form.label>
                                 </div>
                                 <div class="w-full" wire:key="appointment-status-{{$appointmentForm->status}}">
-                                    <x-form.radio id="no_done" wire:model.live="appointmentForm.status" name="status" class="hidden peer/no_done" value="no_done" :disabled="$formDisabled"/>
+                                    <x-form.radio id="no_done" wire:model.live="appointmentForm.status" name="status" class="hidden peer/no_done" value="no_done"/>
                                     <x-form.label for="no_done" class="w-full border border-red-500 rounded-lg p-3 peer-checked/no_done:bg-red-500 peer-checked/no_done:text-white hover:bg-red-100 text-center whitespace-nowrap cursor-pointer">
                                         {{ __('No done')}}
                                     </x-form.label>
@@ -66,9 +67,9 @@
                             </div>
                             <x-input-error :messages="$errors->get('status')" class="mt-2" />
                         </div>
-                        <div class="sm:flex items-center space-y-6 sm:space-y-0 sm:space-x-3 justify-between">
-                            <div class="w-full flex space-x-2">
-                                <x-form.select wire:key="appointment-employee-{{ $appointmentForm->employee_id }}" id="employee" wire:model.live="appointmentForm.employee_id" class="w-full" required :disabled="$formDisabled">
+                        <div class="sm:flex items-center sm:space-x-3 justify-between">
+                            <div class="w-full flex space-x-2 sm:py-0">
+                                <x-form.select wire:key="create-appointment-employee-{{ $appointmentForm->employee_id }}" id="employee" wire:model.live="appointmentForm.employee_id" class="w-full" required>
                                     <option value="">Choose employee</option>
                                     @forelse ($company->employees as $employee_item)
                                         <option value="{{ $employee_item->id }}">{{ $employee_item->first_name }} {{ $employee_item->last_name }}</option>
@@ -77,50 +78,34 @@
                                     @endforelse
                                 </x-form.select>
                             </div>
-                            <x-form.input wire:key="appointment-date-{{ $appointmentForm?->date }}" id="date" wire:model.live="appointmentForm.date" type="date" class="w-full" :disabled="$formDisabled"/>
+                            <x-text-input wire:key="create-appointment-date-{{ $appointmentForm?->date }}" id="date" wire:model.live="appointmentForm.date" type="date" class="w-full"/>
                         </div>
                         <div class="w-full space-y-6">
-                            @if ($employee) 
-                                <div class="w-full">
-                                    <x-input-label for="service" value="{{ __('Service:') }}"/>
-                                    <x-form.select wire:key="appointment-service-{{ $appointmentForm?->service_id }}" wire:change="$set('appointmentForm.term', '')" wire:model.live="appointmentForm.service_id" class="w-full" :disabled="$formDisabled">
-                                        <option value="">Choose service</option>
-                                        @if($employee?->services)
-                                            @forelse ($employee?->services as $service_item)
-                                                <option value="{{ $service_item->id }}">{{ $service_item->name }} ({{ $service_item->price }})</option>
-                                            @empty
-                                                
-                                            @endforelse
-                                        @endif
-                                    </x-form.select>
-                                </div>
-                            @endif
-
-                            @if ($employee AND $appointmentForm->service_id AND $appointmentForm->date) 
-                                <div class="w-full">
-                                    <x-input-label for="term" value="{{ __('Term:') }}"/>
-                                    <x-form.input wire:key="appointment-term-{{ $appointmentForm->term }}" dropdown="termDropdown" id="term" wire:model.live="appointmentForm.term" type="time" class="w-full" required :disabled="$formDisabled">
-                                        @foreach ($schedules as $schedule_item)
-                                            <button wire:key="appointment-term-{{ $schedule_item->id }}" class="p-2 w-full hover:bg-gray-200 text-left dropdown-option" type="button" @click="termDropdown = false" wire:click="$set('appointmentForm.term', {{json_encode($schedule_item->term?->format('H:s'))}})" >
-                                                {{ $schedule_item->term?->format('H:s') }}
-                                            </button>
-                                        @endforeach
-                                    </x-form.input>
-                                    <x-input-error :messages="$errors->get('term')" class="mt-2" />
-                                </div>
-                            @endif
+                            <div class="w-full">
+                                <x-input-label for="service" value="{{ __('Service:') }}"/>
+                                <x-form.select wire:key="create-appointment-service-{{ $appointmentForm?->service_id }}" wire:change="$set('appointmentForm.term', '')" wire:model.live="appointmentForm.service_id" class="w-full">
+                                    <option value="">Choose service</option>
+                                    @if($employee?->services)
+                                        @forelse ($employee?->services as $service_item)
+                                            <option value="{{ $service_item->id }}">{{ $service_item->name }} ({{ $service_item->price }})</option>
+                                        @empty
+                                            
+                                        @endforelse
+                                    @endif
+                                </x-form.select>
+                            </div>
                 
                             <div class="w-full">
                                 <x-input-label value="{{ __('Sub services:') }}"/>
                                 <div class="w-full border rounded-lg p-2" >
                                     @foreach ($company->sub_services as $sub_service_item)
-                                        <div wire:key="appointment-sub-services-{{ $sub_service_item->id }}" class="flex space-x-2 items-center py-3">
+                                        <div wire:key="create-appointment-sub-services-{{ $sub_service_item->id }}" class="flex space-x-2 items-center py-3">
                                             <x-form.label for="{{ $sub_service_item->slug }}" class="w-full ">
                                                 <div class="flex justify-between w-full items-center">
                                                     <span>
                                                         {{ $sub_service_item->name }} ({{ $sub_service_item->price }})
                                                     </span>
-                                                    <x-form.checkbox id="{{ $sub_service_item->slug }}" wire:model.live="appointmentForm.sub_services" :value="$sub_service_item->id"  :disabled="$formDisabled"/>
+                                                    <x-form.checkbox id="{{ $sub_service_item->slug }}" wire:model.live="appointmentForm.sub_services" :value="$sub_service_item->id"/>
                                                 </div>
                                             </x-form.label>
                                         </div>
@@ -136,23 +121,35 @@
                             </div>
                             <hr>
                 
+                            <div class="w-full">
+                                <x-input-label for="term" value="{{ __('Term:') }}"/>
+                                <x-form.input wire:key="create-appointment-term-{{ $appointmentForm->term }}" dropdown="termDropdown" id="term" wire:model.live="appointmentForm.term" type="time" class="w-full" required>
+                                    @foreach ($schedules as $schedule_item)
+                                        <button wire:key="create-appointment-term-{{ $schedule_item->id }}" class="p-2 w-full hover:bg-gray-200 text-left dropdown-option" type="button" @click="termDropdown = false" wire:click="$set('appointmentForm.term', {{json_encode($schedule_item->term?->format('H:s'))}})" >
+                                            {{ $schedule_item->term?->format('H:s') }}
+                                        </button>
+                                    @endforeach
+                                </x-form.input>
+                                <x-input-error :messages="$errors->get('term')" class="mt-2" />
+                            </div>
+                
                             <div class="w-full flex space-x-6">
                                 @if ($appointmentForm->status == 'done')
                                     <div class="w-full">
                                         <x-input-label for="price" value="{{ __('Taken price:') }}"/>
-                                        <x-form.input id="price" name="price" class="w-full" type="number" value="{{ $appointmentForm?->price }}" required :disabled="$formDisabled"/>
+                                        <x-form.input id="price" name="price" class="w-full" type="number" value="{{ $appointmentForm?->price }}" required/>
                                         <x-input-error :messages="$errors->get('price')" class="mt-2" />
                                     </div>
                                 @endif
                             </div>
                 
-                            <div wire:key="appointment-comment" class="w-full" x-data="{ show: false }">
+                            <div wire:key="create-appointment-comment" class="w-full" x-data="{ show: false }">
                                 <div class="flex items-center space-x-2" x-on:click="show= ! show">
                                     <x-input-label for="comment" value="{{ __('Comment:') }}"/>
                                     <p class="text-xl text-blue-600 cursor-pointer" x-text="show ? '-' : '+'" ></p>
                                 </div>
                                 <div :class="show ? 'block' : 'hidden'">
-                                    <x-form.textarea id="comment" wire:model.live="appointmentForm.comment" class="w-full" :disabled="$formDisabled"/>
+                                    <x-form.textarea id="comment" wire:model.live="appointmentForm.comment" class="w-full"/>
                                     <x-input-error :messages="$errors->get('comment')" class="mt-2" />
                                 </div>
                             </div>
@@ -162,7 +159,7 @@
             {{-- APPOINTMENT --}}
         </form>
         <x-slot name="footer">
-            <x-buttons.primary wire:click="save" :disabled="$formDisabled OR !$employee OR !$appointmentForm->service_id OR !$appointmentForm->date OR !$appointmentForm->term">
+            <x-buttons.primary wire:click="save">
                 {{ __('Save') }}
             </x-buttons.primary>
         </x-slot>

@@ -10,9 +10,6 @@
                     {{ $employee->first_name }} {{ $employee->last_name }}
                 </p>
             </h2>
-            <x-buttons.secondary id="editScheduleButton" class="whitespace-nowrap">
-                {{ __("Edit schedule") }}
-            </x-buttons.secondary>
         </div>
         <x-header.menu>
             <x-header.link :href="route('admin.company.employee.show', [$company, $employee])" :active="request()->routeIs('admin.company.employee.show')">
