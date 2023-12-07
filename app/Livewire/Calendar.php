@@ -28,7 +28,7 @@ class Calendar extends Component
                 'id' => $schedule->id,
                 'start' => $schedule->date->format('Y-m-d') . " " . $schedule->term->format('H:i'),
                 'color' => 'gray',
-                'extendedProps' => $schedule->resource()->toArray(),
+                'extendedProps' => $schedule->resource->toArray(),
                 "borderColor" => null,
                 'classNames' => "text-[6px] text-[8px] sm:text-sm my-1 p-0.5 sm:py-2 sm:p-1 border-none schedule transform transition-all duration-200",
             ];
@@ -48,7 +48,7 @@ class Calendar extends Component
                 'id' => $appointment->id,
                 'start' => $appointment->date->format('Y-m-d') . " " . $appointment->term->format('H:i'),
                 'color' => $color,
-                'extendedProps' => $appointment->resource()->toArray(),
+                'extendedProps' => $appointment->resource->toArray(),
                 "borderColor" => null,
                 'classNames' => "text-[6px] text-[8px] sm:text-sm my-1 p-0.5 sm:py-2 sm:p-1 border-none",
             ];
@@ -67,7 +67,7 @@ class Calendar extends Component
                 'id' => $schedule->id,
                 'start' => $schedule->date->format('Y-m-d') . " " . $schedule->term->format('H:i'),
                 'color' => 'gray',
-                'extendedProps' => $schedule->resource()->toArray(),
+                'extendedProps' => $schedule->resource->toArray(),
                 "borderColor" => null,
                 'classNames' => "text-[6px] text-[8px] sm:text-sm my-1 p-0.5 sm:py-2 sm:p-1 border-none schedule transform transition-all duration-200",
             ];
@@ -87,7 +87,7 @@ class Calendar extends Component
                 'id' => $appointment->id,
                 'start' => $appointment->date->format('Y-m-d') . " " . $appointment->term->format('H:i'),
                 'color' => $color,
-                'extendedProps' => $appointment->resource()->toArray(),
+                'extendedProps' => $appointment->resource->toArray(),
                 "borderColor" => null,
                 'classNames' => "text-[6px] text-[8px] sm:text-sm my-1 p-0.5 sm:py-2 sm:p-1 border-none",
             ];

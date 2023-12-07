@@ -21,7 +21,7 @@ class CreateEventModal extends Component
     public $service_id = null;
 
     #[On('set-data')]
-    public function setData($info = null)
+    public function setData($info = [])
     {
         $this->start_date   = Carbon::parse($info['dateStr'] ?? $info['startStr'] ?? null)->format('Y-m-d');
         $this->end_date     = isset($info['endStr']) 

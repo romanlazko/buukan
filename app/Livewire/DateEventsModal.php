@@ -55,7 +55,6 @@ class DateEventsModal extends Component
             ->orderBy('term')
             ->get()
             ->map(function ($appointment){
-                $appointment->type = 'appointment';
                 return $appointment;
             });
 

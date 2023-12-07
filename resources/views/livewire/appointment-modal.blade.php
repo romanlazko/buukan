@@ -110,17 +110,17 @@
                                 </div>
                             @endif
                 
-                            <div class="w-full">
+                            <div class="w-full" wire:key="appointment-sub-services-{{ json_encode($appointmentForm?->sub_services) }}">
                                 <x-input-label value="{{ __('Sub services:') }}"/>
                                 <div class="w-full border rounded-lg p-2" >
                                     @foreach ($company->sub_services as $sub_service_item)
-                                        <div wire:key="appointment-sub-services-{{ $sub_service_item->id }}" class="flex space-x-2 items-center py-3">
+                                        <div class="flex space-x-2 items-center py-3">
                                             <x-form.label for="{{ $sub_service_item->slug }}" class="w-full ">
                                                 <div class="flex justify-between w-full items-center">
                                                     <span>
                                                         {{ $sub_service_item->name }} ({{ $sub_service_item->price }})
                                                     </span>
-                                                    <x-form.checkbox id="{{ $sub_service_item->slug }}" wire:model.live="appointmentForm.sub_services" :value="$sub_service_item->id"  :disabled="$formDisabled"/>
+                                                    <x-form.checkbox wire:key="appointment-sub-services-{{ $sub_service_item->id }}" id="{{ $sub_service_item->slug }}" wire:model.live="appointmentForm.sub_services" :value="$sub_service_item->id"  :disabled="$formDisabled"/>
                                                 </div>
                                             </x-form.label>
                                         </div>

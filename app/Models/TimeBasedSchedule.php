@@ -43,17 +43,11 @@ class TimeBasedSchedule extends Model implements ScheduleInterface
         });
     }
 
-    public function resource()
+    public function getResourceAttribute()
     {
         return collect([
-            'id' => $this->id,
+            'schedule_id' => $this->id,
             'type' => 'schedule',
-            'date' => $this->date->format('Y-m-d'),
-            'term' => $this->term->format('H:i'),
-            'active' => $this->active,
-            'employee' => [
-                'id' => $this->employee->id,
-            ],
             'service' => [
                 'id' => $this->service?->id,
                 'name' => $this->service?->name,

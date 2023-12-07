@@ -5,10 +5,11 @@ namespace App\Livewire\Forms;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use App\Models\Appointment;
+use App\Models\TimeBasedSchedule;
 
 class AppointmentForm extends Form
 {
-    public $appointment_id;
+    public $model = null;
     public $client_id = null;
     public $employee_id = null;
     public $service_id;
@@ -19,48 +20,38 @@ class AppointmentForm extends Form
     public $status = 'new';
     public $sub_services = [];
 
-    public function set($appointment)
+    public function set($data)
     {
-        $this->appointment_id  = $appointment->get('appointment_id') ?? null;
-        $this->client_id    = $appointment->get('client')['id'] ?? null;
-        $this->employee_id  = $appointment->get('employee')['id'] ?? null;
-        $this->service_id   = $appointment->get('service')['id'] ?? null;
-        $this->date         = $appointment->get('date');
-        $this->term         = $appointment->get('term');
-        $this->comment      = $appointment->get('comment');
-        $this->price        = $appointment->get('price');
-        $this->status       = $appointment->get('status') ?? 'new';
+        $this->model = Appointment::findOr($data['appointment_id'] ?? null, function() use($data) {
+            return TimeBasedSchedule::find($data['schedule_id'] ?? null);
+        });
+
+        $this->client_id        = $this->model?->client_id;
+        $this->employee_id      = $this->model?->employee_id;
+        $this->service_id       = $this->model?->service_id;
+        $this->date             = $this->model?->date->format('Y-m-d');
+        $this->term             = $this->model?->term->format('H:s');
+        $this->comment          = $this->model?->comment;
+        $this->price            = $this->model?->price;
+        $this->status           = $this->model?->status ?? 'new';
+        $this->sub_services     = $this->model?->subServices?->pluck('id')->toArray() ?? [];
     }
 
-    public function store()
+    public function save()
     {
-        return Appointment::create([
-            'client_id'     => $this->client_id,
-            'employee_id'   => $this->employee_id,
-            'service_id'    => $this->service_id,
-            'date'          => $this->date,
-            'term'          => $this->term,
-            'comment'       => $this->comment,
-            'price'         => $this->price,
-            'status'        => $this->status,
-        ])->subServices()->sync($this->sub_services);
-    }
+        $appointment = ($this->model instanceof Appointment) ? $this->model : new Appointment;
 
-    public function update()
-    {
-        $appointment = Appointment::find($this->appointment_id);
+        $appointment->client_id     = $this->client_id;
+        $appointment->employee_id   = $this->employee_id;
+        $appointment->service_id    = $this->service_id;
+        $appointment->date          = $this->date;
+        $appointment->term          = $this->term;
+        $appointment->comment       = $this->comment;
+        $appointment->price         = $this->price;
+        $appointment->status        = $this->status;
 
-        $appointment->update([
-            'client_id'     => $this->client_id,
-            'employee_id'   => $this->employee_id,
-            'service_id'    => $this->service_id,
-            'date'          => $this->date,
-            'term'          => $this->term,
-            'comment'       => $this->comment,
-            'price'         => $this->price,
-            'status'        => $this->status,
-        ]);
-        
+        $appointment->save();
+
         $appointment->subServices()->sync($this->sub_services);
     }
 }

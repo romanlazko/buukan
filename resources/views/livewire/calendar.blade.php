@@ -64,9 +64,7 @@
                     @this.openModal('CreateEventModal', info);
                 },
                 eventClick: function (eventClickInfo) {
-                    // if (eventClickInfo.event.extendedProps.type == "schedule") {
-                        @this.openModal('AppointmentModal', eventClickInfo.event.extendedProps);
-                    // }
+                    @this.openModal('AppointmentModal', eventClickInfo.event.extendedProps);
                 },
             });
             calendar.render();

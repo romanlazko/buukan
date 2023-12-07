@@ -37,7 +37,7 @@ class Appointment extends Model
         return $this->belongsToMany(SubService::class, 'appointment_sub_service');
     }
 
-    public function resource()
+    public function getResourceAttribute()
     {
         $subServices = [];
 
@@ -49,26 +49,15 @@ class Appointment extends Model
                 'slug' => $service?->slug,
             ];
         }
+
         return collect([
-            'id' => $this->id,
             'appointment_id' => $this->id,
             'type' => 'appointment',
-            'date' => $this->date->format('Y-m-d'),
-            'term' => $this->term->format('H:i'),
-            'price' => $this->price,
-            'total_price' => $this->total_price->getAmount()->toInt(),
-            'comment' => $this->comment,
-            'status' => $this->status,
-            'employee' => [
-                'id' => $this->employee?->id,
-            ],
             'service' => [
                 'id' => $this->service?->id,
                 'name' => $this->service?->name,
-                'price' => $this->service?->price->getAmount()->toInt(),
                 
             ],
-            'sub_services' => $subServices,
             'client' => [
                 'id' => $this->client?->id,
                 'first_name' => $this->client?->first_name,

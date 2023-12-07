@@ -82,17 +82,12 @@ class AppointmentModal extends Component
     {
         $this->appointmentForm->reset();
 
-        $this->appointmentForm->set(collect($data));
+        $this->appointmentForm->set($data);
     }
 
     public function save()
     {
-        if ($this->appointmentForm->appointment_id) {
-            $this->appointmentForm->update();
-        }
-        else {
-            $this->appointmentForm->store();
-        }
+        $this->appointmentForm->save();
 
         $this->dispatch('reset-events')->to(Calendar::class);
         
@@ -101,10 +96,11 @@ class AppointmentModal extends Component
         $this->reset('schedules');
     }
 
-    public function toDateEventsModal($date)
+    public function toDateEventsModal($data)
     {
+        dd('work');
         $this->dispatch('close-modal', 'AppointmentModal');
-        $this->dispatch('set-data', $date)->to(DateEventsModal::class);
+        $this->dispatch('set-data', $data)->to(DateEventsModal::class);
         $this->dispatch('open-modal', "DateEventsModal");
     }
 }
