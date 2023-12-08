@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="sm:flex items-center sm:space-x-3 w-max text-center">
-            <a class="font-semibold text-xl text-gray-600 hidden lg:grid hover:bg-gray-200 aspect-square w-8 rounded-full content-center text-center" href="{{ route('admin.company.service.index', $company) }}">
+            <a class="font-semibold text-xl text-gray-600 hidden lg:grid hover:bg-gray-200 aspect-square w-8 rounded-full content-center text-center" href="{{ route('admin.company.sub_service.index', $company) }}">
                 {{ __('←') }}
             </a>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">

@@ -53,14 +53,12 @@ class ClientController extends Controller
      */
     public function show(Company $company, Client $client)
     {
-        if ($telegram_bot = $client->telegram_chat?->bot) {
-            $bot = new Bot($telegram_bot->token);
-
-            $client->telegram_chat->photo = $bot::getPhoto(['file_id' => $client->telegram_chat->photo]);
-        }
+        $appointments = $company->clients->find($client->id)->appointments->sortBy('date');
+        
         return view('admin.company.client.show', compact(
             'company',
-            'client'
+            'client',
+            'appointments'
         ));
     }
 

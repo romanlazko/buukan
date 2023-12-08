@@ -25,14 +25,18 @@
     <livewire:appointment-modal :company="$company"/>
 
     <div class="py-4 sm:p-4 space-y-6 max-w-6xl m-auto">
-        <div class="sm:flex w-full sm:space-x-6 space-y-3 sm:space-y-0">
-            <div class="sm:w-1/3 space-y-3">
-                    <div class="block space-y-3 sm:space-x-0 items-center sm:bg-white rounded-lg p-4">
-                        <div class="w-20 bg-cover bg-no-repeat aspect-square rounded-full h-min m-auto" style="background-image: url({{asset($client->avatar ?? $client->telegram_chat->photo ?? '/storage/img/public/preview.jpg' )}})"></div>
-                        <div class="m-auto text-center">
-                            <h2 class="text-xl font-bold w-full">
+        <div class="sm:flex w-full sm:space-x-8 space-y-3 sm:space-y-0">
+            <div class="sm:w-1/2 md:w-1/3 space-y-3">
+                {{-- <h1 class="w-full text-2xl font-semibold py-3">
+                    Client data:
+                </h1>
+                <x-white-block> --}}
+                    {{-- <div class="flex items-center space-x-3">
+                        <div class="w-1/4 bg-cover bg-no-repeat aspect-square rounded-full h-min" style="background-image: url({{ asset($client->avatar) }})"></div>
+                        <div class="w-3/4 overflow-hidden">
+                            <a href="{{ route('admin.company.client.show', [$company, $client]) }}" class="w-full text-md font-medium text-gray-900 hover:underline">
                                 {{ $client->first_name }} {{ $client->last_name }}
-                            </h2>
+                            </a>
                             <p class="text-sm text-gray-500">
                                 {{ $client->email }}
                             </p>
@@ -40,19 +44,23 @@
                                 {{ $client->phone }}
                             </p>
                         </div>
-                    </div>
-                <div class="w-full items-center justify-center">
-                    <a href="{{ route('admin.company.client.edit', [$company, $client]) }}" class="block m-auto w-min whitespace-nowrap text-sm text-gray-500 hover:bg-indigo-700 hover:text-white p-3 rounded-lg">
-                        <i class="fa-solid fa-pen-to-square sm:mr-1"></i>
-                        Edit client
-                    </a>
-                </div>
+                        <div class="text-lg">
+                            <a href="{{ route('admin.company.client.edit', [$company, $client]) }}"  wire:click="toggleClientForm" x-on:click="hasChanged = true">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </div>
+                    </div> --}}
+                    <livewire:client :company="$company" client_id="{{ $client->id }}" />
+                {{-- </x-white-block> --}}
             </div>
-            <div class="w-full space-y-3">
+            <div class="sm:w-1/2 md:w-2/3 space-y-3">
+                <h1 class="w-full text-2xl font-semibold py-3">
+                    All appointments:
+                </h1>
                 <div class="min-w-full">
-                    <div class="p-3 space-y-3 rounded-md">
+                    <div class="rounded-md">
                         <div class="space-y-6">
-                            @forelse ($client->appointments as $appointment)
+                            @forelse ($appointments as $appointment)
                                 <x-appointment.block :appointment="$appointment" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{ $appointment->resource->toJson()}}})"/>
                             @empty
                             @endforelse

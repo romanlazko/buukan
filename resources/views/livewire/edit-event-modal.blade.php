@@ -11,18 +11,18 @@
                 <i class="fa-solid fa-xmark"></i>
             </a>
         </x-slot>
-        <form class="space-y-6 p-3">
-            <div class="w-full flex space-x-2">
+        <form class="space-y-6 p-2">
+            <div class="w-full flex space-x-2 p-2 bg-white rounded-md shadow-sm">
                 <div class="w-full">
                     <x-input-label for="date" value="{{ __('Date:') }}"/>
                     <x-text-input id="date" type="date" class="w-full" wire:model="date" value="{{ $date }}"/>
                 </div>
+                <div class="w-full">
+                    <x-input-label for="term" value="{{ __('Term') }}"/>
+                    <x-text-input id="term" type="time" class="w-full" wire:model="term" value="{{ $term }}"/>
+                </div>
             </div>
-            <div class="w-full">
-                <x-input-label for="term" value="{{ __('Term') }}"/>
-                <x-text-input id="term" type="time" class="w-full" wire:model="term" value="{{ $term }}"/>
-            </div>
-            <div class="w-full">
+            <div class="w-full p-2 bg-white rounded-md shadow-sm">
                 <x-input-label for="service" value="{{ __('Service') }}"/>
                 <x-form.select id="service" wire:model.live="service_id" class="w-full">
                     <option @selected($service_id == null) value="null">Any service</option>
@@ -40,7 +40,7 @@
                 </x-form.select>
             </div>
 
-            <div class="w-full">
+            <div class="w-full p-2 bg-white rounded-md shadow-sm">
                 <x-input-label for="active" value="{{ __('Status') }}"/>
                 <x-form.select id="active" wire:model="active" class="w-full">
                     <option wire:key="{{$active }}-0" @selected($active == 1) value="1">Active</option>

@@ -29,8 +29,8 @@ class AppointmentController extends Controller
                 ->orderBy('term')
                 ->get();
 
-            $employee->appointments = $schedules->concat($appointments)->sortBy('term');
-            // Верните измененный объект сотрудника
+            $employee->events = $schedules->concat($appointments)->sortBy('term');
+            
             return $employee;
         });
 

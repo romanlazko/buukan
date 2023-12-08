@@ -84,6 +84,7 @@
                 });
                 
                 calendar.addEventSource( events[0] );
+                calendar.updateSize();
             });
         });
     </script>

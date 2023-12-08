@@ -59,6 +59,11 @@ class Employee extends Model
         return $this->user->last_name;
     }
 
+    public function getEmailAttribute()
+    {
+        return $this->user->email;
+    }
+
     public function getSlugAttribute()
     {
         return $this->user->slug;
@@ -71,5 +76,10 @@ class Employee extends Model
                 'id' => $this->id,
             ],
         ]);
+    }
+
+    public function getAvatarAttribute()
+    {
+        return $this->attributes['avatar'] ?? '/storage/img/public/preview.jpg';
     }
 }

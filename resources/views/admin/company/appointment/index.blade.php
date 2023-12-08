@@ -35,8 +35,8 @@
                     <hr>
 
                     <div class="space-y-6">
-                        @forelse ($employee->appointments as $appointment)
-                            <x-appointment.block :appointment="$appointment" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{ $appointment->resource->toJson()}}})"/>
+                        @forelse ($employee->events as $event)
+                            <x-appointment.block :appointment="$event" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{ $event->resource->toJson()}}})"/>
                         @empty
                         @endforelse
                     </div>
@@ -45,15 +45,4 @@
         @empty
         @endforelse
     </div>
-
-    @push('scripts')
-        <script type="module">
-            $(document).ready(function() {
-                $('.term').click(function(){
-                    var event = $(this).attr('event');
-                    showAppointmentModal(JSON.parse(event));
-                });
-            });
-        </script>
-    @endpush
 </x-app-layout>

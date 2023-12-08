@@ -32,14 +32,17 @@
     <div class="py-4 sm:p-4 space-y-6 max-w-6xl m-auto">
         <div class="sm:flex w-full sm:space-x-6 space-y-3 sm:space-y-0">
             <div class="sm:w-1/2 md:w-1/3 space-y-3">
-                <div class="block space-y-3 sm:space-x-0 items-center sm:bg-white rounded-lg p-4">
-                    <div class="w-20 bg-cover bg-no-repeat aspect-square rounded-full h-min m-auto" style="background-image: url({{asset($employee->avatar)}})"></div>
-                    <div class="m-auto text-center">
-                        <h2 class="text-xl font-bold w-full">
+                <div class="flex items-center space-x-3 rounded-lg bg-white p-3">
+                    <div class="w-1/4 bg-cover bg-no-repeat aspect-square rounded-full h-min" style="background-image: url({{ asset($employee->avatar) }})"></div>
+                    <div class="w-3/4 overflow-hidden">
+                        <a href="{{ route('admin.company.employee.show', [$company, $employee]) }}" class="w-full text-md font-medium text-gray-900 hover:underline">
                             {{ $employee->first_name }} {{ $employee->last_name }}
-                        </h2>
+                        </a>
                         <p class="text-sm text-gray-500">
-                            {{ $employee->user->email }}
+                            {{ $employee->email }}
+                        </p>
+                        <p class="text-sm text-gray-500">
+                            {{ $employee->phone }}
                         </p>
                         @forelse ($employee->user->roles as $role)
                             <x-badge color="green">
@@ -57,6 +60,11 @@
                             
                         @endforelse
                     </div>
+                    <div class="text-lg">
+                        <a href="{{ route('admin.company.employee.edit', [$company, $employee]) }}"  wire:click="toggleClientForm" x-on:click="hasChanged = true">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </div>
                 </div>
                 <h3 class="text-md font-bold">
                     {{ __('Description:') }}
@@ -72,7 +80,7 @@
                 <x-white-block>
                     <div class="space-y-2">
                         @forelse ($employee->services as $service)
-                            <div class="border-l-4 px-2 py-1 w-full flex hover:scale-105 hover:shadow-sm rounded-md transform transition-all duration-200" style="border-color: {{$service->color}}">
+                            <div class="w-full flex hover:bg-gray-100 hover:shadow-sm rounded-md transform transition-all duration-200">
                                 <div class="w-2/3">
                                     <a href="{{ route('admin.company.service.edit', [$company, $service]) }}" class="text-sm font-semibold "  title="{{ $service->description }}">{{ $service->name }}</a>
                                     <p class="text-gray-500 text-xs">
@@ -95,14 +103,6 @@
                     </div>
                     
                 </x-white-block>
-                
-                
-                <div class="w-full items-center justify-center">
-                    <a href="{{ route('admin.company.employee.edit', [$company, $employee]) }}" class="block m-auto w-min whitespace-nowrap text-sm text-gray-500 hover:bg-indigo-700 hover:text-white p-3 rounded-lg">
-                        <i class="fa-solid fa-pen-to-square sm:mr-1"></i>
-                        Edit employee
-                    </a>
-                </div>
             </div>
             <div class="sm:w-1/2 md:w-2/3 space-y-3">
                 <x-white-block class="p-3">

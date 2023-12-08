@@ -37,23 +37,17 @@ class Client extends Component
 
             $this->client = ClientModel::find($this->client_id);
 
-            if ($telegram_bot = $this->client?->telegram_chat?->bot) {
-                $bot = new Bot($telegram_bot->token);
-    
-                $this->client->avatar = $bot::getPhoto(['file_id' => $this->client->telegram_chat->photo]);
-            }
-
             $this->client_data = [
                 'id' => $this->client?->id,
                 'first_name' => $this->client?->first_name,
                 'last_name' => $this->client?->last_name,
                 'phone' => $this->client?->phone,
                 'email' => $this->client?->email,
-                'avatar' => $this->client?->avatar
+                'avatar' => $this->client?->avatar,
+                'comment' => $this->client?->comment,
+                'social_media' => json_decode($this->client?->social_media, true) ?? [],
             ];
         }
-
-        
 
         return view('livewire.client');
     }
@@ -61,11 +55,13 @@ class Client extends Component
     public function save()
     {
         $this->client = $this->client ?? new ClientModel;
+        $this->client->company_id   = $this->company->id;
         $this->client->first_name   = $this->client_data['first_name'] ?? $this->client?->first_name;
         $this->client->last_name    = $this->client_data['last_name'] ?? $this->client?->last_name;
         $this->client->phone        = $this->client_data['phone'] ?? $this->client?->phone;
         $this->client->email        = $this->client_data['email'] ?? $this->client?->email;
-        $this->client->company_id   = $this->company->id;
+        $this->client->comment      = $this->client_data['comment'] ?? $this->client?->comment;
+        $this->client->social_media      = json_encode($this->client_data['social_media']) ?? $this->client?->social_media;
 
         $this->client->save();
 
