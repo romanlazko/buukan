@@ -2,7 +2,7 @@
 
 namespace App\Http\Services;
 
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class FileService
 {
