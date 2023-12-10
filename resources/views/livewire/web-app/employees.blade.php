@@ -1,16 +1,13 @@
 <x-web-app>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            {{-- <img id="photoPreview" src="{{ asset($web_app->company->logo) }}" class="w-36"> --}}
-            {{ $web_app->company->name }}
-        </div>
-        <div>
-            CZ
+            <h2 class="font-bold text-2xl">
+                {{ $web_app->company->name }}
+            </h2>
         </div>
     </x-slot>
 
     <div class="space-y-6">
-        @dump($sub_services)
         <h1 class="p-4 text-white bg-gray-800 rounded-lg sticky top-1 text-2xl font-bold shadow">
             Choose employee:
         </h1>

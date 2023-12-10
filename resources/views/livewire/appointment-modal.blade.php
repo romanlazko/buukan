@@ -72,8 +72,9 @@
                             </div>
                             <x-form.input wire:key="appointment-date-{{ $appointmentForm?->date }}" id="date" wire:model.live="appointmentForm.date" type="date" class="w-full" :disabled="$formDisabled"/>
                         </div>
-                        <div class="w-full shadow-md p-2 space-y-4 bg-white rounded-md">
-                            @if ($employee) 
+                        @if ($employee)
+                            <div class="w-full shadow-md p-2 space-y-4 bg-white rounded-md">
+                                
                                 <div class="w-full">
                                     <x-input-label for="service" value="{{ __('Service:') }}"/>
                                     <x-form.select wire:key="appointment-service-{{ $appointmentForm?->service_id }}" wire:change="$set('appointmentForm.term', '')" wire:model.live="appointmentForm.service_id" class="w-full" :disabled="$formDisabled">
@@ -87,41 +88,44 @@
                                         @endif
                                     </x-form.select>
                                 </div>
-                            @endif
 
-                            @if ($employee AND $appointmentForm->service_id AND $appointmentForm->date) 
-                                <div class="w-full">
-                                    <x-input-label for="term" value="{{ __('Term:') }}"/>
-                                    <x-form.input wire:key="appointment-term-{{ $appointmentForm->term }}" dropdown="termDropdown" id="term" wire:model.live="appointmentForm.term" type="time" class="w-full" required :disabled="$formDisabled">
-                                        @foreach ($schedules as $schedule_item)
-                                            <button wire:key="appointment-term-{{ $schedule_item->id }}" class="p-2 w-full hover:bg-gray-200 text-left dropdown-option" type="button" @click="termDropdown = false" wire:click="$set('appointmentForm.term', {{json_encode($schedule_item->term?->format('H:s'))}})" >
-                                                {{ $schedule_item->term?->format('H:s') }}
-                                            </button>
-                                        @endforeach
-                                    </x-form.input>
-                                    <x-input-error :messages="$errors->get('term')" class="mt-2" />
-                                </div>
-                            @endif
-                
-                            <div class="w-full" wire:key="appointment-sub-services-{{ json_encode($appointmentForm?->sub_services) }}">
-                                <x-input-label value="{{ __('Sub services:') }}"/>
-                                <div class="w-full border rounded-lg p-2" >
-                                    @foreach ($company->sub_services as $sub_service_item)
-                                        <div class="flex space-x-2 items-center py-3">
-                                            <x-form.label for="{{ $sub_service_item->slug }}" class="w-full ">
-                                                <div class="flex justify-between w-full items-center">
-                                                    <span>
-                                                        {{ $sub_service_item->name }} ({{ $sub_service_item->price }})
-                                                    </span>
-                                                    <x-form.checkbox wire:key="appointment-sub-services-{{ $sub_service_item->id }}" id="{{ $sub_service_item->slug }}" wire:model.live="appointmentForm.sub_services" :value="$sub_service_item->id"  :disabled="$formDisabled"/>
+                                @if ($employee AND $appointmentForm->service_id AND $appointmentForm->date) 
+                                    <div class="w-full">
+                                        <x-input-label for="term" value="{{ __('Term:') }}"/>
+                                        <x-form.input wire:key="appointment-term-{{ $appointmentForm->term }}" dropdown="termDropdown" id="term" wire:model.live="appointmentForm.term" type="time" class="w-full" required :disabled="$formDisabled">
+                                            @foreach ($schedules as $schedule_item)
+                                                <button wire:key="appointment-term-{{ $schedule_item->id }}" class="p-2 w-full hover:bg-gray-200 text-left dropdown-option" type="button" @click="termDropdown = false" wire:click="$set('appointmentForm.term', {{json_encode($schedule_item->term?->format('H:s'))}})" >
+                                                    {{ $schedule_item->term?->format('H:s') }}
+                                                </button>
+                                            @endforeach
+                                        </x-form.input>
+                                        <x-input-error :messages="$errors->get('term')" class="mt-2" />
+                                    </div>
+                                @endif
+                    
+                                @if ($appointmentForm?->sub_services)
+                                    <div class="w-full" wire:key="appointment-sub-services-{{ json_encode($appointmentForm?->sub_services) }}">
+                                        <x-input-label value="{{ __('Sub services:') }}"/>
+                                        <div class="w-full border rounded-lg p-2" >
+                                            @foreach ($company->sub_services as $sub_service_item)
+                                                <div class="flex space-x-2 items-center py-3">
+                                                    <x-form.label for="{{ $sub_service_item->slug }}" class="w-full ">
+                                                        <div class="flex justify-between w-full items-center">
+                                                            <span>
+                                                                {{ $sub_service_item->name }} ({{ $sub_service_item->price }})
+                                                            </span>
+                                                            <x-form.checkbox wire:key="appointment-sub-services-{{ $sub_service_item->id }}" id="{{ $sub_service_item->slug }}" wire:model.live="appointmentForm.sub_services" :value="$sub_service_item->id"  :disabled="$formDisabled"/>
+                                                        </div>
+                                                    </x-form.label>
                                                 </div>
-                                            </x-form.label>
+                                                @if(!$loop->last) <hr> @endif
+                                            @endforeach
                                         </div>
-                                        @if(!$loop->last) <hr> @endif
-                                    @endforeach
-                                </div>
+                                    </div>
+                                @endif
+                                
                             </div>
-                        </div>
+                        @endif
                         <div class="whitespace-nowrap w-full justify-end text-right">
                             <span class="font-bold">
                                 Total price: {{ $total_price }}

@@ -1,11 +1,9 @@
 <x-web-app>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            {{-- <img id="photoPreview" src="{{ asset($web_app->company->logo) }}" class="w-36"> --}}
-            {{ $web_app->company->name }}
-        </div>
-        <div>
-            CZ
+            <h2 class="font-bold text-2xl">
+                {{ $web_app->company->name }}
+            </h2>
         </div>
     </x-slot>
 
@@ -58,21 +56,24 @@
     </div>
 
     <x-slot name="footer">
-        <div class="space-x-4 flex w-full">
-            <div>
-                <x-a-buttons.primary wire:click="prevStep">
-                    <div class="w-full text-center p-3">
-                        ←
-                    </div>
-                </x-a-buttons.primary>
-            </div>
-            <div class="w-full">
-                <x-buttons.primary wire:click="create" class="w-full" :disabled="$date == null OR $term == null">
-                    <div class="w-full text-center p-3">
-                        Confirm
-                    </div>
-                </x-buttons.primary>
+        <div class="w-full">
+            <div class="space-x-4 flex w-full">
+                <div>
+                    <x-a-buttons.primary wire:click="prevStep">
+                        <div class="w-full text-center p-3">
+                            ←
+                        </div>
+                    </x-a-buttons.primary>
+                </div>
+                <div class="w-full">
+                    <x-buttons.primary wire:click="create" class="w-full" :disabled="$date == null OR $term == null">
+                        <div class="w-full text-center p-3">
+                            Confirm
+                        </div>
+                    </x-buttons.primary>
+                </div>
             </div>
         </div>
+        
     </x-slot>
 </x-web-app>

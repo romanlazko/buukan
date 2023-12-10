@@ -143,12 +143,10 @@ class EmployeeController extends Controller
             ]);
         }
 
-        $schedule_model = ScheduleType::find($request->schedule_model)->model;
-
         $employee->update([
             'company_id' => $company->id,
             'description' => $request->description,
-            'schedule_model' => $schedule_model
+            'settings' => $request->settings,
         ]);
 
         if ($request->hasFile('avatar')) {
@@ -165,8 +163,9 @@ class EmployeeController extends Controller
 
         $employee->services()->sync($request->services);
 
-        return redirect()->route('admin.company.employee.index', compact([
-            'company'
+        return redirect()->route('admin.company.employee.show', compact([
+            'company',
+            'employee'
         ]));
     }
 

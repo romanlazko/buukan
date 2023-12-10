@@ -36,66 +36,6 @@
             <x-white-block>
                 <div class="space-y-4">
                     <h2 class="text-lg font-medium text-gray-900">
-                        {{ __('Employees') }}
-                    </h2>
-
-                    <p class="mt-1 text-sm text-gray-600">
-                        {{ __('Use this form to specify a which employee will be shown inside app.') }}
-                    </p>
-                    <div class="border rounded-md p-3">
-                        @foreach ($company->employees as $employee)
-                            <div class="flex space-x-2 items-center py-3">
-                                <x-form.label for="{{ $employee->slug }}" class="w-full">
-                                    <div class="flex justify-between w-full items-center">
-                                        <span>
-                                            {{ $employee->first_name }} {{ $employee->last_name }}
-                                        </span>
-                                        <x-form.checkbox 
-                                            id="{{ $employee->slug }}" 
-                                            name="settings[employees][]"
-                                            value="{{ $employee->id }}"/>
-                                    </div>
-                                </x-form.label>
-                            </div>
-                            @if(!$loop->last) <hr> @endif
-                        @endforeach
-                    </div>
-                </div>
-            </x-white-block>
-
-            <x-white-block>
-                <div class="space-y-4">
-                    <h2 class="text-lg font-medium text-gray-900">
-                        {{ __('Services') }}
-                    </h2>
-
-                    <p class="mt-1 text-sm text-gray-600">
-                        {{ __('Use this form to specify a which service will be shown inside app.') }}
-                    </p>
-                    <div class="border rounded-md p-3">
-                        @foreach ($company->services as $service)
-                            <div class="flex space-x-2 items-center py-3">
-                                <x-form.label for="{{ $service->slug }}" class="w-full ">
-                                    <div class="flex justify-between w-full items-center">
-                                        <span>
-                                            {{ $service->name }}
-                                        </span>
-                                        <x-form.checkbox 
-                                            id="{{ $service->slug }}" 
-                                            name="settings[services][]"
-                                            value="{{$service->id}}"/>
-                                    </div>
-                                </x-form.label>
-                            </div>
-                            @if(!$loop->last) <hr> @endif
-                        @endforeach
-                    </div>
-                </div>
-            </x-white-block>
-
-            <x-white-block>
-                <div class="space-y-4">
-                    <h2 class="text-lg font-medium text-gray-900">
                         {{ __('Settings') }}
                     </h2>
                     <div class="border rounded-md p-3">
@@ -103,7 +43,7 @@
                             <x-form.label for="" class="w-full ">
                                 <div class="flex justify-between w-full items-center">
                                     <span>
-                                        {{ __("Can customer cancel an appointment via bot")  }}
+                                        {{ __("Can customer cancel an appointment via WebApp")  }}
                                     </span>
                                     <x-form.checkbox id="" name="settings[can_client_cancel_appointment]" type="checkbox" :checked="old('settings[can_client_cancel_appointment]')"/>
                                 </div>

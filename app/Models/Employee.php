@@ -11,12 +11,17 @@ class Employee extends Model
 {
     use HasFactory; use SoftDeletes; use HasRoles;
 
+    protected $casts = [
+        'settings' => 'object',
+    ];
+
     protected $fillable = [
         'user_id',
         'company_id',
         'description',
         'schedule_model',
         'avatar',
+        'settings'
     ];
 
     public function services()

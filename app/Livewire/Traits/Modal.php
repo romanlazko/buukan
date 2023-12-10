@@ -10,7 +10,7 @@ trait Modal
     {
         $className = "App\\Livewire\\{$modal}";
         if (!class_exists($className)) {
-            $className = "App\\Livewire\\Calendar\\{$modal}";
+            $className = "App\\Livewire\\Event\\{$modal}";
         }
 
         $this->dispatch('close-all-modal');

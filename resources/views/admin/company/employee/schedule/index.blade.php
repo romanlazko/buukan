@@ -23,6 +23,6 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 
     <div class="w-full py-6 bg-white">
-        <livewire:calendar.index :employee="$employee">
+        <livewire:calendar :employee="$employee">
     </div>
 </x-app-layout>

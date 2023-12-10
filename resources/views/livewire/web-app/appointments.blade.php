@@ -1,11 +1,9 @@
 <x-web-app>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            {{-- <img id="photoPreview" src="{{ asset($web_app->company->logo) }}" class="w-36"> --}}
-            {{ $web_app->company->name }}
-        </div>
-        <div>
-            CZ
+            <h2 class="font-bold text-2xl">
+                {{ $web_app->company->name }}
+            </h2>
         </div>
     </x-slot>
 
@@ -43,9 +41,9 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <x-a-buttons.delete wire:click="cancel({{$appointment->id}})">
+                                        <x-a-buttons.button class="bg-red-600 text-white hover:bg-red-500 active:bg-red-700" wire:click="cancel({{$appointment->id}})" wire:confirm="Are you sure">
                                             {{ __('Cancel') }}
-                                        </x-a-buttons.delete>
+                                        </x-a-buttons.button>
                                     </div>
                                 </div>
                             </div>

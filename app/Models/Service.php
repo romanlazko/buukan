@@ -20,11 +20,13 @@ class Service extends Model
         'price',
         'img',
         'color',
-        'currency'
+        'currency',
+        'settings'
     ];
 
     protected $casts = [
         'price' => Money::class,
+        'settings' => 'object',
     ];
 
     /**

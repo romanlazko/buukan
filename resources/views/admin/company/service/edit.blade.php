@@ -84,6 +84,37 @@
                         </div>
                     </div>
                 </x-white-block>
+
+                <x-white-block>
+                    <div class="space-y-4">
+                        <h2 class="text-lg font-medium text-gray-900">
+                            {{ __('Settings') }}
+                        </h2>
+                        <div class="border rounded-md p-3">
+                            <div class="flex space-x-2 items-center py-3">
+                                <x-form.label for="is_available_on_telegram" class="w-full">
+                                    <div class="flex justify-between w-full items-center">
+                                        <span>
+                                            {{ __("Is available on Telegram")  }}
+                                        </span>
+                                        <x-form.checkbox id="is_available_on_telegram" name="settings[is_available_on_telegram]" type="checkbox" :checked="old('settings[is_available_on_telegram]', $service->settings->is_available_on_telegram ?? null)"/>
+                                    </div>
+                                </x-form.label>
+                            </div>
+                            <hr>
+                            <div class="flex space-x-2 items-center py-3">
+                                <x-form.label for="is_available_on_webapp" class="w-full">
+                                    <div class="flex justify-between w-full items-center">
+                                        <span>
+                                            {{ __("Is available on WebApp")  }}
+                                        </span>
+                                        <x-form.checkbox id="is_available_on_webapp" name="settings[is_available_on_webapp]" type="checkbox" :checked="old('settings[is_available_on_webapp]', $service->settings->is_available_on_webapp ?? null)"/>
+                                    </div>
+                                </x-form.label>
+                            </div>
+                        </div>
+                    </div>
+                </x-white-block>
                 
                 <div class="flex justify-end px-4 sm:px-0">
                     <x-buttons.primary>{{ __('Save') }}</x-buttons.primary>

@@ -21,18 +21,21 @@
             <div class="w-full p-2 bg-white rounded-md shadow-sm">
                 <x-input-label for="service" value="{{ __('Service') }}"/>
                 <x-form.select id="service" wire:model.live="service_id" class="w-full">
-                    <option @selected($service_id == null) value="null">Any service</option>
-                    @forelse ($employee->services as $service)
-                        <option 
-                            wire:key="{{$service->slug}}-{{ $service_id }}" 
-                            @selected($service_id == $service->id) 
-                            value="{{ $service->id }}"
-                        >
-                            {{ $service->name }} ({{ $service->price }})
-                        </option>
-                    @empty
-                        
-                    @endforelse
+                    <option value="">Any service</option>
+                    @if ($employee)
+                        @forelse ($employee?->services as $service)
+                            <option 
+                                wire:key="{{$service->slug}}-{{ $service_id }}" 
+                                @selected($service_id == $service->id) 
+                                value="{{ $service->id }}"
+                            >
+                                {{ $service->name }} ({{ $service->price }})
+                            </option>
+                        @empty
+                            
+                        @endforelse
+                    @endif
+                    
                 </x-form.select>
             </div>
 
@@ -45,9 +48,9 @@
             </div>
         </form>
         <x-slot name="footer">
-            <x-a-buttons.delete wire:click="delete">
+            <x-a-buttons.button class="bg-red-600 text-white hover:bg-red-500 active:bg-red-700" wire:key="remove-schedule-{{ $schedule->id ?? null }}" wire:click="delete" wire:confirm="Are you sure you want to delete this event?">
                 {{ __('Delete') }}
-            </x-a-buttons.delete>
+            </x-a-buttons.button>
             <div class="space-x-3">
                 <x-primary-button wire:click="update">
                     {{ __('Update') }}

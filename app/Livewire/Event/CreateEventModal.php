@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Calendar;
+namespace App\Livewire\Event;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -77,6 +77,6 @@ class CreateEventModal extends Component
 
     public function render()
     {
-        return view('livewire.calendar.create-event-modal');
+        return view('livewire.event.create-modal');
     }
 }

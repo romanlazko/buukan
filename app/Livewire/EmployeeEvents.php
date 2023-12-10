@@ -30,6 +30,6 @@ class EmployeeEvents extends Component
 
         $events = $schedules->concat($appointments)->sortBy('term');
 
-        return view('livewire.events', compact('events'));
+        return view('livewire.event.show', compact('events'));
     }
 }

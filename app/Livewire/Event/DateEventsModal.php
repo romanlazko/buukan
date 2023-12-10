@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Calendar;
+namespace App\Livewire\Event;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
@@ -23,6 +23,6 @@ class DateEventsModal extends Component
 
     public function render()
     {
-        return view('livewire.calendar.date-events-modal');
+        return view('livewire.event.date-modal');
     }
 }

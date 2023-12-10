@@ -20,6 +20,8 @@
         </x-header.menu>
     </x-slot>
 
+    <livewire:event.edit-event-modal :employee="$employee"/>
+
     <livewire:appointment-modal :company="$company"/>
 
     <div class="py-4 sm:p-4 space-y-6 max-w-6xl m-auto">

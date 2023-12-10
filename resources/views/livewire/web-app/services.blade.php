@@ -1,11 +1,9 @@
 <x-web-app>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            {{-- <img id="photoPreview" src="{{ asset($web_app->company->logo) }}" class="w-36"> --}}
-            {{ $web_app->company->name }}
-        </div>
-        <div>
-            CZ
+            <h2 class="font-bold text-2xl">
+                {{ $web_app->company->name }}
+            </h2>
         </div>
     </x-slot>
 

@@ -133,11 +133,11 @@ class WebApp extends Component
         }
 
         if ($this->steps[$this->currentStep] == 'services') {
-            $this->services = Service::whereIn('id', $this->web_app->settings->services ?? [])?->get();
+            $this->services = Service::whereJsonContains('settings->is_available_on_webapp', 'on')?->get();
         }
 
         if ($this->steps[$this->currentStep] == 'employees') {
-            $this->employees = Employee::whereIn('id', $this->web_app->settings->employees ?? [])?->whereHas('services', function($query){
+            $this->employees = Employee::whereJsonContains('settings->is_available_on_webapp', 'on')?->whereHas('services', function($query){
                 return $query->where('service_id', $this->serviceId);
             })->get();
         }

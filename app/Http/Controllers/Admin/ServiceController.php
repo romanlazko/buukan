@@ -55,7 +55,8 @@ class ServiceController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'color' => $request->color,
-            'currency' => 'CZK',
+            'currency' => $request->currency,
+            'settings'  => $request->settings,
         ]);
 
         return redirect()->route('admin.company.service.index', $company);
@@ -100,7 +101,9 @@ class ServiceController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
-            'color' => $request->color
+            'color' => $request->color,
+            'currency' => $request->currency,
+            'settings'  => $request->settings,
         ]);
 
         $service->employees()->sync($request->employees);

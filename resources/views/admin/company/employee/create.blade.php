@@ -22,7 +22,7 @@
             <div class="space-y-6">
                 <x-white-block>
                     <div class="flex space-x-4 items-center">
-                        <x-form.photo name="avatar" :src="asset('/storage/img/public/preview.jpg')" class="w-36"/>
+                        <x-form.photo name="avatar" :src="asset('img/public/preview.jpg')" class="w-36"/>
                         <div class="space-y-4 w-full">
                             <div class="space-y-4">
                                 <div class="w-full">

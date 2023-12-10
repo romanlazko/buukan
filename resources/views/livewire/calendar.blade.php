@@ -1,9 +1,9 @@
 <div x-data={}>
     <div wire:ignore id='calendar' class="text-[10px] sm:text-base"></div>
 
-    <livewire:calendar.create-event-modal :employee="$employee"/>
-    <livewire:calendar.date-events-modal :employee="$employee"/>
-    <livewire:calendar.edit-event-modal :employee="$employee"/>
+    <livewire:event.create-event-modal :employee="$employee"/>
+    <livewire:event.date-events-modal :employee="$employee"/>
+    <livewire:event.edit-event-modal :employee="$employee"/>
     <livewire:appointment-modal :company="$company"/>
 
     <script>

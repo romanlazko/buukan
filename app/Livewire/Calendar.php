@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire\Calendar;
+namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
 use App\Livewire\Traits\Modal;
 
-class Index extends Component
+class Calendar extends Component
 {
     use Modal;
     
@@ -74,6 +74,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.calendar.index');
+        return view('livewire.calendar');
     }
 }

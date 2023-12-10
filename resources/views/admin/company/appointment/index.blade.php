@@ -15,7 +15,8 @@
             </x-header.link>
         </x-header.menu>
     </x-slot>
-    
+
+    <livewire:event.edit-event-modal/>
     <livewire:appointment-modal :company="$company"/>
 
     <div class="flex overflow-auto min-h-full py-4 sm:p-4">

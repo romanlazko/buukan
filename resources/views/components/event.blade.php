@@ -58,9 +58,9 @@
         </div>
         
     </div>
-    @if ($event?->type == 'schedule')
-        <x-a-buttons.edit wire:key="edit-{{ rand(15000, 15999) }}" class="my-1" wire:click="openModal('EditEventModal', {{ $event?->id }})">
-            Edit
-        </x-a-buttons.edit>
+    @if ($event instanceof App\Models\Schedule)
+        <button class="hover:text-gray-500" wire:key="edit-{{ rand(15000, 15999) }}" class="my-1" x-on:click.prevent="$dispatch('openModal', {modal: 'EditEventModal', params: {{ $event->resource->toJson()}}})">
+            <i class="fa-solid fa-pen-to-square sm:mr-1"></i>
+        </button>
     @endif
 </div>
