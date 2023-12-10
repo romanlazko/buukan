@@ -53,6 +53,11 @@ class EditEventModal extends Component
         $this->reset('schedule', 'date', 'term', 'active', 'service_id');
     }
 
+    public function delete()
+    {
+        $this->schedule->delete();
+    }
+
     public function render()
     {
         return view('livewire.calendar.edit-event-modal');

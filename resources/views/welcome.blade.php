@@ -14,9 +14,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased">
-        <button id="createEventModalButton" class="" x-data="" x-on:click.prevent="$dispatch('open-modal', 'createEventModal')">
-            Открыть
-        </button>
+        <a href="{{ route('register') }}">РЕГИСТРАЦИЯ ДЛЯ НАТАШИ</a>
         <x-modal name="createEventModal">
             <iframe class="w-full min-h-[90vh]" src="http://127.0.0.1:8003/app/1"></iframe>
         </x-modal>
