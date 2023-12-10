@@ -7,8 +7,7 @@ use App\Http\Requests\Company\CompanyCreateRequest;
 use App\Http\Requests\Company\CompanyUpdateRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\DB;
+use App\Http\Services\FileService;
 
 class CompanyController extends Controller
 {
