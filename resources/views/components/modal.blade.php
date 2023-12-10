@@ -46,12 +46,15 @@ $maxWidth = [
     x-on:open-modal.window="$event.detail == '{{ $name }}' ? show = true : null"
     x-on:close-modal.window="$event.detail == '{{ $name }}' ? show = false : null"
     x-on:close.stop="show = false"
+    x-on:close.window="show = false"
+    x-on:close-all-modal.window="show = false"
     x-on:keydown.escape.window="show = false"
     x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
     x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
-    :class="show ? 'block' : 'hidden'"
     class="fixed inset-0 overflow-y-auto px-2 py-6 z-50"
     id="{{$id}}"
+    style="display: none"
+    x-bind:style="show ? { display: 'block' } : { display: 'none' }"
 >
     <div
         class="fixed inset-0 transform transition-all"
@@ -82,12 +85,13 @@ $maxWidth = [
                 </div>
             </div>
         @endif
+
         <div class="flex-1 overflow-x-hidden overflow-y-auto">
             {{ $slot }}
         </div>
         
         @if(isset($footer))
-        <hr>
+            <hr>
             <div class="w-full">
                 <div class="py-2 px-3 flex items-center space-x-3 justify-between">
                     <div class="flex w-full items-center justify-between">

@@ -45,7 +45,7 @@ class Client extends Component
                 'email' => $this->client?->email,
                 'avatar' => $this->client?->avatar,
                 'comment' => $this->client?->comment,
-                'social_media' => json_decode($this->client?->social_media, true) ?? [],
+                'social_media' => (array) $this->client?->social_media ?? [],
             ];
         }
 
@@ -61,7 +61,7 @@ class Client extends Component
         $this->client->phone        = $this->client_data['phone'] ?? $this->client?->phone;
         $this->client->email        = $this->client_data['email'] ?? $this->client?->email;
         $this->client->comment      = $this->client_data['comment'] ?? $this->client?->comment;
-        $this->client->social_media      = json_encode($this->client_data['social_media']) ?? $this->client?->social_media;
+        $this->client->social_media      = $this->client_data['social_media'] ?? $this->client?->social_media;
 
         $this->client->save();
 

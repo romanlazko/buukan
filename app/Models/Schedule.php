@@ -14,7 +14,8 @@ class Schedule extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'date' => 'datetime:H:i'
+        'date' => 'datetime',
+        'term' => 'datetime:H:i:s'
     ];
 
     public function employee()
@@ -22,15 +23,35 @@ class Schedule extends Model
         return $this->belongsTo(Employee::class);
     }
 
-    public function scopeUnoccupied($query)
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function scopeUnoccupied($query, $date = null)
     {
         $query->leftJoin('appointments', function ($join) {
-            $join->on('time_based_schedules.employee_id', '=', 'appointments.employee_id')
-                ->whereRaw('time_based_schedules.date = appointments.date')
-                ->whereRaw('time_based_schedules.term = appointments.term');
+            $join->on('schedules.employee_id', '=', 'appointments.employee_id')
+                ->whereIn('appointments.status', ['new', 'done', 'no_done'])
+                ->whereRaw('schedules.date = appointments.date')
+                ->whereRaw('schedules.term = appointments.term');
         })
-        ->where('appointments.status', '!=', 'new')
         ->whereNull('appointments.id')
-        ->select('time_based_schedules.*');
+        ->select('schedules.*')
+        ->when($date, function($query) use ($date){
+            $query->where('schedules.date', $date);
+        });
+    }
+
+    public function getResourceAttribute()
+    {
+        return collect([
+            'schedule_id' => $this->id,
+            'type' => 'schedule',
+            'service' => [
+                'id' => $this->service?->id,
+                'name' => $this->service?->name,
+            ],
+        ]);
     }
 }

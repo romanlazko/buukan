@@ -1,16 +1,13 @@
 <div>
     <x-modal name="AppointmentModal">
         <x-slot name="header">
-            <a wire:click="toDateEventsModal" class="font-semibold text-base text-white grid hover:bg-gray-200 hover:text-gray-600 aspect-square w-8 rounded-full content-center text-center h-min">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
+            <x-a-buttons.back wire:key="{{ $appointmentForm->date }}" wire:click="openModal('DateEventsModal', {{ json_encode(['dateStr' => $appointmentForm->date ?? now()->format('Y-m-d')]) }})" class="text-white hover:bg-gray-200 hover:text-gray-600"/>
             <h1 class="font-bold  text-white w-full text-center">
                 Appointment: 
             </h1>
-            <a x-on:click="$dispatch('close')" class="font-semibold text-xl text-white grid hover:bg-gray-200 hover:text-gray-600 aspect-square w-8 rounded-full content-center text-center h-min">
-                <i class="fa-solid fa-xmark"></i>
-            </a>
+            <x-a-buttons.close x-on:click="$dispatch('close-all-modal')"/>
         </x-slot>
+
         <form class="sm:flex w-full space-y-3 sm:space-y-0" >
             {{-- CLIENT --}}
                 <div class="sm:w-1/3 w-full p-2 space-y-3">
@@ -154,6 +151,7 @@
                 </div>
             {{-- APPOINTMENT --}}
         </form>
+
         <x-slot name="footer">
             @if (!$formDisabled)
                 <x-buttons.primary wire:click="save" :disabled="$formDisabled OR !$employee OR !$appointmentForm->service_id OR !$appointmentForm->date OR !$appointmentForm->term">

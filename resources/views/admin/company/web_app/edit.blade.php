@@ -89,7 +89,7 @@
                                             <x-form.checkbox 
                                                 id="{{ $service->slug }}" 
                                                 name="settings[services][]" 
-                                                :checked="old('settings[services][]', in_array($service->id, $web_app->settings?->services?? []))"
+                                                :checked="old('settings[services][]', in_array($service->id, $web_app->settings?->services ?? []))"
                                                 value="{{ $service->id }}"/>
                                         </div>
                                     </x-form.label>

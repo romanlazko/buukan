@@ -1,15 +1,11 @@
 <div>
     <x-modal name="EditEventModal">
         <x-slot name="header">
-            <a wire:key="{{$date}}" wire:click="toDateEventsModal({{ json_encode(['dateStr' => $date]) }})" class="font-semibold text-base text-white grid hover:bg-gray-200 hover:text-gray-600 aspect-square w-8 rounded-full content-center text-center h-min">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
-            <h1 class="font-bold  text-white">
+            <x-a-buttons.back wire:key="{{ $date }}" wire:click="openModal('DateEventsModal', {{ json_encode(['dateStr' => $date ?? now()->format('Y-m-d')]) }})" class="text-white hover:bg-gray-200 hover:text-gray-600"/>
+            <h1 class="font-bold  text-white w-full text-center">
                 Edit schedule:
             </h1>
-            <a x-on:click="$dispatch('close')" class="font-semibold text-xl text-white grid hover:bg-gray-200 hover:text-gray-600 aspect-square w-8 rounded-full content-center text-center h-min">
-                <i class="fa-solid fa-xmark"></i>
-            </a>
+            <x-a-buttons.close x-on:click="$dispatch('close-all-modal')"/>
         </x-slot>
         <form class="space-y-6 p-2">
             <div class="w-full flex space-x-2 p-2 bg-white rounded-md shadow-sm">

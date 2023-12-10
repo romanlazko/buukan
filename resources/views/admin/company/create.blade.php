@@ -12,12 +12,12 @@
             @csrf
 
             <x-white-block>
-                <div class="flex space-x-4">
-                    <x-form.photo name="logo" :src="asset('/storage/img/public/preview.jpg')" class="w-36"/>
+                <div class="flex space-x-4 items-center">
+                    <x-form.photo name="logo" :src="asset('img/public/preview.jpg')" class="w-36"/>
                     <div class="space-y-4 w-full">
                         <div>
-                            <x-form.label for="name" :value="__('Name of company*:')" />
-                            <x-form.input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" required autocomplete="name" />
+                            <x-form.label for="name" :value="__('Name of company:')" />
+                            <x-form.input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" required/>
                             <x-form.error class="mt-2" :messages="$errors->get('name')" />
                         </div>
                     </div>
@@ -29,7 +29,7 @@
                     <div>
                         <x-form.label for="description" :value="__('Description of company:')" />
                         <p class="text-sm text-gray-500">Write somethig about your company</p>
-                        <x-form.textarea id="description" name="description" class="mt-1 block w-full" :value="old('description')" />
+                        <x-form.textarea id="description" name="description" class="mt-1 block w-full" :value="old('description')" required/>
                         <x-form.error class="mt-2" :messages="$errors->get('name')" />
                     </div>
                 </div>

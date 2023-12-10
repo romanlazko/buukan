@@ -73,8 +73,6 @@ class EmployeeController extends Controller
             ]);
         }
 
-        $schedule_model = ScheduleType::find($request->schedule_model)->model;
-
         if ($request->hasFile('avatar')) {
             $filePath = $fileService->uppload(
                 $request->file('avatar'), 
@@ -85,7 +83,6 @@ class EmployeeController extends Controller
         $employee = $user->employee()->create([
             'company_id' => $company->id,
             'description' => $request->description,
-            'schedule_model' => $schedule_model,
             'avatar' => $filePath ?? null
         ])->assignRole($request->roles);
 
@@ -101,20 +98,6 @@ class EmployeeController extends Controller
      */
     public function show(Company $company, Employee $employee)
     {
-        $schedules = $employee->unoccupiedSchedules(request('date', now()->format('Y-m-d')))
-            ->orderBy('term')
-            ->get()
-            ->map(function($schedule){
-                return $schedule;
-            });
-
-        $appointments = $employee->appointments()
-            ->where('date', request('date', now()->format('Y-m-d')))
-            ->orderBy('term')
-            ->get();
-
-        $employee->appointments = $schedules->concat($appointments)->sortBy('term');
-
         return view('admin.company.employee.show', compact([
             'company',
             'employee'

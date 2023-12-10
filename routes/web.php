@@ -98,7 +98,6 @@ Route::middleware('auth')->group(function () {
         
         // Route::middleware(['checkEmployeeRole:admin|administrator|employee'])->group(function () {
             Route::resource('company.employee.schedule', ScheduleController::class);
-            Route::get('company/{company}/employee/{employee}/example', [ScheduleController::class, 'exampleSchedule'])->name('company.employee.schedule.example');
         // });
     });
 });

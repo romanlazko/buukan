@@ -21,10 +21,8 @@ return new class extends Migration
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
 
             $table->string('avatar')->nullable();
-            
             $table->text('description')->nullable();
-
-            $table->string('schedule_model')->nullable();
+            $table->json('settings')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

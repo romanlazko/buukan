@@ -26,6 +26,9 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('avatar')->nullable();
             $table->string('password')->nullable();
+            $table->text('comment')->nullable();
+            $table->json('social_media')->nullable();
+            $table->json('settings')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

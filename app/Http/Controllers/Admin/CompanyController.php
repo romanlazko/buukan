@@ -7,7 +7,8 @@ use App\Http\Requests\Company\CompanyCreateRequest;
 use App\Http\Requests\Company\CompanyUpdateRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\DB;
 
 class CompanyController extends Controller
 {
@@ -33,25 +34,19 @@ class CompanyController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('logo')) {
-            $photo = $request->file('logo');
+            $file = $request->file('logo');
 
-            // Генерация уникального имени файла
-            $fileName = uniqid('logo_') . '.' . $photo->getClientOriginalExtension();
+            $fileName = uniqid('logo_') . '.' . $file->getClientOriginalExtension();
 
-            // Сохранение файла по указанному пути
+            $directory = "img/{$request->name}/logo";
 
-            $directory = "public/img/{$request->name}/logo";
-        
-            // Создание соответствующих подпапок, если они не существуют
-            Storage::makeDirectory($directory);
+            File::makeDirectory($directory, 0777, true);
 
-            // Сохранение файла по указанному пути
-            $path = $photo->storeAs($directory, $fileName);
+            $file->move(public_path($directory), $fileName);
 
-            // Путь к сохраненному файлу
-            $logoPath = Storage::url($path);
+            $filePath = "$directory/" . $fileName;
 
-            $data['logo'] = $logoPath;
+            $data['logo'] = $filePath;
         }
 
         auth()->user()->company()->create($data);
@@ -64,7 +59,39 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        return view('admin.company.show', compact('company'));
+        $clientsCount = $company->clients()->count();
+
+        $appointments = $company->appointments()
+            ->where('status', 'done')
+            ->where('date', '>', now()->subMonth())
+            ->get();
+            
+
+        $dailySales = $appointments->groupBy(function ($appointment) {
+                return $appointment->date->format('d M');
+            })
+            ->map(function ($dateAppointments, $dateKey) {
+                return $dateAppointments->sum('price');
+            });
+        
+        $salesData = [
+            'labels' => $dailySales->keys(),
+            'values' => $dailySales->values(),
+        ];
+
+        $bookingStats = $appointments->groupBy(function ($appointment) {
+                return $appointment->service->name;
+            })
+            ->map(function ($dateAppointments, $dateKey) {
+                return $dateAppointments->count();
+            });
+
+        return view('admin.company.show', compact(
+            'company',
+            'clientsCount',
+            'salesData',
+            'bookingStats'
+        ));
     }
 
     /**

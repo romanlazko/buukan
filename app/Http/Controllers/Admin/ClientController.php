@@ -52,13 +52,10 @@ class ClientController extends Controller
      * Display the specified resource.
      */
     public function show(Company $company, Client $client)
-    {
-        $appointments = $company->clients->find($client->id)->appointments->sortBy('date');
-        
+    {   
         return view('admin.company.client.show', compact(
             'company',
-            'client',
-            'appointments'
+            'client'
         ));
     }
 
@@ -69,8 +66,6 @@ class ClientController extends Controller
     {
         if ($telegram_bot = $client->telegram_chat?->bot) {
             $bot = new Bot($telegram_bot->token);
-
-            $client->telegram_chat->photo = $bot::getPhoto(['file_id' => $client->telegram_chat->photo]);
     
             $messages = $client->telegram_chat->messages()
                 ->orderBy('id', 'DESC')
@@ -94,26 +89,6 @@ class ClientController extends Controller
             'company' => $company,
             'client' => $client
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Company $company, Client $client)
-    {
-        $client = $company->clients->find($client->id);
-
-        if (!$client) {
-            return back()->with([
-                'ok' => false,
-                'description' => "Client not found"
-            ]);
-        }
-
-        return view('admin.company.client.edit', compact([
-            'company',
-            'client'
-        ]));
     }
 
     /**

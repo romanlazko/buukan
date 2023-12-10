@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center">
+        <div class="sm:flex items-center sm:space-x-3 w-max text-center">
+            <x-a-buttons.back href="{{ route('admin.company.employee.index', $company) }}"/>
+            <h2 class="font-semibold text-xl text-gray-800">
                 {{ __('Create employee:') }}
             </h2>
         </div>
@@ -20,10 +21,10 @@
             @csrf
             <div class="space-y-6">
                 <x-white-block>
-                    <div class="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                    <div class="flex space-x-4 items-center">
                         <x-form.photo name="avatar" :src="asset('/storage/img/public/preview.jpg')" class="w-36"/>
                         <div class="space-y-4 w-full">
-                            <div class="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
+                            <div class="space-y-4">
                                 <div class="w-full">
                                     <x-form.label for="first_name" :value="__('Name:')" />
                                     <x-form.input id="first_name" name="first_name" type="text" class="block w-full" :value="old('first_name')" required autocomplete="first_name" />
@@ -35,23 +36,27 @@
                                     <x-form.error class="mt-2" :messages="$errors->get('last_name')" />
                                 </div>
                             </div>
-                            <div>
-                                <x-form.label for="email" :value="__('Email')" />
-                                <x-form.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-                                <x-form.error :messages="$errors->get('email')" class="mt-2" />
-                            </div>
                         </div>
                     </div>
                 </x-white-block>
 
                 <x-white-block>
                     <div>
-                        <x-form.label for="description" :value="__('Description:')" />
-                        <x-form.textarea id="description" name="description" class="mt-1 block w-full" :value="old('description')" />
-                        <x-form.error class="mt-2" :messages="$errors->get('name')" />
+                        <x-form.label for="email" :value="__('Email')" />
+                        <x-form.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                        <x-form.error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                 </x-white-block>
 
+                
+                <x-white-block>
+                    <div>
+                        <x-form.label for="description" :value="__('Description:')" />
+                        <x-form.textarea id="description" name="description" class="mt-1 block w-full" :value="old('description')" />
+                        <x-form.error class="mt-2" :messages="$errors->get('description')" />
+                    </div>
+                </x-white-block>
+                
                 <x-white-block>
                     <div class="space-y-4">
                         <h2 class="text-lg font-medium text-gray-900">
@@ -99,21 +104,30 @@
                 <x-white-block>
                     <div class="space-y-4">
                         <h2 class="text-lg font-medium text-gray-900">
-                            {{ __('Schedule type') }}
+                            {{ __('Settings') }}
                         </h2>
                         <div class="border rounded-md p-3">
-                            @forelse (App\Models\ScheduleType::all() as $schedule_type)
-                                <div class="flex space-x-2 items-center py-3 @if(!$loop->last) border-b @endif">
-                                    <x-form.label for="{{ $schedule_type->name }}" class="w-full ">
-                                        <div class="flex justify-between w-full items-center">
-                                            <span>
-                                                {{ $schedule_type->name }}
-                                            </span>
-                                            <x-form.radio id="{{ $schedule_type->name }}" name="schedule_model" :value="$schedule_type->id" :checked="old('schedule_model')"/>
-                                        </div>
-                                    </x-form.label>
-                                </div>
-                            @endforeach
+                            <div class="flex space-x-2 items-center py-3">
+                                <x-form.label for="is_available_on_telegram" class="w-full">
+                                    <div class="flex justify-between w-full items-center">
+                                        <span>
+                                            {{ __("Is available on Telegram")  }}
+                                        </span>
+                                        <x-form.checkbox id="is_available_on_telegram" name="settings[is_available_on_telegram]" type="checkbox" :checked="old('settings[is_available_on_telegram]')"/>
+                                    </div>
+                                </x-form.label>
+                            </div>
+                            <hr>
+                            <div class="flex space-x-2 items-center py-3">
+                                <x-form.label for="is_available_on_webapp" class="w-full">
+                                    <div class="flex justify-between w-full items-center">
+                                        <span>
+                                            {{ __("Is available on WebApp")  }}
+                                        </span>
+                                        <x-form.checkbox id="is_available_on_webapp" name="settings[is_available_on_webapp]" type="checkbox" :checked="old('settings[is_available_on_telegram]')"/>
+                                    </div>
+                                </x-form.label>
+                            </div>
                         </div>
                     </div>
                 </x-white-block>

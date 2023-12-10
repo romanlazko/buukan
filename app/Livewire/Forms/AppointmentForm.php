@@ -5,7 +5,7 @@ namespace App\Livewire\Forms;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use App\Models\Appointment;
-use App\Models\TimeBasedSchedule;
+use App\Models\Schedule;
 
 class AppointmentForm extends Form
 {
@@ -23,7 +23,7 @@ class AppointmentForm extends Form
     public function set($data)
     {
         $this->model = Appointment::findOr($data['appointment_id'] ?? null, function() use($data) {
-            return TimeBasedSchedule::find($data['schedule_id'] ?? null);
+            return Schedule::find($data['schedule_id'] ?? null);
         });
 
         $this->client_id        = $this->model?->client_id ?? $data['client_id'] ?? null;

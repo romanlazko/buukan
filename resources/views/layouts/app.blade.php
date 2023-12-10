@@ -12,6 +12,8 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/f4c6764ec6.js" crossorigin="anonymous"></script>
 
+        @stack('library')
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     

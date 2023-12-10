@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center">
+        <div class="sm:flex items-center sm:space-x-3 w-max text-center">
+            <h2 class="font-semibold text-xl text-gray-800">
                 {{ __('Employees:') }}
             </h2>
             <x-form.search :action="route('admin.company.employee.index', $company)" :placeholder="__('Search by employees')"/>
@@ -35,7 +35,7 @@
                                 <x-table.td>
                                     <div class="flex items-center py-2">
                                         <a href="{{ route('admin.company.employee.show', [$company, $employee]) }}" class="flex-col items-center my-auto">
-                                            <img src="{{ $employee->avatar ?? null }}" class="mr-4 w-12 h-12 min-w-[48px] rounded-full bg-slate-300">
+                                            <img src="{{ asset($employee->avatar) }}" class="mr-4 w-12 h-12 min-w-[48px] rounded-full bg-slate-300">
                                         </a>
                                         <div class="flex-col justify-center">
                                             <div>

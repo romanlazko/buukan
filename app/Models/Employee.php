@@ -31,7 +31,7 @@ class Employee extends Model
 
     public function schedule()
     {
-        return $this->hasMany((new $this->schedule_model)::class);
+        return $this->hasMany(Schedule::class);
     }
 
     public function company()
@@ -80,6 +80,6 @@ class Employee extends Model
 
     public function getAvatarAttribute()
     {
-        return $this->attributes['avatar'] ?? '/storage/img/public/preview.jpg';
+        return $this->attributes['avatar'] ?? 'img/public/preview.jpg';
     }
 }

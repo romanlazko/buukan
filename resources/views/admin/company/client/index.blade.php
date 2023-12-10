@@ -41,7 +41,23 @@
                                 </div>
                             </x-table.td>
                             <x-table.td>{{ $client->phone }}</x-table.td>
-                            <x-table.td></x-table.td>
+                            <x-table.td>
+                                @if (isset($client->social_media->instagram))
+                                    <a href="https://instagram.com/{{ $client->social_media->instagram }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                                        <i class="fa-brands fa-instagram text-pink-700"></i>
+                                    </a>
+                                @endif
+                                @if (isset($client->social_media->facebook))
+                                    <a href="{{ $client->social_media->facebook }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                                        <i class="fa-brands fa-facebook text-blue-700"></i>
+                                    </a>
+                                @endif
+                                @if (isset($client->social_media->telegram))
+                                    <a href="https://t.me/{{ $client->social_media->telegram }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                                        <i class="fa-brands fa-telegram text-blue-500"></i>
+                                    </a>
+                                @endif
+                            </x-table.td>
                             <x-table.td>
                                 <div class="text-xs text-gray-500">
                                     <p>{{ $client->created_at->diffForHumans() }}</p>

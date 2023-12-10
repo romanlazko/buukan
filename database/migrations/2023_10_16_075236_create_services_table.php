@@ -25,6 +25,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2)->nullable();
             $table->string('currency')->nullable();
+            $table->json('settings')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

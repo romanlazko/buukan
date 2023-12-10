@@ -62,6 +62,28 @@
                         </div>
                     </div>
                 </x-white-block>
+
+                <x-white-block>
+                    <div class="space-y-4">
+                        <h2 class="text-lg font-medium text-gray-900">
+                            {{ __('Employees') }}
+                        </h2>
+                        <div class="border rounded-md p-3">
+                            @foreach ($company->employees as $employee)
+                                <div class="flex space-x-2 items-center py-3 @if(!$loop->last) border-b @endif">
+                                    <x-form.label for="{{ $employee->slug }}" class="w-full ">
+                                        <div class="flex justify-between w-full items-center">
+                                            <span>
+                                                {{ $employee->first_name }} {{ $employee->last_name }}
+                                            </span>
+                                            <x-form.checkbox id="{{ $employee->slug }}" name="employees[]" :value="$employee->id" type="checkbox" :checked="old('employees[{{$employee->id}}]', !$service->employees->where('id', $employee->id)->isEmpty())"/>
+                                        </div>
+                                    </x-form.label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </x-white-block>
                 
                 <div class="flex justify-end px-4 sm:px-0">
                     <x-buttons.primary>{{ __('Save') }}</x-buttons.primary>

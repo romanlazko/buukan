@@ -14,6 +14,10 @@ class Client extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'social_media' => 'object'
+    ];
+
     public function company()
     {
         return $this->belongsTo(Company::class);
@@ -48,6 +52,6 @@ class Client extends Model
             return $bot::getPhoto(['file_id' => $this->telegram_chat->photo]);
         }
 
-        return $this->attributes['avatar'] ?? '/storage/img/public/preview.jpg';
+        return $this->attributes['avatar'] ?? 'img/public/preview.jpg';
     }
 }

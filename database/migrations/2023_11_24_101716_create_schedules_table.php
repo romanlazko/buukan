@@ -14,14 +14,16 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('employee_id')->nullable();
-            $table->foreign('employee_id')->on('employees')->references('id');
+            $table->unsignedBigInteger('employee_id');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
+
+            $table->unsignedBigInteger('service_id')->nullable();
+            $table->foreign('service_id')->references('id')->on('services');
 
             $table->date('date')->nullable();
             $table->time('term')->nullable();
-
-            $table->unsignedBigInteger('service_id')->nullable();
-            $table->foreign('service_id')->on('services')->references('id');
+            $table->boolean('active')->default(true);
+            $table->json('settings')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

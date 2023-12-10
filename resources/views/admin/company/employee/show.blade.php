@@ -1,13 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center flex whitespace-nowrap items-center">
-                <a class="text-gray-600 hidden lg:grid hover:bg-gray-200 aspect-square mr-5 w-8 rounded-full content-center" href="{{ route('admin.company.employee.index', $company) }}">
-                    {{ __('←') }}
-                </a>
-                <p>
-                    {{ $employee->first_name }} {{ $employee->last_name }}
-                </p>
+        <div class="sm:flex items-center sm:space-x-3 w-max text-center">
+            <x-a-buttons.back href="{{ route('admin.company.employee.index', $company) }}"/>
+            <h2 class="font-semibold text-xl text-gray-800">
+                {{ $employee->first_name }} {{ $employee->last_name }}
             </h2>
         </div>
         <x-header.menu>
@@ -16,9 +12,6 @@
             </x-header.link>
             <x-header.link href="{{ route('admin.company.employee.schedule.index', [$company, $employee]) }}" :active="request()->routeIs('admin.company.employee.schedule.index')">
                 {{ __("Callendar") }}
-            </x-header.link>
-            <x-header.link href="{{ route('admin.company.employee.schedule.example', [$company, $employee]) }}" :active="request()->routeIs('admin.company.employee.schedule.example')">
-                {{ __("Example Callendar") }}
             </x-header.link>
             <x-header.link class="float-right" x-data="" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{json_encode(['employee_id' => $employee->id])}}})">
                 <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
@@ -94,14 +87,10 @@
                                 </div>
                             </div>
                             @if(!$loop->last) <hr> @endif
-                            {{-- <x-badge color="{{ $service->color }}" >
-                                <a href="{{ route('admin.company.service.edit', [$company, $service]) }}" class="whitespace-nowrap" title="{{ $service->description }}">{{ $service->name }}</a>
-                            </x-badge> --}}
                         @empty
                             
                         @endforelse
                     </div>
-                    
                 </x-white-block>
             </div>
             <div class="sm:w-1/2 md:w-2/3 space-y-3">
@@ -110,16 +99,7 @@
                         <x-form.input name="date" type="date" onchange="$('#appointmentDateForm').submit()" class="w-full" value="{{request('date', now()->format('Y-m-d'))}}"/>
                     </form>
                 </x-white-block>
-                <div class="min-w-full">
-                    <div class="p-3 space-y-3 rounded-md">
-                        <div class="space-y-6">
-                            @forelse ($employee->appointments as $appointment)
-                                <x-appointment.block :appointment="$appointment" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{ $appointment->resource->toJson()}}})"/>
-                            @empty
-                            @endforelse
-                        </div>
-                    </div>
-                </div>
+                <livewire:employee-events :employee="$employee" :date="request('date')"/>
             </div>
         </div>
     </div>

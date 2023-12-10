@@ -2,7 +2,7 @@
     @if (isset($client_data['id']))
         <div class="space-y-6">
             <div class="flex items-center space-x-3 bg-white p-2 rounded-lg shadow-md">
-                <div class="w-1/4 bg-cover bg-no-repeat aspect-square rounded-full h-min" style="background-image: url({{asset($client_data['avatar'])}})"></div>
+                <div class="w-1/4 bg-cover bg-no-repeat aspect-square rounded-full h-min" style="background-image: url({{ asset($client_data['avatar']) }})"></div>
                 <div class="w-3/4 overflow-hidden">
                     <a href="{{ route('admin.company.client.show', [$company, $client_data['id']]) }}" class="w-full text-md font-medium text-gray-900 hover:underline">
                         {{ $client_data['first_name'] ?? null }} {{ $client_data['last_name'] ?? null }}
@@ -13,7 +13,6 @@
                     <p class="text-sm text-gray-500">
                         {{ $client_data['phone'] ?? null }}
                     </p>
-                    
                 </div>
                 <div class="text-lg">
                     <i class="fa-solid {{$isClientFormOpen ? 'fa-circle-xmark' : 'fa-pen-to-square'}}" wire:click="toggleClientForm" x-on:click="hasChanged = true"></i>

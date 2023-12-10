@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Calendar;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Carbon\Carbon;
+use App\Livewire\Traits\Modal;
 
 class EditEventModal extends Component
 {
+    use Modal;
+
     public $employee;
 
     public $date = '';
@@ -26,17 +29,10 @@ class EditEventModal extends Component
         $this->reset('service_id', 'schedule', 'date', 'term', 'active');
 
         $this->schedule     = $this->employee->schedule()->find($schedule_id);
-        $this->date         = $this->schedule->date->format('Y-m-d');
-        $this->term         = $this->schedule->term->format('H:s');
+        $this->date         = $this->schedule?->date->format('Y-m-d');
+        $this->term         = $this->schedule?->term->format('H:s');
         $this->service_id   = $this->schedule?->service?->id ?? null;
-        $this->active       = $this->schedule->active;
-    }
-
-    public function toDateEventsModal($date)
-    {
-        $this->dispatch('close-modal', 'EditEventModal');
-        $this->dispatch('set-data', $date)->to(DateEventsModal::class);
-        $this->dispatch('open-modal', "DateEventsModal");
+        $this->active       = $this->schedule?->active;
     }
 
     public function update()
@@ -48,15 +44,17 @@ class EditEventModal extends Component
             'active' => $this->active,
         ]);
 
-        $this->dispatch('reset-events')->to(Calendar::class);
+        $this->dispatch('reset-events')->to(Index::class);
         
-        $this->dispatch('close-modal', 'EditEventModal');
+        $this->openModal('DateEventsModal', [
+            'dateStr' => $this->date
+        ]);
 
         $this->reset('schedule', 'date', 'term', 'active', 'service_id');
     }
 
     public function render()
     {
-        return view('livewire.edit-event-modal');
+        return view('livewire.calendar.edit-event-modal');
     }
 }

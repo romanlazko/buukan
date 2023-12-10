@@ -14,11 +14,14 @@ use Romanlazko\Telegram\App\Bot;
 
 class AppointmentModal extends Component
 {
+    use Traits\Modal;
+
     public Company $company;
 
     public AppointmentForm $appointmentForm;
 
     public $employee;
+    
     public $isClientFormOpen = false;
 
     public $schedules = [];
@@ -89,26 +92,10 @@ class AppointmentModal extends Component
     {
         $this->appointmentForm->save();
 
-        $this->dispatch('reset-events')->to(Calendar::class);
+        $this->dispatch('reset-events');
         
-        $this->dispatch('close-modal', 'AppointmentModal');
+        $this->closeModal();
 
         $this->reset('schedules');
-    }
-
-    #[On('openModal')]
-    public function openModal($modal, $params = [])
-    {
-        
-        $this->dispatch('set-data', $params)->to($modal);
-        $this->dispatch('open')->to($modal);
-        $this->dispatch('open-modal', $modal);
-    }
-
-    public function toDateEventsModal()
-    {
-        $this->dispatch('close-modal', 'AppointmentModal');
-        $this->dispatch('set-data', ['dateStr' => $this->appointmentForm->date ?? now()->format('Y-m-d')])->to(DateEventsModal::class);
-        $this->dispatch('open-modal', "DateEventsModal");
     }
 }

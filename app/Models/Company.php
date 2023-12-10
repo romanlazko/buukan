@@ -75,7 +75,7 @@ class Company extends Model
 
     public function schedules()
     {
-        return $this->hasManyThrough(Schedules::class, Employee::class);
+        return $this->hasManyThrough(Schedule::class, Employee::class);
     }
 
     public function getRolesAttribute()

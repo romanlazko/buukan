@@ -1,12 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="sm:flex items-center sm:space-x-3 w-max text-center">
-            <a class="font-semibold text-xl text-gray-600 hidden lg:grid hover:bg-gray-200 aspect-square w-8 rounded-full content-center text-center" href="{{ route('admin.company.client.show', [$company, $client]) }}">
-                {{ __('←') }}
-            </a>
-            <div class="flex items-center">
+            <x-a-buttons.back href="{{ route('admin.company.client.show', [$company, $client]) }}"/>
+            <div class="flex items-center space-x-1 text-left">
                 <div class="flex-col items-center my-auto">
-                    <img src="{{ asset($client->avatar ?? $client->telegram_chat->photo ?? '/storage/img/public/preview.jpg' ) }}" alt="Avatar" class="mr-4 w-12 h-12 min-w-[48px] rounded-full">
+                    <img src="{{ asset($client->avatar) }}" alt="Avatar" class="w-16 h-16 min-w-[64px] rounded-full">
                 </div>
                 <div class="flex-col justify-center">
                     <div>

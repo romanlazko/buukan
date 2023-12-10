@@ -103,6 +103,8 @@ class ServiceController extends Controller
             'color' => $request->color
         ]);
 
+        $service->employees()->sync($request->employees);
+
         return redirect()->route('admin.company.service.index', $company);
     }
 
