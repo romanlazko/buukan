@@ -76,7 +76,7 @@ class EmployeeController extends Controller
         if ($request->hasFile('avatar')) {
             $filePath = $fileService->uppload(
                 $request->file('avatar'), 
-                "public/img/{$company->slug}/employees"
+                "img/{$company->slug}/employees"
             );
         }
 
@@ -152,7 +152,7 @@ class EmployeeController extends Controller
         if ($request->hasFile('avatar')) {
             $filePath = $fileService->uppload(
                 $request->file('avatar'), 
-                "public/img/{$company->slug}/employees"
+                "img/{$company->slug}/employees"
             );
             $employee->update([
                 'avatar' => $filePath

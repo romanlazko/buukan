@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
-    public function __construct(private FileService $fileService)
-    {
-        
-    }
     /**
      * Display a listing of the resource.
      */

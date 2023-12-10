@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 class CompanyController extends Controller
 {
+    public function __construct(private FileService $fileService)
+    {
+        
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -29,24 +33,15 @@ class CompanyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CompanyCreateRequest $request)
+    public function store(CompanyCreateRequest $request, FileService $fileService)
     {
         $data = $request->validated();
 
         if ($request->hasFile('logo')) {
-            $file = $request->file('logo');
-
-            $fileName = uniqid('logo_') . '.' . $file->getClientOriginalExtension();
-
-            $directory = "img/{$request->name}/logo";
-
-            File::makeDirectory($directory, 0777, true);
-
-            $file->move(public_path($directory), $fileName);
-
-            $filePath = "$directory/" . $fileName;
-
-            $data['logo'] = $filePath;
+            $data['logo'] = $fileService->uppload(
+                $request->file('logo'), 
+                "img/{$request->name}/logo"
+            );
         }
 
         auth()->user()->company()->create($data);
@@ -105,30 +100,15 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CompanyUpdateRequest $request, Company $company)
+    public function update(CompanyUpdateRequest $request, Company $company, FileService $fileService)
     {
         $data = $request->validated();
 
         if ($request->hasFile('logo')) {
-            $photo = $request->file('logo');
-
-            // Генерация уникального имени файла
-            $fileName = uniqid('logo_') . '.' . $photo->getClientOriginalExtension();
-
-            // Сохранение файла по указанному пути
-
-            $directory = "public/img/{$company->slug}/logo";
-        
-            // Создание соответствующих подпапок, если они не существуют
-            Storage::makeDirectory($directory);
-
-            // Сохранение файла по указанному пути
-            $path = $photo->storeAs($directory, $fileName);
-
-            // Путь к сохраненному файлу
-            $logoPath = Storage::url($path);
-
-            $data['logo'] = $logoPath;
+            $data['logo'] = $fileService->uppload(
+                $request->file('logo'), 
+                "img/{$request->name}/logo"
+            );
         }
 
         $company->update($data);

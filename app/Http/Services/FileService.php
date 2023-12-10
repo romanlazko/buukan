@@ -8,16 +8,12 @@ class FileService
 {
     public function uppload($file, $directory): string
     {
-        // Генерация уникального имени файла
-        $fileName = uniqid('img_') . '.' . $file->getClientOriginalExtension();
-    
-        // Создание соответствующих подпапок, если они не существуют
-        Storage::makeDirectory($directory);
+        $fileName = uniqid('logo_') . '.' . $file->getClientOriginalExtension();
 
-        // Сохранение файла по указанному пути
-        $path = $file->storeAs($directory, $fileName);
+        File::makeDirectory($directory, 0777, true);
 
-        // Путь к сохраненному файлу
-        return Storage::url($path);
+        $file->move(public_path($directory), $fileName);
+
+        return "$directory/" . $fileName;
     }
 }
