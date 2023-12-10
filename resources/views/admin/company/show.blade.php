@@ -25,7 +25,7 @@
                     @foreach ($bookingStats as $service => $count)
                         <li class="flex items-center">
                             <span class="text-gray-600">{{ $service }}:</span>
-                            <span class="ml-2 font-semibold">{{ $count }}</span>
+                            <span class="ml-2 font-semibold text-indigo-600">{{ $count }}</span>
                         </li>
                     @endforeach
                 </ul>
