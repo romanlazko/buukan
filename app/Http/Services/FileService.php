@@ -10,7 +10,10 @@ class FileService
     {
         $fileName = uniqid('logo_') . '.' . $file->getClientOriginalExtension();
 
-        File::makeDirectory($directory, 0777, true);
+        if (!file_exists($directory)) {
+            // If not, create it
+            File::makeDirectory($directory, 0777, true);
+        }
 
         $file->move(public_path($directory), $fileName);
 
