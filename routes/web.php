@@ -37,13 +37,17 @@ use Romanlazko\Slurp\App\Http\Controllers\UserController;
 |
 */
 
+Route::domain('{company}.test.buukan.com')->middleware('web')->group(function(){
+    Route::get('/test', function ($company) {
+        return $company;
+    });
+});
+
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/test', function ($company) {
-    return $company;
-})->name('welcome.test');
+
 
 
 
