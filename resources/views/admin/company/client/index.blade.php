@@ -6,12 +6,9 @@
             </h2>
             <x-form.search :action="route('admin.company.client.index', $company)" :placeholder="__('Search by clients')"/>
         </div>
-        <x-header.menu>
-            <x-header.link href="{{ route('admin.company.client.create', $company) }}" class="float-right">
-                <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
-                {{ __("Create client") }}
-            </x-header.link>
-        </x-header.menu>
+        <div>
+            
+        </div>
     </x-slot>
     <div class="py-4 sm:p-4">
         <x-white-block class="p-0">
@@ -65,9 +62,6 @@
                                 </div>
                             </x-table.td>
                             <x-table.buttons>
-                                <x-a-buttons.edit href="{{ route('admin.company.client.edit', [$company, $client]) }}">
-                                    {{ __('Edit') }}
-                                </x-a-buttons.edit>
                                 <x-buttons.delete action="{{ route('admin.company.client.destroy', [$company, $client]) }}">
                                     {{ __('Delete') }}
                                 </x-buttons.delete>

@@ -41,6 +41,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/test', function ($company) {
+    return $company;
+})->name('welcome.test');
+
+
 
 // Route::get('/app/{company}', function (Company $company) {
 //     return response()->view('admin.company.web_app.show', compact(
@@ -113,6 +118,8 @@ Route::middleware(['web'])->get('api/v1/get-employee-unoccupied-schedule', GetEm
 Route::middleware(['web'])->post('api/v1/get-employee-unoccupied-schedule', GetEmployeeUnoccupiedSchedule::class)->name('get-employee-unoccupied-schedule');
 Route::middleware(['web'])->post('api/v1/get-employee-service', GetEmployeeService::class)->name('get-employee-service');
 Route::middleware(['web'])->post('api/v1/get-client-data', GetClientData::class)->name('get-client-data');
+
+
 
 // Route::middleware(['web'])->get('api/telegram/{bot}', function () {
 //     try {
