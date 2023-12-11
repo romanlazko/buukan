@@ -14,6 +14,6 @@ class ClientEvents extends Component
     {
         $events = $this->client->appointments->sortBy('date');
 
-        return view('livewire.events', compact('events'));
+        return view('livewire.event.show', compact('events'));
     }
 }

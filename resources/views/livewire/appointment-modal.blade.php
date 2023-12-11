@@ -74,7 +74,6 @@
                         </div>
                         @if ($employee)
                             <div class="w-full shadow-md p-2 space-y-4 bg-white rounded-md">
-                                
                                 <div class="w-full">
                                     <x-input-label for="service" value="{{ __('Service:') }}"/>
                                     <x-form.select wire:key="appointment-service-{{ $appointmentForm?->service_id }}" wire:change="$set('appointmentForm.term', '')" wire:model.live="appointmentForm.service_id" class="w-full" :disabled="$formDisabled">
