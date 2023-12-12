@@ -28,7 +28,7 @@ class AppointmentForm extends Form
 
         $this->client_id        = $this->model?->client_id ?? $data['client_id'] ?? null;
         $this->employee_id      = $this->model?->employee_id ?? $data['employee_id'] ?? null;
-        $this->service_id       = $this->model?->service_id ?? ($data['service'] ? $data['service']['id'] : null) ?? null;
+        $this->service_id       = $this->model?->service_id ?? $data['service_id'] ?? null;
         $this->date             = $this->model?->date->format('Y-m-d') ?? $data['date'] ?? null;;
         $this->term             = $this->model?->term->format('H:s');
         $this->comment          = $this->model?->comment;
