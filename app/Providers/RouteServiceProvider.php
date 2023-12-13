@@ -29,9 +29,9 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $this->routes(function () {
-            Route::domain('webapp.buukan.com')
-                ->middleware('web')
-                ->group(base_path('routes/webapp.php'));
+            // Route::domain('webapp.buukan.com')
+            //     ->middleware('web')
+            //     ->group(base_path('routes/webapp.php'));
 
             Route::middleware('api')
                 ->prefix('api')
