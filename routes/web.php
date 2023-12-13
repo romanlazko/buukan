@@ -41,6 +41,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::domain('{account}.blade.com')->group(function () {
+    Route::get('/', function (string $account) {
+        return $account;
+    });
+});
 
 
 
