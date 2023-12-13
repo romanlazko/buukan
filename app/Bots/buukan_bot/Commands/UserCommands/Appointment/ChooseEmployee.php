@@ -23,34 +23,27 @@ class ChooseEmployee extends Command
     {
         $company = Company::find(DB::getBot()->owner_id);
 
-        $employees = $company->employees()
-            ?->whereIn('id', DB::getBot()->settings->employees ?? [])
-            ?->whereHas('services', function($query) use ($updates){
+        $employees_buttons = $company->employees()
+            ?->whereJsonContains('settings->is_available_on_telegram', 'on')
+            ?->whereHas('services', function($query) use($updates){
                 return $query->where('service_id', $updates->getInlineData()->getServiceId());
             })
-            ?->get();
+            ?->get()
+            ?->map(function ($employee) {
+                return [array("$employee->first_name $employee->last_name", SaveEmployee::$command, $employee->id)];
+            });
 
-        $employees_buttons = $employees->map(function ($employee) {
-            return [array($employee->user->first_name, SaveEmployee::$command, $employee->id)];
-        });
+        $buttons = BotApi::inlineKeyboard([
+            ...$employees_buttons,
+            [array("👈 Назад", ChooseService::$command, '')]
+        ], 'employee_id');
 
-        if (count($employees_buttons) > 1) {
-            $buttons = BotApi::inlineKeyboard([
-                ...$employees_buttons,
-                [array("👈 Назад", ChooseService::$command, '')]
-            ], 'employee_id');
-
-            return BotApi::returnInline([
-                'text'          =>  "*Выбери работника:*".json_encode(array_filter(explode(':', $updates->getInlineData()->getSubServices()))),
-                'chat_id'       =>  $updates->getChat()->getId(),
-                'reply_markup'  =>  $buttons,
-                'parse_mode'    =>  'Markdown',
-                'message_id'    =>  $updates->getCallbackQuery()?->getMessage()?->getMessageId(),
-            ]);
-        }
-
-        $updates->getInlineData()->getEmployeeId($employees->first()->id);
-
-        return $this->bot->executeCommand(SaveEmployee::$command);
+        return BotApi::returnInline([
+            'text'          =>  "*Выбери мастера:*",
+            'chat_id'       =>  $updates->getChat()->getId(),
+            'reply_markup'  =>  $buttons,
+            'parse_mode'    =>  'Markdown',
+            'message_id'    =>  $updates->getCallbackQuery()?->getMessage()?->getMessageId(),
+        ]);
     }
 }

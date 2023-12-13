@@ -111,6 +111,12 @@ class TelegramController extends Controller
 
     public function update(Request $request, Company $company, TelegramBot $telegram_bot)
     {
+        $bot = new Bot($request->token);
+
+        $response = $bot::setWebHook([
+            'url' => env('APP_URL').'/api/telegram/'.$bot->getBotId(),
+        ]);
+
         $company->telegram_bots()->find($telegram_bot->id)->update([
             'settings' => $request->settings
         ]);

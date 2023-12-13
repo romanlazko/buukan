@@ -44,7 +44,6 @@ Route::get('/', function () {
 
 
 
-
 // Route::get('/app/{company}', function (Company $company) {
 //     return response()->view('admin.company.web_app.show', compact(
 //         'company'

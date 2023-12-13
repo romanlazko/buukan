@@ -23,17 +23,12 @@ class ChooseSubService extends Command
         $company = Company::find(DB::getBot()->owner_id);
 
         $sub_services = $company->sub_services;
-            // ->filter(function ($sub_service) {
-            //     if (DB::getBot()->settings?->sub_services->{$sub_service->id} ?? null) {
-            //         return $sub_service;
-            //     }
-            // });
 
         $sub_services_buttons = $sub_services->map(function ($sub_service) {
             return [array($sub_service->name, ChooseSubService::$command, $sub_service->id)];
         });
         
-        // if ($services->count() > 1) {
+        if ($sub_services->isNotEmpty()) {
             $buttons = BotApi::inlineCheckbox([
                 ...$sub_services_buttons,
                 [array("Продолжить", SaveSubService::$command, '')],
@@ -47,10 +42,8 @@ class ChooseSubService extends Command
                 'parse_mode'    =>  'Markdown',
                 'message_id'    =>  $updates->getCallbackQuery()?->getMessage()?->getMessageId(),
             ]);
-        // }
+        }
 
-        // $updates->getInlineData()->getServiceId($services->first()->id);
-
-        // return $this->bot->executeCommand(SaveService::$command);
+        return $this->bot->executeCommand(SaveSubService::$command);
     }
 }

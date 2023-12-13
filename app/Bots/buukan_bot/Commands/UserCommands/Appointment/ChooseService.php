@@ -23,53 +23,24 @@ class ChooseService extends Command
     {
         $company = Company::find(DB::getBot()->owner_id);
 
-        // $services = $company->services
-        //     ->map(function ($service) use ($updates){
-        //         // if ($master->just_ref) {
-        //         //     if ($master->telegram_chat_id == $updates->getChat()->getReferal()) {
-        //         //         return [array($master->name, SaveMaster::$command, $master->id)];
-        //         //     }
-        //         //     
-        //         // }
-        //         if (DB::getBot()->settings->services->{$service->id} ?? null) {
-        //             return [array($service->name, SaveService::$command, $service->id)];
-        //         }
-
-        //         return [];
-        //     });
-
-        // $services = $company->services
-        //     ->filter(function ($service) {
-        //         if (DB::getBot()->settings->services->{$service->id} ?? null) {
-        //             return $service;
-        //         }
-        //     });
-
-        $services = $company->services()
-            ->whereIn('id', DB::getBot()->settings->services ?? [])
-            ?->get();
-
-        $services_buttons = $services->map(function ($service) {
-            return [array($service->name, SaveService::$command, $service->id)];
-        });
+        $services_buttons = $company->services()
+            ?->whereJsonContains('settings->is_available_on_telegram', 'on')
+            ?->get()
+            ?->map(function ($service) {
+                return [array($service->name, SaveService::$command, $service->id)];
+            });
         
-        // if ($services->count() > 1) {
-            $buttons = BotApi::inlineKeyboard([
-                ...$services_buttons,
-                [array("👈 Назад", CreateProfile::$command, '')]
-            ], 'service_id');
-    
-            return BotApi::returnInline([
-                'text'          =>  "*Выбери услугу:*",
-                'chat_id'       =>  $updates->getChat()->getId(),
-                'reply_markup'  =>  $buttons,
-                'parse_mode'    =>  'Markdown',
-                'message_id'    =>  $updates->getCallbackQuery()?->getMessage()?->getMessageId(),
-            ]);
-        // }
+        $buttons = BotApi::inlineKeyboard([
+            ...$services_buttons,
+            [array("👈 Назад", CreateProfile::$command, '')]
+        ], 'service_id');
 
-        // $updates->getInlineData()->getServiceId($services->first()->id);
-
-        // return $this->bot->executeCommand(SaveService::$command);
+        return BotApi::returnInline([
+            'text'          =>  "*Выбери услугу:*",
+            'chat_id'       =>  $updates->getChat()->getId(),
+            'reply_markup'  =>  $buttons,
+            'parse_mode'    =>  'Markdown',
+            'message_id'    =>  $updates->getCallbackQuery()?->getMessage()?->getMessageId(),
+        ]);
     }
 }
