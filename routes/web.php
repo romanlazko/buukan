@@ -46,7 +46,7 @@ Route::get('/', function () {
 //         'company'
 //     ));
 // });
-Route::domain('webapp.buukan.com')->group(function () {
+Route::domain('webapp.buukan.com')->name('user.client.')->group(function () {
     Route::get('/{web_app}', [EmailController::class, 'create'])->name('email');
     Route::post('/{web_app}', [EmailController::class, 'store'])->name('email.store');
 
