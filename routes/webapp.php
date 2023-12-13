@@ -7,7 +7,7 @@ use App\Http\Controllers\Client\RegisterController;
 use App\Http\Controllers\Client\AppointmentController as ClientAppointmentController;
 use App\Livewire\WebApp\WebApp;
 
-Route::domain('webapp.buukan.com')->group(function () {
+Route::group(function () {
     Route::get('/{web_app}', [EmailController::class, 'create'])->name('email');
     Route::post('/{web_app}', [EmailController::class, 'store'])->name('email.store');
 
