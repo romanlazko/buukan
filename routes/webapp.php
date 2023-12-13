@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-Route::domain('webapp.blade.com')->group(function () {
+Route::domain('webapp.buukan.com')->group(function () {
     Route::get('/', function (string $account) {
         return $account;
     });
