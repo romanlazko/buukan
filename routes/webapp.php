@@ -10,10 +10,6 @@ use App\Http\Controllers\Client\RegisterController;
 use App\Http\Controllers\Client\AppointmentController as ClientAppointmentController;
 use App\Livewire\WebApp\WebApp;
 
-Route::get('/', function () {
-    return 'hello from web app';
-});
-
 Route::name('webapp.')->group(function () {
     Route::middleware('webapp.guest:user')->group(function () {
         Route::get('/{web_app}/register', [RegisteredUserController::class, 'create'])->name('register');
