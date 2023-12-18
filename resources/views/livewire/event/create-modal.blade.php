@@ -1,7 +1,7 @@
 <div>
     <x-modal name="CreateEventModal">
         <x-slot name="header">
-            <x-a-buttons.back wire:key="{{$start_date}}" wire:click="openModal('DateEventsModal', {{ json_encode(['dateStr' => $start_date ?? now()->format('Y-m-d')]) }})" class="text-white hover:bg-gray-200 hover:text-gray-600"/>
+            <x-a-buttons.back wire:key="{{ $start_date }}" wire:click="openModal('DateEventsModal', {{ json_encode(['dateStr' => $start_date ?? now()->format('Y-m-d')]) }})" class="text-white hover:bg-gray-200 hover:text-gray-600"/>
             <h1 class="font-bold  text-white w-full text-center">
                 Create new schedule:
             </h1>
@@ -30,6 +30,17 @@
                     @endforelse
                 </x-form.select>
             </div>
+            @if ($start_date != $end_date)
+                <div class="w-full p-2 bg-white rounded-md shadow-sm">
+                    @foreach(['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] as $day)
+                        <div wire:key="days-{{ $day }}-{{ rand(13000, 13999) }}" class="w-full flex cursor-pointer items-center space-x-2 font-medium text-sm text-gray-700">
+                            <x-form.checkbox id="{{ $day }}" wire:model.live="days.{{ $day }}"/>
+                            <label for="{{ $day }}">{{ __(ucfirst($day)) }}</label>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+            
             <div class="w-full p-2 bg-white rounded-md shadow-sm">
                 <x-input-label value="{{ __('Term:') }}"/>
                 <div wire:key="create-schedule-terms-{{ rand(1,10000) }}" class="space-y-4">

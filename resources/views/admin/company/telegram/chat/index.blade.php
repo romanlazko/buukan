@@ -31,9 +31,6 @@
             <x-header.link href="{{ route('admin.company.telegram_bot.chat.index', [$company, $telegram_bot] ) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.chat.*')">
                 {{ __('Chats') }}
             </x-header.link>
-            <x-header.link href="{{ route('admin.company.telegram_bot.advertisement.index', [$company, $telegram_bot]) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.advertisement.*')">
-                {{ __('Advertisements') }}
-            </x-header.link>
             <x-header.link href="{{ route('admin.company.telegram_bot.edit', [$company, $telegram_bot]) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.edit.*')">
                 {{ __('Settings') }}
             </x-header.link>
@@ -65,7 +62,9 @@
                                     </div>
                                     <div class="flex-col justify-center">
                                         <div class="">
-                                            <a href="{{ route('admin.company.telegram_bot.chat.show', [$company, $telegram_bot, $chat]) }}" class="w-full text-sm font-light text-gray-500 mb-1 hover:underline">{{ $chat->chat_id ?? null }}</a>
+                                            <a href="{{ route('admin.company.telegram_bot.chat.show', [$company, $telegram_bot, $chat]) }}" class="w-full text-sm font-light text-gray-500 mb-1 hover:underline">
+                                                {{ $chat->chat_id ?? null }}
+                                            </a>
                                             <div class="w-full text-md font-medium text-gray-900">{{ $chat->first_name ?? null }} {{ $chat->last_name ?? null }}</div>
                                             @if ($chat->username)
                                                 <a class="w-full text-sm font-light text-blue-500 hover:underline" href="https://t.me/{{$chat->username}}">{{ "@".($chat->username ?? null) }}</a>
@@ -75,8 +74,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                {{-- <x-chat-block :chat="$chat"/> --}}
                             </x-table.td>
                             <x-table.td>
                                 <x-badge color="green">

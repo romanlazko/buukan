@@ -9,11 +9,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasSlug;
+    use HasApiTokens, HasFactory, Notifiable, HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -55,15 +54,5 @@ class User extends Authenticatable
         return SlugOptions::create()
             ->generateSlugsFrom(['first_name', 'last_name'])
             ->saveSlugsTo('slug');
-    }
-
-    public function company()
-    {
-        return $this->hasOne(Company::class, 'owner_id', 'id');
-    }
-
-    public function employee()
-    {
-        return $this->hasOne(Employee::class);
     }
 }

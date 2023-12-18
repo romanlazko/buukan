@@ -2,7 +2,7 @@
 
 namespace App\Livewire\WebApp;
 
-use App\Models\Client;
+use App\Models\User;
 use App\Models\Employee;
 use App\Models\Service;
 use App\Models\WebApp as ModelsWebApp;
@@ -16,7 +16,7 @@ class WebApp extends Component
 {
     public ModelsWebApp $web_app;
 
-    public Client $client;
+    public $client;
 
     public $sub_services = [];
 
@@ -40,6 +40,11 @@ class WebApp extends Component
     public $unnocupiedDates;
     public $schedules;
     public $appointments;
+
+    // public function mount()
+    // {
+    //     $this->client = $this->web_app->company->clients()->where('user_id', auth('user')->user()->id);
+    // }
     
     public function nextStep()
     {
@@ -97,10 +102,10 @@ class WebApp extends Component
             ])->withInput();
         }
 
-        $client = $this->web_app->company->clients->find($this->client->id);
+        $client = $this->web_app->company->clients()->where('user_id', auth('user')->user()->id)->first();
 
         if ($client) {
-            $client->appointments()->create([
+            $appointment = $client->appointments()->create([
                 'employee_id' => $this->employeeId,
                 'service_id' => $this->serviceId,
                 'date' => $this->date,
@@ -114,7 +119,7 @@ class WebApp extends Component
 
     public function cancel($appointmentId) 
     {
-        $client = $this->web_app->company->clients->find($this->client->id);
+        $client = $this->web_app->company->clients()->where('user_id', auth('user')->user()->id)->first();
 
         if ($client) {
             $client->appointments()->find($appointmentId)->cancel();
@@ -129,7 +134,8 @@ class WebApp extends Component
     public function render()
     {
         if ($this->steps[$this->currentStep] == 'appointments') {
-            $this->appointments = $this->client->appointments->where('status', 'new');
+            $client = $this->web_app->company->clients()->where('user_id', auth('user')->user()->id)->first();
+            $this->appointments = $client?->appointments?->where('status', 'new') ?? collect([]);
         }
 
         if ($this->steps[$this->currentStep] == 'services') {
@@ -147,6 +153,6 @@ class WebApp extends Component
             $this->schedules        = GetEmployeeUnoccupiedScheduleAction::handle(Employee::find($this->employeeId), $this->date, $this->serviceId)?->sortBy('term');
         }
         
-        return view("livewire.web-app.{$this->steps[$this->currentStep]}");
+        return view("webapp.{$this->steps[$this->currentStep]}");
     }
 }

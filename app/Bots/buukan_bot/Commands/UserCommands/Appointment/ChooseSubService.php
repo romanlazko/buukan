@@ -22,13 +22,13 @@ class ChooseSubService extends Command
     {
         $company = Company::find(DB::getBot()->owner_id);
 
-        $sub_services = $company->sub_services;
+        $subServices = $company->subServices;
 
-        $sub_services_buttons = $sub_services->map(function ($sub_service) {
+        $sub_services_buttons = $subServices->map(function ($sub_service) {
             return [array($sub_service->name, ChooseSubService::$command, $sub_service->id)];
         });
         
-        if ($sub_services->isNotEmpty()) {
+        if ($subServices->isNotEmpty()) {
             $buttons = BotApi::inlineCheckbox([
                 ...$sub_services_buttons,
                 [array("Продолжить", SaveSubService::$command, '')],
@@ -36,7 +36,7 @@ class ChooseSubService extends Command
             ], 'sub_services');
     
             return BotApi::returnInline([
-                'text'          =>  "*Выбери дополнительную услугу:*".json_encode(explode(':', $updates->getInlineData()->getSubServices())),
+                'text'          =>  "*Выбери дополнительную услугу:*",
                 'chat_id'       =>  $updates->getChat()->getId(),
                 'reply_markup'  =>  $buttons,
                 'parse_mode'    =>  'Markdown',

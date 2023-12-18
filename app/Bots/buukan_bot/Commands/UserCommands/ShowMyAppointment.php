@@ -39,14 +39,12 @@ class ShowMyAppointment extends Command
         $text = implode("\n", [
             "*{$appointment->service->name}*"."\n",
             ($appointment->subServices->isNotEmpty() ? "Доп услуги: *{$appointment->subServices->pluck('name')->implode(', ')}*\n" : "").
-            "Мастер: *{$appointment->employee->user->first_name}*",
+            "Мастер: *{$appointment->employee->first_name}*",
             "Дата и время: *{$appointment->date->format('d.m(D)')}: {$appointment->term->format('H:s')}*"."\n",
 
-            "📍 [Masarykova 427/31, 602 00 Brno-střed-Brno-město](https://goo.gl/maps/u7L3p7xahrkJaa428)"."\n",
+            "📍 [{$appointment->employee->company->address}](https://www.google.com/maps?q={$appointment->employee->company->address})",
 
-            "Итоговая стоимость: *{$appointment->total_price}*"."\n",
-
-            "Будем тебя ждать!",
+            "Итоговая стоимость: *{$appointment->total_price}*"
         ]);
 
         return BotApi::returnInline([

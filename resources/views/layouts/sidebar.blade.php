@@ -3,7 +3,7 @@
 <div x-cloak :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed inset-y-0 left-0 z-30 w-full sm:w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0">
     <div class="justify-between flex items-center md:justify-center p-4">
         <div class="flex items-center justify-center">
-			<a href="{{ route('dashboard') }}" class="flex items-center justify-between  w-full px-10 py-3 bg-blue-600 rounded-full hover:bg-blue-500 text-2xl font-semibold text-white">
+			<a href="{{ route('admin.dashboard') }}" class="flex items-center justify-between  w-full px-10 py-3 bg-blue-600 rounded-full hover:bg-blue-500 text-2xl font-semibold text-white">
 				{{ auth()->user()?->company->name ?? auth()->user()->employee?->company->name ?? __("+Add") }}
 			</a>
         </div>
@@ -25,11 +25,11 @@
 
 		<hr>
 		
-		<x-responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.*')">
+		<x-responsive-nav-link :href="route('admin.profile.edit')" :active="request()->routeIs('admin.profile.*')">
 			{{ __('Profile') }}
 		</x-responsive-nav-link>
 		<x-responsive-nav-link>
-			<form method="POST" action="{{ route('logout') }}">
+			<form method="POST" action="{{ route('admin.logout') }}">
 				@csrf
 				<button type="submit" >
 					{{ __('Log Out') }}

@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('admin_id');
+            $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
 
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+
+            $table->unsignedBigInteger('telegram_chat_id')->nullable();
+            $table->foreign('telegram_chat_id')->references('id')->on('telegram_chats');
 
             $table->string('avatar')->nullable();
             $table->text('description')->nullable();

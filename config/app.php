@@ -162,6 +162,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Romanlazko\Telegram\Providers\TelegramServiceProvider::class,
         App\Bots\buukan_bot\Providers\BuukanBotProvider::class,
+        App\Bots\buukan_bot\Providers\EventServiceProvider::class,
         /*
          * Application Service Providers...
          */

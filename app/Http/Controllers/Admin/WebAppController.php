@@ -22,10 +22,7 @@ class WebAppController extends Controller
             return redirect()->route('admin.company.web_app.create', compact('company'));
         } 
 
-        return view('admin.company.web_app.index', compact(
-            'company',
-            'web_apps'
-        ));
+        return redirect()->route('admin.company.web_app.show', [$company, $web_apps->first()]);
     }
 
     /**

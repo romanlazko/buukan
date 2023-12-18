@@ -5,11 +5,6 @@
                 {{ __('Create WebApp:') }}
             </h2>
         </div>
-        <div class="space-x-4 sm:-my-px sm:ml-10 flex">
-            <x-nav-link :href="route('admin.company.web_app.index', $company)" :active="request()->routeIs('admin.company.web_app.index*')">
-                {{ __('←') }}
-            </x-nav-link>
-        </div>
     </x-slot>
     
     <div class="w-full space-y-6 m-auto max-w-2xl">

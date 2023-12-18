@@ -20,16 +20,7 @@ class TelegramController extends Controller
             return redirect()->route('admin.company.telegram_bot.create', [$company]);
         }
 
-        $telegram_bots->map(function ($telegram_bot) {
-            $bot = new Bot($telegram_bot->token);
-            $telegram_bot->photo = $bot->getBotChat()->getPhotoLink();
-            return $telegram_bot;
-        });
-
-        return view('admin.company.telegram.index', compact([
-            'telegram_bots',
-            'company'
-        ]));
+        return redirect()->route('admin.company.telegram_bot.show', [$company, $telegram_bots->first()]);
     }
 
     public function create(Company $company)
@@ -61,7 +52,7 @@ class TelegramController extends Controller
                 ]);
             }
             
-            return back()->with([
+            return redirect()->route('admin.company.telegram_bot.index', $company)->with([
                 'ok' => $response->getOk(), 
                 'description' => $response->getDescription()
             ]);

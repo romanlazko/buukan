@@ -45,7 +45,7 @@
                                             </div>
                                             <div>
                                                 <p class="text-sm text-gray-600">
-                                                    {{ $employee->user->email }}
+                                                    {{ $employee->email }}
                                                 </p>
                                             </div>
                                         </div>
@@ -71,7 +71,7 @@
 
                                 <x-table.td>
                                     <div class="w-full pb-2">
-                                        @forelse ($employee->user->roles as $role)
+                                        @forelse ($employee->admin->roles as $role)
                                             <x-badge color="green">
                                                 {{ $role->name }}
                                             </x-badge>

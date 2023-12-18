@@ -26,10 +26,13 @@ class ConfirmAppointCommand extends Command
     {
         $company = Company::find(DB::getBot()->owner_id);
 
-        $schedule = $company->employees()
-            ->find($updates->getInlineData()->getEmployeeId())
-            ->schedule()
-            ->find($updates->getInlineData()->getScheduleId());
+        $service = $company->services()->find($updates->getInlineData()->getServiceId());
+
+        $subServices = $company->subServices()->whereIn('id', [array_filter(explode(':', $updates->getInlineData()->getSubServices()))])->get();
+
+        $employee = $company->employees()->find($updates->getInlineData()->getEmployeeId());
+
+        $schedule = $employee->schedule()->find($updates->getInlineData()->getScheduleId());
 
         if (!$schedule) {
             BotApi::answerCallbackQuery([
@@ -48,7 +51,9 @@ class ConfirmAppointCommand extends Command
 
         $text = implode("\n", [
             "*Пожалуйста, проверь все данные, и подтверди запись:*"."\n",
-            "Мастер: *{$schedule->employee->user->first_name} {$schedule->employee->user->last_name}*",
+            "*{$service->name}*"."\n",
+            ($subServices->isNotEmpty() ? "Доп услуги: *{$subServices->pluck('name')->implode(', ')}*\n" : "").
+            "Мастер: *{$employee->first_name} {$employee->last_name}*",
             "Дата и время: *{$schedule->date->format('d.m(D)')}: {$schedule->term->format('H:i')}*"."\n",
             "Если все правильно, нажми на кнопку *«Подтвердить»*"
         ]);

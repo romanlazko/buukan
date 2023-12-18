@@ -43,7 +43,7 @@ class Company extends Model
         return $this->hasMany(Service::class);
     }
 
-    public function sub_services()
+    public function subServices()
     {
         return $this->hasMany(SubService::class);
     }
@@ -81,5 +81,10 @@ class Company extends Model
     public function getRolesAttribute()
     {
         return Role::whereGuardName('company')->get();
+    }
+
+    public function getLogoAttribute()
+    {
+        return $this->attributes['logo'] ?? 'img/public/preview.jpg';
     }
 }

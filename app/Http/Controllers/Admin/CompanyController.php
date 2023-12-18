@@ -9,6 +9,8 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Services\FileService;
 
+use Illuminate\Support\Facades\Auth;
+
 class CompanyController extends Controller
 {
     public function __construct(private FileService $fileService)
@@ -26,7 +28,7 @@ class CompanyController extends Controller
             return view('admin.company.create');
         }
 
-        return redirect()->route('dashboard');
+        return redirect()->route('admin.dashboard');
     }
 
     /**
@@ -45,7 +47,7 @@ class CompanyController extends Controller
 
         auth()->user()->company()->create($data);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('admin.dashboard');
     }
 
     /**

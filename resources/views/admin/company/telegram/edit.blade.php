@@ -31,9 +31,6 @@
             <x-header.link href="{{ route('admin.company.telegram_bot.chat.index', [$company, $telegram_bot] ) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.chat.*')">
                 {{ __('Chats') }}
             </x-header.link>
-            <x-header.link href="{{ route('admin.company.telegram_bot.advertisement.index', [$company, $telegram_bot]) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.advertisement')">
-                {{ __('Advertisements') }}
-            </x-header.link>
             <x-header.link href="{{ route('admin.company.telegram_bot.edit', [$company, $telegram_bot]) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.edit')">
                 {{ __('Settings') }}
             </x-header.link>

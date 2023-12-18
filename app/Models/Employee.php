@@ -29,9 +29,9 @@ class Employee extends Model
         return $this->belongsToMany(Service::class, 'service_employee');
     }
 
-    public function user()
+    public function admin()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Admin::class);
     }
 
     public function schedule()
@@ -49,6 +49,11 @@ class Employee extends Model
         return $this->hasMany(Appointment::class);
     }
 
+    public function telegram_chat()
+    {
+        return $this->belongsTo(TelegramChat::class);
+    }
+
     public function unoccupiedSchedules($date = null)
     {
         return $this->schedule()->unoccupied($date);
@@ -56,22 +61,22 @@ class Employee extends Model
 
     public function getFirstNameAttribute()
     {
-        return $this->user->first_name;
+        return $this->admin->first_name;
     }
 
     public function getLastNameAttribute()
     {
-        return $this->user->last_name;
+        return $this->admin->last_name;
     }
 
     public function getEmailAttribute()
     {
-        return $this->user->email;
+        return $this->admin->email;
     }
 
     public function getSlugAttribute()
     {
-        return $this->user->slug;
+        return $this->admin->slug;
     }
 
     public function getResourceAttribute()

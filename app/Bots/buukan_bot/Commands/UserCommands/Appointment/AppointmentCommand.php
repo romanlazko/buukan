@@ -32,7 +32,7 @@ class AppointmentCommand extends Command
             $appointments = $client
                 ->appointments()
                 ->where('status', 'new')
-                ->where('date', '>', now()->format('Y-m-d'))
+                ->where('date', '>', now())
                 ->get();
 
             if ($appointments->count() >= (DB::getBot()->settings->max_active_appointments ?? 1)) {

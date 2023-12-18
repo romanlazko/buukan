@@ -102,11 +102,11 @@
                                     </div>
                                 @endif
                     
-                                @if ($appointmentForm?->sub_services)
+                                @if ($company->subServices->isNotEmpty())
                                     <div class="w-full" wire:key="appointment-sub-services-{{ json_encode($appointmentForm?->sub_services) }}">
                                         <x-input-label value="{{ __('Sub services:') }}"/>
                                         <div class="w-full border rounded-lg p-2" >
-                                            @foreach ($company->sub_services as $sub_service_item)
+                                            @foreach ($company->subServices as $sub_service_item)
                                                 <div class="flex space-x-2 items-center py-3">
                                                     <x-form.label for="{{ $sub_service_item->slug }}" class="w-full ">
                                                         <div class="flex justify-between w-full items-center">
