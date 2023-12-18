@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -16,7 +16,7 @@ class SuperDuperAdminSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        Admin::create([
             'first_name' => 'SuperDuperAdmin',
             'last_name' => 'SuperDuperAdmin',
             'email' => 'super-duper-admin@admin.com',
