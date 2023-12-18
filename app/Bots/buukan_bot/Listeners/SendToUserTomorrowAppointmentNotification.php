@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Bots\valeri_beautybar_bot\Listeners;
+namespace App\Bots\buukan_bot\Listeners;
 
-use App\Bots\valeri_beautybar_bot\Commands\UserCommands\MenuCommand;
-use App\Bots\valeri_beautybar_bot\Events\TomorrowAppointment;
+use App\Bots\buukan_bot\Commands\UserCommands\MenuCommand;
+use App\Bots\buukan_bot\Events\TomorrowAppointment;
 use Romanlazko\Telegram\App\BotApi;
 
 class SendToUserTomorrowAppointmentNotification
@@ -28,7 +28,7 @@ class SendToUserTomorrowAppointmentNotification
         ]);
 
         if ($appointment->client->telegram_chat) {
-            $this->telegram::sendMessage([
+            BotApi::sendMessage([
                 'text'          =>  $text,
                 'chat_id'       =>  $appointment?->client?->telegram_chat->chat_id,
                 'parse_mode'    =>  'Markdown',
