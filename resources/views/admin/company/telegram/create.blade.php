@@ -3,11 +3,6 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Create bot:') }}
         </h2>
-        <div class="space-x-4 sm:-my-px sm:ml-10 flex py-6">
-            <x-nav-link :href="route('admin.company.telegram_bot.index', $company)">
-                {{ __('←') }}
-            </x-nav-link>
-        </div>
     </x-slot>
     <div class="w-full space-y-6 m-auto max-w-2xl">
         <form method="post" action="{{ route('admin.company.telegram_bot.store', $company) }}" class="space-y-6">

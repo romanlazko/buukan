@@ -55,26 +55,26 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('admin.profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="{{ route('admin.logout') }}">
                                 @csrf
-                                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                                <x-dropdown-link :href="route('admin.logout')" onclick="event.preventDefault(); this.closest('form').submit();">
                                     {{ __('Log Out') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
                     </x-dropdown>
                 @else
-                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                    <x-nav-link :href="route('admin.login')" :active="request()->routeIs('admin.login')">
                         {{ __('Login') }}
                     </x-nav-link>
 
-                    @if (Route::has('register'))
-                        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                    @if (Route::has('admin.register'))
+                        <x-nav-link :href="route('admin.register')" :active="request()->routeIs('admin.register')">
                             {{ __('Register') }}
                         </x-nav-link>
                     @endif
@@ -122,26 +122,26 @@
                 </div>
 
                 <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link :href="route('profile.edit')">
+                    <x-responsive-nav-link :href="route('admin.profile.edit')">
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
 
                     <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('admin.logout') }}">
                         @csrf
-                        <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                        <x-responsive-nav-link :href="route('admin.logout')" onclick="event.preventDefault(); this.closest('form').submit();">
                             {{ __('Log Out') }}
                         </x-responsive-nav-link>
                     </form>
                 </div>
             @else
-                <x-responsive-nav-link :href="route('login')">
+                <x-responsive-nav-link :href="route('admin.login')">
                     {{ __('Log in') }}
                 </x-responsive-nav-link>
                 
 
-                @if (Route::has('register'))
-                    <x-responsive-nav-link :href="route('register')">
+                @if (Route::has('admin.register'))
+                    <x-responsive-nav-link :href="route('admin.register')">
                         {{ __('Register') }}
                     </x-responsive-nav-link>
                 @endif

@@ -9,7 +9,7 @@ use App\Http\Services\UserService;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\ScheduleType;
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -53,7 +53,7 @@ class EmployeeController extends Controller
      */
     public function store(CreateEmployeeRequest $request, Company $company, UserService $userService, FileService $fileService)
     {
-        $user = User::whereEmail($request->email)->first();
+        $user = Admin::whereEmail($request->email)->first();
 
         if ($user) {
             if (!$user->hasRole('admin')) {
@@ -65,7 +65,7 @@ class EmployeeController extends Controller
         }
 
         if (!$user) {
-            $user = User::create([
+            $user = Admin::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
@@ -83,7 +83,8 @@ class EmployeeController extends Controller
         $employee = $user->employee()->create([
             'company_id' => $company->id,
             'description' => $request->description,
-            'avatar' => $filePath ?? null
+            'avatar' => $filePath ?? null,
+            'settings' => $request->settings,
         ])->assignRole($request->roles);
 
         $employee->services()->sync($request->services);
@@ -136,7 +137,7 @@ class EmployeeController extends Controller
         }
 
         if ($employee->user) {
-            $user = $employee->user->update([
+            $user = $employee->admin->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,

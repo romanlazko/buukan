@@ -24,11 +24,23 @@ class CreateEventModal extends Component
         ]
     ];
 
+    public $days = [
+        'monday' => true,
+        'tuesday' => true,
+        'wednesday' => true,
+        'thursday' => true,
+        'friday' => true,
+        'saturday' => true,
+        'sunday' => true,
+    ];
+
     public $service_id = null;
 
     #[On('set-data')]
     public function setData($data = [])
     {
+        $this->reset('start_date', 'end_date', 'terms', 'service_id', 'days');
+
         $this->start_date   = Carbon::parse($data['dateStr'] ?? $data['startStr'] ?? null)->format('Y-m-d');
         $this->end_date     = isset($data['endStr']) 
             ? Carbon::parse($data['endStr'])->subDay()->format('Y-m-d') 
@@ -56,12 +68,15 @@ class CreateEventModal extends Component
         $currentDate = $startDate->copy();
 
         while ($currentDate->lte($endDate)) {
-            foreach ($this->terms as $index => $term) {
-                $schedule = $this->employee->schedule()->updateOrCreate([
-                    'date' => $currentDate->format('Y-m-d'),
-                    'term' => $term['hours'] .':'. $term['minutes'],
-                    'service_id' => !empty($this->service_id) ? $this->service_id : null,
-                ]);
+            $dayOfWeek = strtolower($currentDate->format('l')); // Получаем текущий день недели
+            if ($this->days[$dayOfWeek]) {
+                foreach ($this->terms as $index => $term) {
+                    $schedule = $this->employee->schedule()->updateOrCreate([
+                        'date' => $currentDate->format('Y-m-d'),
+                        'term' => $term['hours'] .':'. $term['minutes'],
+                        'service_id' => !empty($this->service_id) ? $this->service_id : null,
+                    ]);
+                }
             }
             $currentDate->addDay();
         }
@@ -72,7 +87,7 @@ class CreateEventModal extends Component
             'dateStr' => $this->start_date
         ]);
 
-        $this->reset('start_date', 'end_date', 'terms', 'service_id');
+        $this->reset('start_date', 'end_date', 'terms', 'service_id', 'days');
     }
 
     public function render()

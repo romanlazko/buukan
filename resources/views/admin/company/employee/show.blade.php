@@ -39,7 +39,7 @@
                         <p class="text-sm text-gray-500">
                             {{ $employee->phone }}
                         </p>
-                        @forelse ($employee->user->roles as $role)
+                        @forelse ($employee->admin->roles as $role)
                             <x-badge color="green">
                                 {{ $role->name }}
                             </x-badge>

@@ -34,6 +34,7 @@ class SuperDuperAdminSeeder extends Seeder
 
         Role::create([
             'name' => 'admin',
+            'guard_name' => 'admin'
         ]);
 
         Role::create([

@@ -10,6 +10,7 @@ use Romanlazko\Telegram\App\DB;
 use Romanlazko\Telegram\App\Entities\Response;
 use Romanlazko\Telegram\App\Entities\Update;
 use App\Models\Company;
+use App\Bots\buukan_bot\Events\NewAppointment;
 
 class Appoint extends Command
 {
@@ -75,11 +76,12 @@ class Appoint extends Command
             'date' => $schedule->date->format('Y-m-d'),
             'term' => $schedule->term->format('H:i'),
             'status' => 'new',
-        ])->subServices()->sync(array_filter(explode(':', $updates->getInlineData()->getSubServices())));
+        ]);
+        $appointment->subServices()->sync(array_filter(explode(':', $updates->getInlineData()->getSubServices())));
 
-        // if ($appointment) {
-        //     event(new NewAppointment($appointment));
-        // }
+        if ($appointment) {
+            event(new NewAppointment($appointment));
+        }
     
         return BotApi::deleteMessage([
             'chat_id'       =>  $updates->getChat()->getId(),

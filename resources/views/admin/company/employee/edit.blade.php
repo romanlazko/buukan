@@ -22,13 +22,13 @@
                         <div class="space-y-4 w-full">
                             <div>
                                 <x-form.label for="last_name" :value="__('Surname:')" />
-                                <x-form.input id="last_name" name="last_name" type="text" class="mt-1 block w-full" :value="old('last_name', $employee->user->last_name)" required autocomplete="last_name"/>
+                                <x-form.input id="last_name" name="last_name" type="text" class="mt-1 block w-full" :value="old('last_name', $employee->last_name)" required autocomplete="last_name"/>
                                 <x-form.error class="mt-2" :messages="$errors->get('last_name')" />
                             </div>
     
                             <div>
                                 <x-form.label for="first_name" :value="__('Name:')" />
-                                <x-form.input id="first_name" name="first_name" type="text" class="mt-1 block w-full" :value="old('first_name', $employee->user->first_name)" required autocomplete="first_name" />
+                                <x-form.input id="first_name" name="first_name" type="text" class="mt-1 block w-full" :value="old('first_name', $employee->first_name)" required autocomplete="first_name" />
                                 <x-form.error class="mt-2" :messages="$errors->get('first_name')" />
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                 <x-white-block>
                     <div>
                         <x-form.label for="email" :value="__('Email')" />
-                        <x-form.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $employee->user->email)" required autocomplete="username" />
+                        <x-form.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $employee->email)" required autocomplete="username" />
                         <x-form.error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                 </x-white-block>
