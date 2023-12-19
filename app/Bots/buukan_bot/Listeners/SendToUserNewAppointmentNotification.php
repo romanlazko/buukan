@@ -34,7 +34,7 @@ class SendToUserNewAppointmentNotification
         
         BotApi::sendMessage([
             'text'          =>  $text,
-            'chat_id'       =>  $appointment->client->telegram_chat->chat_id,
+            'chat_id'       =>  $appointment->client?->telegram_chat?->chat_id,
             'reply_markup'  =>  $buttons,
             'parse_mode'    =>  'Markdown',
         ]);
