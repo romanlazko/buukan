@@ -13,7 +13,6 @@
                     <p class="text-sm text-gray-500">
                         {{ $client_data['phone'] ?? null }}
                     </p>
-                    <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{$client_data['contact']}}">@contact</a>
                 </div>
                 <div class="text-lg">
                     <i class="fa-solid {{$isClientFormOpen ? 'fa-circle-xmark' : 'fa-pen-to-square'}}" wire:click="toggleClientForm" x-on:click="hasChanged = true"></i>
@@ -21,7 +20,7 @@
             </div>
             
             @if (!$isClientFormOpen)
-                @if (!empty($client_data['social_media']))
+                @if (!empty($client_data['social_media']) OR $client->telegram_chat)
                     <div class="flex w-full justify-start space-x-3 bg-white p-2 rounded-lg shadow-md items-center">
                         <h1 class="text-sm text-gray-500">
                             Social media:
@@ -36,8 +35,8 @@
                                 <i class="fa-brands fa-facebook text-blue-700"></i>
                             </a>
                         @endif
-                        @if (!empty($client_data['social_media']['telegram']))
-                            <a href="https://t.me/{{ $client_data['social_media']['telegram'] }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                        @if (!empty($client_data['social_media']['telegram']) OR $client->telegram_chat)
+                            <a href="{{ $client->telegram_chat->contact ?? "https://t.me/{$client_data['social_media']['telegram']}" }}" class="flex items-center space-x-1 text-2xl" target="blank">
                                 <i class="fa-brands fa-telegram text-blue-500"></i>
                             </a>
                         @endif

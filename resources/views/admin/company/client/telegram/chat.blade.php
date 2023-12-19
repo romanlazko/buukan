@@ -18,11 +18,9 @@
                         </a>
                     </div>
                     <div>
-                        @if ($client->telegram_chat->username)
-                            <a class="w-full text-sm font-light text-blue-500 hover:underline" href="https://t.me/{{$client->telegram_chat->username}}">{{ "@".($client->telegram_chat->username ?? null) }}</a>
-                        @else
-                            <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{ route('get-contact', $client->telegram_chat) }}">{{ __('@'.$client->telegram_chat->first_name.$client->telegram_chat->last_name) }}</a>
-                        @endif
+                        <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{$client->telegram_chat->contact}}">
+                            {{ "@".($client->telegram_chat->username ?? $client->telegram_chat?->first_name.$client->telegram_chat->last_name) }}
+                        </a>
                     </div>
                 </div>
             </div>
