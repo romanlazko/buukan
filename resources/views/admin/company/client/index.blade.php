@@ -35,25 +35,29 @@
                                     <p class="text-sm text-gray-600">
                                         {{ $client->email }}
                                     </p>
+                                    
                                 </div>
                             </x-table.td>
                             <x-table.td>{{ $client->phone }}</x-table.td>
                             <x-table.td>
-                                @if (isset($client->social_media->instagram))
-                                    <a href="https://instagram.com/{{ $client->social_media->instagram }}" class="flex items-center space-x-1 text-2xl" target="blank">
-                                        <i class="fa-brands fa-instagram text-pink-700"></i>
-                                    </a>
-                                @endif
-                                @if (isset($client->social_media->facebook))
-                                    <a href="{{ $client->social_media->facebook }}" class="flex items-center space-x-1 text-2xl" target="blank">
-                                        <i class="fa-brands fa-facebook text-blue-700"></i>
-                                    </a>
-                                @endif
-                                @if (isset($client->social_media->telegram))
-                                    <a href="https://t.me/{{ $client->social_media->telegram }}" class="flex items-center space-x-1 text-2xl" target="blank">
-                                        <i class="fa-brands fa-telegram text-blue-500"></i>
-                                    </a>
-                                @endif
+                                <div class="flex space-x-2">
+                                    @if (isset($client->social_media->instagram))
+                                        <a href="https://instagram.com/{{ $client->social_media->instagram }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                                            <i class="fa-brands fa-instagram text-pink-700"></i>
+                                        </a>
+                                    @endif
+                                    @if (isset($client->social_media->facebook))
+                                        <a href="{{ $client->social_media->facebook }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                                            <i class="fa-brands fa-facebook text-blue-700"></i>
+                                        </a>
+                                    @endif
+                                    @if (isset($client->social_media->telegram) OR $client->telegram_chat)
+                                        <a href="{{ $client->telegram_chat->contact ?? "https://t.me/{$client->social_media->telegram}" }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                                            <i class="fa-brands fa-telegram text-blue-500"></i>
+                                        </a>
+                                    @endif
+                                </div>
+                                
                             </x-table.td>
                             <x-table.td>
                                 <div class="text-xs text-gray-500">

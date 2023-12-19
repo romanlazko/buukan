@@ -45,8 +45,7 @@ class Client extends Component
                 'email' => $this->client?->email,
                 'avatar' => $this->client?->avatar,
                 'comment' => $this->client?->comment,
-                'social_media' => (array) $this->client?->social_media ?? [],
-                'contact'       => $this->client?->telegram_chat?->contact
+                'social_media' => (array) $this->client?->social_media ?? []
             ];
         }
 
