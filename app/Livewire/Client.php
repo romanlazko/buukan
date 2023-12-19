@@ -46,6 +46,7 @@ class Client extends Component
                 'avatar' => $this->client?->avatar,
                 'comment' => $this->client?->comment,
                 'social_media' => (array) $this->client?->social_media ?? [],
+                'contact'       => $this->client?->telegram_chat?->contact
             ];
         }
 
