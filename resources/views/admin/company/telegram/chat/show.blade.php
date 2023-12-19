@@ -18,11 +18,7 @@
                         </a>
                     </div>
                     <div>
-                        @if ($chat->username)
-                            <a class="w-full text-sm font-light text-blue-500 hover:underline" href="https://t.me/{{$chat->username}}">{{ "@".($chat->username ?? null) }}</a>
-                        @else
-                            <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{ route('get-contact', $chat) }}">{{ __('@'.$chat->first_name.$chat->last_name) }}</a>
-                        @endif
+                        <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{$chat->contact}}">{{ "@".($chat->username ?? '@'.$chat->first_name.$chat->last_name) }}</a>
                     </div>
                 </div>
             </div>

@@ -65,12 +65,12 @@
                                             <a href="{{ route('admin.company.telegram_bot.chat.show', [$company, $telegram_bot, $chat]) }}" class="w-full text-sm font-light text-gray-500 mb-1 hover:underline">
                                                 {{ $chat->chat_id ?? null }}
                                             </a>
-                                            <div class="w-full text-md font-medium text-gray-900">{{ $chat->first_name ?? null }} {{ $chat->last_name ?? null }}</div>
-                                            @if ($chat->username)
-                                                <a class="w-full text-sm font-light text-blue-500 hover:underline" href="https://t.me/{{$chat->username}}">{{ "@".($chat->username ?? null) }}</a>
-                                            @else
-                                                <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{ route('get-contact', $chat) }}">{{ __('@'.$chat->first_name.$chat->last_name) }}</a>
-                                            @endif
+                                            <div class="w-full text-md font-medium text-gray-900">
+                                                {{ $chat->first_name ?? null }} {{ $chat->last_name ?? null }}
+                                            </div>
+                                            <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{$chat->contact}}">
+                                                {{ "@".($chat->username ?? '@'.$chat->first_name.$chat->last_name) }}
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

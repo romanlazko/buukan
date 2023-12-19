@@ -13,6 +13,7 @@
                     <p class="text-sm text-gray-500">
                         {{ $client_data['phone'] ?? null }}
                     </p>
+                    <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{$client_data['contact']}}">@contact</a>
                 </div>
                 <div class="text-lg">
                     <i class="fa-solid {{$isClientFormOpen ? 'fa-circle-xmark' : 'fa-pen-to-square'}}" wire:click="toggleClientForm" x-on:click="hasChanged = true"></i>
