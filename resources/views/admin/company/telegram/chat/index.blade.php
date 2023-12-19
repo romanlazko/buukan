@@ -68,8 +68,8 @@
                                             <div class="w-full text-md font-medium text-gray-900">
                                                 {{ $chat->first_name ?? null }} {{ $chat->last_name ?? null }}
                                             </div>
-                                            <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{$chat->contact}}">
-                                                {{ "@".($chat->username ?? '@'.$chat->first_name.$chat->last_name) }}
+                                            <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{ $chat->contact }}">
+                                                {{ "@".($chat->username ?? $chat->first_name.$chat->last_name) }}
                                             </a>
                                         </div>
                                     </div>

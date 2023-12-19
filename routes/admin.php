@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 use Romanlazko\Slurp\App\Http\Controllers\PermissionController;
 use Romanlazko\Slurp\App\Http\Controllers\RoleController;
 use Romanlazko\Slurp\App\Http\Controllers\UserController;
-
+use App\Bots\buukan_bot\Http\Controllers\CronController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,5 +95,5 @@ Route::middleware(['web'])->post('api/v1/get-employee-unoccupied-schedule', GetE
 Route::middleware(['web'])->post('api/v1/get-employee-service', GetEmployeeService::class)->name('get-employee-service');
 Route::middleware(['web'])->post('api/v1/get-client-data', GetClientData::class)->name('get-client-data');
 
-
+Route::middleware(['web'])->prefix('telegram')->get('/cron', CronController::class); 
 // require __DIR__.'/auth.php';
