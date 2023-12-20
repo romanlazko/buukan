@@ -10,9 +10,11 @@
             <x-header.link :href="route('admin.company.client.show', [$company, $client])" :active="request()->routeIs('admin.company.client.show')">
                 {{ __('Card') }}
             </x-header.link>
-            <x-header.link :href="route('admin.company.client.telegram.chat', [$company, $client])" :active="request()->routeIs('admin.company.client.telegram.chat')">
-                {{ __('Telegram') }}
-            </x-header.link>
+            @if ($client->telegram_chat) 
+                <x-header.link :href="route('admin.company.client.telegram.chat', [$company, $client])" :active="request()->routeIs('admin.company.client.telegram.chat')">
+                    {{ __('Telegram') }}
+                </x-header.link>
+            @endif
             <x-header.link class="float-right" x-data="" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{json_encode(['client_id' => $client->id])}}})">
                 <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
                 {{ __("Add appointment") }}

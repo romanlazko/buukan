@@ -57,7 +57,7 @@
                                     </x-form.label>
                                 </div>
                             </div>
-                            <x-input-error :messages="$errors->get('status')" class="mt-2" />
+                            <x-form.error :messages="$errors->get('appointmentForm.status')" class="mt-2" />
                         </div>
                         <div class="sm:flex items-center sm:space-y-0 sm:space-x-3 justify-between shadow-md p-2 space-y-4 bg-white rounded-md">
                             <div class="w-full flex space-x-2">
@@ -69,13 +69,17 @@
                                         
                                     @endforelse
                                 </x-form.select>
+                                <x-form.error :messages="$errors->get('appointmentForm.employee')" class="mt-2" />
                             </div>
-                            <x-form.input wire:key="appointment-date-{{ $appointmentForm?->date }}" id="date" wire:model.live="appointmentForm.date" type="date" class="w-full" :disabled="$formDisabled"/>
+                            <div>
+                                <x-form.input wire:key="appointment-date-{{ $appointmentForm?->date }}" id="date" wire:model.live="appointmentForm.date" type="date" class="w-full" :disabled="$formDisabled"/>
+                                <x-form.error :messages="$errors->get('appointmentForm.date')" class="mt-2" />
+                            </div>
                         </div>
                         @if ($employee)
                             <div class="w-full shadow-md p-2 space-y-4 bg-white rounded-md">
                                 <div class="w-full">
-                                    <x-input-label for="service" value="{{ __('Service:') }}"/>
+                                    <x-form.label for="service" value="{{ __('Service:') }}"/>
                                     <x-form.select wire:key="appointment-service-{{ $appointmentForm?->service_id }}" wire:change="$set('appointmentForm.term', '')" wire:model.live="appointmentForm.service_id" class="w-full" :disabled="$formDisabled">
                                         <option value="">Choose service</option>
                                         @if($employee?->services)
@@ -86,11 +90,12 @@
                                             @endforelse
                                         @endif
                                     </x-form.select>
+                                    <x-form.error :messages="$errors->get('appointmentForm.service')" class="mt-2" />
                                 </div>
 
                                 @if ($employee AND $appointmentForm->service_id AND $appointmentForm->date) 
                                     <div class="w-full">
-                                        <x-input-label for="term" value="{{ __('Term:') }}"/>
+                                        <x-form.label for="term" value="{{ __('Term:') }}"/>
                                         <x-form.input wire:key="appointment-term-{{ $appointmentForm->term }}" dropdown="termDropdown" id="term" wire:model.live="appointmentForm.term" type="time" class="w-full" required :disabled="$formDisabled">
                                             @foreach ($schedules as $schedule_item)
                                                 <button wire:key="appointment-term-{{ $schedule_item->id }}" class="p-2 w-full hover:bg-gray-200 text-left dropdown-option" type="button" @click="termDropdown = false" wire:click="$set('appointmentForm.term', {{ json_encode($schedule_item->term?->format('H:i')) }})" >
@@ -98,13 +103,13 @@
                                                 </button>
                                             @endforeach
                                         </x-form.input>
-                                        <x-input-error :messages="$errors->get('term')" class="mt-2" />
+                                        <x-form.error :messages="$errors->get('appointmentForm.term')" class="mt-2" />
                                     </div>
                                 @endif
                     
                                 @if ($company->sub_services->isNotEmpty())
                                     <div class="w-full" wire:key="appointment-sub-services-{{ json_encode($appointmentForm?->sub_services) }}">
-                                        <x-input-label value="{{ __('Sub services:') }}"/>
+                                        <x-form.label value="{{ __('Sub services:') }}"/>
                                         <div class="w-full border rounded-lg p-2" >
                                             @foreach ($company->sub_services as $sub_service_item)
                                                 <div class="flex space-x-2 items-center py-3">
@@ -133,20 +138,20 @@
                         <div class="shadow-md p-2 space-y-4 bg-white rounded-md">
                             @if ($appointmentForm->status == 'done')
                                 <div class="w-full">
-                                    <x-input-label for="price" value="{{ __('Taken price:') }}"/>
+                                    <x-form.label for="price" value="{{ __('Taken price:') }}"/>
                                     <x-form.input id="price" wire:model.live="appointmentForm.price" class="w-full" type="number" value="{{ $appointmentForm?->price }}" required :disabled="$formDisabled"/>
-                                    <x-input-error :messages="$errors->get('price')" class="mt-2" />
+                                    <x-form.error :messages="$errors->get('appointmentForm.price')" class="mt-2" />
                                 </div>
                             @endif
                 
                             <div wire:key="appointment-comment" class="w-full" x-data="{ show: false }">
                                 <div class="flex items-center space-x-2" x-on:click="show= ! show">
-                                    <x-input-label for="comment" value="{{ __('Comment:') }}"/>
+                                    <x-form.label for="comment" value="{{ __('Comment:') }}"/>
                                     <p class="text-xl text-blue-600 cursor-pointer" x-text="show ? '-' : '+'" ></p>
                                 </div>
                                 <div :class="show ? 'block' : 'hidden'">
                                     <x-form.textarea id="comment" wire:model.live="appointmentForm.comment" class="w-full" :disabled="$formDisabled"/>
-                                    <x-input-error :messages="$errors->get('comment')" class="mt-2" />
+                                    <x-form.error :messages="$errors->get('appointmentForm.comment')" class="mt-2" />
                                 </div>
                             </div>
                         </div>

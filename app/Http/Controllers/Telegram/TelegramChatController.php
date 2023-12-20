@@ -38,6 +38,19 @@ class TelegramChatController extends Controller
         ]));
     }
 
+    public function edit(Company $company, TelegramBot $telegram_bot, TelegramChat $chat)
+    {
+        $bot = new Bot($telegram_bot->token);
+
+        $chat->photo = $bot::getPhoto(['file_id' => $chat->photo]);
+
+        return view('admin.company.telegram.chat.edit', compact(
+            'chat',
+            'telegram_bot',
+            'company',
+        ));
+    }
+
     /**
      * Display the specified resource.
      */
@@ -69,12 +82,12 @@ class TelegramChatController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TelegramChat $chat)
+    public function update(Request $request, Company $company, TelegramBot $telegram_bot, TelegramChat $chat)
     {
         try {
             $chat->update($request->all());
 
-            return back()->with([
+            return redirect()->route('admin.company.telegram_bot.chat.show', [$company, $telegram_bot, $chat])->with([
                 'ok' => true, 
                 'description' => "Updated"
             ]);
