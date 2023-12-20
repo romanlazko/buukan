@@ -30,6 +30,19 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = auth('user')->user();
+
+        $client = $web_app->company->clients()->where('user_id', $user->id)->first();
+
+        if (!$client) {
+            $client = $web_app->company->clients()->create([
+                'user_id'       => $user->id,
+                'first_name'    => $request->first_name,
+                'last_name'     => $request->last_name,
+                'email'         => $request->email,
+            ]);
+        }
+
         return redirect()->route('webapp.index', $web_app);
     }
 
