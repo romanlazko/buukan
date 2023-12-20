@@ -16,10 +16,10 @@ class SendToUserTomorrowAppointmentNotification
         $appointment = $event->appointment;
 
         $text = implode("\n", [
-            "Завтра, *{$appointment->date->format('d.m(D)')}* -> *{$appointment->term->format('H:s')}* Вы записаны на услугу."."\n",
+            "Завтра, *{$appointment->date->format('d.m(D)')}* -> *{$appointment->term->format('H:i')}* Вы записаны на услугу."."\n",
 
             "*{$appointment->service->name}*"."\n",
-            ($appointment->subServices->isNotEmpty() ? "Доп услуги: *{$appointment->subServices->pluck('name')->implode(', ')}*\n" : "").
+            ($appointment->sub_services->isNotEmpty() ? "Доп услуги: *{$appointment->sub_services->pluck('name')->implode(', ')}*\n" : "").
             "Мастер: *{$appointment->employee->first_name}*",
 
             "📍 [{$appointment->employee->company->address}](https://www.google.com/maps?q={$appointment->employee->company->address})",

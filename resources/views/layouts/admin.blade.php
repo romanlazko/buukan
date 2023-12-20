@@ -11,11 +11,11 @@
     </head>
 
     <body
-    x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+    x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
     x-init="
             darkMode = JSON.parse(localStorage.getItem('darkMode'));
             $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
-    :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
+    :class="{'dark text-bodydark bg-boxdark-2': darkMode === false}">
 <!-- ===== Preloader Start ===== -->
         <include src="./partials/preloader.html"></include>
     <!-- ===== Preloader End ===== -->

@@ -111,7 +111,7 @@ class WebApp extends Component
                 'date' => $this->date,
                 'term' => $this->term,
                 'status' => 'new',
-            ])->subServices()->sync($this->sub_services);
+            ])->sub_services()->sync($this->sub_services);
         }
 
         $this->reset('serviceId', 'employeeId', 'date', 'term', 'currentStep', 'sub_services');

@@ -40,11 +40,11 @@
                     </div>
                     <div class="w-full" >
                         <x-input-label for="start_time" value="{{ __('From:') }}"/>
-                        <x-text-input id="start_time" name="start_time" type="time" class="w-full" value="{{ old('start_time', now()->format('H:s')) }}"/>
+                        <x-text-input id="start_time" name="start_time" type="time" class="w-full" value="{{ old('start_time', now()->format('H:i')) }}"/>
                     </div>
                     <div class="w-full" >
                         <x-input-label for="end_time" value="{{ __('To:') }}"/>
-                        <x-text-input id="end_time" name="end_time" type="time" class="w-full" value="{{ old('end_time', now()->format('H:s')) }}"/>
+                        <x-text-input id="end_time" name="end_time" type="time" class="w-full" value="{{ old('end_time', now()->format('H:i')) }}"/>
                     </div>
                 </div>
             </form>

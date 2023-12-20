@@ -51,9 +51,9 @@
             <div class="terms space-y-4">
                 @if ($schedules AND $date)
                     @forelse ($schedules as $schedule)
-                        <x-form.radio wire:key="schedule-{{$schedule->id}}" id="{{ $schedule->id }}" name="term" wire:model.live="term" class="peer/{{ $schedule->id }} hidden" value="{{ $schedule->term->format('H:s') }}"/>
+                        <x-form.radio wire:key="schedule-{{$schedule->id}}" id="{{ $schedule->id }}" name="term" wire:model.live="term" class="peer/{{ $schedule->id }} hidden" value="{{ $schedule->term->format('H:i') }}"/>
                         <x-form.label for="{{ $schedule->id }}" class="text-center w-full bg-white rounded-full border-2 py-2 peer-checked/{{ $schedule->id }}:bg-gray-800 peer-checked/{{ $schedule->id }}:text-white" >
-                            {{ $schedule->term->format('H:s') }}
+                            {{ $schedule->term->format('H:i') }}
                         </x-form.label>
                     @empty
                         

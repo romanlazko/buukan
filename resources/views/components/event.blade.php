@@ -38,10 +38,10 @@
                             <span>{{ $event?->service?->name }}</span>
                         </li>
                     @endif
-                    @if ($event?->subServices)
-                        @forelse ($event?->subServices as $sub_service)
+                    @if ($event?->sub_services)
+                        @forelse ($event?->sub_services as $sub_service)
                             <li class="text-gray-500 text-xs flex space-x-1">
-                                <span style="color: {{$sub_service?->color}}">•</span>
+                                <span style="color: {{ $sub_service->color }}">•</span>
                                 <span>{{ $sub_service->name }}</span>
                             </li>
                         @empty

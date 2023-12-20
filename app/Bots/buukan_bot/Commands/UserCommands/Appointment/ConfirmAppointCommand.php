@@ -28,7 +28,7 @@ class ConfirmAppointCommand extends Command
 
         $service = $company->services()->find($updates->getInlineData()->getServiceId());
 
-        $subServices = $company->subServices()->whereIn('id', [array_filter(explode(':', $updates->getInlineData()->getSubServices()))])->get();
+        $sub_services = $company->sub_services()->whereIn('id', [array_filter(explode(':', $updates->getInlineData()->getsub_services()))])->get();
 
         $employee = $company->employees()->find($updates->getInlineData()->getEmployeeId());
 
@@ -52,7 +52,7 @@ class ConfirmAppointCommand extends Command
         $text = implode("\n", [
             "*Пожалуйста, проверь все данные, и подтверди запись:*"."\n",
             "*{$service->name}*"."\n",
-            ($subServices->isNotEmpty() ? "Доп услуги: *{$subServices->pluck('name')->implode(', ')}*\n" : "").
+            ($sub_services->isNotEmpty() ? "Доп услуги: *{$sub_services->pluck('name')->implode(', ')}*\n" : "").
             "Мастер: *{$employee->first_name} {$employee->last_name}*",
             "Дата и время: *{$schedule->date->format('d.m(D)')}: {$schedule->term->format('H:i')}*"."\n",
             "Если все правильно, нажми на кнопку *«Подтвердить»*"

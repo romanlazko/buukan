@@ -17,7 +17,7 @@
             <h2 class="text-lg font-medium text-gray-900 p-4 bg-gray-100">
                 {{ __('Preview:') }}
             </h2>
-            <iframe class="w-full min-h-[80vh]" src="{{ url('app/'.$web_app->id) }}"></iframe>
+            <iframe class="w-full min-h-[80vh]" src="{{ route('webapp.index', $web_app) }}"></iframe>
         </x-white-block>
     </div>
 </x-app-layout>
