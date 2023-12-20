@@ -17,7 +17,7 @@ class GetEmployeeUnoccupiedSchedule extends Controller
             $schedules = GetEmployeeUnoccupiedScheduleAction::handle($employee, $request->date, $request->service)
                 ->pluck('term')
                 ->map(function($term){
-                    return $term->format('H:s');
+                    return $term->format('H:i');
                 });
     
             return $schedules->toJson();

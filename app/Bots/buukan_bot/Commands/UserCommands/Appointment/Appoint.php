@@ -36,39 +36,15 @@ class Appoint extends Command
             ->schedule()
             ->find($updates->getInlineData()->getScheduleId());
 
-        // $schedule = Schedule::find($updates->getInlineData()->getScheduleId());
+        if (!$schedule) {
+            BotApi::answerCallbackQuery([
+                'callback_query_id' => $updates->getCallbackQuery()->getId(),
+                'text'              => "Этой записи уже не существует, начнем с начала",
+                'show_alert'        => true
+            ]);
 
-        // if (!$schedule) {
-        //     BotApi::answerCallbackQuery([
-        //         'callback_query_id' => $updates->getCallbackQuery()->getId(),
-        //         'text'              => "Этой записи уже не существует, давай попробуем с начала",
-        //         'show_alert'        => true
-        //     ]);
-
-        //     return $this->bot->executeCommand(AppointmentCommand::$command);
-        // }
-
-        // if ($schedule?->appointments) {
-        //     foreach ($schedule->appointments as $appointment) {
-        //         if ($appointment->status == 'new') {
-        //             BotApi::answerCallbackQuery([
-        //                 'callback_query_id' => $updates->getCallbackQuery()->getId(),
-        //                 'text'              => "Это место уже занято, давай попробуем с начала",
-        //                 'show_alert'        => true
-        //             ]);
-
-        //             return $this->bot->executeCommand(AppointmentCommand::$command);
-        //         }
-        //     }
-        // }
-
-        
-
-        // $appointment = Appointment::create([
-        //     'client_id' => $updates->getInlineData()->getClientId(),
-        //     'schedule_id' => $updates->getInlineData()->getScheduleId(),
-        //     'status' => 'new'
-        // ]);
+            return $this->bot->executeCommand(AppointmentCommand::$command);
+        }
 
         $appointment = $client->appointments()->create([
             'employee_id' => $updates->getInlineData()->getEmployeeId(),
@@ -77,7 +53,7 @@ class Appoint extends Command
             'term' => $schedule->term->format('H:i'),
             'status' => 'new',
         ]);
-        $appointment->subServices()->sync(array_filter(explode(':', $updates->getInlineData()->getSubServices())));
+        $appointment->sub_services()->sync(array_filter(explode(':', $updates->getInlineData()->getSubServices())));
 
         if ($appointment) {
             event(new NewAppointment($appointment));

@@ -43,7 +43,7 @@ class Company extends Model
         return $this->hasMany(Service::class);
     }
 
-    public function subServices()
+    public function sub_services()
     {
         return $this->hasMany(SubService::class);
     }

@@ -36,7 +36,7 @@
                     <div>
                         <x-form.label for="description" :value="__('Description:')"/>
                         <x-form.textarea id="description" name="description" class="mt-1 block w-full" :value="old('description')" />
-                        <x-form.error class="mt-2" :messages="$errors->get('name')"/>
+                        <x-form.error class="mt-2" :messages="$errors->get('description')"/>
                     </div>
                 </x-white-block>
 
@@ -55,6 +55,28 @@
                                 <option value="USD">USD</option>
                             </x-form.select>
                             <x-form.error class="mt-2" :messages="$errors->get('currency')" />
+                        </div>
+                    </div>
+                </x-white-block>
+
+                <x-white-block>
+                    <div class="space-y-4">
+                        <h2 class="text-lg font-medium text-gray-900">
+                            {{ __('Employees') }}
+                        </h2>
+                        <div class="border rounded-md p-3">
+                            @foreach ($company->employees as $employee)
+                                <div class="flex space-x-2 items-center py-3 @if(!$loop->last) border-b @endif">
+                                    <x-form.label for="{{ $employee->slug }}" class="w-full ">
+                                        <div class="flex justify-between w-full items-center">
+                                            <span>
+                                                {{ $employee->first_name }} {{ $employee->last_name }}
+                                            </span>
+                                            <x-form.checkbox id="{{ $employee->slug }}" name="employees[]" :value="$employee->id" type="checkbox" :checked="in_array($employee->id, old('employees') ?? [])"/>
+                                        </div>
+                                    </x-form.label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </x-white-block>

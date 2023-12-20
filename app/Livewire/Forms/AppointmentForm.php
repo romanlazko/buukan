@@ -30,11 +30,11 @@ class AppointmentForm extends Form
         $this->employee_id      = $this->model?->employee_id ?? $data['employee_id'] ?? null;
         $this->service_id       = $this->model?->service_id ?? $data['service_id'] ?? null;
         $this->date             = $this->model?->date->format('Y-m-d') ?? $data['date'] ?? null;;
-        $this->term             = $this->model?->term->format('H:s');
+        $this->term             = $this->model?->term->format('H:i');
         $this->comment          = $this->model?->comment;
         $this->price            = $this->model?->price;
         $this->status           = $this->model?->status ?? 'new';
-        $this->sub_services     = $this->model?->subServices?->pluck('id')->toArray() ?? [];
+        $this->sub_services     = $this->model?->sub_services?->pluck('id')->toArray() ?? [];
     }
 
     public function save()
@@ -52,6 +52,6 @@ class AppointmentForm extends Form
 
         $appointment->save();
 
-        $appointment->subServices()->sync($this->sub_services);
+        $appointment->sub_services()->sync($this->sub_services);
     }
 }

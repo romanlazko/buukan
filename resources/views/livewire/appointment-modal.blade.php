@@ -93,8 +93,8 @@
                                         <x-input-label for="term" value="{{ __('Term:') }}"/>
                                         <x-form.input wire:key="appointment-term-{{ $appointmentForm->term }}" dropdown="termDropdown" id="term" wire:model.live="appointmentForm.term" type="time" class="w-full" required :disabled="$formDisabled">
                                             @foreach ($schedules as $schedule_item)
-                                                <button wire:key="appointment-term-{{ $schedule_item->id }}" class="p-2 w-full hover:bg-gray-200 text-left dropdown-option" type="button" @click="termDropdown = false" wire:click="$set('appointmentForm.term', {{json_encode($schedule_item->term?->format('H:s'))}})" >
-                                                    {{ $schedule_item->term?->format('H:s') }}
+                                                <button wire:key="appointment-term-{{ $schedule_item->id }}" class="p-2 w-full hover:bg-gray-200 text-left dropdown-option" type="button" @click="termDropdown = false" wire:click="$set('appointmentForm.term', {{ json_encode($schedule_item->term?->format('H:i')) }})" >
+                                                    {{ $schedule_item->term?->format('H:i') }}
                                                 </button>
                                             @endforeach
                                         </x-form.input>
@@ -102,11 +102,11 @@
                                     </div>
                                 @endif
                     
-                                @if ($company->subServices->isNotEmpty())
+                                @if ($company->sub_services->isNotEmpty())
                                     <div class="w-full" wire:key="appointment-sub-services-{{ json_encode($appointmentForm?->sub_services) }}">
                                         <x-input-label value="{{ __('Sub services:') }}"/>
                                         <div class="w-full border rounded-lg p-2" >
-                                            @foreach ($company->subServices as $sub_service_item)
+                                            @foreach ($company->sub_services as $sub_service_item)
                                                 <div class="flex space-x-2 items-center py-3">
                                                     <x-form.label for="{{ $sub_service_item->slug }}" class="w-full ">
                                                         <div class="flex justify-between w-full items-center">

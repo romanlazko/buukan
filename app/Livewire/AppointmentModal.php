@@ -50,7 +50,7 @@ class AppointmentModal extends Component
             ->find($this->appointmentForm->service_id)
             ?->price
             ?->plus(
-                $this->company->subServices()->whereIn('id', $this->appointmentForm->sub_services)
+                $this->company->sub_services()->whereIn('id', $this->appointmentForm->sub_services)
                     ->get()
                     ->map(function($sub_service){
                         return $sub_service->price->getAmount()->toInt();

@@ -24,7 +24,7 @@ class SendToAdminCancelAppointmentNotification
             "#{$appointment->date->format('D')}{$appointment->date->format('dmY')}"."\n",
 
             "Мастер: *{$appointment->employee->first_name} {$appointment->employee->last_name}*",
-            "Дата и время: *{$appointment->date->format('d.m(D)')}: {$appointment->term->format('H:s')}*",
+            "Дата и время: *{$appointment->date->format('d.m(D)')}: {$appointment->term->format('H:i')}*",
             "Имя фамилия: *{$appointment->client?->first_name} {$appointment->client?->last_name}*",
             "Телефон: [{$appointment->client?->phone}]()"
         ]);

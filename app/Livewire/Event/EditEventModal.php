@@ -33,7 +33,7 @@ class EditEventModal extends Component
         $this->schedule     = Schedule::find($data['schedule_id']);
         $this->employee     = $this->schedule->employee;
         $this->date         = $this->schedule?->date->format('Y-m-d');
-        $this->term         = $this->schedule?->term->format('H:s');
+        $this->term         = $this->schedule?->term->format('H:i');
         $this->service_id   = $this->schedule?->service?->id ?? null;
         $this->active       = $this->schedule?->active;
     }

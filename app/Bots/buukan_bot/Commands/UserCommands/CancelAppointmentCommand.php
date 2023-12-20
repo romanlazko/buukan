@@ -34,7 +34,7 @@ class CancelAppointmentCommand extends Command
             ]);
         }
 
-        $appointment_date = Carbon::parse($appointment->date->format('Y-m-d')." ".$appointment->term->format('H:s'));
+        $appointment_date = Carbon::parse($appointment->date->format('Y-m-d')." ".$appointment->term->format('H:i'));
  
         if (now() >= $appointment_date->subHours(24)) {
 

@@ -39,7 +39,7 @@ class MyAppointments extends Command
             ->get()
             ->sortBy('date')
             ->map(function($appointment) {
-                return [array("{$appointment->date->format('d.m (D)')}: {$appointment->term->format('H:s')}", ShowMyAppointment::$command, $appointment->id)];
+                return [array("{$appointment->date->format('d.m (D)')}: {$appointment->term->format('H:i')}", ShowMyAppointment::$command, $appointment->id)];
             });
 
         if (!$client OR $appointments->count() == 0) {

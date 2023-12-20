@@ -48,13 +48,13 @@
                 </div>
             @endforeach
         </div>
-        @if ($web_app->company->subServices->isNotEmpty())
+        @if ($web_app->company->sub_services->isNotEmpty())
             <h1 class="p-4 text-white bg-gray-800 rounded-lg sticky top-1 text-2xl font-bold shadow">
                 Choose sub service: 
             </h1>
 
             <div class="w-full space-y-6">
-                @foreach ($web_app->company->subServices as $service)
+                @foreach ($web_app->company->sub_services as $service)
                     <div wire:key="service-{{ $service->id }}" class="flex items-center space-x-2">
                         <input wire:model="sub_services" type="checkbox" id="{{ $service->slug }}" class="peer/{{ $service->slug }}" name="sub_services[]" slug="{{ $service->slug }}" value="{{ $service->id }}">
                         <x-form.label for="{{ $service->slug }}" class="w-full bg-white rounded-lg border-2 peer-checked/{{ $service->slug }}:border-blue-400 overflow-hidden" >

@@ -38,7 +38,7 @@
                         <x-badge color="{{$appointment->service->color}}">
                             {{$appointment->service->name}}
                         </x-badge>
-                        @foreach ($appointment->subServices as $service)
+                        @foreach ($appointment->sub_services as $service)
                             <x-badge color="{{$service->color}}">
                                 {{$service->name}}
                             </x-badge>
@@ -50,7 +50,7 @@
                                 <div class="flex items-center">
                                     <div class="w-full space-y-2">
                                         <p class="font-bold text-xl">
-                                            {{ $appointment->date->format('d.m(D)') }} {{ $appointment->term->format('H:s') }} 
+                                            {{ $appointment->date->format('d.m(D)') }} {{ $appointment->term->format('H:i') }} 
                                         </p>
                                         <p class="text-sm font-light">
                                             {{ $appointment->employee->first_name }} {{ $appointment->employee->last_name }} 

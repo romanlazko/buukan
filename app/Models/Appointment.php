@@ -32,24 +32,13 @@ class Appointment extends Model
         return $this->belongsTo(Service::class);
     }
 
-    public function subServices()
+    public function sub_services()
     {
         return $this->belongsToMany(SubService::class, 'appointment_sub_service');
     }
 
     public function getResourceAttribute()
     {
-        $subServices = [];
-
-        foreach ($this->subServices as $key => $service) {
-            $subServices[] = [
-                'id' => $service?->id,
-                'name' => $service?->name,
-                'price' => $service?->price?->getAmount()->toInt(),
-                'slug' => $service?->slug,
-            ];
-        }
-
         return collect([
             'appointment_id' => $this->id,
             'type' => 'appointment',
@@ -76,7 +65,7 @@ class Appointment extends Model
     public function getTotalPriceAttribute()
     {
         return $this->service->price->plus(
-            $this->subServices->pluck('price')->map(function($price){
+            $this->sub_services->pluck('price')->map(function($price){
                 return $price->getAmount()->toInt();
             })->sum()
         );
