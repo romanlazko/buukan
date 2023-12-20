@@ -23,6 +23,14 @@
                 </div>
             </div>
         </div>
+        <x-header.menu>
+            <x-header.link href="{{ route('admin.company.telegram_bot.chat.show', [$company, $telegram_bot, $chat]) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.chat.show')">
+                {{ __('Chat') }}
+            </x-header.link>
+            <x-header.link href="{{ route('admin.company.telegram_bot.chat.edit', [$company, $telegram_bot, $chat]) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.chat.edit')">
+                {{ __('Settings') }}
+            </x-header.link>
+        </x-header.menu>
     </x-slot>
     
     <div class="space-y-6">

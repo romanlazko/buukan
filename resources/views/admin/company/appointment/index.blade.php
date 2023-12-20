@@ -26,7 +26,7 @@
                     <div class="flex items-center space-x-3 ">
                         <div class="w-1/4 bg-cover bg-no-repeat aspect-square rounded-full h-min" style="background-image: url({{ asset($employee->avatar) }})"></div>
                         <div class="w-3/4 overflow-hidden">
-                            <a href="{{ route('admin.company.employee.show', [$company, $employee]) }}" class="w-full text-md font-medium text-gray-900 hover:underline">
+                            <a href="{{ route('admin.company.employee.schedule.index', [$company, $employee]) }}" class="w-full text-md font-medium text-gray-900 hover:underline">
                                 {{ $employee->first_name }} {{ $employee->last_name }}
                             </a>
                             <p class="text-sm text-gray-500">

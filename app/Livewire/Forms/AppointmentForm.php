@@ -39,6 +39,8 @@ class AppointmentForm extends Form
 
     public function save()
     {
+        $this->validate();
+        
         $appointment = ($this->model instanceof Appointment) ? $this->model : new Appointment;
 
         $appointment->client_id     = $this->client_id;
@@ -53,5 +55,19 @@ class AppointmentForm extends Form
         $appointment->save();
 
         $appointment->sub_services()->sync($this->sub_services);
+    }
+
+    public function rules()
+    {
+        return [
+            'client_id'   => 'required',
+            'employee_id' => 'required',
+            'service_id'  => 'required',
+            'date'        => 'required',
+            'term'        => 'required',
+            'comment'     => 'sometimes',
+            'price'       => 'required_if:status,done',
+            'status'      => 'required',
+        ];
     }
 }

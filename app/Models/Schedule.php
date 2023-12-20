@@ -33,6 +33,7 @@ class Schedule extends Model
         $query->leftJoin('appointments', function ($join) {
             $join->on('schedules.employee_id', '=', 'appointments.employee_id')
                 ->whereIn('appointments.status', ['new', 'done', 'no_done'])
+                ->where('appointments.deleted_at', null)
                 ->whereRaw('schedules.date = appointments.date')
                 ->whereRaw('schedules.term = appointments.term');
         })

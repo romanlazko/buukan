@@ -14,9 +14,6 @@
                     </p>
                 </div>
             </div>
-            <div>
-                {{ auth('user')->user()->first_name }} {{ auth('user')->user()->last_name }}
-            </div>
             <form method="POST" action="{{ route('webapp.logout', $web_app) }}">
 				@csrf
 				<button type="submit" >
