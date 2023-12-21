@@ -26,15 +26,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         NewAppointment::class => [
             SendToUserNewAppointmentNotification::class,
-            // SendToAdminNewAppointmentNotification::class,
+            SendToAdminNewAppointmentNotification::class,
         ],
         UpdateAppointment::class => [
             SendToUserUpdateAppointmentNotification::class,
-            // SendToAdminUpdateAppointmentNotification::class,
+            SendToAdminUpdateAppointmentNotification::class,
         ],
         CancelAppointmentEvent::class => [
             SendToUserCancelAppointmentNotification::class,
-            // SendToAdminCancelAppointmentNotification::class,
+            SendToAdminCancelAppointmentNotification::class,
         ],
         TomorrowAppointment::class => [
             SendToAdminTomorrowAppointmentNotification::class,

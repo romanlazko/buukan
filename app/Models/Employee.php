@@ -22,7 +22,8 @@ class Employee extends Model
         'description',
         'schedule_model',
         'avatar',
-        'settings'
+        'settings',
+        'telegram_chat_id'
     ];
 
     public function services()

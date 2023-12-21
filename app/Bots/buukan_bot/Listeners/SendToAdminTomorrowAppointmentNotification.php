@@ -21,7 +21,7 @@ class SendToAdminTomorrowAppointmentNotification
         $text = implode("\n", [
             "⚠️*Напоминание о записи*⚠️"."\n",
 
-            "#{$appointment->date->format('D')}{$appointment->date->format('d_m_Y')}"."\n",
+            "#{$appointment->date->format('D')}{$appointment->date->format('dmY')}"."\n",
 
             "*{$appointment->service->name}*"."\n",
             ($appointment->sub_services->isNotEmpty() ? "Доп услуги: *{$appointment->sub_services->pluck('name')->implode(', ')}*\n" : "").

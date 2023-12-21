@@ -24,10 +24,11 @@ class MenuCommand extends Command
 
     public function execute(Update $updates): Response
     {
+        $updates->getInlineData()->unset();
+
         $buttons = BotApi::inlineKeyboard([
             [array(AppointmentCommand::getTitle(), AppointmentCommand::$command, '')],
             [array(MyAppointments::getTitle(), MyAppointments::$command, '')],
-            [array(About::getTitle(), About::$command, '')],
         ]);
         
         $data = [

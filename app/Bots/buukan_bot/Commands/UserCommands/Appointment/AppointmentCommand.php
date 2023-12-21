@@ -8,6 +8,7 @@ use Romanlazko\Telegram\App\Commands\Command;
 use Romanlazko\Telegram\App\DB;
 use Romanlazko\Telegram\App\Entities\Response;
 use Romanlazko\Telegram\App\Entities\Update;
+use Romanlazko\Telegram\App\Entities\InlineData;
 
 class AppointmentCommand extends Command
 {
