@@ -55,6 +55,19 @@
                         <x-form.error class="mt-2" :messages="$errors->get('description')" />
                     </div>
                 </x-white-block>
+
+                <x-white-block>
+                    <div class="space-y-4">
+                        <x-form.label for="telegram_chat" :value="__('Telegram chat:')" />
+                        <x-form.select id="telegram_chat" name="telegram_chat" class="w-full">
+                            <option value="">Select telegram chat</option>
+                            @foreach ($company->telegram_bots()->first()->chats()->where('role', 'admin')->get() as $admin)
+                                <option value="{{ $admin->id }}">{{ $admin->first_name }} {{ $admin->last_name }}</option>
+                            @endforeach
+                        </x-form.select>
+                        <x-form.error class="mt-2" :messages="$errors->get('telegram_chat')" />
+                    </div>
+                </x-white-block>
                 
                 <x-white-block>
                     <div class="space-y-4">

@@ -25,7 +25,7 @@ class ChooseSubService extends Command
         $sub_services = $company->sub_services;
 
         $sub_services_buttons = $sub_services->map(function ($sub_service) {
-            return [array($sub_service->name, ChooseSubService::$command, $sub_service->id)];
+            return [array("{$sub_service->name}: {$sub_service->price} ", ChooseSubService::$command, $sub_service->id)];
         });
         
         if ($sub_services->isNotEmpty()) {

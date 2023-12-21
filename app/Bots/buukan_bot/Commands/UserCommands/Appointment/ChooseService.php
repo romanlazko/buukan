@@ -27,7 +27,7 @@ class ChooseService extends Command
             ?->whereJsonContains('settings->is_available_on_telegram', 'on')
             ?->get()
             ?->map(function ($service) {
-                return [array($service->name, SaveService::$command, $service->id)];
+                return [array("{$service->name}: {$service->price}", SaveService::$command, $service->id)];
             });
         
         $buttons = BotApi::inlineKeyboard([

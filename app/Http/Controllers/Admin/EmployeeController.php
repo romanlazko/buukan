@@ -90,6 +90,7 @@ class EmployeeController extends Controller
             'description' => $request->description,
             'avatar' => $filePath ?? null,
             'settings' => $request->settings,
+            'telegram_chat_id' => $request->telegram_chat,
         ])->assignRole($request->roles);
 
         $employee->services()->sync($request->services);
@@ -177,6 +178,7 @@ class EmployeeController extends Controller
             'company_id' => $company->id,
             'description' => $request->description,
             'settings' => $request->settings,
+            'telegram_chat_id' => $request->telegram_chat,
         ]);
 
         if ($request->hasFile('avatar')) {
