@@ -56,7 +56,7 @@
                     </div>
                 </x-white-block>
 
-                @if ($company->telegram_bots)
+                @if ($company->telegram_bots->isNotEmpty())
                     <x-white-block>
                         <div class="space-y-4">
                             <x-form.label for="telegram_chat" :value="__('Telegram chat:')" />
