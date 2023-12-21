@@ -23,24 +23,24 @@
             <div class="p-6 space-y-6">
                 <div class="w-full flex space-x-4">
                     <div class="w-full" >
-                        <x-input-label for="first_name" value="{{ __('Name:') }}"/>
-                        <x-text-input id="first_name" name="first_name" type="text" class="w-full appointmentModalFormClientFirstName" value="{{ old('first_name') }}" required/>
+                        <x-form.label for="first_name" value="{{ __('Name:') }}"/>
+                        <x-form.input id="first_name" name="first_name" type="text" class="w-full appointmentModalFormClientFirstName" value="{{ old('first_name') }}" required/>
                     </div>
 
                     <div class="w-full" >
-                        <x-input-label for="last_name" value="{{ __('Surname:') }}"/>
-                        <x-text-input id="last_name" name="last_name" type="text" class="w-full appointmentModalFormClientLastName" value="{{ old('last_name') }}"/>
+                        <x-form.label for="last_name" value="{{ __('Surname:') }}"/>
+                        <x-form.input id="last_name" name="last_name" type="text" class="w-full appointmentModalFormClientLastName" value="{{ old('last_name') }}"/>
                     </div>
                 </div>
 
                 <div class="w-full" >
-                    <x-input-label for="email" value="{{ __('Email:') }}"/>
-                    <x-text-input id="email" name="email" type="email" class="w-full appointmentModalFormClientEmail" value="{{ old('email') }}"/>
+                    <x-form.label for="email" value="{{ __('Email:') }}"/>
+                    <x-form.input id="email" name="email" type="email" class="w-full appointmentModalFormClientEmail" value="{{ old('email') }}"/>
                 </div>
 
                 <div class="w-full" >
-                    <x-input-label for="phone" value="{{ __('Phone:') }}"/>
-                    <x-text-input id="phone" name="phone" type="text" class="w-full appointmentModalFormClientPhone" value="{{ old('phone') }}"/>
+                    <x-form.label for="phone" value="{{ __('Phone:') }}"/>
+                    <x-form.input id="phone" name="phone" type="text" class="w-full appointmentModalFormClientPhone" value="{{ old('phone') }}"/>
                 </div>
 
                 <div class="w-full" >
@@ -51,18 +51,18 @@
                 <div class="socialMediaBlock hidden">
                     <div class="space-y-6">
                         <div class="w-full" >
-                            <x-input-label for="instagram" value="{{ __('Instagram:') }}"/>
-                            <x-text-input id="instagram" name="instagram" type="text" class="w-full" value="{{ old('instagram') }}" placeholder="link or @nickname"/>
+                            <x-form.label for="instagram" value="{{ __('Instagram:') }}"/>
+                            <x-form.input id="instagram" name="instagram" type="text" class="w-full" value="{{ old('instagram') }}" placeholder="link or @nickname"/>
                         </div>
 
                         <div class="w-full" >
-                            <x-input-label for="telegram" value="{{ __('Telegram:') }}"/>
-                            <x-text-input id="telegram" name="telegram" type="text" class="w-full" value="{{ old('telegram') }}" placeholder="link or @nickname"/>
+                            <x-form.label for="telegram" value="{{ __('Telegram:') }}"/>
+                            <x-form.input id="telegram" name="telegram" type="text" class="w-full" value="{{ old('telegram') }}" placeholder="link or @nickname"/>
                         </div>
 
                         <div class="w-full" >
-                            <x-input-label for="facebook" value="{{ __('Facebook:') }}"/>
-                            <x-text-input id="facebook" name="facebook" type="text" class="w-full" value="{{ old('facebook') }}" placeholder="link or @nickname"/>
+                            <x-form.label for="facebook" value="{{ __('Facebook:') }}"/>
+                            <x-form.input id="facebook" name="facebook" type="text" class="w-full" value="{{ old('facebook') }}" placeholder="link or @nickname"/>
                         </div>
                     </div>
                 </div>
@@ -79,12 +79,12 @@
                             
                         @endforelse
                     </x-form.select>
-                    <x-text-input id="date" name="date" type="date" class="w-full appointmentModalFormDate" value="{{ old('date', request('date', now()->format('Y-m-d'))) }}"/>
+                    <x-form.input id="date" name="date" type="date" class="w-full appointmentModalFormDate" value="{{ old('date', request('date', now()->format('Y-m-d'))) }}"/>
                 </div>
             </div>
             <div class="w-full space-y-6 p-6">
                 <div class="w-full" >
-                    <x-input-label for="service" value="{{ __('Service:') }}"/>
+                    <x-form.label for="service" value="{{ __('Service:') }}"/>
                     <x-form.select id="service" name="service" class="w-full appointmentModalFormService appointmentSelector" required>
                     </x-form.select>
                 </div>
@@ -106,32 +106,32 @@
                 </div>
 
                 <div class="w-full">
-                    <x-input-label for="term" value="{{ __('Term:') }}"/>
+                    <x-form.label for="term" value="{{ __('Term:') }}"/>
                     <x-form.input dropdown="termDropdown" id="term" name="term" type="time" class="w-full appointmentModalFormTerm" value="{{ old('term', now()->format('H:i')) }}" required/>
-                    <x-input-error :messages="$errors->get('term')" class="mt-2" />
+                    <x-form.error :messages="$errors->get('term')" class="mt-2" />
                 </div>
 
                 <div class="w-full">
-                    <x-input-label for="price" value="{{ __('Price:') }}"/>
+                    <x-form.label for="price" value="{{ __('Price:') }}"/>
                     <x-form.input id="price" name="price" class="w-full appointmentModalFormPrice" type="number"/>
-                    <x-input-error :messages="$errors->get('price')" class="mt-2" />
+                    <x-form.error :messages="$errors->get('price')" class="mt-2" />
                 </div>
 
                 <div class="w-full">
-                    <x-input-label for="comment" value="{{ __('Comment:') }}"/>
+                    <x-form.label for="comment" value="{{ __('Comment:') }}"/>
                     <x-form.textarea id="comment" name="comment" class="w-full appointmentModalFormComment"/>
-                    <x-input-error :messages="$errors->get('comment')" class="mt-2" />
+                    <x-form.error :messages="$errors->get('comment')" class="mt-2" />
                 </div>
 
                 <div class="w-full">
-                    <x-input-label for="status" value="{{ __('Status:') }}"/>
+                    <x-form.label for="status" value="{{ __('Status:') }}"/>
                     <x-form.select id="status" name="status" class="w-full appointmentModalFormStatus">
                         <option value="new">New appointment</option>
                         <option value="canceled">Canceled appointment</option>
                         <option value="done">Done appointment</option>
                         <option value="no_done">No done appointment</option>
                     </x-form.select>
-                    <x-input-error :messages="$errors->get('comment')" class="mt-2" />
+                    <x-form.error :messages="$errors->get('comment')" class="mt-2" />
                 </div>
             </div>
             <hr>
@@ -140,9 +140,9 @@
                     {{ __('Close') }}
                 </x-secondary-button>
     
-                <x-primary-button class="ml-3" type="submit" >
+                <x-buttons.primary class="ml-3" type="submit" >
                     {{ __('Save') }}
-                </x-primary-button>
+                </x-buttons.primary>
             </div>
         </form>
     </div>

@@ -12,6 +12,9 @@ use App\Models\ScheduleType;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use App\Mail\SendEmployeePassword;
+use Illuminate\Support\Facades\Mail;
 
 class EmployeeController extends Controller
 {
@@ -65,12 +68,14 @@ class EmployeeController extends Controller
         }
 
         if (!$user) {
+            $password = Str::random(12);
             $user = Admin::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
-                'password' => Hash::make('12345678'),
+                'password' => Hash::make($password),
             ]);
+            Mail::to($user->email)->send(new SendEmployeePassword($user, $password));
         }
 
         if ($request->hasFile('avatar')) {
@@ -89,9 +94,11 @@ class EmployeeController extends Controller
 
         $employee->services()->sync($request->services);
 
-        return redirect()->route('admin.company.employee.index', compact([
-            'company'
-        ]));
+        return redirect()->route('admin.company.employee.index', compact('company'))
+            ->with([
+                'ok' => true,
+                'description' => "Employee created"
+            ]);
     }
 
     /**
@@ -99,6 +106,16 @@ class EmployeeController extends Controller
      */
     public function show(Company $company, Employee $employee)
     {
+        $employee = $company->employees->find($employee->id);
+
+        if (!$employee) {
+            return redirect()->route('admin.company.employee.index', compact('company'))
+                ->with([
+                    'ok' => false,
+                    'description' => "Employee not found"
+                ]); 
+        }
+
         return view('admin.company.employee.show', compact([
             'company',
             'employee'
@@ -110,6 +127,16 @@ class EmployeeController extends Controller
      */
     public function edit(Company $company, Employee $employee)
     {
+        $employee = $company->employees->find($employee->id);
+
+        if (!$employee) {
+            return redirect()->route('admin.company.employee.index', compact('company'))
+                ->with([
+                    'ok' => false,
+                    'description' => "Employee not found"
+                ]); 
+        }
+
         return view('admin.company.employee.edit', compact([
             'company',
             'employee'
@@ -131,9 +158,11 @@ class EmployeeController extends Controller
         $employee = $company->employees->find($employee->id);
 
         if (!$employee) {
-            return redirect()->route('admin.company.employee.index', compact([
-                'company'
-            ])); 
+            return redirect()->route('admin.company.employee.index', compact('company'))
+                ->with([
+                    'ok' => false,
+                    'description' => "Employee not found"
+                ]); 
         }
 
         if ($employee->user) {
@@ -167,7 +196,11 @@ class EmployeeController extends Controller
         return redirect()->route('admin.company.employee.show', compact([
             'company',
             'employee'
-        ]));
+        ]))
+        ->with([
+            'ok' => true,
+            'description' => "Employee updated"
+        ]);
     }
 
     /**
@@ -175,6 +208,16 @@ class EmployeeController extends Controller
      */
     public function destroy(Company $company, Employee $employee)
     {
+        $employee = $company->employees->find($employee->id);
+
+        if (!$employee) {
+            return redirect()->route('admin.company.employee.index', compact('company'))
+                ->with([
+                    'ok' => false,
+                    'description' => "Employee not found"
+                ]); 
+        }
+        
         $employee->delete();
 
         return redirect()->route('admin.company.employee.index', compact([

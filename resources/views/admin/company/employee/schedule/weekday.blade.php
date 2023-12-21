@@ -26,7 +26,7 @@
 
                 <div class="w-full">
                     <div class="w-full">
-                        <x-input-label for="weekday" value="{{ __('Day:') }}"/>
+                        <x-form.label for="weekday" value="{{ __('Day:') }}"/>
                         <x-form.select name="weekday" class="w-full">
                             <option value="1">Monday</option>
                             <option value="2">Tuesday</option>
@@ -36,15 +36,15 @@
                             <option value="6">Saturday</option>
                             <option value="7">Sunday</option>
                         </x-form.select>
-                        <x-input-error :messages="$errors->get('term')" class="mt-2" />
+                        <x-form.error :messages="$errors->get('term')" class="mt-2" />
                     </div>
                     <div class="w-full" >
-                        <x-input-label for="start_time" value="{{ __('From:') }}"/>
-                        <x-text-input id="start_time" name="start_time" type="time" class="w-full" value="{{ old('start_time', now()->format('H:i')) }}"/>
+                        <x-form.label for="start_time" value="{{ __('From:') }}"/>
+                        <x-form.input id="start_time" name="start_time" type="time" class="w-full" value="{{ old('start_time', now()->format('H:i')) }}"/>
                     </div>
                     <div class="w-full" >
-                        <x-input-label for="end_time" value="{{ __('To:') }}"/>
-                        <x-text-input id="end_time" name="end_time" type="time" class="w-full" value="{{ old('end_time', now()->format('H:i')) }}"/>
+                        <x-form.label for="end_time" value="{{ __('To:') }}"/>
+                        <x-form.input id="end_time" name="end_time" type="time" class="w-full" value="{{ old('end_time', now()->format('H:i')) }}"/>
                     </div>
                 </div>
             </form>
@@ -56,9 +56,9 @@
                     {{ __('Close') }}
                 </x-secondary-button>
     
-                <x-primary-button class="ml-3" onclick="$('#createWeekdayScheduleModalForm').submit()">
+                <x-buttons.primary class="ml-3" onclick="$('#createWeekdayScheduleModalForm').submit()">
                     {{ __('Save') }}
-                </x-primary-button>
+                </x-buttons.primary>
             </div>
         </div>
     </x-modal>

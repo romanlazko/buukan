@@ -25,7 +25,7 @@ class CreateServiceRequest extends FormRequest
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric'],
-            'img' => ['file']
+            'img' => ['file'],
         ];
     }
 }

@@ -38,6 +38,11 @@
     </x-slot>
 
     <div class="space-y-6 py-4 sm:p-4">
+
+        <x-white-block class="p-2 w-full">
+            <x-form.search :action="route('admin.company.telegram_bot.chat.index', [$company, $telegram_bot] )" :placeholder="__('Search by chats')" class="w-full"/>
+        </x-white-block>
+
         <x-white-block class="p-0">
             <x-table.table class="whitespace-nowrap">
                 <x-table.thead class="text-left py-2 ">

@@ -30,6 +30,7 @@
                 <div class="sm:w-2/3 w-full p-2 space-y-3 {{$formDisabled ? 'opacity-25' : ''}}">
                     <h1 class="font-bold text-black">Information about appointment:</h1>
                     <div class="space-y-4">
+
                         <div class="w-full overflow-auto shadow-md p-2 space-y-4 bg-white rounded-md">
                             <div class="flex space-x-2 items-center">
                                 <div class="w-full" wire:key="appointment-status-{{$appointmentForm->status}}">
@@ -59,11 +60,12 @@
                             </div>
                             <x-form.error :messages="$errors->get('appointmentForm.status')" class="mt-2" />
                         </div>
+
                         <div class="sm:flex items-center sm:space-y-0 sm:space-x-3 justify-between shadow-md p-2 space-y-4 bg-white rounded-md">
                             <div class="w-full flex space-x-2">
                                 <x-form.select wire:key="appointment-employee-{{ $appointmentForm->employee_id }}" id="employee" wire:model.live="appointmentForm.employee_id" class="w-full" required :disabled="$formDisabled">
                                     <option value="">Choose employee</option>
-                                    @forelse ($company->employees as $employee_item)
+                                    @forelse ($company->employees()->role('employee', 'company')->get() as $employee_item)
                                         <option value="{{ $employee_item->id }}">{{ $employee_item->first_name }} {{ $employee_item->last_name }}</option>
                                     @empty
                                         
@@ -76,6 +78,7 @@
                                 <x-form.error :messages="$errors->get('appointmentForm.date')" class="mt-2" />
                             </div>
                         </div>
+
                         @if ($employee)
                             <div class="w-full shadow-md p-2 space-y-4 bg-white rounded-md">
                                 <div class="w-full">

@@ -11,16 +11,16 @@
         <form class="w-full space-y-6 p-2">
             <div class="w-full flex space-x-2 p-2 bg-white rounded-md shadow-sm">
                 <div class="w-full">
-                    <x-input-label for="start_date" value="{{ __('From:') }}"/>
-                    <x-text-input wire:key="start_date-{{ rand(10000, 10999) }}" id="start_date" type="date" class="w-full" wire:model.live="start_date"/>
+                    <x-form.label for="start_date" value="{{ __('From:') }}"/>
+                    <x-form.input wire:key="start_date-{{ rand(10000, 10999) }}" id="start_date" type="date" class="w-full" wire:model.live="start_date"/>
                 </div>
                 <div class="w-full">
-                    <x-input-label for="end_date" value="{{ __('To:') }}"/>
-                    <x-text-input wire:key="end_date-{{ rand(10000, 10999) }}" id="end_date" type="date" class="w-full" wire:model.live="end_date"/>
+                    <x-form.label for="end_date" value="{{ __('To:') }}"/>
+                    <x-form.input wire:key="end_date-{{ rand(10000, 10999) }}" id="end_date" type="date" class="w-full" wire:model.live="end_date"/>
                 </div>
             </div>
             <div class="w-full p-2 bg-white rounded-md shadow-sm">
-                <x-input-label for="service" value="{{ __('Service') }}"/>
+                <x-form.label for="service" value="{{ __('Service') }}"/>
                 <x-form.select wire:key="service-{{ rand(11000, 11999) }}" id="service" wire:model.live="service_id" class="w-full">
                     <option value="">Any service</option>
                     @forelse ($employee->services as $service_item)
@@ -42,7 +42,7 @@
             @endif
             
             <div class="w-full p-2 bg-white rounded-md shadow-sm">
-                <x-input-label value="{{ __('Term:') }}"/>
+                <x-form.label value="{{ __('Term:') }}"/>
                 <div wire:key="create-schedule-terms-{{ rand(1,10000) }}" class="space-y-4">
                     @forelse ($terms as $index => $term)
                         <div class="w-full flex items-center space-x-3">
@@ -149,7 +149,7 @@
                     </button>
                 </div>
                 
-                <x-input-error :messages="$errors->get('term')" class="mt-2" />
+                <x-form.error :messages="$errors->get('term')" class="mt-2" />
             </div>
         </form>
 

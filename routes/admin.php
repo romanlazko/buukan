@@ -41,7 +41,7 @@ use App\Bots\buukan_bot\Http\Controllers\CronController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('admin.login');
 })->name('welcome');
 
 Route::middleware('guest')->name('admin.')->group(function () {

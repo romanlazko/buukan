@@ -28,8 +28,8 @@
                 <div class="space-y-4">
                     <div>
                         <x-form.label for="description" :value="__('Description of company::')" />
-                        <x-form.textarea id="description" name="description" class="mt-1 block w-full" :value="old('description', $company->description)" />
-                        <x-form.error class="mt-2" :messages="$errors->get('name')" />
+                        <x-form.textarea id="description" name="description" class="mt-1 block w-full" :value="old('description', $company->description)" required/>
+                        <x-form.error class="mt-2" :messages="$errors->get('description')" />
                     </div>
                 </div>
             </x-white-block>
@@ -50,7 +50,7 @@
 
                     <div>
                         <x-form.label for="address" :value="__('Address:')" />
-                        <x-form.input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address', $company->address)"/>
+                        <x-form.input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address', $company->address)" required/>
                         <x-form.error class="mt-2" :messages="$errors->get('address')" />
                     </div>
                 </div>

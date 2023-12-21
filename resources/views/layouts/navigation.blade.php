@@ -12,30 +12,15 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    @auth
-                        @hasanyrole('admin')
-                            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                                {{ __('Dashboard') }}
-                            </x-nav-link>
-                            
-                        @endhasanyrole
-
-                        @hasanyrole('user')
-                            <x-nav-link :href="route('user.dashboard')" :active="request()->routeIs('user.dashboard')">
-                                {{ __('Dashboard') }}
-                            </x-nav-link>
-                        @endhasanyrole
-                    @else 
-                        <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
-                            {{ __('Main') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('welcome')" :active="request()->routeIs('about')">
-                            {{ __('About') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('welcome')" :active="request()->routeIs('kontakt')">
-                            {{ __('Kontakt') }}
-                        </x-nav-link>
-                    @endauth
+                    {{-- <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+                        {{ __('Main') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('about')">
+                        {{ __('About') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('kontakt')">
+                        {{ __('Kontakt') }}
+                    </x-nav-link> --}}
                 </div>
             </div>
 
