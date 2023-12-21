@@ -26,7 +26,6 @@ class UpdateServiceRequest extends FormRequest
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric'],
             'img' => ['file'],
-            'color' => ['regex:/^#[0-9A-Fa-f]{6}$/'],
         ];
     }
 }

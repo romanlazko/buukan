@@ -23,10 +23,10 @@ class CompanyCreateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'description' => ['nullable', 'string'],
+            'description' => ['required', 'string'],
             'ico' => ['nullable', 'string'],
             'dic' => ['nullable', 'string'],
-            'address' => ['nullable', 'string'],
+            'address' => ['required', 'string'],
             'logo' => ['nullable', 'file'],
         ];
     }

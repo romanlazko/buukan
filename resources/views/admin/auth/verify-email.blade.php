@@ -14,9 +14,9 @@
             <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
                 <div>
-                    <x-primary-button>
+                    <x-buttons.primary>
                         {{ __('Resend Verification Email') }}
-                    </x-primary-button>
+                    </x-buttons.primary>
                 </div>
             </form>
 

@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
-use App\Models\Service;
 use App\Models\SubService;
 use Illuminate\Http\Request;
+use App\Http\Requests\Service\CreateServiceRequest;
+use App\Http\Requests\Service\UpdateServiceRequest;
 
 class SubServiceController extends Controller
 {
@@ -38,7 +39,7 @@ class SubServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Company $company)
+    public function store(CreateServiceRequest $request, Company $company)
     {
         $company->sub_services()->create([
             'name' => $request->name,
@@ -76,7 +77,7 @@ class SubServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Company $company, SubService $sub_service)
+    public function update(UpdateServiceRequest $request, Company $company, SubService $sub_service)
     {
         $sub_service = $company->sub_services()->find($sub_service->id);
 
@@ -91,7 +92,8 @@ class SubServiceController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
-            'color' => $request->color
+            'color' => $request->color,
+            'currency' => 'CZK',
         ]);
 
         return redirect()->route('admin.company.sub_service.index', $company);

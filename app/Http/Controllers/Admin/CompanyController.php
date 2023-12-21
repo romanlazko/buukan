@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
-    public function __construct(private FileService $fileService)
-    {
-        
-    }
     /**
      * Show the form for creating a new resource.
      */

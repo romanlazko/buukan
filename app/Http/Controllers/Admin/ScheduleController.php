@@ -14,9 +14,16 @@ class ScheduleController extends Controller
 {
     public function index(Company $company, Employee $employee)
     {
-        return view('admin.company.employee.schedule.index', compact(
-            'company',
-            'employee'
-        ));
+        if ($employee->hasRole('employee', 'company')) {
+            return view('admin.company.employee.schedule.index', compact(
+                'company',
+                'employee'
+            ));
+        }
+        
+        return redirect()->route('admin.company.employee.show', [$company, $employee])->with([
+            'ok' => false,
+            'description' => 'Employee should have `employee` role'
+        ]);
     }
 }

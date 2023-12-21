@@ -14,19 +14,19 @@ class DashboardController extends Controller
 
         if ($user->hasRole('admin')) {
 
-            $company = $user->company;
-
-            if ($company) {
-                return redirect()->route('admin.company.show', $company);
+            if ($user->company) {
+                return redirect()->route('admin.company.show', $user->company);
             }
 
             return redirect()->route('admin.company.create');
         }
 
-        if ($user->employee->company) {
-            return redirect()->route('admin.company.employee.schedule.index', [$user->employee->company, $user->employee]);
+        if ($user->employee->hasRole('administrator', 'company')) {
+            return redirect()->route('admin.company.appointment.index', $user->employee->company);
         }
 
-        return view('admin.dashboard');
+        if ($user->employee->hasRole('employee', 'company')) {
+            return redirect()->route('admin.company.employee.schedule.index', [$user->employee->company, $user->employee]);
+        }
     }
 }

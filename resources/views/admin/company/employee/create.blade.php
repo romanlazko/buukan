@@ -47,7 +47,6 @@
                         <x-form.error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                 </x-white-block>
-
                 
                 <x-white-block>
                     <div>

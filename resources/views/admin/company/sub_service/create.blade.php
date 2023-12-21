@@ -1,9 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="sm:flex items-center sm:space-x-3 w-max text-center">
-            <a class="font-semibold text-xl text-gray-600 hidden lg:grid hover:bg-gray-200 aspect-square w-8 rounded-full content-center text-center" href="{{ route('admin.company.sub_service.index', $company) }}">
-                {{ __('←') }}
-            </a>
+            <x-a-buttons.back href="{{ route('admin.company.sub_service.index', $company) }}"/>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Create sub service:') }}
             </h2>
@@ -24,7 +22,7 @@
                         </div>
                         <div>
                             <x-form.label for="color" :value="__('Color:')" />
-                            <x-form.color id="color" name="color" :value="'#' . substr(md5(uniqid()), 0, 6)"/>
+                            <x-form.color id="color" name="color" :value="old('color', '#' . substr(md5(uniqid()), 0, 6))"/>
                             <x-form.error class="mt-2" :messages="$errors->get('color')" />
                         </div>
                     </div>
@@ -35,7 +33,7 @@
                     <div>
                         <x-form.label for="description" :value="__('Description:')" />
                         <x-form.textarea id="description" name="description" class="mt-1 block w-full" :value="old('description')" />
-                        <x-form.error class="mt-2" :messages="$errors->get('name')" />
+                        <x-form.error class="mt-2" :messages="$errors->get('description')" />
                     </div>
                 </x-white-block>
 

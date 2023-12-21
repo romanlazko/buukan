@@ -25,9 +25,16 @@ class TelegramController extends Controller
 
     public function create(Company $company)
     {
-        return view('admin.company.telegram.create', compact([
-            'company'
-        ]));
+        $telegram_bots = $company->telegram_bots;
+
+        if ($telegram_bots->isEmpty()) {
+            return view('admin.company.telegram.create', compact([
+                'company'
+            ]));
+        }
+
+        return redirect()->route('admin.company.telegram_bot.show', [$company, $telegram_bots->first()]);
+        
     }
 
     public function store(Request $request, Company $company)

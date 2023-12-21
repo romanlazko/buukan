@@ -18,8 +18,7 @@ class TelegramChatController extends Controller
     {
         $bot = new Bot($telegram_bot->token);
 
-        $chats = TelegramChat::search($request->search)
-            ->where('telegram_bot_id', $bot->getBotId())
+        $chats = $telegram_bot->chats()->search($request->search)
             ->orderByDesc('updated_at')
             ->paginate(20);
 
