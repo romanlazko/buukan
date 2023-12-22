@@ -50,7 +50,7 @@
                                     <span>
                                         {{ __("Maximum number of active appointments at the customer")  }}
                                     </span>
-                                    <x-form.input id="" name="settings[max_active_appointments]" type="number" :value="old('settings[max_active_appointments]')"/>
+                                    <x-form.input id="" name="settings[max_active_appointments]" type="number" :value="old('settings[max_active_appointments]', 1)"/>
                                 </div>
                             </x-form.label>
                         </div>
