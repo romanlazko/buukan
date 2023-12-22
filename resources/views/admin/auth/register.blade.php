@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="mx-auto sm:max-w-md mt-6 bg-white overflow-hidden shadow-sm sm:rounded-lg sm:p-6 lg:p-8">
+    <div class=" w-full mx-auto sm:max-w-md mt-6 bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 sm:p-6 lg:p-8">
         <form method="POST" action="{{ route('admin.register') }}">
             @csrf
     

@@ -64,7 +64,9 @@ class Appointment extends Model
 
     public function getTotalPriceAttribute()
     {
-        return $this->service->price->plus(
+        $prefix = isset($this->service->settings->is_price_from) ? __("from ") : "";
+
+        return $prefix.$this->service->price->plus(
             $this->sub_services->pluck('price')->map(function($price){
                 return $price->getAmount()->toInt();
             })->sum()

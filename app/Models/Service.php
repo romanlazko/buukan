@@ -48,4 +48,14 @@ class Service extends Model
     {
         return $this->belongsToMany(Employee::class, 'service_employee');
     }
+
+    public function price()
+    {
+        return $this->price->getAmount()->toInt();
+    }
+
+    // public function getPriceAttribute()
+    // {
+    //     return $this->attributes['price']->getAmount()->toInt();
+    // }
 }

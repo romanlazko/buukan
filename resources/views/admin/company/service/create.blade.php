@@ -39,14 +39,22 @@
                 </x-white-block>
 
                 <x-white-block>
-                    <div class="space-y-4">
-                        <div>
-                            <x-form.label for="price" :value="__('Price:')"/>
+                    <div>
+                        <x-form.label for="additional" :value="__('Additional information:')"/>
+                        <x-form.textarea id="additional" name="additional" class="mt-1 block w-full" :value="old('additional')"/>
+                        <x-form.error class="mt-2" :messages="$errors->get('additional')"/>
+                    </div>
+                </x-white-block>
+
+                <x-white-block>
+                    <x-form.label for="price" :value="__('Price:')"/>
+                    
+                    <div class="flex space-x-2">
+                        <div class="w-full">
                             <x-form.input id="price" name="price" type="number" class="mt-1 block w-full" :value="old('price')"/>
                             <x-form.error class="mt-2" :messages="$errors->get('price')"/>
                         </div>
-                        <div>
-                            <x-form.label for="currency" :value="__('Currency:')" />
+                        <div class="w-1/3">
                             <x-form.select id="currency" name="currency" class="mt-1 block w-full">
                                 <option value="CZK">CZK</option>
                                 <option value="EUR">EUR</option>
@@ -54,6 +62,16 @@
                             </x-form.select>
                             <x-form.error class="mt-2" :messages="$errors->get('currency')" />
                         </div>
+                    </div>
+                    <div class="flex space-x-2 items-center py-3">
+                        <x-form.label for="is_price_from" class="w-full">
+                            <div class="flex justify-between w-full items-center">
+                                <span>
+                                    {{ __("Price from:")  }}
+                                </span>
+                                <x-form.checkbox id="is_price_from" name="settings[is_price_from]" type="checkbox" :checked="old('settings[is_price_from]')"/>
+                            </div>
+                        </x-form.label>
                     </div>
                 </x-white-block>
 
@@ -63,7 +81,7 @@
                             {{ __('Employees') }}
                         </h2>
                         <div class="border rounded-md p-3">
-                            @foreach ($company->employees as $employee)
+                            @foreach ($company->employees()->role('employee', 'company')->get() as $employee)
                                 <div class="flex space-x-2 items-center py-3 @if(!$loop->last) border-b @endif">
                                     <x-form.label for="{{ $employee->slug }}" class="w-full ">
                                         <div class="flex justify-between w-full items-center">

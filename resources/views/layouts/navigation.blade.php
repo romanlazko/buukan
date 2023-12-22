@@ -1,10 +1,10 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100 sticky top-0">
+<nav x-data="{ open: false }" class="w-full bg-white border-b border-gray-100 sticky top-0">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="shrink-0 flex items-center px-2">
                     <a href="{{ route('welcome') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
@@ -67,7 +67,7 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
+            <div class="mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -80,7 +80,7 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        {{-- <div class="pt-2 pb-3 space-y-1">
             @auth
                 <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                     {{ __('Dashboard') }}
@@ -96,7 +96,7 @@
                     {{ __('Kontakt') }}
                 </x-responsive-nav-link>
             @endauth
-        </div>
+        </div> --}}
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
@@ -120,13 +120,13 @@
                     </form>
                 </div>
             @else
-                <x-responsive-nav-link :href="route('admin.login')">
+                <x-responsive-nav-link :href="route('admin.login')" :active="request()->routeIs('admin.login')">
                     {{ __('Log in') }}
                 </x-responsive-nav-link>
                 
 
                 @if (Route::has('admin.register'))
-                    <x-responsive-nav-link :href="route('admin.register')">
+                    <x-responsive-nav-link :href="route('admin.register')" :active="request()->routeIs('admin.register')">
                         {{ __('Register') }}
                     </x-responsive-nav-link>
                 @endif
