@@ -28,11 +28,23 @@ class ConfirmAppointCommand extends Command
 
         $service = $company->services()->find($updates->getInlineData()->getServiceId());
 
-        $sub_services = $company->sub_services()->whereIn('id', [array_filter(explode(':', $updates->getInlineData()->getsub_services()))])->get();
+        $sub_services = $company->sub_services()->whereIn('id', array_filter(explode(':', $updates->getInlineData()->getSubServices())) ?? null)->get();
 
         $employee = $company->employees()->find($updates->getInlineData()->getEmployeeId());
 
         $schedule = $employee->schedule()->find($updates->getInlineData()->getScheduleId());
+
+        $total_price = $service?->price
+            ?->plus(
+                $sub_services
+                    ->map(function($sub_service){
+                        return $sub_service->price->getAmount()->toInt();
+                    })->sum()
+            );
+
+        $prefix = isset($service->settings->is_price_from) ? __("from ") : "";
+
+        $total_price = $prefix.$total_price;
 
         if (!$schedule) {
             BotApi::answerCallbackQuery([
@@ -55,6 +67,7 @@ class ConfirmAppointCommand extends Command
             ($sub_services->isNotEmpty() ? "Доп услуги: *{$sub_services->pluck('name')->implode(', ')}*\n" : "").
             "Мастер: *{$employee->first_name} {$employee->last_name}*",
             "Дата и время: *{$schedule->date->format('d.m(D)')}: {$schedule->term->format('H:i')}*"."\n",
+            "Итоговая стоимость: *{$total_price}*"."\n",
             "Если все правильно, нажми на кнопку *«Подтвердить»*"
         ]);
 
