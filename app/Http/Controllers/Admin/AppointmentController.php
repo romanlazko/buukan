@@ -16,23 +16,26 @@ class AppointmentController extends Controller
      */
     public function index(Request $request, Company $company)
     {
-        $employees = $company->employees->map(function ($employee) {
-            $schedules = $employee->unoccupiedSchedules(request('date', now()->format('Y-m-d')))
-                ->orderBy('term')
-                ->get()
-                ->map(function($schedule){
-                    return $schedule;
-                });
+        $employees = $company->employees()
+            ->role('employee', 'company')
+            ->get()
+            ->map(function ($employee) {
+                $schedules = $employee->unoccupiedSchedules(request('date', now()->format('Y-m-d')))
+                    ->orderBy('term')
+                    ->get()
+                    ->map(function($schedule){
+                        return $schedule;
+                    });
 
-            $appointments = $employee->appointments()
-                ->where('date', request('date', now()->format('Y-m-d')))
-                ->orderBy('term')
-                ->get();
+                $appointments = $employee->appointments()
+                    ->where('date', request('date', now()->format('Y-m-d')))
+                    ->orderBy('term')
+                    ->get();
 
-            $employee->events = $schedules->concat($appointments)->sortBy('term');
-            
-            return $employee;
-        });
+                $employee->events = $schedules->concat($appointments)->sortBy('term');
+                
+                return $employee;
+            });
 
         return view('admin.company.appointment.index', compact(
             'company',

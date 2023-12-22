@@ -41,14 +41,14 @@
                 </x-white-block>
 
                 <x-white-block>
-                    <div class="space-y-4">
-                        <div>
-                            <x-form.label for="price" :value="__('Price:')" />
+                    <x-form.label for="price" :value="__('Price:')"/>
+                    
+                    <div class="flex space-x-2">
+                        <div class="w-full">
                             <x-form.input id="price" name="price" type="number" class="mt-1 block w-full" :value="old('price', $sub_service->price->getAmount()->toInt())"/>
-                            <x-form.error class="mt-2" :messages="$errors->get('price')" />
+                            <x-form.error class="mt-2" :messages="$errors->get('price')"/>
                         </div>
-                        <div>
-                            <x-form.label for="currency" :value="__('Currency:')" />
+                        <div class="w-1/3">
                             <x-form.select id="currency" name="currency" class="mt-1 block w-full">
                                 <option @selected($sub_service->currency == 'CZK') value="CZK">CZK</option>
                                 <option @selected($sub_service->currency == 'EUR') value="EUR">EUR</option>
@@ -56,6 +56,16 @@
                             </x-form.select>
                             <x-form.error class="mt-2" :messages="$errors->get('currency')" />
                         </div>
+                    </div>
+                    <div class="flex space-x-2 items-center py-3">
+                        <x-form.label for="is_price_from" class="w-full">
+                            <div class="flex justify-between w-full items-center">
+                                <span>
+                                    {{ __("Price from:")  }}
+                                </span>
+                                <x-form.checkbox id="is_price_from" name="settings[is_price_from]" type="checkbox" :checked="old('settings[is_price_from]', $sub_service->settings->is_price_from ?? null)"/>
+                            </div>
+                        </x-form.label>
                     </div>
                 </x-white-block>
                 

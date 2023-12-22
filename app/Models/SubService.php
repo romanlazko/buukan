@@ -19,11 +19,13 @@ class SubService extends Model
         'description',
         'price',
         'color',
-        'currency'
+        'currency',
+        'settings'
     ];
 
     protected $casts = [
         'price' => Money::class,
+        'settings' => 'object',
     ];
 
     /**

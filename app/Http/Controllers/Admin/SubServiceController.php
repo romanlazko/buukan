@@ -47,6 +47,7 @@ class SubServiceController extends Controller
             'price' => $request->price,
             'color' => $request->color,
             'currency' => 'CZK',
+            'settings'  => $request->settings,
         ]);
         
         return redirect()->route('admin.company.sub_service.index', compact([
@@ -94,6 +95,7 @@ class SubServiceController extends Controller
             'price' => $request->price,
             'color' => $request->color,
             'currency' => 'CZK',
+            'settings'  => $request->settings,
         ]);
 
         return redirect()->route('admin.company.sub_service.index', $company);

@@ -46,9 +46,9 @@ class AppointmentModal extends Component
 
         $this->toggleFormDisabled();
 
-        $total_price = $this->company->services()
-            ->find($this->appointmentForm->service_id)
-            ?->price
+        $service = $this->company->services()->find($this->appointmentForm->service_id);
+
+        $total_price = $service?->price
             ?->plus(
                 $this->company->sub_services()->whereIn('id', $this->appointmentForm->sub_services)
                     ->get()
@@ -57,7 +57,9 @@ class AppointmentModal extends Component
                     })->sum()
             );
 
-        $this->total_price = $total_price?->getAmount()->toInt()." ".$total_price?->getCurrency()->getCurrencyCode();
+        $prefix = isset($service->settings->is_price_from) ? __("from ") : "";
+
+        $this->total_price = $prefix.$total_price?->getAmount()->toInt()." ".$total_price?->getCurrency()->getCurrencyCode();
 
         return view('livewire.appointment-modal');
     }
