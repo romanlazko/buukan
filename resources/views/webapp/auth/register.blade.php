@@ -23,12 +23,12 @@
                 <div class="w-full sm:flex sm:space-x-3">
                     <div class="w-full sm:w-1/2">
                         <x-form.label for="first_name" :value="__('First name')" />
-                        <x-form.input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="first_name" />
+                        <x-form.input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required/>
                         <x-form.error :messages="$errors->get('first_name')" class="mt-2" />
                     </div>
                     <div class="w-full sm:w-1/2">
                         <x-form.label for="last_name" :value="__('Last name')" />
-                        <x-form.input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="last_name" />
+                        <x-form.input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required/>
                         <x-form.error :messages="$errors->get('last_name')" class="mt-2" />
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                 <!-- Email Address -->
                 <div class="mt-4">
                     <x-form.label for="email" :value="__('Email')" />
-                    <x-form.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                    <x-form.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required/>
                     <x-form.error :messages="$errors->get('email')" class="mt-2" />
                 </div>
         
@@ -59,7 +59,7 @@
         
                     <x-form.input id="password_confirmation" class="block mt-1 w-full"
                                     type="password"
-                                    name="password_confirmation" required autocomplete="new-password" />
+                                    name="password_confirmation" required/>
         
                     <x-form.error :messages="$errors->get('password_confirmation')" class="mt-2" />
                 </div>
