@@ -25,7 +25,7 @@
                 <!-- Email Address -->
                 <div>
                     <x-form.label for="email" :value="__('Email')" />
-                    <x-form.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                    <x-form.input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
                     <x-form.error :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
@@ -36,7 +36,7 @@
                     <x-form.input id="password" class="block mt-1 w-full"
                                     type="password"
                                     name="password"
-                                    required autocomplete="current-password" />
+                                    autocomplete="current-password" />
 
                     <x-form.error :messages="$errors->get('password')" class="mt-2" />
                 </div>
