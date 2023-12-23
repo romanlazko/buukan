@@ -33,12 +33,6 @@
                 dayMaxEventRows: true, 
                 selectable: true,
                 eventDidMount: function (info) {
-                    // $(info.el).find('.fc-event-time').addClass('items-center flex').append(
-                    //     $("<span>", {
-                    //         "class": "p-0 ml-1 border rounded-md border-gray-200 px-1",
-                    //         "html": info.event.extendedProps.service.name
-                    //     })
-                    // );
                     $(info.el).find('.fc-event-main')
                         .append(
                             $("<div>", {

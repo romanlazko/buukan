@@ -89,12 +89,10 @@
                 @endforeach
             </div>
         @endif
-        
     </div>
 
     <x-slot name="footer">
         <div class="space-x-4 flex w-full">
-            
             <div>
                 <x-a-buttons.primary wire:click="prevStep">
                     <div class="w-full text-center p-3">
@@ -110,6 +108,5 @@
                 </x-buttons.primary>
             </div>
         </div>
-        
     </x-slot>
 </x-web-app>

@@ -139,7 +139,7 @@ class WebApp extends Component
         }
 
         if ($this->steps[$this->currentStep] == 'services') {
-            $this->services = $this->web_app->company->services()->whereJsonContains('settings->is_available_on_webapp', 'on')?->get();
+            $this->services = $this->web_app->company->services()?->active()->whereJsonContains('settings->is_available_on_webapp', 'on')?->get();
         }
 
         if ($this->steps[$this->currentStep] == 'employees') {

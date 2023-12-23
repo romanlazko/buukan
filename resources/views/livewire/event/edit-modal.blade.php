@@ -23,13 +23,9 @@
                 <x-form.select id="service" wire:model.live="service_id" class="w-full">
                     <option value="">Any service</option>
                     @if ($employee)
-                        @forelse ($employee?->services as $service)
-                            <option 
-                                wire:key="{{$service->slug}}-{{ $service_id }}" 
-                                @selected($service_id == $service->id) 
-                                value="{{ $service->id }}"
-                            >
-                                {{ $service->name }} ({{ $service->price }})
+                        @forelse ($employee?->services as $service_item)
+                            <option @disabled(!$service_item->active) wire:key="{{$service_item->slug}}-{{ $service_id }}" @selected($service_id == $service_item->id) value="{{ $service_item->id }}">
+                                {{ $service_item->name }} ({{ $service_item->price }})
                             </option>
                         @empty
                             
@@ -42,8 +38,8 @@
             <div class="w-full p-2 bg-white rounded-md shadow-sm">
                 <x-form.label for="active" value="{{ __('Status') }}"/>
                 <x-form.select id="active" wire:model="active" class="w-full">
-                    <option wire:key="{{$active }}-0" @selected($active == 1) value="1">Active</option>
-                    <option wire:key="{{$active }}-1" @selected($active == 0) value="0">Disable</option>
+                    <option wire:key="{{ $active }}-0" @selected($active == 1) value="1">Active</option>
+                    <option wire:key="{{ $active }}-1" @selected($active == 0) value="0">Disable</option>
                 </x-form.select>
             </div>
         </form>

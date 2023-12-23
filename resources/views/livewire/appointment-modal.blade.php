@@ -87,7 +87,7 @@
                                         <option value="">Choose service</option>
                                         @if($employee?->services)
                                             @forelse ($employee?->services as $service_item)
-                                                <option value="{{ $service_item->id }}">{{ $service_item->name }} ({{ $service_item->price }})</option>
+                                                <option @disabled(!$service_item->active) value="{{ $service_item->id }}">{{ $service_item->name }} ({{ $service_item->price }})</option>
                                             @empty
                                                 
                                             @endforelse

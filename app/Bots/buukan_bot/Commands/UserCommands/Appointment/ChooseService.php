@@ -24,6 +24,7 @@ class ChooseService extends Command
         $company = Company::find(DB::getBot()->owner_id);
 
         $services_buttons = $company->services()
+            ?->active()
             ?->whereJsonContains('settings->is_available_on_telegram', 'on')
             ?->get()
             ?->map(function ($service) {
