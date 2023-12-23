@@ -21,7 +21,8 @@ class Service extends Model
         'img',
         'color',
         'currency',
-        'settings'
+        'settings',
+        'active'
     ];
 
     protected $casts = [
@@ -52,6 +53,11 @@ class Service extends Model
     public function price()
     {
         return $this->price->getAmount()->toInt();
+    }
+
+    public function scopeActive($query) 
+    {
+        return $query->where('active', true);
     }
 
     // public function getPriceAttribute()

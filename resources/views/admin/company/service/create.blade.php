@@ -127,6 +127,16 @@
                         </div>
                     </div>
                 </x-white-block>
+
+                <x-white-block>
+                    <div class="space-y-4">
+                        <x-form.label for="active" value="{{ __('Status') }}"/>
+                        <x-form.select id="active" name="active" class="w-full">
+                            <option selected value="1">Active</option>
+                            <option value="0">Disable</option>
+                        </x-form.select>
+                    </div>
+                </x-white-block>
                 
                 <div class="flex justify-end px-4 sm:px-0">
                     <x-buttons.primary>{{ __('Create') }}</x-buttons.primary>

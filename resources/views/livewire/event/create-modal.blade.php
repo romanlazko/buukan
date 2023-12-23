@@ -24,7 +24,7 @@
                 <x-form.select wire:key="service-{{ rand(11000, 11999) }}" id="service" wire:model.live="service_id" class="w-full">
                     <option value="">Any service</option>
                     @forelse ($employee->services as $service_item)
-                        <option value="{{ $service_item->id }}">{{ $service_item->name }} ({{ $service_item->price }})</option>
+                        <option @disabled(!$service_item->active) value="{{ $service_item->id }}">{{ $service_item->name }} ({{ $service_item->price }})</option>
                     @empty
                         
                     @endforelse
