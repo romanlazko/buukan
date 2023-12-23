@@ -39,7 +39,7 @@
                                     <div>
                                         
                                         <p class="w-full text-lg font-medium text-gray-900">
-                                            @if ($service->settings->is_price_from)
+                                            @if (isset($service->settings->is_price_from))
                                                 from: 
                                             @endif
                                             {{ $service->price ?? null }}
@@ -75,7 +75,7 @@
                                         </div>
                                         <div>
                                             <p class="w-full text-lg font-medium text-gray-900">
-                                                @if ($service->settings->is_price_from)
+                                                @if (isset($service->settings->is_price_from))
                                                     from: 
                                                 @endif
                                                 {{ $service->price ?? null }}
