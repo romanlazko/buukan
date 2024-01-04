@@ -68,7 +68,6 @@ class Client extends Component
         $this->dispatch('setClient', $this->client->id)->to(AppointmentModal::class);
 
         $this->toggleClientForm(false);
-        
     }
 
     public function toggleClientForm(bool $status = null)
