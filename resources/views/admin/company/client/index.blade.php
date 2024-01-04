@@ -42,7 +42,7 @@
                             <x-table.td>
                                 <div class="flex space-x-2">
                                     @if (isset($client->social_media->instagram))
-                                        <a href="https://instagram.com/{{ $client->social_media->instagram }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                                        <a href="https://instagram.com/{{ str_replace('@', '', $client->social_media->instagram) }}" class="flex items-center space-x-1 text-2xl" target="blank">
                                             <i class="fa-brands fa-instagram text-pink-700"></i>
                                         </a>
                                     @endif

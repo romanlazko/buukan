@@ -26,7 +26,7 @@
                             Social media:
                         </h1>
                         @if (!empty($client_data['social_media']['instagram']))
-                            <a href="https://instagram.com/{{ $client_data['social_media']['instagram'] }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                            <a href="https://instagram.com/{{ str_replace('@', '', $client_data['social_media']['instagram']) }}" class="flex items-center space-x-1 text-2xl" target="blank">
                                 <i class="fa-brands fa-instagram text-pink-700"></i>
                             </a>
                         @endif
