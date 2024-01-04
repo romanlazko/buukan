@@ -33,7 +33,7 @@ class Appoint extends Command
         
         $schedule = $company->employees()
             ->find($updates->getInlineData()->getEmployeeId())
-            ->schedule()
+            ->unoccupiedSchedules()
             ->find($updates->getInlineData()->getScheduleId());
 
         if (!$schedule) {
