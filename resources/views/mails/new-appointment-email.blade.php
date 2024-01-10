@@ -16,7 +16,7 @@
     <li><strong>Master:</strong> {{ $appointment->employee->first_name }} {{ $appointment->employee->last_name }}</li>
     <li><strong>Booking Date:</strong> {{ $appointment->date->format('d.m.Y') }} {{ $appointment->term->format('H:i') }}</li>
     <li><strong>Service Type:</strong> {{ $appointment->service->name }}</li>
-    <li><strong>Service Cost:</strong> {{ $appointment->total_price() }}</li>
+    <li><strong>Service Cost:</strong> {{ $appointment->total_price }}</li>
     <li><strong>Address:</strong> {{ $appointment->employee->company->adress }}</li>
 </ul>
 
