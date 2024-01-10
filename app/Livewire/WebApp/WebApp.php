@@ -112,7 +112,9 @@ class WebApp extends Component
                 'date' => $this->date,
                 'term' => $this->term,
                 'status' => 'new',
-            ])->sub_services()->sync($this->sub_services);
+            ]);
+            
+            $appointment->sub_services()->sync($this->sub_services);
 
             event(new NewAppointment($appointment));
         }
