@@ -17,7 +17,7 @@
     <li><strong>Booking Date:</strong> {{ $appointment->date->format('d.m.Y') }} {{ $appointment->term->format('H:i') }}</li>
     <li><strong>Service Type:</strong> {{ $appointment->service->name }}</li>
     <li><strong>Service Cost:</strong> {{ $appointment->total_price }}</li>
-    <li><strong>Address:</strong> {{ $appointment->employee->company->adress }}</li>
+    <li><strong>Address:</strong> {{ $appointment->employee->company->address }}</li>
 </ul>
 
 <p>We thank you for choosing our services</p>
