@@ -10,19 +10,19 @@
 
 <p>Dear {{ $appointment->client->first_name }},</p>
 
-<p>You have successfully booked a service at {{ $appointment->company->name }}</p>
+<p>You have successfully booked a service at {{ $appointment->employee->company->name }}</p>
 
 <ul>
     <li><strong>Master:</strong> {{ $appointment->employee->first_name }} {{ $appointment->employee->last_name }}</li>
     <li><strong>Booking Date:</strong> {{ $appointment->date->format('d.m.Y') }} {{ $appointment->term->format('H:i') }}</li>
     <li><strong>Service Type:</strong> {{ $appointment->service->name }}</li>
     <li><strong>Service Cost:</strong> {{ $appointment->total_price() }}</li>
-    <li><strong>Address:</strong> {{ $appointment->company->adress }}</li>
+    <li><strong>Address:</strong> {{ $appointment->employee->company->adress }}</li>
 </ul>
 
 <p>We thank you for choosing our services</p>
 
-<p>If you have any questions or need to modify or cancel your booking, you can do so through the <a href="{{ route('webapp.index', $appointment->company->web_apps()->first()) }}">manage booking link</a>.</p>
+<p>If you have any questions or need to modify or cancel your booking, you can do so through the <a href="{{ route('webapp.index', $appointment->employee->company->web_apps()->first()) }}">manage booking link</a>.</p>
 
 <p>Best regards, Your Buukan team.</p>
 
