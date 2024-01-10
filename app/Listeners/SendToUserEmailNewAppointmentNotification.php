@@ -5,6 +5,7 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Mail\NewAppointmentEmailNotification;
+use Illuminate\Support\Facades\Mail;
 
 class SendToUserEmailNewAppointmentNotification
 {
