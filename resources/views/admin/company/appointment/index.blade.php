@@ -23,9 +23,9 @@
         @forelse ($employees as $employee)
             <div class="min-w-full sm:min-w-0 sm:w-1/2 lg:w-1/3 xl:w-1/4 px-2">
                 <div class="p-3 space-y-3 rounded-md bg-gray-100">
-                    <div class="flex items-center space-x-3 ">
-                        <div class="w-1/4 bg-cover bg-no-repeat aspect-square rounded-full h-min" style="background-image: url({{ asset($employee->avatar) }})"></div>
-                        <div class="w-3/4 overflow-hidden">
+                    <div class="flex items-center space-x-3">
+                        <img class="aspect-square rounded-full object-cover max-w-[60px]" src="{{ asset($employee->avatar) }}" alt="">
+                        <div class="w-full overflow-hidden">
                             <a href="{{ route('admin.company.employee.schedule.index', [$company, $employee]) }}" class="w-full text-md font-medium text-gray-900 hover:underline">
                                 {{ $employee->first_name }} {{ $employee->last_name }}
                             </a>

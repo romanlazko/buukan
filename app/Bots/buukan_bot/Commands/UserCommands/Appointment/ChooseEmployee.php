@@ -39,7 +39,7 @@ class ChooseEmployee extends Command
         ], 'employee_id');
 
         return BotApi::returnInline([
-            'text'          =>  "*Выбери мастера:*",
+            'text'          =>  "*Выбери специалиста:*",
             'chat_id'       =>  $updates->getChat()->getId(),
             'reply_markup'  =>  $buttons,
             'parse_mode'    =>  'Markdown',
