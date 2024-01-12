@@ -14,7 +14,7 @@ class ScheduleController extends Controller
 {
     public function index(Company $company, Employee $employee)
     {
-        if ($employee->hasRole('employee', 'company')) {
+        if ($employee->hasRole('employee') OR $employee->hasRole('admin') OR $employee->hasRole('administrator')) {
             return view('admin.company.employee.schedule.index', compact(
                 'company',
                 'employee'

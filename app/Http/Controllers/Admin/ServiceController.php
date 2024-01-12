@@ -123,8 +123,10 @@ class ServiceController extends Controller
             ]);
         }
 
-        $service->employee()->schedules->where($service->id)->get()->each(function ($schedule) {
-            $schedule->delete();
+        $service->employees->map(function($employee) {
+            $employee->schedules->where($service->id)->get()->each(function ($schedule) {
+                $schedule->delete();
+            });
         });
 
         $service->delete();
