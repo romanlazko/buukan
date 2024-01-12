@@ -22,7 +22,7 @@ class CompanySidebar extends Component
      */
     public function render(): View|Closure|string
     {
-        $company = auth()->user()?->company ?? auth()->user()->employee?->company;
+        $company = auth()->user()?->company ?? auth()->user()->employee?->company ?? request()->company;
 
         if ($company) {
             return view('components.company-sidebar', compact([

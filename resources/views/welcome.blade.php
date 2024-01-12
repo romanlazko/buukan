@@ -1,22 +1,33 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="antialiased">
-        <a href="{{ route('admin.register') }}">РЕГИСТРАЦИЯ ДЛЯ НАТАШИ</a>
-        <x-modal name="createEventModal">
-            <iframe class="w-full min-h-[90vh]" src="http://127.0.0.1:8003/app/1"></iframe>
-        </x-modal>
-    </body>
-</html>
+<x-guest-layout>
+    <div></div>
+    <section class="w-full sm:flex items-center p-5 space-y-12 sm:space-y-0 sm:space-x-20">
+        <div class="w-full sm:w-2/3 space-y-12">
+            <h1 class="text-5xl sm:text-6xl font-extrabold">
+                ONLINE RESERVATION SYSTEM
+            </h1>
+            <h3 class="text-xl font-bold">
+                Ваши правила. Наша технология.
+            </h3>
+            <p>
+                Добро пожаловать в инновационную резервационную систему, созданную специально для профессионалов в сфере красоты и ухода. У нас есть все необходимое, чтобы ваш бизнес процветал и вы могли предоставлять своим клиентам высший уровень сервиса.
+            </p>
+            
+            <ul class="text-gray-400 space-y-3">
+                <x-a-buttons.button class="bg-blue-600 text-white" href="{{ route('admin.register') }}">
+                    {{ __("Start free trial") }}
+                </x-a-buttons.button>
+                <li>
+                    {{ __("No credit card required. ") }}
+                </li>
+                <li class="text-blue-500">
+                    {{ __("31 days trial ") }}
+                </li>
+            </ul>
+        </div>
+        <div class="w-full sm:w-1/3">
+            <div class="w-full" style="background-image:url({{ asset('img/public/phone.png')}});">
+                <img class="m-auto " src="{{ asset('img/public/tablet.png')}}" alt="">
+            </div>
+        </div>
+    </section>
+</x-guest-layout>

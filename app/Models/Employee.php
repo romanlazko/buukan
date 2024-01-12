@@ -10,7 +10,7 @@ use Romanlazko\Telegram\Models\TelegramChat;
 
 class Employee extends Model
 {
-    use HasFactory; use SoftDeletes; use HasRoles;
+    use HasFactory; use SoftDeletes;
 
     protected $casts = [
         'settings' => 'object',
@@ -93,5 +93,19 @@ class Employee extends Model
     public function getAvatarAttribute()
     {
         return $this->attributes['avatar'] ?? 'img/public/preview.jpg';
+    }
+
+    public function scopeRole($query, $role)
+    {
+        return $query->whereHas('admin', function($query) use($role){
+            return $query->whereHas('roles', function($query) use($role){
+                return $query->where('name', $role);
+            });
+        });
+    }
+
+    public function hasRole($role)
+    {
+        return $this->admin->hasRole($role);
     }
 }

@@ -4,7 +4,7 @@
             @csrf
     
             <!-- Name -->
-            <div class="w-full sm:flex sm:space-x-3">
+            <div class="w-full sm:flex sm:space-x-3 space-y-4 sm:space-y-0">
                 <div class="w-full sm:w-1/2">
                     <x-form.label for="first_name" :value="__('First name')" />
                     <x-form.input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="first_name" />
@@ -59,5 +59,4 @@
             </div>
         </form>
     </div>
-    
 </x-guest-layout>

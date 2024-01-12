@@ -46,14 +46,6 @@
                         @empty
                             
                         @endforelse
-
-                        @forelse ($employee->roles as $role)
-                            <x-badge color="green">
-                                {{ $role->name }}
-                            </x-badge>
-                        @empty
-                            
-                        @endforelse
                     </div>
                     <div class="text-lg">
                         <a href="{{ route('admin.company.employee.edit', [$company, $employee]) }}"  wire:click="toggleClientForm" x-on:click="hasChanged = true">

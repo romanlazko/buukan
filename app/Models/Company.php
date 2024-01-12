@@ -35,7 +35,7 @@ class Company extends Model
 
     public function owner()
     {
-        return $this->hasOne(User::class, 'owner_id', 'id');
+        return $this->belongsTo(Admin::class);
     }
 
     public function services()

@@ -65,7 +65,7 @@
                             <div class="w-full flex space-x-2">
                                 <x-form.select wire:key="appointment-employee-{{ $appointmentForm->employee_id }}" id="employee" wire:model.live="appointmentForm.employee_id" class="w-full" required :disabled="$formDisabled">
                                     <option value="">Choose employee</option>
-                                    @forelse ($company->employees()->role('employee', 'company')->get() as $employee_item)
+                                    @forelse ($company->employees()->role('employee')->get() as $employee_item)
                                         <option value="{{ $employee_item->id }}">{{ $employee_item->first_name }} {{ $employee_item->last_name }}</option>
                                     @empty
                                         

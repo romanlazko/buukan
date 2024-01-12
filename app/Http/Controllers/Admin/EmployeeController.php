@@ -91,7 +91,9 @@ class EmployeeController extends Controller
             'avatar' => $filePath ?? null,
             'settings' => $request->settings,
             'telegram_chat_id' => $request->telegram_chat,
-        ])->assignRole($request->roles);
+        ]);
+        
+        $user->assignRole($request->roles);
 
         $employee->services()->sync($request->services);
 
@@ -191,7 +193,7 @@ class EmployeeController extends Controller
             ]);
         }
 
-        $employee->roles()->sync($request->roles);
+        $employee->admin->roles()->sync($request->roles);
 
         $employee->services()->sync($request->services);
 
