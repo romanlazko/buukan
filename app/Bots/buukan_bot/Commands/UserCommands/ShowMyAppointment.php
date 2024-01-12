@@ -39,7 +39,7 @@ class ShowMyAppointment extends Command
         $text = implode("\n", [
             "*{$appointment->service->name}*"."\n",
             ($appointment->sub_services->isNotEmpty() ? "Доп услуги: *{$appointment->sub_services->pluck('name')->implode(', ')}*\n" : "").
-            "Мастер: *{$appointment->employee->first_name}*",
+            "Специалист: *{$appointment->employee->first_name}*",
             "Дата и время: *{$appointment->date->format('d.m(D)')}: {$appointment->term->format('H:i')}*"."\n",
 
             "📍 [{$appointment->employee->company->address}](https://www.google.com/maps?q={$appointment->employee->company->address})",

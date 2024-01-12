@@ -65,7 +65,7 @@ class ConfirmAppointCommand extends Command
             "*Пожалуйста, проверь все данные, и подтверди запись:*"."\n",
             "*{$service->name}*"."\n",
             ($sub_services->isNotEmpty() ? "Доп услуги: *{$sub_services->pluck('name')->implode(', ')}*\n" : "").
-            "Мастер: *{$employee->first_name} {$employee->last_name}*",
+            "Специалист: *{$employee->first_name} {$employee->last_name}*",
             "Дата и время: *{$schedule->date->format('d.m(D)')}: {$schedule->term->format('H:i')}*"."\n",
             "Итоговая стоимость: *{$total_price}*"."\n",
             "Если все правильно, нажми на кнопку *«Подтвердить»*"

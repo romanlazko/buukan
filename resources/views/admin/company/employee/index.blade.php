@@ -33,11 +33,11 @@
                         @forelse ($employees as $index => $employee)
                             <tr class="@if($index % 2 === 0) bg-gray-100 @endif">
                                 <x-table.td>
-                                    <div class="flex items-center py-2">
-                                        <a href="{{ route('admin.company.employee.show', [$company, $employee]) }}" class="flex-col items-center my-auto">
-                                            <img src="{{ asset($employee->avatar) }}" class="mr-4 w-12 h-12 min-w-[48px] rounded-full bg-slate-300">
+                                    <div class="flex items-center py-2 space-x-3">
+                                        <a href="{{ route('admin.company.employee.show', [$company, $employee]) }}" class="w-[60px] aspect-square">
+                                            <img src="{{ asset($employee->avatar) }}" class="w-[60px] aspect-square rounded-full object-cover">
                                         </a>
-                                        <div class="flex-col justify-center">
+                                        <div class="justify-center">
                                             <div>
                                                 <a href="{{ route('admin.company.employee.show', [$company, $employee]) }}" class="w-full text-base mb-1 hover:underline">
                                                     {{ $employee->first_name }} {{ $employee->last_name }}

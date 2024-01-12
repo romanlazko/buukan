@@ -19,15 +19,15 @@ class SendToAdminNewAppointmentNotification
         );
 
         $text = implode("\n", [
-            "✅*Новая запись на маникюр*✅"."\n",
+            "✅*Новая запись на услугу*✅"."\n",
 
             "#{$appointment->date->format('D')}{$appointment->date->format('dmY')}"."\n",
 
             "*{$appointment->service->name}*"."\n",
             ($appointment->sub_services->isNotEmpty() ? "Доп услуги: *{$appointment->sub_services->pluck('name')->implode(', ')}*\n" : "").
-            "Мастер: *{$appointment->employee->first_name} {$appointment->employee->last_name}*",
+            "Специалист: *{$appointment->employee->first_name} {$appointment->employee->last_name}*",
             "Дата и время: *{$appointment->date->format('d.m(D)')}: {$appointment->term->format('H:i')}*",
-            "Имя фамилия клиента: *{$appointment->client?->first_name} {$appointment->client?->last_name}*",
+            "Клиент: *{$appointment->client?->first_name} {$appointment->client?->last_name}*",
             "Телефон: [{$appointment->client?->phone}]()"
         ]);
 
