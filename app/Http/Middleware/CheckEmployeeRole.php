@@ -9,15 +9,15 @@ class CheckEmployeeRole
 {
     public function handle($request, Closure $next, ...$roles)
     {
+        // dd(auth()->user());
         foreach ($roles as $role) {
-            if (auth()->user()->hasRole($role) OR auth()->user()->employee->hasRole($role, 'company')) {
-                if (auth()->user()->company?->id == $request->company->id OR auth()->user()->employee->company->id == $request->company->id) {
+            if (auth()->user()->hasRole($role)) {
+                if (auth()->user()->company?->id == $request->company->id OR auth()->user()->employee?->company->id == $request->company->id OR auth()->user()->hasRole('super-duper-admin')) {
                     return $next($request);
                 }
             }
         }
 
-        // Если у работника нет требуемой роли, выполните действия по вашему усмотрению, например, перенаправление на страницу с сообщением об ошибке.
         return redirect()->route('admin.dashboard');
     }
 }

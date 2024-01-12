@@ -17,7 +17,7 @@ class AppointmentController extends Controller
     public function index(Request $request, Company $company)
     {
         $employees = $company->employees()
-            ->role('employee', 'company')
+            ->role('employee')
             ->get()
             ->map(function ($employee) {
                 $schedules = $employee->unoccupiedSchedules(request('date', now()->format('Y-m-d')))

@@ -21,11 +21,15 @@ class DashboardController extends Controller
             return redirect()->route('admin.company.create');
         }
 
-        if ($user->employee->hasRole('administrator', 'company')) {
+        if ($user->hasRole('super-duper-admin')) {
+            return redirect()->route('admin.company.show', $request->company);
+        }
+
+        if ($user->hasRole('administrator')) {
             return redirect()->route('admin.company.appointment.index', $user->employee->company);
         }
 
-        if ($user->employee->hasRole('employee', 'company')) {
+        if ($user->hasRole('employee')) {
             return redirect()->route('admin.company.employee.schedule.index', [$user->employee->company, $user->employee]);
         }
     }

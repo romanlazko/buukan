@@ -18,7 +18,11 @@
 		<x-company-sidebar/>
 
 		@hasrole('super-duper-admin')
-			<x-responsive-nav-link :href="route('super-duper-admin.user.user.index')" :active="request()->routeIs('super-duper-admin.user.*')">
+		<hr>
+			<x-responsive-nav-link :href="route('super-duper-admin.company.index')" :active="request()->routeIs('super-duper-admin.company.*')">
+				{{ __('Companies') }}
+			</x-responsive-nav-link>
+			<x-responsive-nav-link :href="route('super-duper-admin.user.index')" :active="request()->routeIs('super-duper-admin.user.*')">
 				{{ __('Users') }}
 			</x-responsive-nav-link>
 		@endhasrole

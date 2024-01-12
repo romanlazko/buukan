@@ -32,8 +32,10 @@
             @endif
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
+            <main class="">
+                <div class="max-w-7xl m-auto space-y-28">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
     </body>

@@ -101,7 +101,7 @@
                                             <span>
                                                 {{ $role->name }}
                                             </span>
-                                            <x-form.checkbox id="{{ $role->name }}" name="roles[]" type="checkbox" :value="$role->id" :checked="old('roles[]', $employee->hasRole($role->name))"/>
+                                            <x-form.checkbox id="{{ $role->name }}" name="roles[]" type="checkbox" :value="$role->id" :checked="old('roles[]', $employee->admin->hasRole($role->name))"/>
                                         </div>
                                     </x-form.label>
                                 </div>

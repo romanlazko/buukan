@@ -25,9 +25,6 @@ use App\Http\Controllers\Telegram\TelegramChatController;
 use App\Http\Controllers\Telegram\TelegramController;
 use App\Livewire\WebApp\WebApp;
 use Illuminate\Support\Facades\Route;
-use Romanlazko\Slurp\App\Http\Controllers\PermissionController;
-use Romanlazko\Slurp\App\Http\Controllers\RoleController;
-use Romanlazko\Slurp\App\Http\Controllers\UserController;
 use App\Bots\buukan_bot\Http\Controllers\CronController;
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +38,7 @@ use App\Bots\buukan_bot\Http\Controllers\CronController;
 */
 
 Route::get('/', function () {
-    return redirect()->route('admin.login');
+    return view('welcome');
 })->name('welcome');
 
 Route::middleware('guest')->name('admin.')->group(function () {
@@ -60,13 +57,12 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
         
-    Route::middleware(['role:admin'])->group(function () {
+    Route::middleware(['checkEmployeeRole:admin|super-duper-admin|administrator'])->group(function () {
         Route::resource('company', CompanyController::class);
-    });
 
-    Route::middleware(['checkEmployeeRole:admin|administrator'])->group(function () {
         Route::get('company/{company}/client/{client}/telegram_chat', [ClientController::class, 'telegram_chat'])->name('company.client.telegram.chat');
         Route::resource('company.client', ClientController::class);
+
         Route::resource('company.employee', EmployeeController::class);
         Route::resource('company.service', ServiceController::class);
         Route::resource('company.sub_service', SubServiceController::class);
@@ -79,22 +75,10 @@ Route::middleware('auth')->name('admin.')->group(function () {
         Route::resource('company.web_app', WebAppController::class);
     });
     
-    Route::middleware(['checkEmployeeRole:admin|administrator|employee'])->group(function () {
+    Route::middleware(['checkEmployeeRole:admin|administrator|employee|super-duper-admin'])->group(function () {
         Route::resource('company.employee.schedule', ScheduleController::class);
     });
 });
-
-Route::middleware(['web', 'auth', 'role:super-duper-admin'])->name('super-duper-admin.user.')->prefix('super-duper-admin')->group(function () {
-    Route::resource('user', UserController::class);
-    Route::resource('role', RoleController::class);
-    Route::resource('permission', PermissionController::class);
-});
-
-
-Route::middleware(['web'])->get('api/v1/get-employee-unoccupied-schedule', GetEmployeeUnoccupiedSchedule::class)->name('get-employee-unoccupied-schedule');
-Route::middleware(['web'])->post('api/v1/get-employee-unoccupied-schedule', GetEmployeeUnoccupiedSchedule::class)->name('get-employee-unoccupied-schedule');
-Route::middleware(['web'])->post('api/v1/get-employee-service', GetEmployeeService::class)->name('get-employee-service');
-Route::middleware(['web'])->post('api/v1/get-client-data', GetClientData::class)->name('get-client-data');
 
 Route::middleware(['web'])->prefix('telegram')->get('/cron', CronController::class); 
 // require __DIR__.'/auth.php';

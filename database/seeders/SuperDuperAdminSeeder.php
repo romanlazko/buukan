@@ -16,35 +16,35 @@ class SuperDuperAdminSeeder extends Seeder
      */
     public function run(): void
     {
-        Admin::create([
+        Admin::updateOrCreate([
             'first_name' => 'SuperDuperAdmin',
             'last_name' => 'SuperDuperAdmin',
             'email' => 'super-duper-admin@admin.com',
             'password' => Hash::make('admin'),
         ])
         ->roles()
-        ->create([
+        ->updateOrCreate([
             'name' => 'super-duper-admin',
         ])
         ->permissions()
-        ->create([
+        ->updateOrCreate([
             'name' => 'default',
             'comment' => 'Default permission',
         ]);
 
-        Role::create([
-            'name' => 'admin',
-            'guard_name' => 'admin'
-        ]);
+        // Role::updateOrCreate([
+        //     'name' => 'admin',
+        //     'guard_name' => 'admin'
+        // ]);
 
-        Role::create([
-            'name' => 'employee',
-            'guard_name' => 'company'
-        ]);
+        // Role::updateOrCreate([
+        //     'name' => 'employee',
+        //     'guard_name' => 'company'
+        // ]);
 
-        Role::create([
-            'name' => 'administrator',
-            'guard_name' => 'company'
-        ]);
+        // Role::updateOrCreate([
+        //     'name' => 'administrator',
+        //     'guard_name' => 'company'
+        // ]);
     }
 }

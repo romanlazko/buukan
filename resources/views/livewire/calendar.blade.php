@@ -36,7 +36,7 @@
                     $(info.el).find('.fc-event-main')
                         .append(
                             $("<div>", {
-                                "class": "overflow-hidden fc-event-main-div"
+                                "class": "overflow-hidden fc-event-main-div pl-1"
                             })
                         );
 

@@ -41,11 +41,6 @@ class WebApp extends Component
     public $unnocupiedDates;
     public $schedules;
     public $appointments;
-
-    // public function mount()
-    // {
-    //     $this->client = $this->web_app->company->clients()->where('user_id', auth('user')->user()->id);
-    // }
     
     public function nextStep()
     {
