@@ -8,6 +8,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Events\NewAppointment;
 use App\Listeners\SendToUserEmailNewAppointmentNotification;
+use App\Listeners\SendToUserTelegramNewAppointmentNotification;
+use App\Listeners\SendToAdminTelegramNewAppointmentNotification;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,8 +24,11 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         NewAppointment::class => [
+            // User listeners
             SendToUserEmailNewAppointmentNotification::class,
-            // SendToUserTelegramNewAppointmentNotification::class,
+            SendToUserTelegramNewAppointmentNotification::class,
+            // Admin listeners
+            SendToAdminTelegramNewAppointmentNotification::class,
         ],
     ];
 

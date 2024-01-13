@@ -22,6 +22,6 @@ class SendToUserEmailNewAppointmentNotification
      */
     public function handle(object $event): void
     {
-        Mail::to($event->appointment->client->email)->send(new NewAppointmentEmailNotification($event->appointment));
+        Mail::to($event->appointment?->client?->email)->send(new NewAppointmentEmailNotification($event->appointment));
     }
 }
