@@ -112,6 +112,6 @@ class Employee extends Model
 
     public function telegram_bot()
     {
-        return $this->telegram_chat->bot();
+        return $this->telegram_chat?->bot();
     }
 }
