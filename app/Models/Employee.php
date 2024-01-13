@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
 use Romanlazko\Telegram\Models\TelegramChat;
+use Romanlazko\Telegram\Models\TelegramBot;
 
 class Employee extends Model
 {
@@ -107,5 +108,10 @@ class Employee extends Model
     public function hasRole($role)
     {
         return $this->admin->hasRole($role);
+    }
+
+    public function telegram_bot()
+    {
+        return $this->telegram_chat->bot();
     }
 }

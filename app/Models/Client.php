@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Romanlazko\Telegram\Models\TelegramChat;
+use Romanlazko\Telegram\Models\TelegramBot;
 use Romanlazko\Telegram\App\Bot;
 
 class Client extends Model
@@ -46,12 +47,17 @@ class Client extends Model
 
     public function getAvatarAttribute()
     {
-        if ($telegram_bot = $this->telegram_chat?->bot) {
-            $bot = new Bot($telegram_bot->token);
+        if ($this->telegram_bot) {
+            $bot = new Bot($this->telegram_bot->token);
 
             return $bot::getPhoto(['file_id' => $this->telegram_chat->photo]);
         }
 
         return $this->attributes['avatar'] ?? 'img/public/preview.jpg';
+    }
+
+    public function telegram_bot()
+    {
+        return $this->telegram_chat->bot();
     }
 }

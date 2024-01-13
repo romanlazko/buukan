@@ -9,10 +9,9 @@ class CheckEmployeeRole
 {
     public function handle($request, Closure $next, ...$roles)
     {
-        // dd(auth()->user());
         foreach ($roles as $role) {
             if (auth()->user()->hasRole($role)) {
-                if (auth()->user()->company?->id == $request->company->id OR auth()->user()->employee?->company->id == $request->company->id OR auth()->user()->hasRole('super-duper-admin')) {
+                if (auth()->user()->company?->id == $request->company?->id OR auth()->user()->employee?->company?->id == $request->company?->id OR auth()->user()->hasRole('super-duper-admin')) {
                     return $next($request);
                 }
             }
