@@ -47,7 +47,7 @@ class Client extends Model
 
     public function getAvatarAttribute()
     {
-        if ($this->telegram_bot) {
+        if ($this->telegram_chat) {
             $bot = new Bot($this->telegram_bot->token);
 
             return $bot::getPhoto(['file_id' => $this->telegram_chat->photo]);
