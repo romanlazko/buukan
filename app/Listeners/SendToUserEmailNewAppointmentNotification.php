@@ -6,22 +6,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Mail\NewAppointmentEmailNotification;
 use Illuminate\Support\Facades\Mail;
+use App\Events\NewAppointmentEvent;
 
 class SendToUserEmailNewAppointmentNotification
 {
     /**
-     * Create the event listener.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      */
-    public function handle(object $event): void
+    public function handle(NewAppointmentEvent $event): void
     {
-        Mail::to($event->appointment?->client?->email)->send(new NewAppointmentEmailNotification($event->appointment));
+        if ($event->appointment?->client?->email) {
+            Mail::to($event->appointment?->client?->email)->send(new NewAppointmentEmailNotification($event->appointment));
+        }
     }
 }

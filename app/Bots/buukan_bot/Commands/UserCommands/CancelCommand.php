@@ -2,7 +2,6 @@
 
 namespace App\Bots\buukan_bot\Commands\UserCommands;
 
-use App\Bots\buukan_bot\Events\CancelAppointmentEvent;
 use App\Models\Appointment;
 use Romanlazko\Telegram\App\BotApi;
 use Romanlazko\Telegram\App\Commands\Command;
@@ -32,10 +31,6 @@ class CancelCommand extends Command
         }
 
         $appointment->cancel();
-
-        if ($appointment) {
-            event(new CancelAppointmentEvent($appointment));
-        }
     
         return BotApi::deleteMessage([
             'chat_id'       =>  $updates->getChat()->getId(),

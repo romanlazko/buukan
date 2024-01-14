@@ -22,7 +22,13 @@
 
 <p>We thank you for choosing our services</p>
 
-<p>If you have any questions or need to modify or cancel your booking, you can do so through the <a href="{{ route('webapp.index', $appointment->employee->company->web_apps()->first()) }}">manage booking link</a>.</p>
+@if ($appointment->via_telegram) 
+    <p>If you have any questions or need to modify or cancel your booking, you can do so through the <a href="https://t.me/{{ $appointment->company->telegram_bots()->first()->username }}">manage booking link</a>.</p>
+@elseif($appointment->via_webapp)
+    <p>If you have any questions or need to modify or cancel your booking, you can do so through the <a href="{{ route('webapp.index', $appointment->company->web_apps()->first()) }}">manage booking link</a>.</p>
+@endif
+
+
 
 <p>Best regards, Your Buukan team.</p>
 

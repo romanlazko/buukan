@@ -4,29 +4,21 @@ namespace App\Listeners;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-use App\Events\NewAppointment;
-use Romanlazko\Telegram\App\BotApi;
+use App\Events\NewAppointmentEvent;
+use Romanlazko\Telegram\App\Bot;
 use App\Bots\buukan_bot\Commands\UserCommands\MenuCommand;
 
 class SendToUserTelegramNewAppointmentNotification
 {
     /**
-     * Create the event listener.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Handle the event.
      */
-    public function handle(NewAppointment $event): void
+    public function handle(NewAppointmentEvent $event): void
     {
         $appointment = $event->appointment;
 
-        if ($appointment->client->telegram_bot) {
-            $bot = new Bot($appointment->client->telegram_bot->token);
+        if ($telegram_bot = $appointment->company->telegram_bots->first()) {
+            $bot = new Bot($telegram_bot->token);
 
             $buttons = $bot::inlineKeyboard([
                 [array(MenuCommand::getTitle('ru'), MenuCommand::$command, '')]
@@ -47,7 +39,7 @@ class SendToUserTelegramNewAppointmentNotification
             
             $bot::sendMessage([
                 'text'          =>  $text,
-                'chat_id'       =>  $appointment->client?->telegram_chat?->chat_id,
+                'chat_id'       =>  $appointment->client?->chat_id,
                 'reply_markup'  =>  $buttons,
                 'parse_mode'    =>  'Markdown',
             ]);

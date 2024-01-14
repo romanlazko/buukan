@@ -21,13 +21,22 @@
     <div {{ $attributes->merge() }} class="flex py-2 overflow-hidden w-full ">
         <div class="w-full flex rounded-md transform transition-all duration-200">
             <div class="w-full">
-                <p class="block font-bold text-sm whitespace-nowrap">
-                    {{ $event?->date->format('d.m (D)') }} {{ $event?->term->format('H:i') }}
-                </p>
+                <div class="flex items-center space-x-1">
+                    @if ($event->via)
+                        <div class="w-4 h-4 flex items-center justify-center border border-blue-500 rounded-full" title="{{ $event->via }}">
+                            <span class="text-black text-xs">{{ $event->via[0] ?? null}}</span>
+                        </div>
+                    @endif
+                    
+                    <p class="block font-bold text-sm whitespace-nowrap">
+                        {{ $event?->date->format('d.m (D)') }} {{ $event?->term->format('H:i') }}
+                    </p>
+                </div>
+                
                 @if ($event?->client)
                     <div class="text-start text-blue-400">
                         <a href="{{ route('admin.company.client.show', [$event?->client->company, $event?->client]) }}" class="text-base hover:underline text-blue-600">
-                            {{ $event?->client?->first_name }} {{ $event?->client?->last_name }}
+                            {{ $event?->client?->first_name ?? "" }} {{ $event?->client?->last_name ?? "" }} 
                         </a>
                     </div>
                 @endif
