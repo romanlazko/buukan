@@ -93,7 +93,7 @@ class EmployeeController extends Controller
             'telegram_chat_id' => $request->telegram_chat,
         ]);
         
-        $user->assignRole($request->roles);
+        $user->roles()->sync($request->roles);
 
         $employee->services()->sync($request->services);
 
