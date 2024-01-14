@@ -2,17 +2,15 @@
 
 namespace App\Listeners;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
-use App\Events\NewAppointmentEvent;
+use App\Events\CancelAppointmentEvent;
 use Romanlazko\Telegram\App\Bot;
 
-class SendToAdminTelegramNewAppointmentNotification
+class SendToAdminTelegramCancelAppointmentNotification
 {
     /**
      * Handle the event.
      */
-    public function handle(NewAppointmentEvent $event): void
+    public function handle(CancelAppointmentEvent $event): void
     {
         $appointment = $event->appointment;
 
@@ -33,12 +31,10 @@ class SendToAdminTelegramNewAppointmentNotification
             );
 
             $text = implode("\n", [
-                "✅*Новая запись на услугу*✅"."\n",
+                "❌*Отмена записи*❌"."\n",
 
                 "#{$appointment->date->format('D')}{$appointment->date->format('dmY')}"."\n",
 
-                "*{$appointment->service->name}*"."\n",
-                ($appointment->sub_services->isNotEmpty() ? "Доп услуги: *{$appointment->sub_services->pluck('name')->implode(', ')}*\n" : "").
                 "Специалист: *{$appointment->employee->first_name} {$appointment->employee->last_name}*",
                 "Дата и время: *{$appointment->date->format('d.m(D)')}: {$appointment->term->format('H:i')}*",
                 "Клиент: *{$appointment->client?->first_name} {$appointment->client?->last_name}*",

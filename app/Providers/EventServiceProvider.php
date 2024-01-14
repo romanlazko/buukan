@@ -6,10 +6,18 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use App\Events\NewAppointment;
+
+use App\Events\NewAppointmentEvent;
 use App\Listeners\SendToUserEmailNewAppointmentNotification;
 use App\Listeners\SendToUserTelegramNewAppointmentNotification;
 use App\Listeners\SendToAdminTelegramNewAppointmentNotification;
+
+use App\Events\CancelAppointmentEvent;
+// use App\Listeners\SendToUserEmailNewAppointmentNotification;
+use App\Listeners\SendToUserTelegramCancelAppointmentNotification;
+use App\Listeners\SendToAdminTelegramCancelAppointmentNotification;
+
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -23,12 +31,20 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        NewAppointment::class => [
+        NewAppointmentEvent::class => [
             // User listeners
             SendToUserEmailNewAppointmentNotification::class,
             SendToUserTelegramNewAppointmentNotification::class,
             // Admin listeners
             SendToAdminTelegramNewAppointmentNotification::class,
+        ],
+
+        CancelAppointmentEvent::class => [
+            // User listeners
+            // SendToUserEmailNewAppointmentNotification::class,
+            SendToUserTelegramCancelAppointmentNotification::class,
+            // Admin listeners
+            SendToAdminTelegramCancelAppointmentNotification::class,
         ],
     ];
 

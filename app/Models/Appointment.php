@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Events\CancelAppointmentEvent;
 
 class Appointment extends Model
 {
@@ -16,6 +17,11 @@ class Appointment extends Model
         'date' => 'datetime',
         'term' => 'datetime:H:i:s'
     ];
+
+    public function company()
+    {
+        return $this->employee->company();
+    }
 
     public function employee()
     {
@@ -57,9 +63,15 @@ class Appointment extends Model
 
     public function cancel()
     {
-        return $this->update([
+        $result = $this->update([
             'status' => 'canceled'
         ]);
+
+        if ($result) {
+            event(new CancelAppointmentEvent($this));
+        }
+        
+        return $result;
     }
 
     public function getTotalPriceAttribute()
@@ -71,5 +83,15 @@ class Appointment extends Model
                 return $price->getAmount()->toInt();
             })->sum()
         );
+    }
+
+    public function getViaWebappAttribute() :bool
+    {
+        return $this->via == 'webapp';
+    }
+
+    public function getViaTelegramAttribute() :bool
+    {
+        return $this->via == 'telegram';
     }
 }

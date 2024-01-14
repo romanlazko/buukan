@@ -60,4 +60,9 @@ class Client extends Model
     {
         return $this->telegram_chat->bot();
     }
+
+    public function getChatIdAttribute()
+    {
+        return $this->telegram_chat?->chat_id ?? null;
+    }
 }
