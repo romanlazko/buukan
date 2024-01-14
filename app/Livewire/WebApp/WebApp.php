@@ -10,7 +10,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Http\Actions\GetEmployeeUnoccupiedScheduleAction;
-use App\Events\NewAppointment;
+use App\Events\NewAppointmentEvent;
 
 #[Layout('layouts.web-app')]
 class WebApp extends Component
@@ -112,7 +112,7 @@ class WebApp extends Component
             
             $appointment->sub_services()->sync($this->sub_services);
 
-            event(new NewAppointment($appointment));
+            event(new NewAppointmentEvent($appointment));
         }
 
         $this->reset('serviceId', 'employeeId', 'date', 'term', 'currentStep', 'sub_services');
