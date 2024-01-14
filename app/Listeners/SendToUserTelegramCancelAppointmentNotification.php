@@ -15,8 +15,8 @@ class SendToUserTelegramCancelAppointmentNotification
     public function handle(CancelAppointmentEvent $event): void
     {
         $appointment = $event->appointment;
-        
-        if ($telegram_bot = $appointment->company->telegram_bots->first()) {
+
+        if ($telegram_bot = $appointment->company->telegram_bots->first() AND $appointment->client?->chat_id) {
             $bot = new Bot($telegram_bot->token);
 
             $buttons = $bot::inlineKeyboard([
