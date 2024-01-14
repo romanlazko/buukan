@@ -8,29 +8,28 @@
 </head>
 <body>
 
-<p>Dear {{ $appointment->client->first_name }},</p>
+    <p>Dear {{ $appointment->client->first_name }},</p>
 
-<p>You have successfully booked a service at {{ $appointment->employee->company->name }}</p>
+    <p>You have successfully booked a service at {{ $appointment->employee->company->name }}</p>
 
-<ul>
-    <li><strong>Master:</strong> {{ $appointment->employee->first_name }} {{ $appointment->employee->last_name }}</li>
-    <li><strong>Booking Date:</strong> {{ $appointment->date->format('d.m.Y') }} {{ $appointment->term->format('H:i') }}</li>
-    <li><strong>Service Type:</strong> {{ $appointment->service->name }}</li>
-    <li><strong>Service Cost:</strong> {{ $appointment->total_price }}</li>
-    <li><strong>Address:</strong> {{ $appointment->employee->company->address }}</li>
-</ul>
+    <ul>
+        <li><strong>Master:</strong> {{ $appointment->employee->first_name }} {{ $appointment->employee->last_name }}</li>
+        <li><strong>Booking Date:</strong> {{ $appointment->date->format('d.m.Y') }} {{ $appointment->term->format('H:i') }}</li>
+        <li><strong>Service:</strong> {{ $appointment->service->name }}</li>
+        <li><strong>Sub services:</strong> {{ $appointment->sub_services->pluck('name')->implode(', ') }}</li>
+        <li><strong>Total Price:</strong> {{ $appointment->total_price }}</li>
+        <li><strong>Address:</strong> {{ $appointment->employee->company->address }}</li>
+    </ul>
 
-<p>We thank you for choosing our services</p>
+    <p>We thank you for choosing our services</p>
 
-@if ($appointment->via_telegram) 
-    <p>If you have any questions or need to modify or cancel your booking, you can do so through the <a href="https://t.me/{{ $appointment->company->telegram_bots()->first()->username }}">manage booking link</a>.</p>
-@elseif($appointment->via_webapp)
-    <p>If you have any questions or need to modify or cancel your booking, you can do so through the <a href="{{ route('webapp.index', $appointment->company->web_apps()->first()) }}">manage booking link</a>.</p>
-@endif
+    @if ($appointment->via_telegram) 
+        <p>If you have any questions or need to modify or cancel your booking, you can do so through the <a href="https://t.me/{{ $appointment->company->telegram_bots()->first()->username }}">manage booking link</a>.</p>
+    @elseif($appointment->via_webapp)
+        <p>If you have any questions or need to modify or cancel your booking, you can do so through the <a href="{{ route('webapp.index', $appointment->company->web_apps()->first()) }}">manage booking link</a>.</p>
+    @endif
 
-
-
-<p>Best regards, Your Buukan team.</p>
+    <p>Best regards, Your Buukan team.</p>
 
 </body>
 </html>

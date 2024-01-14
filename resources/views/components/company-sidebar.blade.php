@@ -1,4 +1,10 @@
 @hasanyrole('super-duper-admin|admin|administrator')
+    <x-responsive-nav-link :href="route('admin.company.show', $company)" :active="request()->routeIs('admin.company.show')">
+        {{ __('Dashboard') }}
+    </x-responsive-nav-link>
+@endhasanyrole
+
+@hasanyrole('super-duper-admin|admin|administrator')
     <x-responsive-nav-link :href="route('admin.company.appointment.index', $company)" :active="request()->routeIs('admin.company.appointment.*')">
         {{ __('Appointments') }}
     </x-responsive-nav-link>

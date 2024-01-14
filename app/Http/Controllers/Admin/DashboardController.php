@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('admin') OR $user->hasRole('administrator')) {
 
             if ($user->company) {
                 return redirect()->route('admin.company.show', $user->company);
@@ -22,7 +22,7 @@ class DashboardController extends Controller
         }
 
         if ($user->hasRole('super-duper-admin')) {
-            return redirect()->route('admin.company.show', $request->company);
+            return redirect()->route('super-duper-admin.company.index');
         }
 
         if ($user->hasRole('administrator')) {
