@@ -33,7 +33,8 @@ class SendToAdminTelegramNewAppointmentNotification
             );
 
             $text = implode("\n", [
-                "✅*Новая запись на услугу*✅"."\n",
+                "✅*Новая запись на услугу*✅",
+                "Через: #{$appointment->via}"."\n",
 
                 "#{$appointment->date->format('D')}{$appointment->date->format('dmY')}"."\n",
 
