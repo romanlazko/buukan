@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Confirmation</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Booking Reminder</title>
+    </head>
 <body>
 
     <p>Dear {{ $appointment->client->first_name }},</p>
 
-    <p>You have successfully booked a service at {{ $appointment->company->name }}</p>
+    <p>We would like to remind you that you have an appointment booked at {{ $appointment->company->name }}</p>
 
     <ul>
         <li><strong>Master:</strong> {{ $appointment->employee->first_name }} {{ $appointment->employee->last_name }}</li>

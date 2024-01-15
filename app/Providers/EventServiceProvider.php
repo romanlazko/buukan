@@ -17,6 +17,10 @@ use App\Events\CancelAppointmentEvent;
 use App\Listeners\SendToUserTelegramCancelAppointmentNotification;
 use App\Listeners\SendToAdminTelegramCancelAppointmentNotification;
 
+use App\Events\TomorrowAppointmentsEvent;
+use App\Listeners\SendToUserEmailTomorrowAppointmentsNotification;
+use App\Listeners\SendToUserTelegramTomorrowAppointmentsNotification;
+use App\Listeners\SendToAdminTelegramTomorrowAppointmentsNotification;
 
 
 class EventServiceProvider extends ServiceProvider
@@ -45,6 +49,14 @@ class EventServiceProvider extends ServiceProvider
             SendToUserTelegramCancelAppointmentNotification::class,
             // Admin listeners
             SendToAdminTelegramCancelAppointmentNotification::class,
+        ],
+
+        TomorrowAppointmentsEvent::class => [
+            // User listeners
+            SendToUserEmailTomorrowAppointmentsNotification::class,
+            SendToUserTelegramTomorrowAppointmentsNotification::class,
+            // Admin listeners
+            SendToAdminTelegramTomorrowAppointmentsNotification::class,
         ],
     ];
 

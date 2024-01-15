@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Employee;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Spatie\Permission\Models\Role;
 
 class UpdateEmployeeRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdateEmployeeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,16 @@ class UpdateEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'description' => ['required'],
+            'roles.*' => ['not_in:'.$this->getAdminRoles()],
         ];
+    }
+
+    public function getAdminRoles()
+    {
+        return Role::whereGuardName('admin')->pluck('id')->implode(',');
     }
 }

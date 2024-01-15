@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Bots\buukan_bot\Events;
+namespace App\Events;
 
 use App\Models\Appointment;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Romanlazko\Telegram\App\Bot;
 
-class TomorrowAppointment
+class TomorrowAppointmentsEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -16,7 +17,7 @@ class TomorrowAppointment
     /**
      * Create a new event instance.
      */
-    public function __construct(public Appointment $appointment)
+    public function __construct(public $appointments, public Bot $bot)
     {
     }
 

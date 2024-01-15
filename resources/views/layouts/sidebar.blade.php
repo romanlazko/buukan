@@ -7,7 +7,7 @@
 				{{ auth()->user()?->company->name ?? auth()->user()->employee?->company->name ?? __("+Add") }}
 			</a>
         </div> --}}
-		<div class="flex items-center float-left overflow-hidden">
+		<div class="flex items-center float-left overflow-hidden w-full">
 			@if (auth()->user()?->company)
 				<div class="flex-col items-center my-auto">
 					<img src="{{ asset(auth()->user()?->company->logo) }}" alt="Avatar" class="mr-4 w-12 h-12 min-w-[48px] rounded-full">
@@ -16,8 +16,9 @@
 					{{ auth()->user()?->company->name ?? auth()->user()->employee?->company->name }}
 				</a>
 			@else
-				<x-a-buttons.secondary href="{{ route('admin.dashboard') }}">
-					{{ __("+ Create company") }}
+				<x-a-buttons.secondary href="{{ route('admin.dashboard') }}" class="flex w-full justify-center space-x-1">
+					<i class="fa-solid fa-circle-plus text-indigo-700"></i>
+					<p>{{ __("Create company") }}</p>
 				</x-a-buttons.secondary>
 			@endif
         </div>
