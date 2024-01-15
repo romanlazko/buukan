@@ -12,6 +12,10 @@ class CronController extends Controller
     public function __invoke()
     {
         $companies = Company::all()->each(function ($company) {
+            $appointments   = null;
+            $telegram_bot   = null;
+            $bot            = null;
+
             if ($telegram_bot = $company->telegram_bots->first()){
                 $bot = new Bot($telegram_bot->token);
 
