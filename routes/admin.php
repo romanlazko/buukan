@@ -25,7 +25,7 @@ use App\Http\Controllers\Telegram\TelegramChatController;
 use App\Http\Controllers\Telegram\TelegramController;
 use App\Livewire\WebApp\WebApp;
 use Illuminate\Support\Facades\Route;
-use App\Bots\buukan_bot\Http\Controllers\CronController;
+use App\Http\Controllers\Cron\CronController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,5 +80,5 @@ Route::middleware('auth')->name('admin.')->group(function () {
     });
 });
 
-Route::middleware(['web'])->prefix('telegram')->get('/cron', CronController::class); 
+Route::middleware(['web'])->get('/cron', CronController::class); 
 // require __DIR__.'/auth.php';

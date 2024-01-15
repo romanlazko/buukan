@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Employee\CreateEmployeeRequest;
+use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Http\Services\FileService;
 use App\Http\Services\UserService;
 use App\Models\Company;
@@ -149,7 +150,7 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Company $company, Employee $employee, FileService $fileService)
+    public function update(UpdateEmployeeRequest $request, Company $company, Employee $employee, FileService $fileService)
     {
         $request->validate([
             'first_name' => ['required', 'string', 'max:255'],
