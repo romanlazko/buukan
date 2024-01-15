@@ -13,12 +13,14 @@ class TomorrowAppointmentsEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $company;
     
     /**
      * Create a new event instance.
      */
-    public function __construct(public $appointments, public Bot $bot)
+    public function __construct($company)
     {
+        $this->company = $company;
     }
 
     /**
