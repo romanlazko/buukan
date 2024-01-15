@@ -15,12 +15,20 @@ class SendToUserEmailTomorrowAppointmentsNotification
      */
     public function handle(TomorrowAppointmentsEvent $event): void
     {
-        $appointments = $event->appointments;
+        $company = $event->company;
 
-        $appointments->each(function ($appointment) {
-            if ($appointment?->client?->email) {
-                Mail::to($appointment?->client?->email)->send(new TomorrowAppointmentEmailNotification($appointment));
-            }
-        });
+        $appointments = $company->appointments()
+            ->where('status', 'new')
+            ->where('date', now()->addDay()->format('Y-m-d'))
+            ->orderBy('term')
+            ->get();
+
+        if ($appointments->isNotEmpty()) {
+            $appointments->each(function ($appointment) {
+                if ($appointment->client?->email) {
+                    Mail::to($appointment->client?->email)->send(new TomorrowAppointmentEmailNotification($appointment));
+                }
+            });
+        }
     }
 }
