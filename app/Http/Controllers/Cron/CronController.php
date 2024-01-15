@@ -17,7 +17,7 @@ class CronController extends Controller
 
                 $appointments = $company->appointments()
                     ->where('status', 'new')
-                    ->where('date', "2024-01-15")
+                    ->where('date', now()->addDay()->format('Y-m-d'))
                     ->orderBy('term')
                     ->get();
 
