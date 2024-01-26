@@ -14,7 +14,10 @@ class Money implements CastsAttributes
      */
     public function get(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return \Brick\Money\Money::of($attributes['price'], $attributes['currency']);
+        if ($attributes['price'] AND $attributes['currency']) {
+            return \Brick\Money\Money::of($attributes['price'], $attributes['currency']);
+        }
+        return $attributes['price'];
     }
 
     /**

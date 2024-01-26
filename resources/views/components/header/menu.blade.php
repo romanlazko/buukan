@@ -1,14 +1,12 @@
-<div class="space-x-4 lg:-my-px lg:ml-10 lg:flex hidden ">
+<div class="space-x-2 hidden lg:flex overflow-auto">
     {{ $slot }}
 </div>
-<div x-data="{ headerMenu: false }"  class="lg:hidden">
-    <button @click="headerMenu = ! headerMenu" class="w-6">
-        <i class="fa-solid fa-ellipsis-vertical"></i>
+<div x-data="{ headerMenu: false }" class="lg:hidden">
+    <button @click="headerMenu = ! headerMenu" class="px-4 py-1 hover:text-indigo-700 bg-gray-200 rounded-lg">
+        <i class="fa-solid fa-ellipsis"></i>
     </button>
 
-    <div x-cloak x-show="headerMenu" @click="headerMenu = false" class="fixed inset-0 z-10 w-full h-full"></div>
-
-    <div x-cloak x-show="headerMenu" class="absolute right-0 z-10 mt-2 overflow-hidden bg-white rounded-md shadow-xl border">
+    <div x-cloak x-show="headerMenu" @click.outside="headerMenu = false" @close.stop="headerMenu = false" class="absolute right-0 z-10 mt-2 overflow-hidden bg-white rounded-md shadow-xl border p-2 space-y-2">
         {{ $slot }}
     </div>
 </div>

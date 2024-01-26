@@ -59,7 +59,11 @@ class AppointmentModal extends Component
 
         $prefix = isset($service->settings->is_price_from) ? __("from ") : "";
 
-        $this->total_price = $prefix.$total_price?->getAmount()->toInt()." ".$total_price?->getCurrency()->getCurrencyCode();
+        $this->total_price = (object)[
+            'prefix' => $prefix,
+            'amount' => $total_price?->getAmount()->toInt(),
+            'currency' => $total_price?->getCurrency()->getCurrencyCode()
+        ];
 
         return view('livewire.appointment-modal');
     }

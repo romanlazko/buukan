@@ -1,6 +1,6 @@
 @props(['action' => "", 'placeholder' => 'Search'])
 
-<form action="{{ $action }}" class="w-full">
+<form action="{{ $action }}" class="">
     <div class="relative lg:mx-0 w-full">
         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
             <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none">
@@ -8,6 +8,6 @@
             </svg>
         </span>
 
-        <input class="w-full pl-10 pr-4 rounded-md sm:min-w-[16rem] focus:border-indigo-600" type="text" name="search" value="{{ old('search', request()->search) }}" placeholder="{{ $placeholder }}">
+        <input class="w-full pl-10 pr-4 rounded-md sm:min-w-[16rem] focus:border-indigo-600 border-none" type="text" name="search" value="{{ old('search', request()->search) }}" placeholder="{{ $placeholder }}">
     </div>
 </form>

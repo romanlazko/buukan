@@ -1,19 +1,15 @@
 <x-app-layout>
+    <x-slot name="navigation">
+        <x-form.search :action="route('admin.company.employee.index', $company)" :placeholder="__('Search by employees')"/>
+    </x-slot>
+    
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max text-center">
+        <div class="flex items-center space-x-2">
             <x-a-buttons.back href="{{ route('admin.company.employee.index', $company) }}"/>
-            <h2 class="font-semibold text-xl text-gray-800">
+            <h2 class="font-semibold text-lg text-gray-800">
                 {{ __('Create employee:') }}
             </h2>
         </div>
-        <x-header.menu>
-            <x-header.link :href="route('admin.company.employee.index', $company)" :active="request()->routeIs('admin.company.employee.index')">
-                {{ __('Employees') }}
-            </x-header.link>
-            <x-header.link href="{{ route('admin.company.employee.create', $company) }}" :active="request()->routeIs('admin.company.employee.create')">
-                {{ __("✚ Create employee") }}
-            </x-header.link>
-        </x-header.menu>
     </x-slot>
 
     <div class="w-full space-y-6 m-auto max-w-2xl py-4">
@@ -71,27 +67,29 @@
                     </x-white-block>
                 @endif
                 
-                <x-white-block>
-                    <div class="space-y-4">
-                        <h2 class="text-lg font-medium text-gray-900">
-                            {{ __('Services') }}
-                        </h2>
-                        <div class="border rounded-md p-3">
-                            @foreach ($company->services as $service)
-                                <div class="flex space-x-2 items-center py-3 @if(!$loop->last) border-b @endif">
-                                    <x-form.label for="{{ $service->slug }}" class="w-full ">
-                                        <div class="flex justify-between w-full items-center">
-                                            <span>
-                                                {{ $service->name }}
-                                            </span>
-                                            <x-form.checkbox id="{{ $service->slug }}" name="services[]" :value="$service->id" type="checkbox" :checked="old('services[{{$service->id}}]')"/>
-                                        </div>
-                                    </x-form.label>
-                                </div>
-                            @endforeach
+                @if ($company->services->isNotEmpty())
+                    <x-white-block>
+                        <div class="space-y-4">
+                            <h2 class="text-lg font-medium text-gray-900">
+                                {{ __('Services') }}
+                            </h2>
+                            <div class="border rounded-md p-3">
+                                @foreach ($company->services as $service)
+                                    <div class="flex space-x-2 items-center py-3 @if(!$loop->last) border-b @endif">
+                                        <x-form.label for="{{ $service->slug }}" class="w-full ">
+                                            <div class="flex justify-between w-full items-center">
+                                                <span>
+                                                    {{ $service->name }}
+                                                </span>
+                                                <x-form.checkbox id="{{ $service->slug }}" name="services[]" :value="$service->id" type="checkbox" :checked="old('services[{{$service->id}}]')"/>
+                                            </div>
+                                        </x-form.label>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                </x-white-block>
+                    </x-white-block>
+                @endif
 
                 <x-white-block>
                     <div class="space-y-4">

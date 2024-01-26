@@ -1,4 +1,19 @@
 <x-app-layout>
+    <x-slot name="navigation">
+        <x-form.search :action="route('admin.company.telegram_bot.chat.index', [$company, $telegram_bot] )" :placeholder="__('Search by chats')"/>
+        <x-header.menu>
+            <x-header.link href="{{ route('admin.company.telegram_bot.show', [$company, $telegram_bot]) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.show')">
+                {{ __('Bot') }}
+            </x-header.link>
+            <x-header.link href="{{ route('admin.company.telegram_bot.chat.index', [$company, $telegram_bot] ) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.chat.*')">
+                {{ __('Chats') }}
+            </x-header.link>
+            <x-header.link href="{{ route('admin.company.telegram_bot.edit', [$company, $telegram_bot]) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.edit')">
+                {{ __('Settings') }}
+            </x-header.link>
+        </x-header.menu>
+    </x-slot>
+
     <x-slot name="header">
         <div class="sm:flex items-center sm:space-x-3 w-max">
             <div class="flex items-center">
@@ -24,17 +39,6 @@
                 </div>
             </div>
         </div>
-        <x-header.menu>
-            <x-header.link href="{{ route('admin.company.telegram_bot.show', [$company, $telegram_bot]) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.show')">
-                {{ __('Bot') }}
-            </x-header.link>
-            <x-header.link href="{{ route('admin.company.telegram_bot.chat.index', [$company, $telegram_bot] ) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.chat.*')">
-                {{ __('Chats') }}
-            </x-header.link>
-            <x-header.link href="{{ route('admin.company.telegram_bot.edit', [$company, $telegram_bot]) }}" class="float-right" :active="request()->routeIs('admin.company.telegram_bot.edit')">
-                {{ __('Settings') }}
-            </x-header.link>
-        </x-header.menu>
     </x-slot>
     
     <div class="w-full space-y-6 m-auto max-w-2xl">

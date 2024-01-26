@@ -18,33 +18,26 @@
     </head>
     
     <body>
-        <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto">
+        <div x-data="{ sidebarOpen: false }" class="flex h-dvh bg-gray-200 font-roboto">
             @include('layouts.sidebar')
             
             <div class="flex-1 flex flex-col overflow-hidden">
-                {{-- <div class="sm:hidden">
-                    @include('layouts.header')
-                </div> --}}
-                
+                @include('layouts.header')
                 @if (isset($header))
-                    <div class="bg-white  " x-data="{ headerOpen: false }">
-                        <div class="flex w-full m-auto px-4 sm:px-6 lg:px-8 min-h-[80px] items-center justify-between">
-                            <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
-                                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
+                    <div class="bg-white" x-data="{ headerOpen: false }">
+                        <div class="flex lg:grid w-full px-2 md:px-4 min-h-[50px] items-center py-1 space-x-2 lg:space-x-0 justify-between lg:justify-normal">
                             {{ $header }}
                         </div>
                         <hr>
                     </div>
                 @endif
                 
-                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                <main class="flex-1 overflow-y-auto bg-gray-200">
                     <div class="mx-auto p-1">
                         {{$slot}}
                     </div>
                 </main>
+
                 @if (isset($footer))
                     <div class="bg-white">
                         <div class="flex w-full m-auto px-4 sm:px-6 lg:px-8 items-center justify-between">

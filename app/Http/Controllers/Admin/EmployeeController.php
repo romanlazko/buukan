@@ -27,7 +27,7 @@ class EmployeeController extends Controller
         $employees = $company->employees()
             ->when($request->has('search'), function($query) use($request) {
                 return $query->where(function ($query) use ($request){
-                    $query->whereHas('user', function ($query) use ($request) {
+                    $query->whereHas('admin', function ($query) use ($request) {
                         $query->whereRaw('LOWER(first_name) LIKE ?', ['%' . strtolower($request->search) . '%'])
                             ->orWhereRaw('LOWER(last_name) LIKE ?', ['%' . strtolower($request->search) . '%'])
                             ->orWhereRaw('LOWER(email) LIKE ?', ['%' . strtolower($request->search) . '%']);
@@ -47,6 +47,20 @@ class EmployeeController extends Controller
      */
     public function create(Company $company)
     {
+        $planLimits = [
+            'minimum' => 3,
+            'standard' => 10,
+        ];
+    
+        $subscriptionType = $company->actual_plan->type;
+    
+        if ($company->subscribed([$subscriptionType]) && $company->employees->count() >= $planLimits[$subscriptionType]) {
+            return back()->with([
+                'ok' => false,
+                'description' => "You can add just {$planLimits[$subscriptionType]} employees with {$subscriptionType} plan",
+            ]);
+        }
+
         return view('admin.company.employee.create', compact(
             'company',
         ));
@@ -60,7 +74,7 @@ class EmployeeController extends Controller
         $user = Admin::whereEmail($request->email)->first();
 
         if ($user) {
-            if (!$user->hasRole('admin')) {
+            if ($company->owner->id != $user->id) {
                 return back()->with([
                     'ok' => false,
                     'description' => "User already exists"
@@ -70,6 +84,7 @@ class EmployeeController extends Controller
 
         if (!$user) {
             $password = Str::random(12);
+
             $user = Admin::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -169,7 +184,7 @@ class EmployeeController extends Controller
                 ]); 
         }
 
-        if ($employee->user) {
+        if ($employee->admin) {
             $user = $employee->admin->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,

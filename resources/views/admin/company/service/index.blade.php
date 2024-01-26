@@ -1,23 +1,25 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max text-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center">
-                {{ __('Services:') }}
-            </h2>
-            <x-form.search :action="route('admin.company.service.index', $company)" :placeholder="__('Search by services')"/>
-        </div>
+    <x-slot name="navigation">
+        <x-form.search :action="route('admin.company.service.index', $company)" :placeholder="__('Search by services')"/>
         <x-header.menu>
-            <x-header.link :href="route('admin.company.service.index', $company)" :active="request()->routeIs('admin.company.service.index')">
+            <x-header.link :href="route('admin.company.service.index', $company)" :active="request()->routeIs('admin.company.service.*')">
                 {{ __('Services') }}
             </x-header.link>
-            <x-header.link :href="route('admin.company.sub_service.index', $company)" :active="request()->routeIs('admin.company.sub_service.index')">
+            <x-header.link :href="route('admin.company.sub_service.index', $company)" :active="request()->routeIs('admin.company.sub_service.*')">
                 {{ __('Sub services') }}
             </x-header.link>
-            <x-header.link href="{{ route('admin.company.service.create', $company) }}" :active="request()->routeIs('admin.company.service.create')">
-                <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
-                {{ __("Create service") }}
-            </x-header.link>
         </x-header.menu>
+    </x-slot>
+
+    <x-slot name="header">
+        <div class="flex items-center justify-between w-full">
+            <h2 class="font-semibold text-lg text-gray-800">
+                {{ __('Services:') }}
+            </h2>
+            <x-a-buttons.create href="{{ route('admin.company.service.create', $company) }}">
+                {{ __("Add service") }}
+            </x-a-buttons.create>
+        </div>
     </x-slot>
     
     <div class="py-4 sm:p-4 space-y-6">

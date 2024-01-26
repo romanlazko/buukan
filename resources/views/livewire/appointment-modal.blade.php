@@ -135,24 +135,36 @@
                         @endif
                         <div class="whitespace-nowrap w-full justify-end text-right">
                             <span class="font-bold">
-                                Total price: {{ $total_price }}
+                                Total price: {{ $total_price->amount }} {{ $total_price?->currency }}
                             </span>
                         </div>
                         <div class="shadow-md p-2 space-y-4 bg-white rounded-md">
                             @if ($appointmentForm->status == 'done')
-                                <div class="w-full">
-                                    <x-form.label for="price" value="{{ __('Taken price:') }}"/>
-                                    <x-form.input id="price" wire:model.live="appointmentForm.price" class="w-full" type="number" value="{{ $appointmentForm?->price }}" required :disabled="$formDisabled"/>
-                                    <x-form.error :messages="$errors->get('appointmentForm.price')" class="mt-2" />
+                            <x-form.label for="price" value="{{ __('Taken price:') }}"/>
+                            <div class="flex w-full space-x-2">
+                                <div wire:key="appointment-price-{{ $appointmentForm?->model?->id }}" class="w-full">
+                                    <x-form.input id="price" wire:model.live="appointmentForm.price" class="w-full" type="number" required :disabled="$formDisabled"/>
+                                    <x-form.error :messages="$errors->get('appointmentForm.price')" class="mt-2"/>
                                 </div>
+                                <div wire:key="appointment-currency-{{ $appointmentForm?->model?->id }}" class="w-full">
+                                    <x-form.select id="currency" class="w-full" wire:model.live="appointmentForm.currency">
+                                        <option value="">Select currency</option>
+                                        <option value="CZK">CZK</option>
+                                        <option value="EUR">EUR</option>
+                                        <option value="USD">USD</option>
+                                    </x-form.select>
+                                    <x-form.error :messages="$errors->get('appointmentForm.currency')" class="mt-2"/>
+                                </div>
+                            </div>
+                                
                             @endif
                 
-                            <div wire:key="appointment-comment" class="w-full" x-data="{ show: false }">
+                            <div  class="w-full" x-data="{ show: false }">
                                 <div class="flex items-center space-x-2" x-on:click="show= ! show">
                                     <x-form.label for="comment" value="{{ __('Comment:') }}"/>
                                     <p class="text-xl text-blue-600 cursor-pointer" x-text="show ? '-' : '+'" ></p>
                                 </div>
-                                <div :class="show ? 'block' : 'hidden'">
+                                <div wire:key="appointment-comment-{{ $appointmentForm?->model?->id }}" :class="show ? 'block' : 'hidden'">
                                     <x-form.textarea id="comment" wire:model.live="appointmentForm.comment" class="w-full" :disabled="$formDisabled"/>
                                     <x-form.error :messages="$errors->get('appointmentForm.comment')" class="mt-2" />
                                 </div>

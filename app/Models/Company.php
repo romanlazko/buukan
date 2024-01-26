@@ -9,10 +9,12 @@ use Romanlazko\Telegram\Models\TelegramBot;
 use Spatie\Permission\Models\Role;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Laravel\Cashier\Billable;
+use App\Models\Product;
 
 class Company extends Model
 {
-    use HasFactory; use HasSlug; use SoftDeletes;
+    use HasFactory; use HasSlug; use SoftDeletes, Billable;
 
     protected $fillable = [
         'name',
@@ -21,6 +23,11 @@ class Company extends Model
         'ico',
         'dic',
         'address',
+        'trial_ends_at',
+    ];
+
+    public $casts = [
+        'trial_ends_at' => 'datetime'
     ];
 
     /**
@@ -81,6 +88,24 @@ class Company extends Model
     public function getRolesAttribute()
     {
         return Role::whereGuardName('company')->get();
+    }
+
+    public function subscribed(array|null $types = null)
+    {
+        $products = Product::when($types, function ($query) use ($types) {
+            $query->whereIn('type', $types);
+        })->pluck('product_id')->toArray();
+
+        foreach ($products as $key => $product) {
+            if ($this->subscribedToProduct($product, 'default')) {
+                return true;
+            }
+        }
+    }
+
+    public function getActualPlanAttribute()
+    {
+        return Product::where('product_id', $this->subscription()->items->first()->stripe_product)->first();
     }
 
     public function getLogoAttribute()
