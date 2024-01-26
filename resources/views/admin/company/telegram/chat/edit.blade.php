@@ -25,12 +25,14 @@
                         </a>
                     </div>
                     <div>
-                        <a href="{{ route('admin.company.telegram_bot.chat.show', [$company, $telegram_bot, $chat]) }}" class="w-full text-md font-medium text-gray-900">
+                        <a href="{{ route('admin.company.telegram_bot.chat.show', [$company, $telegram_bot, $chat]) }}" class="w-full text-md font-medium text-gray-900 whitespace-nowrap">
                             {{ $chat->first_name ?? null }} {{ $chat->last_name ?? null }}
                         </a>
                     </div>
                     <div>
-                        <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{$chat->contact}}">{{ "@".($chat->username ?? '@'.$chat->first_name.$chat->last_name) }}</a>
+                        <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{ $chat->contact }}" target="_blank">
+                            {{ "@".($chat->username ?? $chat->first_name.$chat->last_name) }}
+                        </a>
                     </div>
                 </div>
             </div>
