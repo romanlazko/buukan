@@ -47,19 +47,19 @@ class EmployeeController extends Controller
      */
     public function create(Company $company)
     {
-        $planLimits = [
-            'minimum' => 3,
-            'standard' => 10,
-        ];
+        // $planLimits = [
+        //     'minimum' => 3,
+        //     'standard' => 10,
+        // ];
     
-        $subscriptionType = $company->actual_plan->type;
+        // $subscriptionType = $company->actual_plan->type;
     
-        if ($company->subscribed([$subscriptionType]) && $company->employees->count() >= $planLimits[$subscriptionType]) {
-            return back()->with([
-                'ok' => false,
-                'description' => "You can add just {$planLimits[$subscriptionType]} employees with {$subscriptionType} plan",
-            ]);
-        }
+        // if ($company->subscribed([$subscriptionType]) && $company->employees->count() >= $planLimits[$subscriptionType]) {
+        //     return back()->with([
+        //         'ok' => false,
+        //         'description' => "You can add just {$planLimits[$subscriptionType]} employees with {$subscriptionType} plan",
+        //     ]);
+        // }
 
         return view('admin.company.employee.create', compact(
             'company',
