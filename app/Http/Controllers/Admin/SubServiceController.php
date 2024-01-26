@@ -15,9 +15,11 @@ class SubServiceController extends Controller
     public function index(Request $request, Company $company)
     {
         $sub_services = $company->sub_services()
-            ->when($request->has('search'), function($query) use($request) {
-                return $query->where('sub_services.name', 'like', "%{$request->search}%")
-                    ->orWhere('sub_services.description', 'like', "%{$request->search}%");
+            ->when($request->has('search'), function ($query) use ($request) {
+                return $query->where(function ($subQuery) use ($request) {
+                    $subQuery->where('name', 'like', "%{$request->search}%")
+                        ->orWhere('description', 'like', "%{$request->search}%");
+                });
             })
             ->get();
 
