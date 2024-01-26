@@ -63,6 +63,7 @@ class CompanyController extends Controller
 
         $appointments = $company->appointments()
             ->where('status', 'done')
+            ->where('price', '>', '0')
             ->where('date', '>', now()->subMonth())
             ->get();
             
