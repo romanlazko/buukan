@@ -30,7 +30,7 @@
                         </a>
                     </div>
                     <div>
-                        <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{$chat->contact}}">{{ "@".($chat->username ?? '@'.$chat->first_name.$chat->last_name) }}</a>
+                        <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{$chat->contact}}">{{ "@".($chat->username ?? $chat->first_name.$chat->last_name) }}</a>
                     </div>
                 </div>
             </div>
