@@ -16,11 +16,12 @@ class ClientController extends Controller
     public function index(Request $request, Company $company)
     {
         $clients = $company->clients()
-            ->when($request->has('search'), function($query) use($request) {
-                return $query->where('first_name', 'like', "%{$request->search}%")
-                    ->orWhere('last_name', 'like', "%{$request->search}%")
-                    ->orWhere('email', 'like', "%{$request->search}%")
-                    ->orWhere('phone', 'like', "%{$request->search}%");
+            ->when($request->has('search'), function ($query) use ($request) {
+                return $query->where(function ($subQuery) use ($request) {
+                    $subQuery->whereRaw('LOWER(first_name) LIKE ?', ['%' . strtolower($request->search) . '%'])
+                        ->orWhereRaw('LOWER(last_name) LIKE ?', ['%' . strtolower($request->search) . '%'])
+                        ->orWhereRaw('LOWER(email) LIKE ?', ['%' . strtolower($request->search) . '%']);
+                });
             })
             ->get();
 
@@ -35,6 +36,15 @@ class ClientController extends Controller
      */
     public function show(Company $company, Client $client)
     {   
+        $client = $company->clients()->find($client->id);
+
+        if (!$client) {
+            return back()->with([
+                'ok' => false,
+                'description' => 'Client not found'
+            ]);
+        }
+        
         return view('admin.company.client.show', compact(
             'company',
             'client'

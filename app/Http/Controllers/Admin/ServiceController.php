@@ -19,9 +19,11 @@ class ServiceController extends Controller
     public function index(Request $request, Company $company)
     {
         $services = $company->services()
-            ->when($request->has('search'), function($query) use($request) {
-                return $query->where('name', 'like', "%{$request->search}%")
-                    ->orWhere('description', 'like', "%{$request->search}%");
+            ->when($request->has('search'), function ($query) use ($request) {
+                return $query->where(function ($subQuery) use ($request) {
+                    $subQuery->where('name', 'like', "%{$request->search}%")
+                        ->orWhere('description', 'like', "%{$request->search}%");
+                });
             })
             ->get();
 
