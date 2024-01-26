@@ -26,17 +26,17 @@
                             Social media:
                         </h1>
                         @if (!empty($client_data['social_media']['instagram']))
-                            <a href="https://instagram.com/{{ str_replace('@', '', $client_data['social_media']['instagram']) }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                            <a href="https://instagram.com/{{ str_replace('@', '', $client_data['social_media']['instagram']) }}" class="flex items-center space-x-1 text-2xl" target="_blank">
                                 <i class="fa-brands fa-instagram text-pink-700"></i>
                             </a>
                         @endif
                         @if (!empty($client_data['social_media']['facebook']))
-                            <a href="{{ $client_data['social_media']['facebook'] }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                            <a href="{{ $client_data['social_media']['facebook'] }}" class="flex items-center space-x-1 text-2xl" target="_blank">
                                 <i class="fa-brands fa-facebook text-blue-700"></i>
                             </a>
                         @endif
                         @if (!empty($client_data['social_media']['telegram']) OR $client->telegram_chat)
-                            <a href="{{ $client->telegram_chat->contact ?? "https://t.me/{$client_data['social_media']['telegram']}" }}" class="flex items-center space-x-1 text-2xl" target="blank">
+                            <a href="{{ $client->telegram_chat->contact ?? "https://t.me/{$client_data['social_media']['telegram']}" }}" class="flex items-center space-x-1 text-2xl" target="_blank">
                                 <i class="fa-brands fa-telegram text-blue-500"></i>
                             </a>
                         @endif

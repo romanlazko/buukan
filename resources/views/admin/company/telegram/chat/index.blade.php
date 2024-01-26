@@ -32,14 +32,13 @@
                         </a>
                     </div>
                     <div>
-                        <a class="w-full text-sm font-light text-blue-500 hover:underline" href="https://t.me/{{$telegram_bot->username}}">
+                        <a class="w-full text-sm font-light text-blue-500 hover:underline" href="https://t.me/{{ $telegram_bot->username }}" target="_blank">
                             {{ "@".($telegram_bot->username ?? null) }}
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-        
     </x-slot>
 
     <div class="space-y-6 py-4 sm:p-4">
@@ -73,7 +72,7 @@
                                             <div class="w-full text-md font-medium text-gray-900">
                                                 {{ $chat->first_name ?? null }} {{ $chat->last_name ?? null }}
                                             </div>
-                                            <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{ $chat->contact }}">
+                                            <a class="w-full text-sm font-light text-blue-500 hover:underline" href="{{ $chat->contact }}" target="_blank">
                                                 {{ "@".($chat->username ?? $chat->first_name.$chat->last_name) }}
                                             </a>
                                         </div>
