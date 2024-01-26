@@ -1,16 +1,26 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot name="navigation">
         <div class="flex items-center">
-            
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <a class="hover:underline text-blue-500" href="{{ route('webapp.index', $web_app) }}">{{ __('WebApp Link') }}</a>
+            </h2>
         </div>
         <x-header.menu>
             <x-header.link :href="route('admin.company.web_app.show', [$company, $web_app])" :active="request()->routeIs('admin.company.web_app.show')">
-                {{ __('App') }}
+                {{ __('Preview') }}
             </x-header.link>
             <x-header.link :href="route('admin.company.web_app.edit', [$company, $web_app])" :active="request()->routeIs('admin.company.web_app.edit')">
                 {{ __('Settings') }}
             </x-header.link>
         </x-header.menu>
+    </x-slot>
+
+    <x-slot name="header">
+        <div class="flex items-center justify-between w-full">
+            <h2 class="font-semibold text-lg text-gray-800">
+                {{ __('Settings:') }}
+            </h2>
+        </div>
     </x-slot>
     
     <div class="w-full flex space-x-4 m-auto max-w-2xl">

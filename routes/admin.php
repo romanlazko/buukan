@@ -26,6 +26,10 @@ use App\Http\Controllers\Telegram\TelegramController;
 use App\Livewire\WebApp\WebApp;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cron\TomorrowAppointmentsController;
+use App\Http\Controllers\Admin\StripeController;
+use App\Http\Controllers\Admin\SubscriptionController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,20 +63,30 @@ Route::middleware('auth')->name('admin.')->group(function () {
         
     Route::middleware(['checkEmployeeRole:admin|super-duper-admin|administrator'])->group(function () {
         Route::resource('company', CompanyController::class);
+        Route::middleware(['subscribed:premium,standard'])->group(function () {
+            Route::get('company/{company}/client/{client}/telegram_chat', [ClientController::class, 'telegram_chat'])->name('company.client.telegram.chat');
+            Route::resource('company.client', ClientController::class);
 
-        Route::get('company/{company}/client/{client}/telegram_chat', [ClientController::class, 'telegram_chat'])->name('company.client.telegram.chat');
-        Route::resource('company.client', ClientController::class);
+            Route::resource('company.employee', EmployeeController::class);
+            Route::resource('company.service', ServiceController::class);
+            Route::resource('company.sub_service', SubServiceController::class);
+            Route::resource('company.appointment', AppointmentController::class);
+            
+            Route::middleware(['subscribed:premium'])->group(function () {
+                Route::resource('company.telegram_bot', TelegramController::class);
+                Route::resource('company.telegram_bot.chat', TelegramChatController::class);
+                Route::resource('company.telegram_bot.advertisement', TelegramAdvertisementController::class);
 
-        Route::resource('company.employee', EmployeeController::class);
-        Route::resource('company.service', ServiceController::class);
-        Route::resource('company.sub_service', SubServiceController::class);
-        Route::resource('company.appointment', AppointmentController::class);
-        
-        Route::resource('company.telegram_bot', TelegramController::class);
-        Route::resource('company.telegram_bot.chat', TelegramChatController::class);
-        Route::resource('company.telegram_bot.advertisement', TelegramAdvertisementController::class);
+                Route::resource('company.web_app', WebAppController::class);
+            });
+        });
+    });
 
-        Route::resource('company.web_app', WebAppController::class);
+    Route::name('company.subscription.')->group(function () {
+        Route::get('company/{company}/subscription/index', [SubscriptionController::class, 'index'])->name('index');
+        Route::get('company/{company}/subscription/billing', [SubscriptionController::class, 'billing'])->name('billing');
+        Route::post('company/{company}/subscription/checkout', [SubscriptionController::class, 'checkout'])->name('checkout');
+        Route::get('company/{company}/subscription/success', [SubscriptionController::class, 'success'])->name('success');
     });
     
     Route::middleware(['checkEmployeeRole:admin|administrator|employee|super-duper-admin'])->group(function () {

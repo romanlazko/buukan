@@ -73,5 +73,6 @@ class Kernel extends HttpKernel
         'telegram' => \Romanlazko\Telegram\Http\Middleware\Telegram::class,
         'checkCompany' => \App\Http\Middleware\CheckCompany::class,
         'checkTemporaryUrl' => \App\Http\Middleware\CheckTemporaryUrl::class,
+        'subscribed' => \App\Http\Middleware\Subscribed::class,
     ];
 }

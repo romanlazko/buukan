@@ -9,6 +9,7 @@
             </x-a-buttons.secondary>
         </div>
     </x-slot>
+    
     <div class="space-y-6 py-4 sm:p-4">
         @forelse ($web_apps as $web_app)
             <x-white-block class="p-4">

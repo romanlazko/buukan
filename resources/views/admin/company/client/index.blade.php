@@ -1,15 +1,16 @@
 <x-app-layout>
+    <x-slot name="navigation">
+        <x-form.search :action="route('admin.company.client.index', $company)" :placeholder="__('Search by clients')"/>
+    </x-slot>
+    
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center">
+        <div class="flex items-center justify-between w-full">
+            <h2 class="font-semibold text-xl text-gray-800">
                 {{ __('Clients:') }}
             </h2>
-            <x-form.search :action="route('admin.company.client.index', $company)" :placeholder="__('Search by clients')"/>
-        </div>
-        <div>
-            
         </div>
     </x-slot>
+
     <div class="py-4 sm:p-4">
         <x-white-block class="p-0">
             <x-table.table class="whitespace-nowrap">

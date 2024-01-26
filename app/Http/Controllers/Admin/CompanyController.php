@@ -41,7 +41,15 @@ class CompanyController extends Controller
             );
         }
 
-        auth()->user()->company()->create($data);
+        $company = auth()->user()->company()->create([
+            ...$data,
+            'trial_ends_at' => now()->addDays(31),
+        ]);
+
+        $company->createAsStripeCustomer([
+            'name' => $company->name,
+            'email' => $company->owner->email,
+        ]);
 
         return redirect()->route('admin.dashboard');
     }
@@ -63,7 +71,7 @@ class CompanyController extends Controller
                 return $appointment->date->format('d M');
             })
             ->map(function ($dateAppointments, $dateKey) {
-                return $dateAppointments->sum('price');
+                return $dateAppointments->sum('price_amount');
             });
         
         $salesData = [

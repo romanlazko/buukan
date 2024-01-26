@@ -1,12 +1,23 @@
 <x-app-layout>
+    <x-slot name="navigation">
+        <x-form.search :action="route('admin.company.service.index', $company)" :placeholder="__('Search by services')"/>
+        <x-header.menu>
+            <x-header.link :href="route('admin.company.service.index', $company)" :active="request()->routeIs('admin.company.service.*')">
+                {{ __('Services') }}
+            </x-header.link>
+            <x-header.link :href="route('admin.company.sub_service.index', $company)" :active="request()->routeIs('admin.company.sub_service.*')">
+                {{ __('Sub services') }}
+            </x-header.link>
+        </x-header.menu>
+    </x-slot>
+    
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max text-center">
+        <div class="flex items-center justify-between w-min space-x-2">
             <x-a-buttons.back href="{{ route('admin.company.service.index', $company) }}"/>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-lg text-gray-800 whitespace-nowrap">
                 {{ __('Create service:') }}
             </h2>
         </div>
-        <div></div>
     </x-slot>
 
     <div class="w-full space-y-6 m-auto max-w-2xl py-4">
@@ -14,18 +25,15 @@
             @csrf
             <div class="space-y-6">
                 <x-white-block>
-                    <div class="space-y-4 sm:flex sm:space-x-4 sm:space-y-0">
-                        <div class="space-y-4 w-full">
-                            <div>
-                                <x-form.label for="name" :value="__('Name of service:')" />
-                                <x-form.input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" required autocomplete="name" />
-                                <x-form.error class="mt-2" :messages="$errors->get('name')" />
-                            </div>
-                            <div>
-                                <x-form.label for="color" :value="__('Color:')" />
-                                <x-form.color id="color" name="color" :value="old('color', '#' . substr(md5(uniqid()), 0, 6))"/>
-                                <x-form.error class="mt-2" :messages="$errors->get('color')" />
-                            </div>
+                    <x-form.label for="name" :value="__('Name of service:')" />
+                    <div class="space-x-2 w-full flex">
+                        <div>
+                            <x-form.color id="color" name="color" :value="old('color', '#' . substr(md5(uniqid()), 0, 6))"/>
+                            <x-form.error class="mt-2" :messages="$errors->get('color')" />
+                        </div>
+                        <div class="w-full">
+                            <x-form.input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" required autocomplete="name" />
+                            <x-form.error class="mt-2" :messages="$errors->get('name')" />
                         </div>
                     </div>
                 </x-white-block>
@@ -75,27 +83,29 @@
                     </div>
                 </x-white-block>
 
-                <x-white-block>
-                    <div class="space-y-4">
-                        <h2 class="text-lg font-medium text-gray-900">
-                            {{ __('Employees') }}
-                        </h2>
-                        <div class="border rounded-md p-3">
-                            @foreach ($company->employees()->role('employee', 'company')->get() as $employee)
-                                <div class="flex space-x-2 items-center py-3 @if(!$loop->last) border-b @endif">
-                                    <x-form.label for="{{ $employee->slug }}" class="w-full ">
-                                        <div class="flex justify-between w-full items-center">
-                                            <span>
-                                                {{ $employee->first_name }} {{ $employee->last_name }}
-                                            </span>
-                                            <x-form.checkbox id="{{ $employee->slug }}" name="employees[]" :value="$employee->id" type="checkbox" :checked="in_array($employee->id, old('employees') ?? [])"/>
-                                        </div>
-                                    </x-form.label>
-                                </div>
-                            @endforeach
+                @if ($company->employees->isNotEmpty())
+                    <x-white-block>
+                        <div class="space-y-4">
+                            <h2 class="text-lg font-medium text-gray-900">
+                                {{ __('Employees') }}
+                            </h2>
+                            <div class="border rounded-md p-3">
+                                @foreach ($company->employees()->role('employee', 'company')->get() as $employee)
+                                    <div class="flex space-x-2 items-center py-3 @if(!$loop->last) border-b @endif">
+                                        <x-form.label for="{{ $employee->slug }}" class="w-full ">
+                                            <div class="flex justify-between w-full items-center">
+                                                <span>
+                                                    {{ $employee->first_name }} {{ $employee->last_name }}
+                                                </span>
+                                                <x-form.checkbox id="{{ $employee->slug }}" name="employees[]" :value="$employee->id" type="checkbox" :checked="in_array($employee->id, old('employees') ?? [])"/>
+                                            </div>
+                                        </x-form.label>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                </x-white-block>
+                    </x-white-block>
+                @endif
 
                 <x-white-block>
                     <div class="space-y-4">

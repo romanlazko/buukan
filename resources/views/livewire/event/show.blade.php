@@ -1,7 +1,7 @@
 <div class="min-w-full">
     <div class="space-y-6">
         @forelse ($events as $event)
-            <x-event :event="$event" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{ $event->resource->toJson()}}})"/>
+            <livewire:event.event :event="$event" wire:key="event-{{ rand(15000, 15999) }}"/>
         @empty
         @endforelse
     </div>

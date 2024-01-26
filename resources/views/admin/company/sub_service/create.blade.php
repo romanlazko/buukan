@@ -1,12 +1,23 @@
 <x-app-layout>
+    <x-slot name="navigation">
+        <x-form.search :action="route('admin.company.sub_service.index', $company)" :placeholder="__('Search by sub services')"/>
+        <x-header.menu>
+            <x-header.link :href="route('admin.company.service.index', $company)" :active="request()->routeIs('admin.company.service.index')">
+                {{ __('Services') }}
+            </x-header.link>
+            <x-header.link :href="route('admin.company.sub_service.index', $company)" :active="request()->routeIs('admin.company.sub_service.*')">
+                {{ __('Sub services') }}
+            </x-header.link>
+        </x-header.menu>
+    </x-slot>
+    
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max text-center">
+        <div class="flex items-center justify-between w-min space-x-2">
             <x-a-buttons.back href="{{ route('admin.company.sub_service.index', $company) }}"/>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 whitespace-nowrap">
                 {{ __('Create sub service:') }}
             </h2>
         </div>
-        <div></div>
     </x-slot>
 
     <div class="w-full space-y-6 m-auto max-w-2xl py-4">
@@ -14,19 +25,17 @@
             @csrf
             <div class="space-y-6">
                 <x-white-block>
-                    <div class="space-y-4">
+                    <x-form.label for="name" :value="__('Name of sub service:')" />
+                    <div class="space-x-2 w-full flex">
                         <div>
-                            <x-form.label for="name" :value="__('Name:')" />
-                            <x-form.input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" required autocomplete="name" />
-                            <x-form.error class="mt-2" :messages="$errors->get('name')" />
-                        </div>
-                        <div>
-                            <x-form.label for="color" :value="__('Color:')" />
                             <x-form.color id="color" name="color" :value="old('color', '#' . substr(md5(uniqid()), 0, 6))"/>
                             <x-form.error class="mt-2" :messages="$errors->get('color')" />
                         </div>
+                        <div class="w-full">
+                            <x-form.input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name')" required autocomplete="name" />
+                            <x-form.error class="mt-2" :messages="$errors->get('name')" />
+                        </div>
                     </div>
-                    
                 </x-white-block>
 
                 <x-white-block>

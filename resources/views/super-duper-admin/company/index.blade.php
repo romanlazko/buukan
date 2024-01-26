@@ -1,21 +1,24 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max text-center">
-            <h2 class="font-semibold text-xl text-gray-800">
-                {{ __('Companies:') }}
-            </h2>
-            <x-form.search :action="route('super-duper-admin.company.index')" :placeholder="__('Search by employees')"/>
-        </div>
+    <x-slot name="navigation">
+        <x-form.search :action="route('super-duper-admin.company.index')" :placeholder="__('Search by employees')"/>
         <x-header.menu>
             <x-header.link :href="route('super-duper-admin.company.index')" :active="request()->routeIs('super-duper-admin.company.index')">
                 {{ __('Companies') }}
             </x-header.link>
-            <x-header.link href="{{ route('super-duper-admin.company.create') }}" class="float-right">
-                <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
-                {{ __("Create company") }}
-            </x-header.link>
         </x-header.menu>
     </x-slot>
+
+    <x-slot name="header">
+        <div class="flex items-center justify-between w-full">
+            <h2 class="font-semibold text-lg text-gray-800">
+                {{ __('Companies:') }}
+            </h2>
+            <x-a-buttons.create href="{{ route('super-duper-admin.company.create') }}">
+                {{ __("Add company") }}
+            </x-a-buttons.create>
+        </div>
+    </x-slot>
+
     <div class="py-4 sm:p-4 space-y-6">
         @if ($companies->isNotEmpty())
             <x-white-block class="p-0">

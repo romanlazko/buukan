@@ -1,19 +1,19 @@
 <x-app-layout>
+    <x-slot name="navigation">
+        <form action="{{ route('admin.company.appointment.index', $company) }}" class="w-min" id="appointmentDateForm">
+            <x-form.input name="date" type="date" onchange="$('#appointmentDateForm').submit()" class="w-full" value="{{request('date', now()->format('Y-m-d'))}}"/>
+        </form>
+    </x-slot>
+
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight w-full text-center">
+        <div class="flex items-center justify-between w-full">
+            <h2 class="font-semibold text-xl text-gray-800">
                 {{ __('Appointments:') }}
             </h2>
-            <form action="{{ route('admin.company.appointment.index', $company) }}" class="w-full" id="appointmentDateForm">
-                <x-form.input name="date" type="date" onchange="$('#appointmentDateForm').submit()" class="w-full" value="{{request('date', now()->format('Y-m-d'))}}"/>
-            </form>
-        </div>
-        <x-header.menu>
-            <x-header.link class="float-right" x-data="" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{json_encode(['date' => request('date', now()->format('Y-m-d'))])}}})">
-                <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
+            <x-a-buttons.create x-data="" x-on:click.prevent="$dispatch('openModal', {modal: 'AppointmentModal', params: {{json_encode(['date' => request('date', now()->format('Y-m-d'))])}}})">
                 {{ __("Add appointment") }}
-            </x-header.link>
-        </x-header.menu>
+            </x-a-buttons.create>
+        </div>
     </x-slot>
 
     <livewire:event.edit-event-modal/>

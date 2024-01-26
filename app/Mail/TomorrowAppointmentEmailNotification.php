@@ -30,7 +30,7 @@ class TomorrowAppointmentEmailNotification extends Mailable
     {
         return new Envelope(
             from: new Address('info@buukan.com', 'Buukan'),
-            subject: 'Tomarrow Appointment Email Notification',
+            subject: 'Tomorrow Appointment Email Notification',
         );
     }
 

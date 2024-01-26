@@ -1,21 +1,19 @@
 <x-app-layout>
+    <x-slot name="navigation">
+        <x-form.search :action="route('admin.company.employee.index', $company)" :placeholder="__('Search by employees')"/>
+    </x-slot>
+    
     <x-slot name="header">
-        <div class="sm:flex items-center sm:space-x-3 w-max text-center">
-            <h2 class="font-semibold text-xl text-gray-800">
+        <div class="flex items-center justify-between w-full">
+            <h2 class="font-semibold text-lg text-gray-800">
                 {{ __('Employees:') }}
             </h2>
-            <x-form.search :action="route('admin.company.employee.index', $company)" :placeholder="__('Search by employees')"/>
+            <x-a-buttons.create href="{{ route('admin.company.employee.create', $company) }}">
+                {{ __("Add employee") }}
+            </x-a-buttons.create>
         </div>
-        <x-header.menu>
-            <x-header.link :href="route('admin.company.employee.index', $company)" :active="request()->routeIs('admin.company.employee.index')">
-                {{ __('Employees') }}
-            </x-header.link>
-            <x-header.link href="{{ route('admin.company.employee.create', $company) }}" class="float-right">
-                <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
-                {{ __("Create employee") }}
-            </x-header.link>
-        </x-header.menu>
     </x-slot>
+
     <div class="py-4 sm:p-4 space-y-6">
         @if ($employees->isNotEmpty())
             <x-white-block class="p-0">

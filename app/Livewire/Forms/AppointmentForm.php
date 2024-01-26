@@ -15,8 +15,9 @@ class AppointmentForm extends Form
     public $service_id;
     public $date;
     public $term;
-    public $comment;
+    public $comment = null;
     public $price;
+    public $currency;
     public $status = 'new';
     public $sub_services = [];
 
@@ -29,10 +30,11 @@ class AppointmentForm extends Form
         $this->client_id        = $this->model?->client_id ?? $data['client_id'] ?? null;
         $this->employee_id      = $this->model?->employee_id ?? $data['employee_id'] ?? null;
         $this->service_id       = $this->model?->service_id ?? $data['service_id'] ?? null;
-        $this->date             = $this->model?->date->format('Y-m-d') ?? $data['date'] ?? null;;
+        $this->date             = $this->model?->date->format('Y-m-d') ?? $data['date'] ?? null;
         $this->term             = $this->model?->term->format('H:i');
-        $this->comment          = $this->model?->comment;
-        $this->price            = $this->model?->price;
+        $this->comment          = $this->model?->comment ?? null;
+        $this->price            = $this->model?->price_amount ?? $this->model?->total_price_amount ?? null;
+        $this->currency         = $this->model?->currency ?? $this->model?->total_price_currency ?? null;
         $this->status           = $this->model?->status ?? 'new';
         $this->sub_services     = $this->model?->sub_services?->pluck('id')->toArray() ?? [];
     }
@@ -49,7 +51,8 @@ class AppointmentForm extends Form
         $appointment->date          = $this->date;
         $appointment->term          = $this->term;
         $appointment->comment       = $this->comment;
-        $appointment->price         = $this->price;
+        $appointment->price         = $this->status == 'done' ? $this->price : null;
+        $appointment->currency      = $this->currency;
         $appointment->status        = $this->status;
 
         $appointment->save();
@@ -67,6 +70,7 @@ class AppointmentForm extends Form
             'term'        => 'required',
             'comment'     => 'sometimes',
             'price'       => 'required_if:status,done',
+            'currency'    => 'required_if:status,done',
             'status'      => 'required',
         ];
     }
