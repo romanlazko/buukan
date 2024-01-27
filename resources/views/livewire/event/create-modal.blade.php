@@ -136,9 +136,9 @@
                                     <option value="59">59</option>
                                 </select>
                             </x-form.area>
-                            <x-a-buttons.button class="bg-red-600 text-white hover:bg-red-500 active:bg-red-700" wire:key="create-schedule-remove-{{ $index }}" wire:click="removeTerm({{ $index }})" wire:confirm="Are you sure you want to delete this term?">
+                            <x-a-buttons.danger wire:key="create-schedule-remove-{{ $index }}" wire:click="removeTerm({{ $index }})" wire:confirm="Are you sure you want to delete this term?">
                                 {{ __('Delete') }}
-                            </x-a-buttons.button>
+                            </x-a-buttons.danger>
                         </div>
                     @empty
                         
