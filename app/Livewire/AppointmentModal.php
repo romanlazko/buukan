@@ -38,7 +38,9 @@ class AppointmentModal extends Component
     {
         $this->reset('schedules');
 
-        $this->employee = $this->company->employees()->find($this->appointmentForm->employee_id);
+        $this->employee = $this->company->employees()->findOr($this->appointmentForm->employee_id, function() {
+            $this->appointmentForm->reset('employee_id', 'service_id', 'term');
+        });
 
         if ($this->employee AND $this->appointmentForm->service_id AND $this->appointmentForm->date) {
             $this->schedules = GetEmployeeUnoccupiedScheduleAction::handle($this->employee, $this->appointmentForm->date, $this->appointmentForm->service_id);
@@ -46,7 +48,9 @@ class AppointmentModal extends Component
 
         $this->toggleFormDisabled();
 
-        $service = $this->company->services()->find($this->appointmentForm->service_id);
+        $service = $this->company->services()->findOr($this->appointmentForm->service_id, function() {
+            $this->appointmentForm->reset('service_id', 'term');
+        });
 
         $total_price = $service?->price
             ?->plus(
@@ -57,7 +61,7 @@ class AppointmentModal extends Component
                     })->sum()
             );
 
-        $prefix = isset($service->settings->is_price_from) ? __("from ") : "";
+        $prefix = isset($service?->settings?->is_price_from) ? __("from ") : "";
 
         $this->total_price = (object)[
             'prefix' => $prefix,

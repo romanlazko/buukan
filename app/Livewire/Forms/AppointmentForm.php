@@ -14,7 +14,7 @@ class AppointmentForm extends Form
     public $model = null;
     public $client_id = null;
     public $employee_id = null;
-    public $service_id;
+    public $service_id = null;
     public $date;
     public $term;
     public $comment = null;
