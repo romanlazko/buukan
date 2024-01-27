@@ -39,17 +39,20 @@ class AppointmentModal extends Component
         $this->reset('schedules');
 
         $this->employee = $this->company->employees()->findOr($this->appointmentForm->employee_id, function() {
-            $this->appointmentForm->reset('employee_id', 'service_id', 'term');
+            $this->appointmentForm->employee_id = null;
+            $this->appointmentForm->service_id = null;
+            $this->appointmentForm->term = null;
         });
 
-        if ($this->employee AND $this->appointmentForm->service_id AND $this->appointmentForm->date) {
+        if ($this->appointmentForm->employee_id AND $this->appointmentForm->service_id AND $this->appointmentForm->date) {
             $this->schedules = GetEmployeeUnoccupiedScheduleAction::handle($this->employee, $this->appointmentForm->date, $this->appointmentForm->service_id);
         }
 
         $this->toggleFormDisabled();
 
         $service = $this->company->services()->findOr($this->appointmentForm->service_id, function() {
-            $this->appointmentForm->reset('service_id', 'term');
+            $this->appointmentForm->service_id = null;
+            $this->appointmentForm->term = null;
         });
 
         $total_price = $service?->price
