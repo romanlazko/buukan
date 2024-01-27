@@ -6,7 +6,7 @@
         <i class="fa-solid fa-ellipsis"></i>
     </button>
 
-    <div x-cloak x-show="headerMenu" @click.outside="headerMenu = false" @close.stop="headerMenu = false" class="absolute right-0 z-10 mt-2 overflow-hidden bg-white rounded-md shadow-xl border p-2 space-y-2">
+    <div x-cloak x-show="headerMenu" @click.outside="headerMenu = false" @close.stop="headerMenu = false" class="absolute right-0 z-20 mt-2 overflow-hidden bg-white rounded-md shadow-xl border p-2 space-y-2">
         {{ $slot }}
     </div>
 </div>
