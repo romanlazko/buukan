@@ -72,7 +72,7 @@
 
             $('.fc-view-harness').addClass('overflow-auto rounded-lg bg-white');
             $('.fc-dayGridMonth-view').addClass('min-w-[850px] md:min-w-full rounded-lg');
-            $('.fc-header-toolbar').css({"margin-bottom":"0.5rem"}).addClass('flex sticky top-0 z-10 bg-white shadow-lg p-1 border rounded-lg');
+            $('.fc-header-toolbar').css({"margin-bottom":"0.5rem"}).addClass('flex sticky top-0 z-10 bg-white shadow-lg p-2 border rounded-lg');
             
             
             calendar.updateSize();
