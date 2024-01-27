@@ -57,8 +57,8 @@ class Appointment extends Model
             ],
             'client' => [
                 'id' => $this->client?->id,
-                'first_name' => $this->client?->first_name,
-                'last_name' => $this->client?->last_name,
+                'first_name' => $this->client?->first_name ?? "",
+                'last_name' => $this->client?->last_name ?? "",
             ],
         ]);
     }

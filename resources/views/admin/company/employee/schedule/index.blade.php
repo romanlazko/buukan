@@ -28,7 +28,7 @@
         
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 
-    <div class="w-full py-6 bg-white">
+    <div class="w-fullrounded-xl">
         <livewire:calendar :employee="$employee">
     </div>
 </x-app-layout>
