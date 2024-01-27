@@ -8,7 +8,7 @@
             <x-a-buttons.close x-on:click="$dispatch('close-all-modal')"/>
         </x-slot>
 
-        @dump($appointmentForm->service_id)
+        {{-- @dump($appointmentForm) --}}
 
         <form class="sm:flex w-full space-y-3 sm:space-y-0" >
             {{-- CLIENT --}}
@@ -65,7 +65,7 @@
 
                         <div class="sm:flex items-center sm:space-y-0 sm:space-x-3 justify-between shadow-md p-2 space-y-4 bg-white rounded-md">
                             <div class="w-full flex space-x-2">
-                                <x-form.select wire:key="appointment-employee-{{ $appointmentForm->key }}" id="employee" wire:model.live="appointmentForm.employee_id" class="w-full" required :disabled="$formDisabled">
+                                <x-form.select wire:key="appointment-employee-{{ $appointmentForm->key }}" id="employee" wire:model.live="appointmentForm.employee_id" wire:change="$set('appointmentForm.service_id', '')"  class="w-full" required :disabled="$formDisabled">
                                     <option value="">Choose employee</option>
                                     @forelse ($company->employees()->role('employee')->get() as $employee_item)
                                         <option value="{{ $employee_item->id }}">{{ $employee_item->first_name }} {{ $employee_item->last_name }}</option>
@@ -89,7 +89,7 @@
                                         <option value="">Choose service</option>
                                         @if($employee?->services)
                                             @forelse ($employee?->services as $service_index => $service_item)
-                                                <option wire:key="appointment-service-{{ $service_index }}-{{ $appointmentForm?->key}}" @disabled(!$service_item->active)  value="{{ $service_item->id }}">{{ $service_item->name }} ({{ $service_item->price }})</option>
+                                                <option wire:key="appointment-service-{{ $service_index }}-{{ $appointmentForm?->key}}" @disabled(!$service_item->active) value="{{ $service_item->id }}">{{ $service_item->name }} ({{ $service_item->price }})</option>
                                             @empty
                                                 
                                             @endforelse
@@ -99,15 +99,15 @@
                                 </div>
 
                                 @if ($employee AND $appointmentForm->service_id AND $appointmentForm->date) 
-                                    <div class="w-full" wire:key="appointment-term-{{ $appointmentForm->key }}">
+                                    <div class="w-full">
                                         <x-form.label for="term" value="{{ __('Term:') }}"/>
-                                        <x-form.input dropdown="termDropdown" id="term" wire:model.live="appointmentForm.term" type="time" class="w-full" required :disabled="$formDisabled">
+                                        <x-form.dropdown.select wire:key="appointment-term-{{ $appointmentForm?->key }}" wire:model.live="appointmentForm.term" default_value="{{ $appointmentForm->term }}" id="term" type="time" class="w-full" required :disabled="$formDisabled">
                                             @foreach ($schedules as $schedule_index => $schedule_item)
-                                                <button wire:key="appointment-term-{{ $schedule_index }}-{{ $appointmentForm->key }}" class="p-2 w-full hover:bg-gray-200 text-left dropdown-option" type="button" @click="termDropdown = false" wire:click="$set('appointmentForm.term', {{ json_encode($schedule_item->term?->format('H:i')) }})" >
+                                                <x-form.dropdown.option wire:key="appointment-term-{{ $schedule_index }}-{{ $appointmentForm?->key }}" value="{{ $schedule_item->term?->format('H:i') }}" wire:click="$set('appointmentForm.term', {{ json_encode($schedule_item->term?->format('H:i')) }})">
                                                     {{ $schedule_item->term?->format('H:i') }}
-                                                </button>
+                                                </x-form.dropdown.option>
                                             @endforeach
-                                        </x-form.input>
+                                        </x-form.dropdown.select>
                                         <x-form.error :messages="$errors->get('appointmentForm.term')" class="mt-2" />
                                     </div>
                                 @endif
