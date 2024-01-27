@@ -85,7 +85,7 @@
                             <div class="w-full shadow-md p-2 space-y-4 bg-white rounded-md">
                                 <div class="w-full" >
                                     <x-form.label for="service" value="{{ __('Service:') }}"/>
-                                    <x-form.select wire:key="appointment-service-{{ $appointmentForm?->key }}" wire:model.live="appointmentForm.service_id" wire:change="$set('appointmentForm.term', '')" class="w-full" :disabled="$formDisabled">
+                                    <x-form.select wire:key="appointment-service-{{ $appointmentForm?->key }}" wire:model.live="appointmentForm.service_id" class="w-full" :disabled="$formDisabled">
                                         <option value="">Choose service</option>
                                         @if($employee?->services)
                                             @forelse ($employee?->services as $service_index => $service_item)
