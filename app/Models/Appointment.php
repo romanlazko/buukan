@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Events\CancelAppointmentEvent;
+use App\Casts\Money;
 
 class Appointment extends Model
 {
@@ -15,7 +16,8 @@ class Appointment extends Model
 
     protected $casts = [
         'date' => 'datetime',
-        'term' => 'datetime:H:i:s'
+        'term' => 'datetime:H:i:s',
+        'price' => Money::class,
     ];
 
     public function company()
@@ -61,10 +63,12 @@ class Appointment extends Model
         ]);
     }
 
-    public function cancel()
+    public function cancel($price = null, $currency = null)
     {
         $result = $this->update([
-            'status' => 'canceled'
+            'price'  => $price ?? null,
+            'currency' => $currency ?? null,
+            'status' => 'canceled',
         ]);
 
         if ($result) {
@@ -83,6 +87,29 @@ class Appointment extends Model
                 return $price->getAmount()->toInt();
             })->sum()
         );
+    }
+
+    public function getTotalPriceAmountAttribute()
+    {
+        return $this->service->price->plus(
+            $this->sub_services->pluck('price')->map(function($price){
+                return $price->getAmount()->toInt();
+            })->sum()
+        )->getAmount()->toInt();
+    }
+
+    public function getTotalPriceCurrencyAttribute()
+    {
+        return $this->service->price->plus(
+            $this->sub_services->pluck('price')->map(function($price){
+                return $price->getAmount()->toInt();
+            })->sum()
+        )->getCurrency()->getCurrencyCode();
+    }
+
+    public function getPriceAmountAttribute()
+    {
+        return $this->price?->getAmount()->toInt();
     }
 
     public function getViaWebappAttribute() :bool
