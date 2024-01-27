@@ -135,7 +135,7 @@
                         @endif
                         <div class="whitespace-nowrap w-full justify-end text-right">
                             <span class="font-bold">
-                                Total price: {{ $total_price->amount }} {{ $total_price?->currency }}
+                                Total price: {{ $total_price?->amount }} {{ $total_price?->currency }}
                             </span>
                         </div>
                         <div class="shadow-md p-2 space-y-4 bg-white rounded-md">
