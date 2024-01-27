@@ -58,9 +58,9 @@
                                     </div>
                                     <div>
                                         @if (isset($web_app->settings->can_client_cancel_appointment))
-                                            <x-a-buttons.button class="bg-red-600 text-white hover:bg-red-500 active:bg-red-700" wire:click="cancel({{$appointment->id}})" wire:confirm="Are you sure">
+                                            <x-a-buttons.danger wire:click="cancel({{$appointment->id}})" wire:confirm="Are you sure?">
                                                 {{ __('Cancel') }}
-                                            </x-a-buttons.button>
+                                            </x-a-buttons.danger>
                                         @endif
                                     </div>
                                 </div>

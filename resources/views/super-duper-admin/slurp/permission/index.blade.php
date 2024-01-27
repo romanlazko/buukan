@@ -46,7 +46,7 @@
                                 <form action="{{ route('super-duper-admin.permission.destroy', $permission) }}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <x-buttons.danger>Delete</x-buttons.dangertton>
+                                    <x-buttons.danger>Delete</x-buttons.danger>
                                 </form>
                             </x-table.buttons>
                         </tr>
