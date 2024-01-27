@@ -68,7 +68,7 @@
                                 <x-form.select wire:key="appointment-employee-{{ $appointmentForm->key }}" id="employee" wire:model.live="appointmentForm.employee_id" wire:change="$set('appointmentForm.service_id', '')"  class="w-full" required :disabled="$formDisabled">
                                     <option value="">Choose employee</option>
                                     @forelse ($company->employees()->role('employee')->get() as $employee_item)
-                                        <option value="{{ $employee_item->id }}">{{ $employee_item->first_name }} {{ $employee_item->last_name }}</option>
+                                        <option wire:key="appointment-employee-{{ $employee_item->id }}-{{ $appointmentForm->key }}" value="{{ $employee_item->id }}">{{ $employee_item->first_name }} {{ $employee_item->last_name }}</option>
                                     @empty
                                         
                                     @endforelse
