@@ -65,7 +65,7 @@
 
                         <div class="sm:flex items-center sm:space-y-0 sm:space-x-3 justify-between shadow-md p-2 space-y-4 bg-white rounded-md">
                             <div class="w-full flex space-x-2">
-                                <x-form.select wire:key="appointment-employee-{{ $appointmentForm->key }}" id="employee" wire:model.live="appointmentForm.employee_id" class="w-full" required :disabled="$formDisabled">
+                                <x-form.select wire:key="appointment-employee-{{ $appointmentForm->key }}" id="employee" wire:model.live="appointmentForm.employee_id" wire:change="$set('appointmentForm.term', '')" class="w-full" required :disabled="$formDisabled">
                                     <option value="">Choose employee</option>
                                     @forelse ($company->employees()->role('employee')->get() as $employee_item)
                                         <option value="{{ $employee_item->id }}">{{ $employee_item->first_name }} {{ $employee_item->last_name }}</option>
@@ -85,11 +85,11 @@
                             <div class="w-full shadow-md p-2 space-y-4 bg-white rounded-md">
                                 <div class="w-full" wire:key="appointment-service-{{ $appointmentForm?->key }}" >
                                     <x-form.label for="service" value="{{ __('Service:') }}"/>
-                                    <x-form.select wire:model.live="appointmentForm.service_id" class="w-full" :disabled="$formDisabled">
+                                    <x-form.select  wire:model.live="appointmentForm.service_id" class="w-full" :disabled="$formDisabled">
                                         <option value="">Choose service</option>
                                         @if($employee?->services)
-                                            @forelse ($employee?->services as $index => $service_item)
-                                                <option wire:key="appointment-service-{{ $index }}-{{ $appointmentForm?->key}}" @disabled(!$service_item->active)  value="{{ $service_item->id }}">{{ $service_item->name }} ({{ $service_item->price }})</option>
+                                            @forelse ($employee?->services as $service_index => $service_item)
+                                                <option wire:key="appointment-service-{{ $service_index }}-{{ $appointmentForm?->key}}" @disabled(!$service_item->active)  value="{{ $service_item->id }}">{{ $service_item->name }} ({{ $service_item->price }})</option>
                                             @empty
                                                 
                                             @endforelse
