@@ -8,8 +8,6 @@
             <x-a-buttons.close x-on:click="$dispatch('close-all-modal')"/>
         </x-slot>
 
-        @dump($appointmentForm)
-
         <form class="sm:flex w-full space-y-3 sm:space-y-0" >
             {{-- CLIENT --}}
                 <div class="sm:w-1/3 w-full p-2 space-y-3">
