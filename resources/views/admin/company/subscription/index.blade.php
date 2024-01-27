@@ -37,9 +37,9 @@
                             {{ __("Ends at:") }} {{ \Illuminate\Support\Carbon::parse($subscription->current_period_end)->format('d.m.Y') }}
                         </p>
                     </div>
-                    <x-a-buttons.primary class="cursor-pointer" href="{{ route('admin.company.subscription.billing', $company) }}">
+                    <x-a-buttons.create class="cursor-pointer" href="{{ route('admin.company.subscription.billing', $company) }}">
                         {{ __("Manage subscription") }}
-                    </x-a-buttons.primary>
+                    </x-a-buttons.create>
                 </div>
             </x-white-block>
         @endif
