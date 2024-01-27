@@ -99,11 +99,11 @@
                                 </div>
 
                                 @if ($employee AND $appointmentForm->service_id AND $appointmentForm->date) 
-                                    <div class="w-full">
+                                    <div class="w-full" wire:key="appointment-term-{{ $appointmentForm->key }}">
                                         <x-form.label for="term" value="{{ __('Term:') }}"/>
-                                        <x-form.input wire:key="appointment-term-{{ $appointmentForm->key }}" dropdown="termDropdown" id="term" wire:model.live="appointmentForm.term" type="time" class="w-full" required :disabled="$formDisabled">
-                                            @foreach ($schedules as $schedule_item)
-                                                <button wire:key="appointment-term-{{ $schedule_item->id }}" class="p-2 w-full hover:bg-gray-200 text-left dropdown-option" type="button" @click="termDropdown = false" wire:click="$set('appointmentForm.term', {{ json_encode($schedule_item->term?->format('H:i')) }})" >
+                                        <x-form.input dropdown="termDropdown" id="term" wire:model.live="appointmentForm.term" type="time" class="w-full" required :disabled="$formDisabled">
+                                            @foreach ($schedules as $schedule_index => $schedule_item)
+                                                <button wire:key="appointment-term-{{ $schedule_index }}-{{ $appointmentForm->key }}" class="p-2 w-full hover:bg-gray-200 text-left dropdown-option" type="button" @click="termDropdown = false" wire:click="$set('appointmentForm.term', {{ json_encode($schedule_item->term?->format('H:i')) }})" >
                                                     {{ $schedule_item->term?->format('H:i') }}
                                                 </button>
                                             @endforeach
