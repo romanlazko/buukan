@@ -6,6 +6,8 @@ use Livewire\Attributes\Validate;
 use Livewire\Form;
 use App\Models\Appointment;
 use App\Models\Schedule;
+use Illuminate\Support\Str;
+
 
 class AppointmentForm extends Form
 {
@@ -20,6 +22,7 @@ class AppointmentForm extends Form
     public $currency;
     public $status = 'new';
     public $sub_services = [];
+    public $key = null;
 
     public function set($data)
     {
@@ -37,6 +40,7 @@ class AppointmentForm extends Form
         $this->currency         = $this->model?->currency ?? $this->model?->total_price_currency ?? null;
         $this->status           = $this->model?->status ?? 'new';
         $this->sub_services     = $this->model?->sub_services?->pluck('id')->toArray() ?? [];
+        $this->key              = Str::random(40);
     }
 
     public function save()

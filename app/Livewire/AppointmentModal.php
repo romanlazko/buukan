@@ -48,22 +48,22 @@ class AppointmentModal extends Component
 
         $service = $this->company->services()->find($this->appointmentForm->service_id);
 
-        // $total_price = $service?->price
-        //     ?->plus(
-        //         $this->company->sub_services()->whereIn('id', $this->appointmentForm->sub_services)
-        //             ->get()
-        //             ->map(function($sub_service){
-        //                 return $sub_service->price->getAmount()->toInt();
-        //             })->sum()
-        //     );
+        $total_price = $service?->price
+            ?->plus(
+                $this->company->sub_services()->whereIn('id', $this->appointmentForm->sub_services)
+                    ->get()
+                    ->map(function($sub_service){
+                        return $sub_service->price->getAmount()->toInt();
+                    })->sum()
+            );
 
-        // $prefix = isset($service->settings->is_price_from) ? __("from ") : "";
+        $prefix = isset($service->settings->is_price_from) ? __("from ") : "";
 
-        // $this->total_price = (object)[
-        //     'prefix' => $prefix,
-        //     'amount' => $total_price?->getAmount()->toInt(),
-        //     'currency' => $total_price?->getCurrency()->getCurrencyCode()
-        // ];
+        $this->total_price = (object)[
+            'prefix' => $prefix,
+            'amount' => $total_price?->getAmount()->toInt(),
+            'currency' => $total_price?->getCurrency()->getCurrencyCode()
+        ];
 
         return view('livewire.appointment-modal');
     }
