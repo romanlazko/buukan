@@ -1,5 +1,5 @@
 <div x-data={}>
-    <div wire:ignore id='calendar' class="text-[10px] sm:text-base"></div>
+    <div wire:ignore id='calendar' class="text-[10px] sm:text-base rounded-lg"></div>
 
     <livewire:event.create-event-modal :employee="$employee"/>
     <livewire:event.date-events-modal :employee="$employee"/>
@@ -15,7 +15,7 @@
                 initialView: 'dayGridMonth',
                 headerToolbar: {
                     left: 'title',
-                    right: 'prev,next'
+                    right: 'prev,next',
                 },
                 selectMinDistance: 1,
                 titleFormat: { year: 'numeric', month: 'short', day: 'numeric' }, 
@@ -70,8 +70,10 @@
             });
             calendar.render();
 
-            $('.fc-view-harness').addClass('overflow-auto');
-            $('.fc-dayGridMonth-view').addClass('min-w-[850px] md:min-w-full');
+            $('.fc-view-harness').addClass('overflow-auto rounded-lg bg-white');
+            $('.fc-dayGridMonth-view').addClass('min-w-[850px] md:min-w-full rounded-lg');
+            $('.fc-header-toolbar').css({"margin-bottom":"0.5rem"}).addClass('flex sticky top-0 z-10 bg-white shadow-lg p-1 border rounded-lg');
+            
             
             calendar.updateSize();
 

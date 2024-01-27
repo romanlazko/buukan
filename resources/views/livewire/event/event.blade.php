@@ -75,7 +75,7 @@
                 <i class="fa-solid fa-pen-to-square sm:mr-1"></i>
             </button>
         @else
-            <div class="h-full" x-data="{ show: false }" @click.outside="show = false" @close.stop="show = false">
+            <div class="h-full items-center" x-data="{ show: false }" @click.outside="show = false" @close.stop="show = false">
                 <button class="h-full w-4 hover:bg-indigo-700 hover:text-white" @click="show = ! show">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </button>
@@ -83,9 +83,9 @@
                 <div 
                     style="display: none"
                     x-bind:style="show ? { display: 'block' } : { display: 'none' }"  
-                    class="z-50 absolute bg-white shadow-lg top-0 right-4 rounded-md border-2 border-gray-100 items-center whitespace-nowrap ring-1 ring-black ring-opacity-5" 
+                    class="z-50 h-full absolute bg-white shadow-lg top-0 right-4 rounded-md border-2 border-gray-100 items-center whitespace-nowrap ring-1 ring-black ring-opacity-5" 
                 >
-                    <div class="flex space-x-2 px-2 items-center">
+                    <div class="flex h-full space-x-2 px-2 items-center">
                         <div class="w-full grid space-y-1">
                             <x-a-buttons.button @click="show = false" wire:click="changeStatus('new')" class="w-full border-blue-500 hover:bg-blue-100 p-2 text-black items-center text-xs" style="{{ $status == 'new' ? 'background-color:blue; color: white' : 'null' }}">
                                 {{ __("New") }}
