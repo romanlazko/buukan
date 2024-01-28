@@ -46,8 +46,8 @@
 
         <x-white-block>
             <stripe-pricing-table 
-                pricing-table-id="prctbl_1Oah1DHnWOcTbmCZgqTXzGBw"
-                publishable-key="pk_test_51OZtRGHnWOcTbmCZYE3rNgZlKssN2Wnqx8TMXfn7PW0flzAEyj059UMdgaDRGcLpAZcT2H22mJASxPyujY2EbYCO001FgAQ4w6"
+                pricing-table-id="prctbl_1OdWteHnWOcTbmCZtwrvcXYq"
+                publishable-key="pk_live_51OZtRGHnWOcTbmCZAO6KVl1Rr77W82kNoDCQ9TxVrnt5sDqKnQUvBvFQkJmsXtRwkGhhbqetsF48iOnpvX0eN9x500io4tJWGO"
                 customer-session-client-secret="{{ $session->client_secret }}"
             >
             </stripe-pricing-table>
