@@ -4,7 +4,7 @@
             <h1 class="leading-[50px] md:leading-[70px] text-[2.5rem] md:text-[3.5rem] font-[600] ">
                 Online <br> RESERVATION <br> SYSTEM
             </h1>
-            <p>
+            <p class="border-l-4 border-l-indigo-600 pl-4">
                 No more errors and overlaps. Schedule employees and work with client records from multiple sources on a single calendar.
             </p>
             
@@ -12,7 +12,7 @@
                 <a class="bg-indigo-600 text-white py-2 px-4 rounded-2xl font-bold whitespace-nowrap block w-min hover:bg-indigo-800 transition ease-in-out duration-150" href="{{ route('admin.register') }}">
                     {{ __("Start 31 day trial") }}
                 </a>
-                <span class="whitespace-nowrap block text-orange-600">
+                <span class="whitespace-nowrap block text-orange-600 underline">
                     {{ __("No credit card required. ") }}
                 </span>
             </div>
@@ -22,6 +22,8 @@
         </div>
     </section>
 
+    <hr class="border-dashed">
+
     <section class="max-w-6xl m-auto grid grid-cols-1 md:grid-cols-3 py-12">
         <div class="space-y-4 p-4 rounded-xl m-3">
             <h2 class=" text-orange-600 font-bold text-xl">
@@ -30,7 +32,7 @@
             <h3 class="font-bold text-lg">
                 Your time, our system
             </h3>
-            <p>
+            <p class="border-l-4 border-l-indigo-600 pl-4">
                 Resource optimization in every sphere with reservation systems. 
             </p>
         </div>
@@ -126,6 +128,8 @@
         </div>
     </section>
 
+    <hr class="border-dashed">
+
     <section class="md:flex max-w-6xl m-auto items-center md:space-x-12 justify-between space-y-12 md:space-y-0 px-4 py-12">
         <div class="space-y-12 w-full">
             <p class="text-xl text-indigo-700 font-bold">
@@ -134,9 +138,12 @@
             <h2 class="text-4xl font-bold">
                 Create your schedule
             </h2>
-            <p class="text-xl">
+            <p class="text-xl border-l-4 border-l-indigo-600 pl-4">
                 Delegate your schedule and client records to us, and spend the time you save on upgrade your business!
             </p>
+            <a class="bg-indigo-600 text-white py-2 px-4 rounded-2xl font-bold whitespace-nowrap block w-min hover:bg-indigo-800 transition ease-in-out duration-150" href="{{ route('admin.register') }}">
+                {{ __("Try it for free") }}
+            </a>
         </div>
         <div class="md:flex border-l border-dashed h-[600px] hidden ">
 
@@ -156,6 +163,8 @@
         </div>
     </section>
 
+    <hr class="border-dashed">
+
     <section class="md:flex max-w-6xl m-auto items-center md:space-x-12 justify-between space-y-12 md:space-y-0 px-4 py-12">
         <div class="space-y-12 w-full">
             <p class="text-xl text-indigo-700 font-bold">
@@ -164,13 +173,16 @@
             <h2 class="text-4xl font-bold">
                 Give link to your customer
             </h2>
-            <p class="text-xl">
+            <p class="text-xl border-l-4 border-l-indigo-600 pl-4">
                 Delegate your schedule and client records to us, and spend the time you save on upgrade your business!
             </p>
             <ul class="text-md text-gray-700">
                 <li><span class="text-indigo-600 font-bold">WebApp</span> - web application for reservation</li>
                 <li><span class="text-indigo-600 font-bold">Telegram</span> - bot for reservation</li>
             </ul>
+            <a class="bg-indigo-600 text-white py-2 px-4 rounded-2xl font-bold whitespace-nowrap block w-min hover:bg-indigo-800 transition ease-in-out duration-150" href="{{ route('admin.register') }}">
+                {{ __("Try it for free") }}
+            </a>
         </div>
         <div class="md:flex hidden border-l border-dashed h-[600px]">
 
@@ -189,6 +201,8 @@
             </div>
         </div>
     </section>
+
+    <hr class="border-dashed">
 
     <section class="max-w-6xl m-auto items-center space-y-12 px-4 py-12">
         <div class="md:flex md:space-x-12 justify-between items-center space-y-12 md:space-y-0">
@@ -213,7 +227,7 @@
             </div>
         </div>
         <div class="max-w-3xl space-y-12">
-            <p class="text-xl">
+            <p class="text-xl border-l-4 border-l-indigo-600 pl-4">
                 Use marketing tools that definitely work - set up automatic notifications for customers. Communicate with your audience via sms and email newsletters, in-app notifications or messengers.
             </p>
             <ul class="text-md text-gray-700 space-y-4">
@@ -226,9 +240,11 @@
                     <p>Get a reminder of upcoming recordings so you don't have to prepare.</p>
                 </li>
             </ul>
+            <a class="bg-indigo-600 text-white py-2 px-4 rounded-2xl font-bold whitespace-nowrap block w-min hover:bg-indigo-800 transition ease-in-out duration-150" href="{{ route('admin.register') }}">
+                {{ __("Try it for free") }}
+            </a>
         </div>
     </section>
-
 
     <section class="w-full bg-blue-950 px-4 py-12">
         <div class="space-y-12 max-w-6xl m-auto">
@@ -280,7 +296,7 @@
             <h2 class="text-4xl font-bold">
                 Ready to get started?
             </h2>
-            <p class="text-xl">
+            <p class="text-xl border-l-4 border-l-indigo-600 pl-4">
                 Login or create an account and start attracting more customers.
             </p>
             <div class="flex space-x-4 items-center">
