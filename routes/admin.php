@@ -59,20 +59,23 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+    // Route::put('password', [PasswordController::class, 'update'])->name('password.update');
         
     Route::middleware(['checkEmployeeRole:admin|super-duper-admin|administrator'])->group(function () {
         Route::resource('company', CompanyController::class);
+
         Route::middleware(['subscribed:premium,standard'])->group(function () {
             Route::get('company/{company}/client/{client}/telegram_chat', [ClientController::class, 'telegram_chat'])->name('company.client.telegram.chat');
             Route::resource('company.client', ClientController::class);
 
             Route::resource('company.employee', EmployeeController::class);
             Route::resource('company.service', ServiceController::class);
-            Route::resource('company.sub_service', SubServiceController::class);
+            
             Route::resource('company.appointment', AppointmentController::class);
             
             Route::middleware(['subscribed:premium'])->group(function () {
+                Route::resource('company.sub_service', SubServiceController::class);
+                
                 Route::resource('company.telegram_bot', TelegramController::class);
                 Route::resource('company.telegram_bot.chat', TelegramChatController::class);
                 Route::resource('company.telegram_bot.advertisement', TelegramAdvertisementController::class);

@@ -15,7 +15,9 @@
                 </div>
             </div>
         </x-slot>
-        <div class="mx-auto sm:max-w-md mt-6 bg-white overflow-hidden shadow-sm sm:rounded-lg sm:p-6 lg:p-8">
+        <div class="mx-auto sm:max-w-md mt-6 bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 sm:p-6 lg:p-8">
+            <x-auth-session-status class="mb-4" :status="session('status')" />
+            
             <form method="POST" action="{{ route('webapp.register', $web_app) }}">
                 @csrf
         
