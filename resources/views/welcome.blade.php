@@ -1,7 +1,7 @@
 <x-guest-layout>
-    <section class="max-w-6xl w-full m-auto sm:flex items-center px-4 py-12 space-y-12 sm:space-y-0 sm:space-x-20">
+    <section class="max-w-7xl w-full m-auto sm:flex items-center px-4 py-12 space-y-12 sm:space-y-0 sm:space-x-20">
         <div class="w-full sm:w-1/3 space-y-8">
-            <h1 class="leading-[50px] md:leading-[70px] text-[2.5rem] md:text-[3.5rem] font-extrabold">
+            <h1 class="leading-[50px] md:leading-[70px] text-[2.5rem] md:text-[3.5rem] font-[600] ">
                 Online <br> RESERVATION <br> SYSTEM
             </h1>
             <p>
@@ -17,8 +17,8 @@
                 </span>
             </div>
         </div>
-        <div class="rounded-[20px] md:rounded-[40px] border-[2px] border-gray-600 w-full md:w-2/3">
-            <img class="rounded-[18px] md:rounded-[38px] border-8 md:border-[10px] border-gray-100" src="{{ asset('img/public/welcome/IMAGE 2024-02-18 14:23:31.jpg')}}" alt="">
+        <div class="rounded-[16px] md:rounded-[20px] border-[2px] border-indigo-900 w-full md:w-2/3">
+            <img class="rounded-[14px] md:rounded-[18px] border-4 md:border-[10px] border-gray-800" src="{{ asset('img/public/welcome/IMAGE 2024-02-18 14:23:31.jpg')}}" alt="">
         </div>
     </section>
 
@@ -150,8 +150,8 @@
             ],
             selected: 0
         }" x-init="setInterval(() => selected = (selected + 1) % images.length, 4000)"">
-            <div class="rounded-[45px] border-[2px] border-gray-600">
-                <img :src="images[selected]" alt="" class="rounded-[42px] border-[14px] border-gray-100 max-h-[600px]">
+            <div class="rounded-[45px] border-[2px] border-indigo-900">
+                <img :src="images[selected]" alt="" class="rounded-[42px] border-[10px] border-gray-800 max-h-[600px]">
             </div>
         </div>
     </section>
@@ -184,8 +184,8 @@
             ],
             selected: 0
         }" x-init="setInterval(() => selected = (selected + 1) % images.length, 4000)"">
-            <div class="rounded-[45px] border-[2px] border-gray-600">
-                <img :src="images[selected]" alt="" class="rounded-[42px] border-[14px] border-gray-100 max-h-[600px]">
+            <div class="rounded-[45px] border-[2px] border-indigo-900">
+                <img :src="images[selected]" alt="" class="rounded-[42px] border-[10px] border-gray-800 max-h-[600px]">
             </div>
         </div>
     </section>
