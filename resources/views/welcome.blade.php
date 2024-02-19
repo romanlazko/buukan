@@ -62,7 +62,7 @@
             </p>
         </div>
         <div class="bg-white p-4 rounded-xl space-y-4 m-3 shadow-2xl hover:bg-gray-100 hover:scale-105 transition ease-in-out duration-150">
-            <img src="{{ asset('img/public/icon/HAIR SALON.png')}}" alt="">
+            <img src="{{ asset('img/public/icon/HAIR SALON.PNG')}}" alt="">
             <h2 class="text-black text-md font-bold">
                 Hair Salon
             </h2>
@@ -143,10 +143,10 @@
         </div>
         <div class="w-full flex justify-center hover:scale-105 transition ease-in-out duration-150" x-data="{
             images: [
-                '{{ asset('img/public/welcome/IMG_5908.png')}}',
-                '{{ asset('img/public/welcome/IMG_5909.png')}}',
-                '{{ asset('img/public/welcome/IMG_5910.png')}}',
-                '{{ asset('img/public/welcome/IMG_5911.png')}}',
+                '{{ asset('img/public/welcome/IMG_5908.PNG')}}',
+                '{{ asset('img/public/welcome/IMG_5909.PNG')}}',
+                '{{ asset('img/public/welcome/IMG_5910.PNG')}}',
+                '{{ asset('img/public/welcome/IMG_5911.PNG')}}',
             ],
             selected: 0
         }" x-init="setInterval(() => selected = (selected + 1) % images.length, 4000)"">
@@ -177,10 +177,10 @@
         </div>
         <div class="w-full flex justify-center hover:scale-105 transition ease-in-out duration-150" x-data="{
             images: [
-                '{{ asset('img/public/welcome/IMG_5908.png')}}',
-                '{{ asset('img/public/welcome/IMG_5909.png')}}',
-                '{{ asset('img/public/welcome/IMG_5910.png')}}',
-                '{{ asset('img/public/welcome/IMG_5911.png')}}',
+                '{{ asset('img/public/welcome/IMG_5908.PNG')}}',
+                '{{ asset('img/public/welcome/IMG_5909.PNG')}}',
+                '{{ asset('img/public/welcome/IMG_5910.PNG')}}',
+                '{{ asset('img/public/welcome/IMG_5911.PNG')}}',
             ],
             selected: 0
         }" x-init="setInterval(() => selected = (selected + 1) % images.length, 4000)"">
