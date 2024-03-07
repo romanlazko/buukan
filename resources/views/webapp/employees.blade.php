@@ -23,7 +23,6 @@
         <div class="w-full space-y-6">
             @forelse ($employees as $employee)
             <div wire:key="employee-{{$employee->id}}" class="flex items-center space-x-2">
-        
                 <input wire:model.live="employeeId" type="radio" name="employee" id="{{ $employee->slug }}" class="peer/{{ $employee->slug }}" value="{{ $employee->id }}">
                 <x-form.label for="{{ $employee->slug }}" class="w-full bg-white rounded-lg border-2 peer-checked/{{ $employee->slug }}:border-blue-400 overflow-hidden" >
                     <div class="flex justify-between items-center" >

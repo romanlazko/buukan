@@ -22,9 +22,8 @@
 			</form>
         </div>
     </x-slot>
-    @dump($current)
-    <livewire:dynamic-component :is="$current"/>
     
+    <livewire:dynamic-component :is="$current"/>
 
     <x-slot name="footer">
         <div class="w-full">

@@ -10,6 +10,7 @@ use Romanlazko\Telegram\App\DB;
 use Romanlazko\Telegram\App\Entities\Response;
 use Romanlazko\Telegram\App\Entities\Update;
 use App\Models\Company;
+use App\Models\Employee;
 
 class ChooseService extends Command
 {
@@ -21,9 +22,9 @@ class ChooseService extends Command
 
     public function execute(Update $updates): Response
     {
-        $company = Company::find(DB::getBot()->owner_id);
+        $employee = Employee::find($updates->getInlineData()->getEmployeeId());
 
-        $services_buttons = $company->services()
+        $services_buttons = $employee->services()
             ?->active()
             ?->whereJsonContains('settings->is_available_on_telegram', 'on')
             ?->get()
@@ -35,7 +36,7 @@ class ChooseService extends Command
         
         $buttons = BotApi::inlineKeyboard([
             ...$services_buttons,
-            [array("👈 Назад", CreateProfile::$command, '')]
+            [array("👈 Назад", ChooseEmployee::$command, '')]
         ], 'service_id');
 
         return BotApi::returnInline([
