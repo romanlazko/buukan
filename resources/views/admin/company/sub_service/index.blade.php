@@ -31,6 +31,7 @@
                             <x-table.th>Sub service</x-table.th>
                             <x-table.th>Description</x-table.th>
                             <x-table.th>Price</x-table.th>
+                            <x-table.th>Status</x-table.th>
                             <x-table.th>Action</x-table.th>
                         </tr>
                     </x-table.thead>
@@ -51,12 +52,22 @@
                                         </div>
                                     </div>
                                 </x-table.td>
+                                
                                 <x-table.td class="text-sm font-light whitespace-normal">
                                     <p class="w-full min-w-[14rem]">
                                         {{ Str::limit($service->description, 100, '...') }}
                                     </p>
                                 </x-table.td>
-                                <x-table.td>{{ $service->price }}</x-table.td>
+
+                                <x-table.td>
+                                    {{ $service->price }}
+                                </x-table.td>
+
+                                <x-table.td>
+                                    <x-badge color="{{ $service->active ? 'green' : 'red' }}">
+                                        {{ $service->active ? "Active" : "Disabled" }}
+                                    </x-badge>
+                                </x-table.td>
 
                                 <x-table.buttons>
                                     <x-a-buttons.edit href="{{ route('admin.company.sub_service.edit', [$company, $service]) }}">

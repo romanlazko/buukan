@@ -58,9 +58,9 @@
             </h1>
 
             <div class="w-full space-y-6">
-                @foreach ($web_app->company->sub_services as $service)
+                @foreach ($sub_services as $service)
                     <div wire:key="service-{{ $service->id }}" class="flex items-center space-x-2">
-                        <input wire:model="sub_services" type="checkbox" id="{{ $service->slug }}" class="peer/{{ $service->slug }}" name="sub_services[]" slug="{{ $service->slug }}" value="{{ $service->id }}">
+                        <input wire:model="sub_services_ids" type="checkbox" id="{{ $service->slug }}" class="peer/{{ $service->slug }}" name="sub_services_ids[]" slug="{{ $service->slug }}" value="{{ $service->id }}">
                         <x-form.label for="{{ $service->slug }}" class="w-full bg-white rounded-lg border-2 peer-checked/{{ $service->slug }}:border-blue-400 overflow-hidden" >
                             <div class="flex justify-between items-center" >
                                 <div class="flex w-full">

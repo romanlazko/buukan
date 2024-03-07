@@ -55,7 +55,7 @@ class ChooseDateByWeek extends Command
 				array('>', 'choose_date_by_week', $startOfWeek->clone()->modify('+1 week')->format('Y-m-d'))
 			],
             ...$schedules,
-            [array("👈 Назад", ChooseSubService::$command, '')]
+            [array("👈 Назад", ChooseService::$command, '')]
         ], 'date');
 
         return BotApi::returnInline([
