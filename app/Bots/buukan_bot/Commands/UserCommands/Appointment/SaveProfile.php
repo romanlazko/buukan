@@ -49,6 +49,6 @@ class SaveProfile extends Command
 
         $updates->getInlineData()->getClientId($client->id);
 
-        return $this->bot->executeCommand(ChooseService::$command);
+        return $this->bot->executeCommand(ChooseEmployee::$command);
     }
 }

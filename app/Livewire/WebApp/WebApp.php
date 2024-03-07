@@ -29,8 +29,8 @@ class WebApp extends Component
 
     public $steps = [
         'appointments',
-        'services',
         'employees',
+        'services',
         'dateterm',
     ];
 
@@ -41,17 +41,46 @@ class WebApp extends Component
     public $unnocupiedDates;
     public $schedules;
     public $appointments;
+
+    public function render()
+    {
+        if ($this->steps[$this->currentStep] == 'appointments') {
+            $client = $this->web_app->company->clients()->where('user_id', auth('user')->user()->id)->first();
+            $this->appointments = $client?->appointments?->where('status', 'new') ?? collect([]);
+        }
+
+        if ($this->steps[$this->currentStep] == 'employees') {
+            $this->employees = $this->web_app->company->employees()
+                ->whereJsonContains('settings->is_available_on_webapp', 'on')
+                ->role('employee', 'company')
+                ->get();
+        }
+
+        if ($this->steps[$this->currentStep] == 'services') {
+            $this->services = Employee::find($this->employeeId)->services()
+                ?->active()
+                ?->whereJsonContains('settings->is_available_on_webapp', 'on')
+                ?->get();
+        }
+
+        if ($this->steps[$this->currentStep] == 'dateterm') {
+            $this->unnocupiedDates  = GetEmployeeUnoccupiedScheduleAction::handle(Employee::find($this->employeeId), null, $this->serviceId)?->sortBy('date');
+            $this->schedules        = GetEmployeeUnoccupiedScheduleAction::handle(Employee::find($this->employeeId), $this->date, $this->serviceId)?->sortBy('term');
+        }
+        
+        return view("webapp.{$this->steps[$this->currentStep]}");
+    }
     
     public function nextStep()
     {
         $this->currentStep++;
 
-        if ($this->steps[$this->currentStep] == 'services') {
+        if ($this->steps[$this->currentStep] == 'employees') {
             $this->reset('serviceId', 'employeeId', 'date', 'term', 'sub_services');
         }
 
-        if ($this->steps[$this->currentStep] == 'employees') {
-            $this->reset('employeeId', 'date', 'term');
+        if ($this->steps[$this->currentStep] == 'services') {
+            $this->reset('serviceId', 'date', 'term', 'sub_services');
         }
 
         if ($this->steps[$this->currentStep] == 'dateterm') {
@@ -65,12 +94,12 @@ class WebApp extends Component
             $this->currentStep--;
         }
 
-        if ($this->steps[$this->currentStep] == 'services') {
-            $this->reset('employeeId', 'date', 'term');
+        if ($this->steps[$this->currentStep] == 'employees') {
+            $this->reset('serviceId', 'employeeId', 'date', 'term', 'sub_services');
         }
 
-        if ($this->steps[$this->currentStep] == 'employees') {
-            $this->reset('employeeId', 'date', 'term');
+        if ($this->steps[$this->currentStep] == 'services') {
+            $this->reset('serviceId', 'date', 'term', 'sub_services');
         }
 
         if ($this->steps[$this->currentStep] == 'dateterm') {
@@ -130,30 +159,5 @@ class WebApp extends Component
     public function resetTerm()
     {
         $this->reset('term');
-    }
-
-    public function render()
-    {
-        if ($this->steps[$this->currentStep] == 'appointments') {
-            $client = $this->web_app->company->clients()->where('user_id', auth('user')->user()->id)->first();
-            $this->appointments = $client?->appointments?->where('status', 'new') ?? collect([]);
-        }
-
-        if ($this->steps[$this->currentStep] == 'services') {
-            $this->services = $this->web_app->company->services()?->active()->whereJsonContains('settings->is_available_on_webapp', 'on')?->get();
-        }
-
-        if ($this->steps[$this->currentStep] == 'employees') {
-            $this->employees = $this->web_app->company->employees()->whereJsonContains('settings->is_available_on_webapp', 'on')?->whereHas('services', function($query){
-                return $query->where('service_id', $this->serviceId);
-            })->role('employee', 'company')->get();
-        }
-
-        if ($this->steps[$this->currentStep] == 'dateterm') {
-            $this->unnocupiedDates  = GetEmployeeUnoccupiedScheduleAction::handle(Employee::find($this->employeeId), null, $this->serviceId)?->sortBy('date');
-            $this->schedules        = GetEmployeeUnoccupiedScheduleAction::handle(Employee::find($this->employeeId), $this->date, $this->serviceId)?->sortBy('term');
-        }
-        
-        return view("webapp.{$this->steps[$this->currentStep]}");
     }
 }

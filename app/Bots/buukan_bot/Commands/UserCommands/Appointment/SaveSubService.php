@@ -16,6 +16,6 @@ class SaveSubService extends Command
 
     public function execute(Update $updates): Response
     {
-        return $this->bot->executeCommand(ChooseEmployee::$command);
+        return $this->bot->executeCommand(ChooseDateByWeek::$command);
     }
 }

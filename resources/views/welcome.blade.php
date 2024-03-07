@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <section class="max-w-7xl w-full m-auto sm:flex items-center px-4 py-12 space-y-12 sm:space-y-0 sm:space-x-20">
+    <section class="max-w-6xl w-full m-auto sm:flex items-center px-4 py-12 space-y-12 sm:space-y-0 sm:space-x-20">
         <div class="w-full sm:w-1/3 space-y-8">
             <h1 class="leading-[50px] md:leading-[70px] text-[2.5rem] md:text-[3.5rem] font-[600] ">
                 Online <br> RESERVATION <br> SYSTEM
@@ -22,7 +22,7 @@
         </div>
     </section>
 
-    <hr class="border-dashed">
+    {{-- <hr class="border-dashed"> --}}
 
     <section class="max-w-6xl m-auto grid grid-cols-1 md:grid-cols-3 py-12">
         <div class="space-y-4 p-4 rounded-xl m-3">
@@ -128,7 +128,7 @@
         </div>
     </section>
 
-    <hr class="border-dashed">
+    {{-- <hr class="border-dashed"> --}}
 
     <section class="md:flex max-w-6xl m-auto items-center md:space-x-12 justify-between space-y-12 md:space-y-0 px-4 py-12">
         <div class="space-y-12 w-full">
@@ -163,7 +163,7 @@
         </div>
     </section>
 
-    <hr class="border-dashed">
+    {{-- <hr class="border-dashed"> --}}
 
     <section class="md:flex max-w-6xl m-auto items-center md:space-x-12 justify-between space-y-12 md:space-y-0 px-4 py-12">
         <div class="space-y-12 w-full">
@@ -202,7 +202,7 @@
         </div>
     </section>
 
-    <hr class="border-dashed">
+    {{-- <hr class="border-dashed"> --}}
 
     <section class="max-w-6xl m-auto items-center space-y-12 px-4 py-12">
         <div class="md:flex md:space-x-12 justify-between items-center space-y-12 md:space-y-0">

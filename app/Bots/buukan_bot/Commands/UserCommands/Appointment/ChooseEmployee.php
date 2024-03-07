@@ -25,9 +25,9 @@ class ChooseEmployee extends Command
 
         $employees_buttons = $company->employees()
             ?->whereJsonContains('settings->is_available_on_telegram', 'on')
-            ?->whereHas('services', function($query) use($updates){
-                return $query->where('service_id', $updates->getInlineData()->getServiceId());
-            })
+            // ?->whereHas('services', function($query) use($updates){
+            //     return $query->where('service_id', $updates->getInlineData()->getServiceId());
+            // })
             ?->get()
             ?->map(function ($employee) {
                 return [array("$employee->first_name $employee->last_name", SaveEmployee::$command, $employee->id)];
@@ -35,7 +35,7 @@ class ChooseEmployee extends Command
 
         $buttons = BotApi::inlineKeyboard([
             ...$employees_buttons,
-            [array("👈 Назад", ChooseService::$command, '')]
+            [array("👈 Назад", CreateProfile::$command, '')]
         ], 'employee_id');
 
         return BotApi::returnInline([
