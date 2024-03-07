@@ -32,6 +32,11 @@ class Employee extends Model
         return $this->belongsToMany(Service::class, 'service_employee');
     }
 
+    public function sub_services()
+    {
+        return $this->belongsToMany(SubService::class, 'sub_service_employee');
+    }
+
     public function admin()
     {
         return $this->belongsTo(Admin::class);

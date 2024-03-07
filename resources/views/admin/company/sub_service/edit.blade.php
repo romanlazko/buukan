@@ -76,6 +76,71 @@
                         </x-form.label>
                     </div>
                 </x-white-block>
+
+                @if ($company->employees->isNotEmpty())
+                    <x-white-block>
+                        <div class="space-y-4">
+                            <h2 class="text-lg font-medium text-gray-900">
+                                {{ __('Employees') }}
+                            </h2>
+                            <div class="border rounded-md p-3">
+                                @foreach ($company->employees()->role('employee', 'company')->get() as $employee)
+                                    <div class="flex space-x-2 items-center py-3 @if(!$loop->last) border-b @endif">
+                                        <x-form.label for="{{ $employee->slug }}" class="w-full ">
+                                            <div class="flex justify-between w-full items-center">
+                                                <span>
+                                                    {{ $employee->first_name }} {{ $employee->last_name }}
+                                                </span>
+                                                <x-form.checkbox id="{{ $employee->slug }}" name="employees[]" :value="$employee->id" type="checkbox" :checked="old('employees[{{$employee->id}}]', !$sub_service->employees->where('id', $employee->id)->isEmpty())"/>
+                                            </div>
+                                        </x-form.label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </x-white-block>
+                @endif
+
+                <x-white-block>
+                    <div class="space-y-4">
+                        <h2 class="text-lg font-medium text-gray-900">
+                            {{ __('Settings') }}
+                        </h2>
+                        <div class="border rounded-md p-3">
+                            <div class="flex space-x-2 items-center py-3">
+                                <x-form.label for="is_available_on_telegram" class="w-full">
+                                    <div class="flex justify-between w-full items-center">
+                                        <span>
+                                            {{ __("Is available on Telegram")  }}
+                                        </span>
+                                        <x-form.checkbox id="is_available_on_telegram" name="settings[is_available_on_telegram]" type="checkbox" :checked="old('settings[is_available_on_telegram]', $sub_service->settings->is_available_on_telegram ?? null)"/>
+                                    </div>
+                                </x-form.label>
+                            </div>
+                            <hr>
+                            <div class="flex space-x-2 items-center py-3">
+                                <x-form.label for="is_available_on_webapp" class="w-full">
+                                    <div class="flex justify-between w-full items-center">
+                                        <span>
+                                            {{ __("Is available on WebApp")  }}
+                                        </span>
+                                        <x-form.checkbox id="is_available_on_webapp" name="settings[is_available_on_webapp]" type="checkbox" :checked="old('settings[is_available_on_webapp]', $sub_service->settings->is_available_on_webapp ?? null)"/>
+                                    </div>
+                                </x-form.label>
+                            </div>
+                        </div>
+                    </div>
+                </x-white-block>
+
+                <x-white-block>
+                    <div class="space-y-4">
+                        <x-form.label for="active" value="{{ __('Status') }}"/>
+                        <x-form.select id="active" name="active" class="w-full">
+                            <option @selected($sub_service->active == 1) value="1">Active</option>
+                            <option @selected($sub_service->active == 0) value="0">Disable</option>
+                        </x-form.select>
+                    </div>
+                </x-white-block>
                 
                 <div class="flex justify-end px-4 sm:px-0">
                     <x-buttons.primary>{{ __('Update') }}</x-buttons.primary>

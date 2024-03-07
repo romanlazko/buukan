@@ -19,9 +19,9 @@ class WebApp extends Component
 
     public $client;
 
-    public $sub_services = [];
-
     public $services;
+
+    public $sub_services;
 
     public $employees;
 
@@ -36,6 +36,7 @@ class WebApp extends Component
 
     public $serviceId;
     public $employeeId;
+    public $sub_services_ids = [];
     public $date;
     public $term;
     public $unnocupiedDates;
@@ -58,6 +59,11 @@ class WebApp extends Component
 
         if ($this->steps[$this->currentStep] == 'services') {
             $this->services = Employee::find($this->employeeId)->services()
+                ?->active()
+                ?->whereJsonContains('settings->is_available_on_webapp', 'on')
+                ?->get();
+
+            $this->sub_services = Employee::find($this->employeeId)->sub_services()
                 ?->active()
                 ?->whereJsonContains('settings->is_available_on_webapp', 'on')
                 ?->get();
@@ -139,12 +145,12 @@ class WebApp extends Component
                 'via'   => 'webapp',
             ]);
             
-            $appointment->sub_services()->sync($this->sub_services);
+            $appointment->sub_services()->sync($this->sub_services_ids);
 
             event(new NewAppointmentEvent($appointment));
         }
 
-        $this->reset('serviceId', 'employeeId', 'date', 'term', 'currentStep', 'sub_services');
+        $this->reset('serviceId', 'employeeId', 'date', 'term', 'currentStep', 'sub_services_ids');
     }
 
     public function cancel($appointmentId) 

@@ -48,9 +48,10 @@ class SubServiceController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'color' => $request->color,
-            'currency' => 'CZK',
+            'currency' => $request->currency,
             'settings'  => $request->settings,
-        ]);
+            'active'    => $request->active,
+        ])->employees()->sync($request->employees);
         
         return redirect()->route('admin.company.sub_service.index', compact([
             'company'
@@ -96,9 +97,12 @@ class SubServiceController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'color' => $request->color,
-            'currency' => 'CZK',
+            'currency' => $request->currency,
             'settings'  => $request->settings,
+            'active'    => $request->active,
         ]);
+
+        $sub_service->employees()->sync($request->employees);
 
         return redirect()->route('admin.company.sub_service.index', $company);
     }

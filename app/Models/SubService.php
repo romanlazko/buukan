@@ -20,7 +20,8 @@ class SubService extends Model
         'price',
         'color',
         'currency',
-        'settings'
+        'settings',
+        'active'
     ];
 
     protected $casts = [
@@ -36,5 +37,20 @@ class SubService extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
+    }
+
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class, 'sub_service_employee');
+    }
+
+    public function price()
+    {
+        return $this->price->getAmount()->toInt();
+    }
+
+    public function scopeActive($query) 
+    {
+        return $query->where('active', true);
     }
 }

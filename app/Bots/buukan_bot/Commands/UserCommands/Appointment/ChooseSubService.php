@@ -9,6 +9,7 @@ use Romanlazko\Telegram\App\DB;
 use Romanlazko\Telegram\App\Entities\Response;
 use Romanlazko\Telegram\App\Entities\Update;
 use App\Models\Company;
+use App\Models\Employee;
 
 class ChooseSubService extends Command
 {
@@ -20,17 +21,17 @@ class ChooseSubService extends Command
 
     public function execute(Update $updates): Response
     {
-        $company = Company::find(DB::getBot()->owner_id);
+        $employee = Employee::find($updates->getInlineData()->getEmployeeId());
 
-        $sub_services = $company->sub_services;
+        $sub_services = $employee->sub_services;
 
-        $sub_services_buttons = $sub_services->map(function ($sub_service) {
-            $service_name = $sub_service->name . ": " . (isset($sub_service->settings->is_price_from) ? 'от ' : '') . $sub_service->price;
-
-            return [array($service_name, ChooseSubService::$command, $sub_service->id)];
-        });
-        
         if ($sub_services->isNotEmpty()) {
+            $sub_services_buttons = $sub_services->map(function ($sub_service) {
+                $service_name = $sub_service->name . ": " . (isset($sub_service->settings->is_price_from) ? 'от ' : '') . $sub_service->price;
+    
+                return [array($service_name, ChooseSubService::$command, $sub_service->id)];
+            });
+
             $buttons = BotApi::inlineCheckbox([
                 ...$sub_services_buttons,
                 [array("Продолжить", SaveSubService::$command, '')],
