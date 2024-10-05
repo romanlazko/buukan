@@ -9,16 +9,16 @@
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet" />
         <script src="https://kit.fontawesome.com/f4c6764ec6.js" crossorigin="anonymous"></script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div id="bg" class="w-full h-screen fixed z-10">
-        </div>
-        <div class="w-full min-h-screen z-50">
+    <body class="font-sans text-gray-900 antialiased flex flex-col">
+        {{-- <div id="bg" class="w-full h-screen fixed z-10">
+        </div> --}}
+        <div class="w-full min-h-screen z-50 flex flex-col">
             
             @include('layouts.navigation')
 
@@ -32,11 +32,11 @@
             @endif
 
             <!-- Page Content -->
-            <main class="">
-                <div class="md:space-y-20">
-                    {{ $slot }}
-                </div>
+            <main class="flex-1">
+                {{ $slot }}
             </main>
+
+            @include('layouts.footer')
         </div>
     </body>
 </html>

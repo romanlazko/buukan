@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="mx-auto sm:max-w-md mt-6 bg-white overflow-hidden shadow-sm sm:rounded-lg sm:p-6 lg:p-8">
+    <div class="mx-auto sm:max-w-md mt-6 bg-white overflow-hidden border shadow-2xl sm:rounded-lg sm:p-6 lg:p-8">
         <div class="mb-4 text-sm text-gray-600">
             {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
         </div>

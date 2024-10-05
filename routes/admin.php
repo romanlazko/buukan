@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cron\TomorrowAppointmentsController;
 use App\Http\Controllers\Admin\StripeController;
 use App\Http\Controllers\Admin\SubscriptionController;
-
+use Laravel\Cashier\Cashier;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +42,32 @@ use App\Http\Controllers\Admin\SubscriptionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome.welcome');
 })->name('welcome');
+
+Route::get('/contacts', function () {
+    return view('welcome.contacts');
+})->name('contacts');
+
+Route::get('/prices', function () {
+    $stripe = Cashier::stripe();
+    $products = $stripe->products->all();
+
+    foreach ($products['data'] as $product) {
+        $plans = $stripe->plans->all(['product' => $product->id, 'active' => true]);
+        $product->plans = collect($plans['data']);
+    }
+
+    $products = collect($products['data'])->sort();
+
+    return view('welcome.prices', compact('products'));
+})->name('prices');
+
+Route::get('setlocale/{locale}', function ($locale) {
+    session(['locale' => $locale]);
+
+    return back();
+})->name('setlocale');
 
 Route::middleware('guest')->name('admin.')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
