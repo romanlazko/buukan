@@ -28,7 +28,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cron\TomorrowAppointmentsController;
 use App\Http\Controllers\Admin\StripeController;
 use App\Http\Controllers\Admin\SubscriptionController;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Cashier\Cashier;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,8 +65,28 @@ Route::get('/prices', function () {
     return view('welcome.prices', compact('products'));
 })->name('prices');
 
+Route::post('/question', function (Request $request) {
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email',
+        'message' => 'required|string',
+    ]);
+
+    Mail::send('mails.question', ['data' => $validated], function($message) use ($validated) {
+        $message->to('info@buukan.com')
+                ->replyTo($validated['email'], $validated['name'])
+                ->subject('Новое сообщение с контактной формы');
+    });
+    
+    return back()->with([
+        'ok' => true,
+        'description' => "Ваше сообщение успешно отправлено"
+    ]);
+
+})->name('question');
+
 Route::get('setlocale/{locale}', function ($locale) {
-    session(['locale' => $locale]);
+    session()->put(['locale' => $locale]);
 
     return back();
 })->name('setlocale');

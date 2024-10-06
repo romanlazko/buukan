@@ -5,10 +5,10 @@
         </h1>
         <div class="flex space-x-3 m-auto">
             <button @click="plan = 'month'" x-bind:class="{ 'bg-indigo-700 hover:bg-indigo-500 text-white': plan === 'month' }" class="p-3 border rounded-lg">
-                Montly
+                {{ __("Monthly") }}
             </button>
             <button @click="plan = 'year'" x-bind:class="{ 'bg-indigo-700 hover:bg-indigo-500 text-white': plan === 'year' }" class="p-3 border rounded-lg">
-                Yearly
+                {{ __("Yearly") }}
             </button>
         </div>
         <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -19,12 +19,12 @@
                             {{ $product->name }}
                         </h1>
                         <p class="text-sm text-gray-500">
-                            {{ $product->description }}
+                            {{ __("$product->description") }}
                         </p>
                         <div class="w-full relative z-0">
                             @foreach ($product->plans as $plan)
                                 <p :class="{ 'active': plan === '{{ $plan->interval }}' }" x-show.transition.in.opacity.duration.600="plan === '{{ $plan->interval }}'">
-                                    {{ $plan->amount_decimal/100 }} {{ $plan->currency }}/{{ $plan->interval }}
+                                    {{ $plan->amount_decimal/100 }} {{ $plan->currency }}/{{ __("$plan->interval") }}
                                 </p>
                             @endforeach
                         </div>

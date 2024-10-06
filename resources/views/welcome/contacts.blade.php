@@ -61,7 +61,7 @@
                 </li>
             </ul>
         </div>
-        <form method="POST" class="w-full lg:w-1/2 bg-white overflow-hidden shadow-3xl rounded-lg p-4 border shadow-2xl">
+        <form action="{{ route('question') }}" method="POST" class="w-full lg:w-1/2 bg-white overflow-hidden shadow-3xl rounded-lg p-4 border shadow-2xl">
             @csrf
     
             <!-- Name -->
@@ -80,9 +80,10 @@
     
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-form.label for="question" :value="__('Question:')" />
-                <x-form.textarea>
+                <x-form.label for="message" :value="__('Question:')" />
+                <x-form.textarea name="message" >
                 </x-form.textarea>
+                <x-form.error :messages="$errors->get('message')" class="mt-2" />
             </div>
     
             <div class="flex items-center justify-end mt-4">

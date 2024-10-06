@@ -16,7 +16,7 @@
         <ul class="xl:flex xl:space-x-2 space-y-3 xl:space-y-0">
             <li>
                 <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-check text-1xl text-green-500 bg-green-100 w-6 h-6 flex items-center justify-center rounded-full"></i>
+                    <i class="fa-solid fa-check text-1xl text-green-500 bg-green-100 w-6 h-6 min-w-6 min-h-6 flex items-center justify-center rounded-full"></i>
                     <p>
                         {{ __("31 days free trial") }}
                     </p>
@@ -24,7 +24,7 @@
             </li>
             <li>
                 <div class="flex items-center space-x-3">
-                    <i class="fa-solid fa-check text-1xl text-green-500 bg-green-100 w-6 h-6 flex items-center justify-center rounded-full"></i>
+                    <i class="fa-solid fa-check text-1xl text-green-500 bg-green-100 w-6 h-6 min-w-6 min-h-6 flex items-center justify-center rounded-full"></i>
                     <p>
                         {{ __("No credit card required") }}
                     </p>
