@@ -144,4 +144,5 @@ Route::middleware('auth')->name('admin.')->group(function () {
 });
 
 Route::middleware(['web'])->get('/cron', TomorrowAppointmentsController::class); 
+
 // require __DIR__.'/auth.php';

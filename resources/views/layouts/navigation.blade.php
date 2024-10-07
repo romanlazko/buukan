@@ -34,6 +34,9 @@
                     <x-dropdown-link href="{{ route('setlocale', 'cz') }}">
                         Cz
                     </x-dropdown-link>
+                    <x-dropdown-link href="{{ route('setlocale', 'sk') }}">
+                        Sk
+                    </x-dropdown-link>
                     <x-dropdown-link href="{{ route('setlocale', 'en') }}">
                         En
                     </x-dropdown-link>
