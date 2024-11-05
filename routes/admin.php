@@ -28,7 +28,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Cron\TomorrowAppointmentsController;
 use App\Http\Controllers\Admin\StripeController;
 use App\Http\Controllers\Admin\SubscriptionController;
-
+use Illuminate\Support\Facades\Mail;
+use Laravel\Cashier\Cashier;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,8 +44,52 @@ use App\Http\Controllers\Admin\SubscriptionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome.welcome');
 })->name('welcome');
+
+Route::get('/contacts', function () {
+    return view('welcome.contacts');
+})->name('contacts');
+
+Route::get('/prices', function () {
+    $stripe = Cashier::stripe();
+    $products = $stripe->products->all();
+
+    foreach ($products['data'] as $product) {
+        $plans = $stripe->plans->all(['product' => $product->id, 'active' => true]);
+        $product->plans = collect($plans['data']);
+    }
+
+    $products = collect($products['data'])->sort();
+
+    return view('welcome.prices', compact('products'));
+})->name('prices');
+
+Route::post('/question', function (Request $request) {
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email',
+        'message' => 'required|string',
+    ]);
+
+    Mail::send('mails.question', ['data' => $validated], function($message) use ($validated) {
+        $message->to('info@buukan.com')
+                ->replyTo($validated['email'], $validated['name'])
+                ->subject('Новое сообщение с контактной формы');
+    });
+    
+    return back()->with([
+        'ok' => true,
+        'description' => "Ваше сообщение успешно отправлено"
+    ]);
+
+})->name('question');
+
+Route::get('setlocale/{locale}', function ($locale) {
+    session()->put(['locale' => $locale]);
+
+    return back();
+})->name('setlocale');
 
 Route::middleware('guest')->name('admin.')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
@@ -98,4 +144,5 @@ Route::middleware('auth')->name('admin.')->group(function () {
 });
 
 Route::middleware(['web'])->get('/cron', TomorrowAppointmentsController::class); 
+
 // require __DIR__.'/auth.php';

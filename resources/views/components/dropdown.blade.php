@@ -8,6 +8,9 @@ switch ($align) {
     case 'top':
         $alignmentClasses = 'origin-top';
         break;
+    case 'bottom':
+        $alignmentClasses = 'origin-bottom bottom-0';
+        break;
     case 'right':
     default:
         $alignmentClasses = 'origin-top-right right-0';
@@ -21,7 +24,7 @@ switch ($width) {
 }
 @endphp
 
-<div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false">
+<div class="relative" x-data="{ open: false }" @click.outside="open = false" @close.stop="open = false" {{ $attributes->merge(['class' => '']) }}>
     <div @click="open = ! open">
         {{ $trigger }}
     </div>
@@ -36,7 +39,7 @@ switch ($width) {
             class="absolute z-50 mt-2 {{ $width }} rounded-md shadow-lg {{ $alignmentClasses }}"
             style="display: none;"
             @click="open = false">
-        <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }}">
+        <div class="rounded-md ring-1 ring-black ring-opacity-5 {{ $contentClasses }} p-1">
             {{ $content }}
         </div>
     </div>

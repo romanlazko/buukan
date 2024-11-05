@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-#bg {
+/* #bg {
 	z-index: -10;
 	background: linear-gradient(190deg,white, #7025e982,  #ee765293,  white);
 	background-size: 200% 100%;
@@ -28,4 +28,4 @@
 }
 .fade-enter, .fade-leave-to {
     opacity: 0;
-}
+} */

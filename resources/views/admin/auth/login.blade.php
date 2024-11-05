@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="mx-auto sm:max-w-md mt-6 bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 sm:p-6 lg:p-8">
+    <div class="mx-auto sm:max-w-md mt-6 bg-white overflow-hidden sm:rounded-lg p-4 sm:p-6 lg:p-8 border shadow-2xl">
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
