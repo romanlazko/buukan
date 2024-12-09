@@ -19,57 +19,57 @@
         </div>
         <div class="space-y-4 justify-self-center">
             <h3 href="" class="w-full text-xl block text-white font-bold">
-                {{ __('Important information') }}
+                {{ __('footer.important_information') }}
             </h3>
             <a href="{{ route('prices')}}" class="w-full block hover:underline">
-                {{ __('Prices') }}
+                {{ __('footer.prices') }}
             </a>
             <x-dropdown align="bottom" width="48">
                 <x-slot name="trigger">
                     <button class="w-full text-left hover:underline">
-                        {{ __('Terms and conditions') }}
+                        {{ __('footer.terms_and_conditions') }}
                     </button>
                 </x-slot>
                 <x-slot name="content">
                     <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_cz.pdf')}}">
-                        Ru
+                        RU
                     </x-dropdown-link>
                     <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_cz.pdf')}}">
-                        Cz
+                        CZ
                     </x-dropdown-link>
                     <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_en.pdf')}}">
-                        En
+                        EN
                     </x-dropdown-link>
                 </x-slot>
             </x-dropdown>
             <x-dropdown align="bottom" width="48">
                 <x-slot name="trigger">
                     <button class="w-full text-left hover:underline">
-                        GDPR
+                        {{ __('footer.gdpr') }}
                     </button>
                 </x-slot>
                 <x-slot name="content">
                     <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_cz.pdf')}}">
-                        Ru
+                        RU
                     </x-dropdown-link>
                     <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_cz.pdf')}}">
-                        Cz
+                        CZ
                     </x-dropdown-link>
                     <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_en.pdf')}}">
-                        En
+                        EN
                     </x-dropdown-link>
                 </x-slot>
             </x-dropdown>
         </div>
         <div class="space-y-4">
             <h3 class="w-full text-xl block text-white font-bold">
-                {{ __('Help') }}
+                {{ __('footer.help') }}
             </h3>
             <a href="{{ route('contacts')}}" class="w-full block hover:underline">
-                {{ __('Contacts') }}
+                {{ __('footer.contacts') }}
             </a>
             <a href="{{ route('contacts')}}" class="w-full block hover:underline">
-                {{ __('Support 24/7') }}
+                {{ __('footer.support_24_7') }}
             </a>
         </div>
     </div>

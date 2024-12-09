@@ -1,14 +1,14 @@
 <x-guest-layout>
     <section class="max-w-6xl w-full m-auto py-12 space-y-12 items-center z-50 p-4 " x-data="{ plan:  'year' }">
         <h1 class="text-5xl leading-[4rem] font-extrabold bg-gradient-to-r from-indigo-500 to-purple-800 text-transparent bg-clip-text">
-            {{ __("Prices:") }}
+            {{ __('prices.prices') }}
         </h1>
         <div class="flex space-x-3 m-auto">
             <button @click="plan = 'month'" x-bind:class="{ 'bg-indigo-700 hover:bg-indigo-500 text-white': plan === 'month' }" class="p-3 border rounded-lg">
-                {{ __("Monthly") }}
+                {{ __('prices.monthly') }}
             </button>
             <button @click="plan = 'year'" x-bind:class="{ 'bg-indigo-700 hover:bg-indigo-500 text-white': plan === 'year' }" class="p-3 border rounded-lg">
-                {{ __("Yearly") }}
+                {{ __('prices.yearly') }}
             </button>
         </div>
         <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6">

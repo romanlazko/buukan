@@ -1,7 +1,7 @@
 {
-    "Main": "Hlavná",
+    "Home": "Hlavná",
     "Prices": "Ceny",
-    "Contacts": "Kontakty",
+    "Contact us": "Kontakty",
     "Dashboard": "Ovládací panel",
     "Login": "Prihlásiť sa",
     "Register": "Registrácia",
@@ -56,7 +56,7 @@
     "Help": "Pomoc",
     "Support 24/7": "Podpora 24/7",
 
-    "Contacts:": "Kontakty:",
+    "Contact us:": "Kontakty:",
     "Email": "E-mail",
     "Marketing:": "Marketing:",
     "Fyzická osoba": "Fyzická osoba",

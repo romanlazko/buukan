@@ -1,0 +1,169 @@
+{
+    "Home": "Главная",
+    "Prices": "Тарифы",
+    "Contact us": "Связаться с нами",
+    "Dashboard": "Панель управления",
+    "Login": "Войти",
+    "Register": "Регистрация",
+
+    "Online RESERVATION SYSTEM": "Онлайн СИСТЕМА БРОНИРОВАНИЯ",
+    "No more errors and overlaps.": "Больше никаких ошибок и накладок.",
+    "Schedule employees and work with client records from multiple sources on a single calendar.": "Планируйте сотрудников и работайте с записями клиентов из разных источников в едином календаре.",
+    "Start for free": "Начать бесплатно",
+    "31 days free trial": "31 день бесплатного тестирования",
+    "No credit card required": "Не требуется кредитная карта",
+
+    "Appointment reminder": "Напоминание о встрече",
+    "Reduce no-shows and increase repetitive sales": "Сократите неявки и увеличьте повторные продажи",
+    "Buukan team": "Команда Buukan",
+    "We would like to remind you that you have an appointment booked on 20.04.2024 at 16:00.": "Мы хотели бы напомнить вам, что у вас назначена встреча на 20.04.2024 в 16:00.",
+    "Use marketing tools that definitely work - set up automatic notifications for customers. Communicate with your audience via email and telegram notifications.": "Используйте проверенные маркетинговые инструменты — настройте автоматические уведомления для клиентов. Общайтесь со своей аудиторией через электронную почту и уведомления в Telegram.",
+    "Based on our research  - automatic reminders helps to reduce tardiness by 60%.": "Согласно нашему исследованию, автоматические напоминания помогают сократить опоздания на 60%.",
+    "You will get a reminder of upcoming client, so you do not have to keep it in mind and can focus on things which matter.": "Вы получите напоминание о предстоящем клиенте, так что вам не придется держать это в голове, и вы сможете сосредоточиться на важных делах.",
+    "Try it for free": "Попробуйте бесплатно",
+
+    "Time and attendance system": "Система учёта времени и посещаемости",
+    "No more mistakes or overlaps. Manage your employees and schedule your client business from multiple sources in one simple calendar": "Больше никаких ошибок или накладок. Управляйте сотрудниками и планируйте бизнес для своих клиентов из нескольких источников в одном простом календаре.",
+
+    "Ready to get started?": "Готовы начать?",
+    "Login or create an account and start attracting more customers.": "Войдите или создайте аккаунт и начните привлекать больше клиентов.",
+    "Name:": "Имя:",
+    "Email:": "Электронная почта:",
+    "Question:": "Вопрос:",
+    "Send": "Отправить",
+
+    "Don't waste your time": "Не тратьте время зря",
+    "Spend your time for developing your business": "Тратьте своё время на развитие бизнеса",
+    "Unlock your potential by streamlining your agenda. Buukan is your partner who can make your business journey more efficient and agile.": "Раскройте свой потенциал, оптимизируя свое расписание. Buukan — ваш партнер, который сделает ваш бизнес более эффективным и гибким.",
+    "Find a client for a second": "Найдите клиента за секунду",
+    "Start typing a name or contact into the search engine and the program will immediately show all the information about the client and their records.": "Начните вводить имя или контакт в поисковую строку, и программа мгновенно покажет всю информацию о клиенте и его записях.",
+    "Integrate Buukan with your site": "Интегрируйте Buukan с вашим сайтом",
+    "Records from your website will be instantly displayed on the Buukan platform.": "Записи с вашего сайта будут мгновенно отображаться на платформе Buukan.",
+    "Schedule in your smartphone": "Расписание в вашем смартфоне",
+    "Client base and logbook always at your fingertips. Work with schedules through the Buukan system.": "База клиентов и журнал записей всегда под рукой. Работайте с расписанием через систему Buukan.",
+
+    "#Your rules. Our technology": "#Ваши правила. Наша технология",
+    "Resource optimization in every sphere with reservation systems.": "Оптимизация ресурсов в каждой сфере с системами бронирования.",
+    "Welness & Spa": "Оздоровление и Спа",
+    "Beauty & Hair": "Красота и уход за волосами",
+    "Health care": "Здравоохранение",
+    "Sprot & Nutrition": "Спорт и питание",
+    "Education & Training": "Образование и тренинги",
+
+    "Important information": "Важная информация",
+    "Terms and conditions": "Условия и положения",
+    "GDPR": "Политика конфиденциальности",
+    "Help": "Помощь",
+    "Support 24/7": "Поддержка 24/7",
+
+    "Contact us:": "Контакты:",
+    "Email": "Электронная почта",
+    "Marketing:": "Маркетинг:",
+    "Fyzická osoba": "Физическое лицо", 
+
+    "Prices:": "Цены:",
+    "Monthly": "Ежемесячно",
+    "Yearly": "Ежегодно",
+
+    "For start yours business": "Для начала вашего бизнеса",
+    "Best choice for yours business": "Лучшее решение для вашего бизнеса.",
+    "For big business": "Для больших бизнесов",
+
+    "Unlimited clients": "Неограниченное количество клиентов",
+    "Number of employees: 3": "Количество сотрудников: 3",
+    "Number of employees: unlimited": "Количество сотрудников: неограниченное",
+    "Number of employees: 5": "Количество сотрудников: 5",
+    "Email notifications": "Уведомления по электронной почте",
+    "Telegram notifications": "Уведомления в Telegram",
+    "Number of services: 3": "Количество услуг: 3",
+    "Number of services: unlimited": "Количество услуг: неограниченное",
+    "Number of services: 10": "Количество услуг: 10",
+    "Telegram bot for your`s customers": "Telegram бот для своих клиентов",
+    "Web application for your`s customers": "Веб-приложение для своих клиентов",
+
+    "year": "год",
+    "month": "месяц"
+}
+
+=="Home": "Главная",==
+    "Prices": "Тарифы",
+    =="Contact us": "Связаться с нами",==
+    "Dashboard": "Панель управления",
+    "Login": "Войти",
+    "Register": "Регистрация",
+
+    =="Online BOOKING SYSTEM": "Онлайн-система бронирования",==
+    =="Eliminate errors and avoid scheduling conflicts.": "Избегайте ошибок и конфликтов в расписании",==
+    =="Efficiently manage staff schedules and access client records from multiple sources in one streamlined calendar": "Эффективно управляйте расписанием сотрудников и получайте доступ к данным клиентов из разных источников в едином календаре",==
+    =="Get Started for Free": "Начать бесплатно",==
+    =="31-Day Free Trial": "31 день бесплатного пробного периода",==
+    =="No Credit Card Needed": "Без ввода данных банковской карты",==
+
+    =="Automated appointment reminder": "Автоматические напоминания о записи",==
+    "Reduce no-shows and increase repetitive sales": "Сократите количество пропущенных встреч и увеличьте число постоянных клиентов",
+    =="The Buukan team": "Команда Buukan",==
+    "We would like to remind you that you have an appointment booked on 20.04.2024 at 16:00.": "Напоминаем вам о записи на 20.04.2024 в 16:00.",
+    "Use marketing tools that definitely work - set up automatic notifications for customers. Communicate with your audience via email and telegram notifications.": "Используйте эффективные маркетинговые инструменты - настройте автоматические уведомления для клиентов. Общайтесь с аудиторией через email и Telegram.",
+    =="Our research shows that automated reminders reduce late arrivals by 60%.": "Согласно нашим исследованиям, автоматические напоминания снижают количество опозданий на 60%.",==
+    =="Receive reminders about upcoming appointments, allowing you to focus on more important tasks.": "Получайте напоминания о предстоящих встречах, чтобы сосредоточиться на действительно важных задачах.",==
+    =="Get Started for Free": "Начать бесплатно",==
+
+    =="Time and Attendance Tracking System": "Система учёта рабочего времени и посещаемости",==
+    =="Eliminate scheduling errors and overlaps. Manage staff and client appointments from multiple sources within one simple calendar.": "Исключите ошибки и накладки в расписании. Управляйте временем сотрудников и встречами с клиентами из разных источников в одном удобном календаре.",==
+
+    "Ready to get started?": "Готовы начать?",
+    "Login or create an account and start attracting more customers.": "Войдите или создайте аккаунт и начните привлекать больше клиентов.",
+    "Name:": "Имя:",
+    "Email:": "Email:",
+
+    =="Stop Wasting Time": "Не теряйте время",==
+    =="Focus your time on growing your business.": "Сосредоточьтесь на развитии вашего бизнеса",==
+    =="Maximize your potential by streamlining your schedule. Buukan is your trusted partner, making your business journey more efficient and flexible.": "Раскройте свой потенциал, оптимизируя расписание. Buukan — ваш надёжный партнёр, делающий ваш бизнес более эффективным и гибким.",==
+    =="Find a client in a second": "Найдите клиента за секунду",==
+    =="Simply start typing a client's name or contact info into the search bar, and the system will instantly display all relevant information and records.": "Просто начните вводить имя клиента или контактную информацию в поиск, и система мгновенно отобразит всю нужную информацию и записи.",==
+    =="Seamlessly Integrate Buukan with Your Website": "Легко интегрируйте Buukan с вашим сайтом",==
+    =="Data from your website will automatically sync and display on the Buukan platform.": "Данные с вашего сайта автоматически синхронизируются и отображаются на платформе Buukan.",==
+    "Schedule in your smartphone": "Расписание в вашем смартфоне!",
+    =="Client base and logbook always at your fingertips. Work with schedules through the Buukan system.": "База клиентов и журнал записей всегда под рукой. Легко управляйте расписанием через систему Buukan.",==
+
+    "#Your rules. Our technology": "#Ваши правила. Наши технологии",
+    "Resource optimization in every sphere with reservation systems.": "Оптимизация ресурсов во всех сферах с системой бронирования.",
+    "Welness & Spa": "Велнес и спа",
+    "Beauty & Hair": "Красота и волосы",
+    "Health care": "Здравоохранение",
+    "Sprot & Nutrition": "Спорт и питание",
+    "Education & Training": "Образование и тренинги",
+
+    "Important information": "Важная информация",
+    "Terms and conditions": "Условия использования",
+    "GDPR": "Защита персональных данных",
+    "Help": "Помощь",
+    "Support 24/7": "Поддержка 24/7",
+
+    "Contacts:": "Контакты:",
+    "Email": "Email",
+    "Marketing:": "Маркетинг:",
+    =="Physical person": "Физическое лицо",==
+
+    "Prices:": "Цены:",
+    "Monthly": "Ежемесячно",
+    "Yearly": "Ежегодно",
+
+    =="For starting your business": "Для начала бизнеса",==
+    "Best choice for yours business": "Лучший выбор для вашего бизнеса",
+    "For big business": "Для крупного бизнеса",
+
+    "Unlimited clients": "Неограниченное количество клиентов",
+    "Number of employees: 3": "Количество сотрудников: 3",
+    "Number of employees: unlimited": "Количество сотрудников: неограниченно",
+    "Number of employees: 5": "Количество сотрудников: 5",
+    "Email notifications": "Email-уведомления",
+    "Telegram notifications": "Уведомления в Telegram",
+    "Number of services: 3": "Количество услуг: 3",
+    "Number of services: unlimited": "Количество услуг: неограниченно",
+    "Number of services: 10": "Количество услуг: 10",
+    "Telegram bot for your`s customers": "Telegram-бот для ваших клиентов",
+    "Web application for your`s customers": "Веб-приложение для ваших клиентов",
+
+    "year": "год",
+    "month": "месяц"

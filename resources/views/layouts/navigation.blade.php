@@ -11,13 +11,13 @@
         <div class="w-full px-3 lg:px-12 border-x h-12 flex items-center justify-between">
             <div class="lg:flex space-x-2 sm:space-x-6 items-center hidden">
                 <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="block ">
-                    <p class="hover:text-indigo-600 hover:underline">{{ __('Main') }}</p>
+                    <p class="hover:text-indigo-600 hover:underline">{{ __('navigation.home') }}</p>
                 </x-nav-link>
                 <x-nav-link :href="route('prices')" :active="request()->routeIs('prices')" class="block ">
-                    <p class="hover:text-indigo-600 hover:underline">{{ __('Prices') }}</p>
+                    <p class="hover:text-indigo-600 hover:underline">{{ __('navigation.prices') }}</p>
                 </x-nav-link>
                 <x-nav-link :href="route('contacts')" :active="request()->routeIs('contacts')" class="block ">
-                    <p class="hover:text-indigo-600 hover:underline">{{ __('Contacts') }}</p>
+                    <p class="hover:text-indigo-600 hover:underline">{{ __('navigation.contacts') }}</p>
                 </x-nav-link>
             </div>
 
@@ -29,16 +29,16 @@
                 </x-slot>
                 <x-slot name="content">
                     <x-dropdown-link href="{{ route('setlocale', 'ru') }}">
-                        Ru
+                        RU
                     </x-dropdown-link>
                     <x-dropdown-link href="{{ route('setlocale', 'cz') }}">
-                        Cz
+                        CZ
                     </x-dropdown-link>
                     <x-dropdown-link href="{{ route('setlocale', 'sk') }}">
-                        Sk
+                        SK
                     </x-dropdown-link>
                     <x-dropdown-link href="{{ route('setlocale', 'en') }}">
-                        En
+                        EN
                     </x-dropdown-link>
                 </x-slot>
             </x-dropdown>
@@ -47,16 +47,16 @@
         <div class="hidden lg:flex space-x-2 sm:space-x-6 items-center">
             @auth
                 <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" class="block bg-indigo-600 px-4 py-2 rounded-2xl hover:bg-indigo-800 hover:underline">
-                    {{ __('Dashboard') }}
+                    {{ __('navigation.dashboard') }}
                 </x-nav-link>
             @else
                 <x-nav-link :href="route('admin.login')" :active="request()->routeIs('admin.login')" class="block ">
-                    <p class="hover:text-indigo-600 hover:underline">{{ __('Login') }}</p>
+                    <p class="hover:text-indigo-600 hover:underline">{{ __('navigation.login') }}</p>
                 </x-nav-link>
 
                 @if (Route::has('admin.register'))
                     <x-nav-link :href="route('admin.register')" :active="request()->routeIs('admin.register')" class="text-white block bg-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-800 hover:underline">
-                        {{ __('Register') }}
+                        {{ __('navigation.register') }}
                     </x-nav-link>
                 @endif
             @endauth
@@ -69,27 +69,27 @@
                 </x-slot>
                 <x-slot name="content">
                     <x-dropdown-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="block ">
-                        <p class="text-gray-800 hover:text-indigo-600 hover:underline">{{ __('Main') }}</p>
+                        <p class="text-gray-800 hover:text-indigo-600 hover:underline">{{ __('navigation.home') }}</p>
                     </x-dropdown-link>
                     <x-dropdown-link :href="route('prices')" :active="request()->routeIs('prices')" class="block ">
-                        <p class="text-gray-800 hover:text-indigo-600 hover:underline">{{ __('Prices') }}</p>
+                        <p class="text-gray-800 hover:text-indigo-600 hover:underline">{{ __('navigation.prices') }}</p>
                     </x-dropdown-link>
                     <x-dropdown-link :href="route('contacts')" :active="request()->routeIs('contacts')" class="block ">
-                        <p class="text-gray-800 hover:text-indigo-600 hover:underline">{{ __('Contacts') }}</p>
+                        <p class="text-gray-800 hover:text-indigo-600 hover:underline">{{ __('navigation.contacts') }}</p>
                     </x-dropdown-link>
                     <hr>
                     @auth
                         <x-dropdown-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')" class="block bg-indigo-600 px-4 py-2 rounded-2xl hover:bg-indigo-800 hover:underline">
-                            {{ __('Dashboard') }}
+                            {{ __('navigation.dashboard') }}
                         </x-dropdown-link>
                     @else
                         <x-dropdown-link :href="route('admin.login')" :active="request()->routeIs('admin.login')" class="block ">
-                            <p class="text-gray-600 hover:text-indigo-600 hover:underline">{{ __('Login') }}</p>
+                            <p class="text-gray-600 hover:text-indigo-600 hover:underline">{{ __('navigation.login') }}</p>
                         </x-dropdown-link>
 
                         @if (Route::has('admin.register'))
                             <x-dropdown-link :href="route('admin.register')" :active="request()->routeIs('admin.register')" class="block bg-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-800 hover:underline text-white">
-                                {{ __('Register') }}
+                                {{ __('navigation.register') }}
                             </x-dropdown-link>
                         @endif
                     @endauth
