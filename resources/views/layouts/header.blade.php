@@ -25,13 +25,15 @@
 				
 				<a href="{{ route('admin.profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white">
 					<div class="whitespace-nowrap">
-						<div class="font-medium text-base">{{ __("Profile") }}</div>
+						<div class="font-medium text-base">
+							{{ __("header.profile") }}
+						</div>
 					</div>
 				</a>
 				<form method="POST" action="{{ route('admin.logout') }}">
 					@csrf
 					<button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white w-full text-left whitespace-nowrap">
-						{{ __('Log Out') }}
+						{{ __('header.logout') }}
 					</button>
 				</form>
 			</div>
