@@ -32,13 +32,13 @@
                 </x-slot>
                 <x-slot name="content">
                     <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_cz.pdf')}}">
-                        RU
-                    </x-dropdown-link>
-                    <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_cz.pdf')}}">
                         CZ
                     </x-dropdown-link>
                     <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_en.pdf')}}">
                         EN
+                    </x-dropdown-link>
+                    <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_cz.pdf')}}">
+                        RU
                     </x-dropdown-link>
                 </x-slot>
             </x-dropdown>
@@ -50,13 +50,13 @@
                 </x-slot>
                 <x-slot name="content">
                     <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_cz.pdf')}}">
-                        RU
-                    </x-dropdown-link>
-                    <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_cz.pdf')}}">
                         CZ
                     </x-dropdown-link>
                     <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_en.pdf')}}">
                         EN
+                    </x-dropdown-link>
+                    <x-dropdown-link target="_blank" href="{{ asset('terms_of_use/terms_of_use_cz.pdf')}}">
+                        RU
                     </x-dropdown-link>
                 </x-slot>
             </x-dropdown>
