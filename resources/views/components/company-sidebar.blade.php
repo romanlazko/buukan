@@ -57,8 +57,8 @@
 @endhasanyrole
 
 @hasanyrole('super-duper-admin|admin|administrator')
-    <x-responsive-nav-link :href="route('admin.company.subscription.index', $company)">
-        {{ __('Subscribtion') }}
+    <x-responsive-nav-link :href="route('admin.company.subscription.index', $company)" :active="request()->routeIs('admin.company.subscription.*')">
+        {{ __('Subscription') }}
     </x-responsive-nav-link>
 @endhasanyrole
 

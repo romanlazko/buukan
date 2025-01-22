@@ -21,13 +21,13 @@
         <div class="w-full sm:w-1/3 space-y-3">
             <div class="w-full bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-lg font-semibold mb-4">
-                    Количество клиентов:
+                    {{ __('Clients') }}
                 </h2>
                 <p class="text-3xl font-bold text-indigo-500">{{ $clientsCount }}</p>
             </div>
             <div class="w-full bg-white p-6 rounded-lg shadow-md">
                 <h2 class="text-lg font-semibold mb-4">
-                    Статистика бронирований:
+                    {{ __('Booking statistics') }}
                 </h2>
                 <ul class="list-inside space-y-2">
                     @foreach ($bookingStats as $service => $count)
@@ -42,7 +42,7 @@
         
         <div class="w-full sm:w-2/3 bg-white p-6 rounded-lg shadow-md">
             <h2 class="text-lg font-semibold">
-                Объем продаж за месяц:
+                {{ __('Sales per month') }}
             </h2>
             <canvas id="salesChart" class="w-full"></canvas>
         </div>

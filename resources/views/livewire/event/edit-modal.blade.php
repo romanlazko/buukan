@@ -14,7 +14,7 @@
                     <x-form.input id="date" type="date" class="w-full" wire:model="date" value="{{ $date }}"/>
                 </div>
                 <div class="w-full">
-                    <x-form.label for="term" value="{{ __('Term') }}"/>
+                    <x-form.label for="term" value="{{ __('Time') }}"/>
                     <x-form.input id="term" type="time" class="w-full" wire:model="term" value="{{ $term }}"/>
                 </div>
             </div>

@@ -10,8 +10,8 @@
             @include('profile.partials.update-profile-information-form')
         </x-white-block>
 
-        <x-white-block>
+        {{-- <x-white-block>
             @include('profile.partials.update-password-form')
-        </x-white-block>
+        </x-white-block> --}}
     </div>
 </x-app-layout>
