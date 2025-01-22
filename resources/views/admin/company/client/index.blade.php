@@ -16,7 +16,7 @@
             <x-table.table class="whitespace-nowrap">
                 <x-table.thead>
                     <tr>
-                        <x-table.th>id</x-table.th>
+                        <x-table.th>ID</x-table.th>
                         <x-table.th>Client</x-table.th>
                         <x-table.th>Phone</x-table.th>
                         <x-table.th>Social media</x-table.th>

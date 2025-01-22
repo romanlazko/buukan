@@ -42,7 +42,7 @@
             @endif
             
             <div class="w-full p-2 bg-white rounded-md shadow-sm">
-                <x-form.label value="{{ __('Term:') }}"/>
+                <x-form.label value="{{ __('Time:') }}"/>
                 <div wire:key="create-schedule-terms-{{ rand(1,10000) }}" class="space-y-4">
                     @forelse ($terms as $index => $term)
                         <div class="w-full flex items-center space-x-3">
@@ -145,7 +145,7 @@
                     @endforelse
                     <button type="button" wire:click="addTerm" class="cursor-pointer whitespace-nowrap text-gray-800 hover:bg-indigo-100 p-3 rounded-lg">
                         <i class="fa-solid fa-circle-plus mr-1 text-indigo-700"></i>
-                        {{ __("Add term") }}
+                        {{ __("Add time") }}
                     </button>
                 </div>
                 

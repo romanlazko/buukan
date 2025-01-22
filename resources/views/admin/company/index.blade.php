@@ -26,7 +26,7 @@
             <x-table.table class="whitespace-nowrap">
                 <x-table.thead>
                     <tr>
-                        <x-table.th>id</x-table.th>
+                        <x-table.th>ID</x-table.th>
                         <x-table.th>Name</x-table.th>
                         <x-table.th>Description</x-table.th>
                         <x-table.th>ICO</x-table.th>

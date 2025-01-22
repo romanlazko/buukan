@@ -98,7 +98,7 @@
 
                                 @if ($appointmentForm->employee_id AND $appointmentForm->service_id AND $appointmentForm->date) 
                                     <div class="w-full">
-                                        <x-form.label for="term" value="{{ __('Term:') }}"/>
+                                        <x-form.label for="term" value="{{ __('Time:') }}"/>
                                         <x-form.dropdown.select wire:key="appointment-term-{{ $appointmentForm?->key }}" wire:model.live="appointmentForm.term" default_value="{{ $appointmentForm->term }}" id="term" type="time" class="w-full" required :disabled="$formDisabled">
                                             @foreach ($schedules as $schedule_index => $schedule_item)
                                                 <x-form.dropdown.option wire:key="appointment-term-{{ $schedule_index }}-{{ $appointmentForm?->key }}" value="{{ $schedule_item->term?->format('H:i') }}" wire:click="$set('appointmentForm.term', {{ json_encode($schedule_item->term?->format('H:i')) }})">

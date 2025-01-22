@@ -16,7 +16,7 @@ return [
         'welness_and_spa' => 'Welness & Spa',
         'beauty_and_hair' => 'Beauty & Hair',
         'health_care' => 'Health care',
-        'sport_and_nutrition' => 'Sprot & Nutrition',
+        'sport_and_nutrition' => 'Sport & Nutrition',
         'education_and_training' => 'Education & Training',
     ],
 
