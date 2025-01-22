@@ -36,16 +36,16 @@
                     </p>
                     <hr>
                     <div>
-                        <x-form.textarea id="ru_message" name="settings[message][ru]" type="text" class="mt-1 block w-full" :value="old('ru_message')" required autocomplete="ru_message" placeholder="RU"/>
-                        <x-form.error class="mt-2" :messages="$errors->get('ru_message')" />
+                        <x-form.textarea id="cz_message" name="settings[message][cz]" type="text" class="mt-1 block w-full" :value="old('cz_message')" required autocomplete="cz_message"  placeholder="CZ"/>
+                        <x-form.error class="mt-2" :messages="$errors->get('cz_message')" />
                     </div>
                     <div>
                         <x-form.textarea id="en_message" name="settings[message][en]" type="text" class="mt-1 block w-full" :value="old('en_message')" required autocomplete="en_message"  placeholder="EN"/>
                         <x-form.error class="mt-2" :messages="$errors->get('en_message')" />
                     </div>
                     <div>
-                        <x-form.textarea id="cz_message" name="settings[message][cz]" type="text" class="mt-1 block w-full" :value="old('cz_message')" required autocomplete="cz_message"  placeholder="CZ"/>
-                        <x-form.error class="mt-2" :messages="$errors->get('cz_message')" />
+                        <x-form.textarea id="ru_message" name="settings[message][ru]" type="text" class="mt-1 block w-full" :value="old('ru_message')" required autocomplete="ru_message" placeholder="RU"/>
+                        <x-form.error class="mt-2" :messages="$errors->get('ru_message')" />
                     </div>
                 </div>
             </x-white-block>

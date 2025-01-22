@@ -28,9 +28,6 @@
                     </x-nav-link>
                 </x-slot>
                 <x-slot name="content">
-                    <x-dropdown-link href="{{ route('setlocale', 'ru') }}">
-                        RU
-                    </x-dropdown-link>
                     <x-dropdown-link href="{{ route('setlocale', 'cz') }}">
                         CZ
                     </x-dropdown-link>
@@ -39,6 +36,9 @@
                     </x-dropdown-link>
                     <x-dropdown-link href="{{ route('setlocale', 'en') }}">
                         EN
+                    </x-dropdown-link>
+                    <x-dropdown-link href="{{ route('setlocale', 'ru') }}">
+                        RU
                     </x-dropdown-link>
                 </x-slot>
             </x-dropdown>
